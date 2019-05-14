@@ -1,0 +1,11 @@
+# Ignore node modules
+/node_modules
+
+# Ignore configuration files
+/config
+
+# Ignore the store metadata
+/store
+
+# Ignore mac filesystem files
+**.DS_Store
