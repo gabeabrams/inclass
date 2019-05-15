@@ -1,5 +1,3 @@
-
-
 /**
  * Class that represents the store metadata. Automatically loads, processes,
  *   and updates app store metadata
@@ -9,7 +7,7 @@
 /* ------------------------- Store Class ------------------------ */
 
 class Store {
-  constructor() {
+  constructor(expressApp) {
     // TODO: create
     // TODO: start scheduled imports
   }
@@ -19,13 +17,11 @@ class Store {
   }
 
   /**
-   * Resolves with the catalog requested
-   * @param {number} accountId - the id of the account associated with the
-   *   catalog we're looking for
-   * @return {Catalog} catalog metadata object
+   * Resolves with all the catalogs
+   * @return {object} mapping { catalogId => catalogObject }
    */
-  async getCatalog(accountId) {
-    // TODO: look up the catalog and return the metadata
+  async getCatalogs(accountId) {
+    // TODO: implement
   }
 }
 

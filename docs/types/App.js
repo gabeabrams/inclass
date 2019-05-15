@@ -38,7 +38,8 @@
  * @param {object[]} [screenshots] - list of screenshots for the app, each of
  *   the form: { title, filename } where filename is the name of the screenshot
  *   file excluding the containing folder. Thus, the file is located at:
- *   /store/catalogId/appId/screenshots/<filename>
+ *   /store/catalogId/appId/screenshots/<filename>.
+ *   Each screenshot also has a url which is added after loading.
  * @param {object[]} [guides] - list of short guides for users who want to get
  *   started with the app. Each of the form:
  *   { title, steps: [step1String, step2String, ...]}

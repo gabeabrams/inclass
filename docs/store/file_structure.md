@@ -8,9 +8,12 @@ The store metadata is stored in a single `/store/metadata.json` file with in fol
 
 ```json
 {
-    "title": "Store Title"
+    "title": "Store Title",
+    "beingEdited": true
 }
 ```
+
+**Note:** beingEdited is optional. If it is true, the store is not loaded.
 
 ## Catalogs:
 
@@ -29,11 +32,7 @@ Each catalog has its own folder within the `/store` folder. Inside that folder i
 }
 ```
 
-Description of each item:
-
-- title (string) - the short title of the catalog
-- \[accounts\] (number[]) - a list of Canvas accountIds that are associated with this catalog. When launching the app store from a course inside of one of these accounts, the user will be shown this catalog
-- \[tagColors\] (object) - if excluded, all tags in all apps are shown and assigned random colors. If included, only the tags listed in this object are shown and the colors listed here will be used (color must be acceptable css: #123456 or 'blue' etc). Form: `{ tagName: color }`
+^ this is an example metadata file. See the docs in the `/docs/types` folder for more info.
 
 ## Apps:
 
@@ -97,24 +96,7 @@ Each app has a metadata file stored at `/store/<catalogId>/<appId>/metadata.json
 }
 ```
 
-Description of each item:
-
-- extends (object) - if included, indicates the parent app that this app extends (the parent app metadata is copied and then any existing fields in this metadata file overwrite the parent app's fields). This object is of the form `{ catalogId, appId }` where `catalogId` is the id of the catalog holding the parent app and `appId` is the id of the parent app
-- title (string) - the title of the app
-- subtitle (string) - the subtitle of the app
-- description (string) - a long description of the app
-- creator (string|string[] - a string description of the creator or a list of creators
-- \[launchPrivacy=public\] (string) - the amount of information that comes along with the LTI launch request ('public' = all info, 'name_only' = just the user's name, 'anonymous' = no identification info)
-- \[supportEmail=the defaultSupportEmail for this catalog\] (string) - the email to direct support issues to when the user requests support
-- \[requestInstallEmail\] (string) - if included, non-admins are not allowed to install this app on their own. Instead, they are directed to send an email to this email address requesting an install. Admins are still allowed to install the app
-- \[requestUninstallEmail\] (string) - if included, non-admins are not allowed to uninstall this app on their own. Instead, they are directed to send an email to this email address requesting an uninstall. Admins are still allowed to uninstall the app
-- \[messageBeforeInstall\] (string/html) - an html message to show to the user just before installing the app (user has to hit "okay")
-- \[messageAfterInstall\] (string/html) - an html message to show to the user just after installing the app
-- \[messageBeforeUninstall\] (string/html) - an html message to show to the user just before uninstalling the app (user has to hit "okay")
-string/html messageAfterUninstall  an html message to show to the user just after uninstalling the app
-- \[tags\] (object) - tags associated with the app in the form: `{ <tagName>: <tagValue/tagValues> }`. tagValues that are not lists are automatically converted to single-element lists upon read
-- \[screenshots\] (object[]) - list of screenshots for the app, each of the form: { title, filename } where filename is the name of the screenshot file excluding the containing folder. Thus, the file is located at: `/store/catalogId/appId/screenshots/<filename>`. If no extension is given, `.png` is assumed.
-- \[guides\] (object[]) - list of short guides for users who want to get started with the app. Each of the form: `{ title, steps: [step1String, step2String, ...]}`
+^ this is an example metadata file. See the docs in the `/docs/types` folder for more info.
 
 ### Screenshots
 
