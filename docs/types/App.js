@@ -4,15 +4,15 @@
  *   app extends
  * @param {string} [extends.catalogId] - the catalogId holding the parent app
  * @param {string} [extends.appId] - the appId of the parent app
- * @param {string} title - the title of the app
- * @param {string} subtitle - the subtitle of the app
- * @param {string} description - a long description of the app
- * @param {string|string[]} creator - a string description of the creator or a
- *   list of creators
- * @param {string} [launchPrivacy=public] - the amount of information that comes
- *   along with the LTI launch request ('public' = all info, 'name_only' = just
- *   the user's name, 'anonymous' = no identification info)
- * @param {string} [supportEmail=the supportEmail of the current catalog] - the
+ * @param {string} [title] - the title of the app
+ * @param {string} [subtitle] - the subtitle of the app
+ * @param {string} [description] - a long description of the app
+ * @param {string|string[]} [creator] - a string description of the creator or a
+ *   list of creators. Upon load, if not a list, we turn this field into a list
+ * @param {string} [launchPrivacy='public'] - the amount of information that
+ *   comes along with the LTI launch request ('public' = all info, 'name_only'
+ *   = just the user's name, 'anonymous' = no identification info)
+ * @param {string} [supportEmail=the defaultSupportEmail of the catalog] - the
  *   email to direct support issues to when the user requests support
  * @param {string} [requestInstallEmail] - if included, non-admins are not
  *   allowed to install this app on their own. Instead, they are directed to
