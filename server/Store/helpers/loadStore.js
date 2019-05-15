@@ -16,8 +16,7 @@ const readJSON = require('./readJSON');
  * @see /server/Store/helpers/loadStore for description of Catalog object
  */
 module.exports = async () => {
-  // Load store metadata
-  const storeMetadata = await readJSON(path.join(STORE_PATH, 'metadata'));
+  // TODO: Load store metadata
 
   // TODO: list the apps to load
 
