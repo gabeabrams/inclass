@@ -1,3 +1,5 @@
+const path = require('path');
+
 const listFolders = require('./helpers/listFolders');
 const STORE_PATH = require('./STORE_PATH');
 
@@ -9,5 +11,18 @@ const STORE_PATH = require('./STORE_PATH');
 module.exports = () => {
   // TODO: crawl store using listFolders and create the list of apps
 
+  // 1. List all catalog ids
+  // 2. For each catalog, list all the apps and store their paths
+
+  // Example return:
+  // {
+  //    dce: {
+  //      swipein: '.../store/dce/swipein',
+  //      gradeup: '.../store/dce/gradeup',
+  //    },
+  //    seas: {
+  //      swipein: '.../store/seas/sqipein',
+  //    }
+  // }
   return {};
 };
