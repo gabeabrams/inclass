@@ -8,4 +8,4 @@
 /store
 
 # Ignore mac filesystem files
-**.DS_Store
+**/.DS_Store
