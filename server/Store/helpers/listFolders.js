@@ -1,3 +1,4 @@
+const path = require('path');
 const fs = require('fs');
 
 /**
@@ -7,8 +8,25 @@ const fs = require('fs');
  * @param {string} path - the path to the enclosing folder to search
  * @return {string[]} the names of all the folders in the enclosing folder
  */
-module.exports = async (path) => {
-  // TODO: read all the files in a folder, filter out the non-folders, return
-
-  return [];
+module.exports = async (folderPath) => {
+  return new Promise((resolve, reject) => {
+    fs.readdir(folderPath, (err, list) => {
+      if (err) {
+        reject(err);
+      } else {
+        // Check if these are directories
+        const folders = (
+          list
+            .filter((name) => {
+              return !name.startsWith('.');
+            })
+            .filter((name) => {
+              const itemPath = path.join(folderPath, name);
+              return fs.lstatSync(itemPath).isDirectory();
+            })
+        );
+        resolve(folders);
+      }
+    });
+  });
 };
