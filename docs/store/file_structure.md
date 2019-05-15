@@ -89,7 +89,7 @@ Each app has a metadata file stored at `/store/<catalogId>/<appId>/metadata.json
                 "Launch the app",
                 "Choose an event",
                 "Plug in your swiper",
-                "Swipe someone's ID'
+                "Swipe someone's ID"
             ]
         }
     ]
@@ -100,7 +100,7 @@ Each app has a metadata file stored at `/store/<catalogId>/<appId>/metadata.json
 
 ### Screenshots
 
-If your app has screenshots listed in the `metadata.json` file, you need to include those files in a `/screenshot` folder. For instance, for the example `metadata.json` file above, we would need the following files:
+If your app has screenshots listed in the `metadata.json` file, you need to include those files in a `/screenshots` folder. For instance, for the example `metadata.json` file above, we would need the following files:
 
 - `/store/dce/swipein/screenshots/event_chooser.jpg`
 - `/store/dce/swipein/screenshots/man_dash.png`

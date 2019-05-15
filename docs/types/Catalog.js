@@ -7,7 +7,7 @@
  * @param {object} [tagColors] - if excluded, all tags in all apps are shown and
  *   assigned random colors. If included, only the tags listed in this object
  *   are shown and the colors listed here will be used (color must be acceptable
- *   css: #123456 or 'blue' etc).
+ *   css: '#123456' or 'blue' etc).
  *   Form: { tagName: color }
  *   For example: { cost: '#59178e', type: 'red' }
  * @param {string} [defaultSupportEmail] - a default support email to use if
