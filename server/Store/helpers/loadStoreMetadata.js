@@ -1,3 +1,5 @@
+const path = require('path');
+
 const readJSON = require('./readJSON');
 const STORE_PATH = require('../STORE_PATH');
 
@@ -7,7 +9,7 @@ const STORE_PATH = require('../STORE_PATH');
  * @return {object} store metadata
  */
 module.exports = async () => {
-  const metadata = await readJSON(`${STORE_PATH}/metadata`);
+  const metadata = await readJSON(path.join(STORE_PATH, 'metadata'));
   // if beingEdited is true, store will not load
   if (metadata.beingEdited) {
     throw new Error('Metadata being edited. Metadata not loaded.');

@@ -1,3 +1,7 @@
+// Import dependencies
+const path = require('path');
+
+// Import our own helpers
 const listFolders = require('../helpers/listFolders');
 const STORE_PATH = require('../STORE_PATH');
 
@@ -8,15 +12,16 @@ const STORE_PATH = require('../STORE_PATH');
  */
 module.exports = async () => {
   // create return object
-  let obj = {};
+  const obj = {};
   // list all catalogs
   const catalogIds = await listFolders(STORE_PATH);
   // populate object
   for (let i = 0; i < catalogIds.length; i++) {
     obj[catalogIds[i]] = {};
-    const apps = await listFolders(`${STORE_PATH}/${catalogIds[i]}`);
+    const apps = await listFolders(path.join(STORE_PATH, catalogIds[i]));
     for (let j = 0; j < apps.length; j++) {
-      obj[catalogIds[i]][apps[j]] = `${STORE_PATH}/${catalogIds[i]}/${apps[j]}`;
+      const appPath = path.join(STORE_PATH, catalogIds[i], apps[j]);
+      obj[catalogIds[i]][apps[j]] = appPath;
     }
   }
   return obj;

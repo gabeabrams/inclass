@@ -1,3 +1,5 @@
+const path = require('path');
+
 const readJSON = require('./readJSON');
 const STORE_PATH = require('../STORE_PATH');
 
@@ -10,6 +12,6 @@ const STORE_PATH = require('../STORE_PATH');
  */
 module.exports = async (catalogId) => {
   // read the corresponding metadata to the catalog
-  const metadata = await readJSON(`${STORE_PATH}/${catalogId}/metadata`);
+  const metadata = await readJSON(path.join(STORE_PATH, catalogId, 'metadata'));
   return metadata;
 };
