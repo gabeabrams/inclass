@@ -12,4 +12,7 @@
  *   For example: { cost: '#59178e', type: 'red' }
  * @param {string} [defaultSupportEmail] - a default support email to use if
  *   an app doesn't have a support email
+ * @param {object} [apps] - this property is added upon load and is of form:
+ *   { appId: appObject } (loadStore.js adds this property by crawling the
+ *   folders inside of the catalog and dynamically finding all the apps)
  */
