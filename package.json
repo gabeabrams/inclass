@@ -33,7 +33,8 @@
 	},
 	"homepage": "https://github.com/gabeabrams/inclass#readme",
 	"dependencies": {
-		"caccl": "^1.0.77"
+		"caccl": "^1.0.77",
+		"fs": "0.0.1-security"
 	},
 	"devDependencies": {
 		"eslint": "^5.16.0",

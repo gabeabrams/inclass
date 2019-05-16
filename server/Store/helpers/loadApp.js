@@ -18,8 +18,7 @@ module.exports = (opts = {}) => {
     appId,
     parentApp,
   } = opts;
-
-  // TODO: implement
+  
   // TODO: for tags, if the value is not an array, turn it into one
   // TODO: resolve filepaths (use parent's filepath for screenshots if needed). Add app.screenshots[i].fullPath
   // TODO: use defaultSupportEmail from catalog metadata if no supportEmail is included
