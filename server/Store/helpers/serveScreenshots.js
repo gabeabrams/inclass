@@ -1,14 +1,17 @@
 /**
  * Serves the screenshots for each app
  * @module server/Store/helpers/serveScreenshots
- * @param {express app} expressApp - the express app to adds routes to
- * @param {App} app - an app that was just loaded
+ * @param {object} opts - the object holding all args
+ * @param {express app} opts.expressApp - the express app to adds routes to
+ * @param {string} opts.catalogId - the id of the catalog holding this app
+ * @param {string} opts.appId - the id of the app we're loading
+ * @param {App} opts.app - an app that was just loaded
  * @return {App} new app object with a
  *   new app.screenshots[i].url field for each screenshot (the screenshot's url)
  */
-module.exports = async (expressApp, app) => {
+module.exports = async (opts) => {
   // TODO: serve the app's screenshots individually
   // use app.screenshots[i].fullPath
 
-  // Use this path: /resources/store/<catalogId>/<appId>/screenshots/<filename>
+  // Use this path: /public/<catalogId>/<appId>/screenshots/<filename>
 };
