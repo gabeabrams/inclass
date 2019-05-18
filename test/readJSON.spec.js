@@ -6,6 +6,7 @@ const listapps = require('../server/Store/helpers/listAppsToLoad');
 const loadCatalogMetadata = require('../server/Store/helpers/loadCatalogMetadata');
 const loadStoreMetadata = require('../server/Store/helpers/loadStoreMetadata');
 const loadStore = require('../server/Store/helpers/loadStore');
+const loadApp = require('../server/Store/helpers/loadApp');
 
 const main = async () => {
   // test for readJSON.js
@@ -15,15 +16,12 @@ const main = async () => {
 
   // test for listAppsToLoad.js
   const test = await listapps();
-  // for ((key, value) in test) {
-  //   console.log(key);
-  // }
-
   console.log(test);
-  
+
   // test for loadCatalogMetadata.js
-  // const metadata = await loadCatalogMetadata('seas');
-  // console.log(metadata);
+  const metadata = await loadCatalogMetadata('seas');
+  console.log(metadata);
+  const parent = await readJSON(path.join(STORE_PATH, 'dce', 'swipein', 'metadata'));
 
   // test for loadStoreMetadata
   // const metadata = await loadStoreMetadata();
@@ -32,6 +30,11 @@ const main = async () => {
 
   // test for loadStore
   // loadStore();
+  await loadApp({
+    catalogId: 'seas',
+    catalogMetadata: metadata,
+    appId: 'swipein',
+    parentAppMetadata: parent,
+  });
 };
-
 main();

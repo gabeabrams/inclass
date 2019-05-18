@@ -8,7 +8,7 @@ const STORE_PATH = require('../STORE_PATH');
 /**
  * Crawls store metadata to get all of the apps that we need to load
  * @module server/Store/helpers/listAppsToLoad
- * @return {object} app list of form { catalogId => appId => l }
+ * @return {object} app list of form { catalogId => appId => appPath }
  */
 module.exports = async () => {
   // create return object

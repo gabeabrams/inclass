@@ -7,7 +7,10 @@ const STORE_PATH = require('../STORE_PATH');
 // Import helpers
 const listAppsToLoad = require('./listAppsToLoad');
 const readJSON = require('./readJSON');
+const loadApp = require('./loadApp');
 const loadStoreMetadata = require('./loadStoreMetadata');
+const getAppParent = require('./getAppParent');
+const loadCatalogMetadata = require('./loadCatalogMetadata');
 
 
 /**
@@ -18,25 +21,51 @@ const loadStoreMetadata = require('./loadStoreMetadata');
  * @see /server/Store/helpers/loadStore for description of Catalog object
  */
 module.exports = async () => {
-  // TODO: Load store metadata
-  // Should we handle the error or just let it crash?
-  // try {
-  //   const storeMetadata = await loadStoreMetadata();
-  //   console.log("worked");
-  // } catch (err) {
-  //   console.log(err);
-  // }
   const storeMetadata = await loadStoreMetadata();
-  console.log(storeMetadata);
+  // console.log(storeMetadata);
 
-  // TODO: list the apps to load
+  // list the apps to load
   const appsToLoad = await listAppsToLoad();
   console.log(appsToLoad);
 
+  // load catalogs
+  const catalogIds = Object.keys(appsToLoad);
+  console.log(catalogIds);
+  const catalogMap = {}; // {catalogId : catalogMetadata}
+  for (let i = 0; i < catalogIds.length; i++) {
+    catalogMap[catalogIds[i]] = await loadCatalogMetadata(catalogIds[i]);
+    // load the apps
+    const appIds = Object.keys(appsToLoad[catalogIds[i]]);
+    for (let j = 0; j < appIds.length; j++) {
+      await loadParentsThenLoadApp(catalogIds[i], appIds[j]);
+    }
+  }
+  console.log(catalogMap);
 
-  // TODO: load the individual apps in order, detect cycles and throw an error if they occur
+  // If the apps have parents
+  const loadParentsThenLoadApp = async (catalogId, appId) => {
+    // if already loaded, just return
+    if (catalogMap[catalogId].apps[appId]) {
+      return;
+    }
+    // check if this app has a parent
+    const parent = await getAppParent(catalogId, appId);
+    if (parent) {
+      // Load parent
+      const parentCatalogId = parent.catalogId;
+      const parentAppId = parent.appId;
+      await loadParentsThenLoadApp(parentCatalogId, parentAppId);
+    }
+    // Load self
+    await loadApp({
+      catalogId,
+      catalogMetadata: catalogMap[catalogId],
+      appId,
+      parentAppMetadata: catalogMap[parent.catalogId],
+    });
+  };
 
-  // TODO: load catalogs
-
+  // TODO: load the individual apps in order,
+  // detect cycles and throw an error if they occur
   return {};
 };
