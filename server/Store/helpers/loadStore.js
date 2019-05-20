@@ -37,6 +37,7 @@ module.exports = async () => {
     // load the apps
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);
     for (let j = 0; j < appIds.length; j++) {
+      // eslint-disable-next-line no-use-before-define
       await loadParentsThenLoadApp(catalogIds[i], appIds[j]);
     }
   }
@@ -57,7 +58,7 @@ module.exports = async () => {
       await loadParentsThenLoadApp(parentCatalogId, parentAppId);
     }
     // Load self
-    await loadApp({
+    catalogMap[catalogId].apps[appId] = await loadApp({
       catalogId,
       catalogMetadata: catalogMap[catalogId],
       appId,

@@ -21,20 +21,21 @@ const main = async () => {
   // test for loadCatalogMetadata.js
   const metadata = await loadCatalogMetadata('seas');
   console.log(metadata);
-  const parent = await readJSON(path.join(STORE_PATH, 'dce', 'swipein', 'metadata'));
 
   // test for loadStoreMetadata
   // const metadata = await loadStoreMetadata();
   // console.log(metadata);
   // console.log(metadata.beingEdited);
 
+  // test for loadApp
+  // await loadApp({
+  //   catalogId: 'seas',
+  //   catalogMetadata: metadata,
+  //   appId: 'swipein',
+  //   parentAppMetadata: null,
+  // });
+
   // test for loadStore
-  // loadStore();
-  await loadApp({
-    catalogId: 'seas',
-    catalogMetadata: metadata,
-    appId: 'swipein',
-    parentAppMetadata: parent,
-  });
+  loadStore();
 };
 main();
