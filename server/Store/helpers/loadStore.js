@@ -50,7 +50,8 @@ module.exports = async () => {
       catalogId,
       catalogMetadata: catalogMap[catalogId],
       appId,
-      parentAppMetadata: (parent === null ? null : catalogMap[parent.catalogId][apps][appId]),
+      parentAppMetadata:
+      (parent === null ? null : catalogMap[parent.catalogId][apps][appId]),
     });
   };
 
