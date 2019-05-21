@@ -16,11 +16,11 @@ const main = async () => {
 
   // test for listAppsToLoad.js
   const test = await listapps();
-  console.log(test);
+  // console.log(test);
 
   // test for loadCatalogMetadata.js
   const metadata = await loadCatalogMetadata('seas');
-  console.log(metadata);
+  // console.log(metadata);
 
   // test for loadStoreMetadata
   // const metadata = await loadStoreMetadata();

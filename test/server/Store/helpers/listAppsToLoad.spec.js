@@ -1,10 +1,14 @@
+const listapps = require('../../../../server/Store/helpers/listAppsToLoad');
 const assert = require('assert');
 
+describe.only('server > Store > helpers > getAppsToLoad', function () {
+  it('returns an object', async function () {
+    const test = await listapps();
+    assert.deepEqual(test, Object(test));
+  });
 
-describe.only('Array', function () {
-  describe('#indexOf()', function () {
-    it('should return -1 when the value is not present', function () {
-      assert.equal(-1, [1, 2, 3].indexOf(4));
-    });
+  it('lists apps of form { catalogId => appId => appPath }', async function () {
+    const test = await listapps();
+    console.log(test);
   });
 });
