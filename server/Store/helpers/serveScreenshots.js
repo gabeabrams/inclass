@@ -11,6 +11,7 @@ const express = require('express');
  * @return {App} new app object with a
  *   new app.screenshots[i].url field for each screenshot (the screenshot's url)
  */
+
 module.exports = async (opts) => {
   // TODO: serve the app's screenshots individually
   // use app.screenshots[i].fullPath
@@ -24,9 +25,9 @@ module.exports = async (opts) => {
   // Checks if app object has screenshot property
   if (typeof (app.screenshots) !== 'undefined') {
     for (let i = 0; i < app.screenshots.length; i++) {
-      // const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with a filename ${app.screenshots[i].filename}, but that file does not exist`;
       const path = `/public/${catalogId}/${appId}/screenshots/`;
-      expressApp.use(path, express.static(app.screenshots[i].fullPath));
+      expressApp.use(path, express.static(app.screenshots[i].fullPath,
+        { fallthrough: false })); // Will throw 404 if file doesn't exist
       app.screenshots[i].url = `${path}${app.screenshots[i].filename}`; // Add url property to each screenshot
     }
   }
