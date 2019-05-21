@@ -32,20 +32,13 @@ module.exports = async () => {
   const catalogIds = Object.keys(appsToLoad);
   console.log(catalogIds);
   const catalogMap = {}; // {catalogId : catalogMetadata}
-  for (let i = 0; i < catalogIds.length; i++) {
-    catalogMap[catalogIds[i]] = await loadCatalogMetadata(catalogIds[i]);
-    // load the apps
-    const appIds = Object.keys(appsToLoad[catalogIds[i]]);
-    for (let j = 0; j < appIds.length; j++) {
-      // eslint-disable-next-line no-use-before-define
-      await loadParentsThenLoadApp(catalogIds[i], appIds[j]);
-    }
-  }
-  console.log(catalogMap);
 
   // If the apps have parents
   const loadParentsThenLoadApp = async (catalogId, appId) => {
-    // if already loaded, just return
+    // if already loaded, just returnf
+    console.log('this is here');
+    console.log(catalogMap[catalogId]);
+    console.log(apps[appId]);
     if (catalogMap[catalogId].apps[appId]) {
       return;
     }
@@ -65,6 +58,19 @@ module.exports = async () => {
       parentAppMetadata: catalogMap[parent.catalogId],
     });
   };
+
+  for (let i = 0; i < catalogIds.length; i++) {
+    catalogMap[catalogIds[i]] = await loadCatalogMetadata(catalogIds[i]);
+    console.log('this is the first catalog information');
+    console.log(catalogMap[catalogIds[i]]);
+    // load the apps
+    const appIds = Object.keys(appsToLoad[catalogIds[i]]);
+    console.log(appIds);
+    for (let j = 0; j < appIds.length; j++) {
+      await loadParentsThenLoadApp(catalogIds[i], appIds[j]);
+    }
+  }
+  console.log(catalogMap);
 
   // TODO: load the individual apps in order,
   // detect cycles and throw an error if they occur

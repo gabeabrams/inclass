@@ -64,8 +64,6 @@ module.exports = async (opts = {}) => {
     if (!baseMetadata.supportEmail) {
       baseMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
     }
-    console.log('here is the transformed data');
-    console.log(baseMetadata);
     return baseMetadata;
   }
   // app has no parent
@@ -75,6 +73,7 @@ module.exports = async (opts = {}) => {
   }
   return appMetadata;
 
+  // add png to screenshot path if it doesn't end with screenshot
 
   // TODO: test out loadapp and loadstore.
   // TODO: add more metadata to the store
