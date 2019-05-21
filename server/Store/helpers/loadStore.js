@@ -26,19 +26,13 @@ module.exports = async () => {
 
   // list the apps to load
   const appsToLoad = await listAppsToLoad();
-  console.log(appsToLoad);
-
   // load catalogs
   const catalogIds = Object.keys(appsToLoad);
-  console.log(catalogIds);
   const catalogMap = {}; // {catalogId : catalogMetadata}
 
   // If the apps have parents
   const loadParentsThenLoadApp = async (catalogId, appId) => {
     // if already loaded, just returnf
-    console.log('this is here');
-    console.log(catalogMap[catalogId]);
-    console.log(apps[appId]);
     if (catalogMap[catalogId].apps[appId]) {
       return;
     }
@@ -61,11 +55,18 @@ module.exports = async () => {
 
   for (let i = 0; i < catalogIds.length; i++) {
     catalogMap[catalogIds[i]] = await loadCatalogMetadata(catalogIds[i]);
-    console.log('this is the first catalog information');
-    console.log(catalogMap[catalogIds[i]]);
     // load the apps
+    const apps = 'apps';
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);
-    console.log(appIds);
+    // add apps => appId => null to every catalog
+    for (let j = 0; j < appIds.length; j++) {
+      // initiate the object
+      if (catalogMap[catalogIds[i]][apps] === undefined) {
+        catalogMap[catalogIds[i]][apps] = {};
+      }
+      // insert null to each app's metadata, meaning the app is not loaded
+      catalogMap[catalogIds[i]][apps][appIds[j]] = null;
+    }
     for (let j = 0; j < appIds.length; j++) {
       await loadParentsThenLoadApp(catalogIds[i], appIds[j]);
     }

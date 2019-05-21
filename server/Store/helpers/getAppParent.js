@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 const readJSON = require('./readJSON');
 const STORE_PATH = require('../STORE_PATH');
