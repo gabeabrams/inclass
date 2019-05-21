@@ -21,6 +21,7 @@ const loadCatalogMetadata = require('./loadCatalogMetadata');
  * @see /server/Store/helpers/loadStore for description of Catalog object
  */
 module.exports = async () => {
+  const apps = 'apps';
   const storeMetadata = await loadStoreMetadata();
   // console.log(storeMetadata);
 
@@ -33,7 +34,7 @@ module.exports = async () => {
   // If the apps have parents
   const loadParentsThenLoadApp = async (catalogId, appId) => {
     // if already loaded, just returnf
-    if (catalogMap[catalogId].apps[appId]) {
+    if (catalogMap[catalogId][apps][appId]) {
       return;
     }
     // check if this app has a parent
@@ -45,18 +46,17 @@ module.exports = async () => {
       await loadParentsThenLoadApp(parentCatalogId, parentAppId);
     }
     // Load self
-    catalogMap[catalogId].apps[appId] = await loadApp({
+    catalogMap[catalogId][apps][appId] = await loadApp({
       catalogId,
       catalogMetadata: catalogMap[catalogId],
       appId,
-      parentAppMetadata: catalogMap[parent.catalogId],
+      parentAppMetadata: (parent === null ? null : catalogMap[parent.catalogId]),
     });
   };
 
   for (let i = 0; i < catalogIds.length; i++) {
     catalogMap[catalogIds[i]] = await loadCatalogMetadata(catalogIds[i]);
     // load the apps
-    const apps = 'apps';
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);
     // add apps => appId => null to every catalog
     for (let j = 0; j < appIds.length; j++) {
@@ -71,7 +71,14 @@ module.exports = async () => {
       await loadParentsThenLoadApp(catalogIds[i], appIds[j]);
     }
   }
-  console.log(catalogMap);
+
+  console.log(catalogMap['dce'][apps]['gradeup']);
+  console.log("\n");
+  console.log("\n");
+  console.log(catalogMap['dce'][apps]['swipein']);
+  console.log("\n");
+  console.log("\n");
+  console.log(catalogMap['seas'][apps]['swipein']);
 
   // TODO: load the individual apps in order,
   // detect cycles and throw an error if they occur
