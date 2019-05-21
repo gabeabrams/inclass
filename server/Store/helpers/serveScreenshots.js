@@ -26,8 +26,13 @@ module.exports = async (opts) => {
   if (typeof (app.screenshots) !== 'undefined') {
     for (let i = 0; i < app.screenshots.length; i++) {
       const path = `/public/${catalogId}/${appId}/screenshots/`;
-      expressApp.use(path, express.static(app.screenshots[i].fullPath,
-        { fallthrough: false })); // Will throw 404 if file doesn't exist
+      try {
+        expressApp.use(path, express.static(app.screenshots[i].fullPath,
+          { fallthrough: false })); // Will throw 404 if file doesn't exist
+      } catch (err) {
+        const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${app.screenshots[i].filename}, but that file does not exist`;
+        throw new Error(errMessage);
+      }
       app.screenshots[i].url = `${path}${app.screenshots[i].filename}`; // Add url property to each screenshot
     }
   }
