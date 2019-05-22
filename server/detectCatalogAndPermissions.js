@@ -15,4 +15,9 @@ module.exports = async (api, launchInfo, catalogs) => {
   // TODO: first, check if the current user can access the catalog for this
   // course, then if that fails, check if they have access to any of the
   // *other* accounts in the catalog. If true at all, set isAdmin to true
+  const { courseId } = launchInfo;
+  // ES-Lint didn't like having courseId: courseId (Fix later if bad syntax)
+  const number = courseId;
+  const myCourse = await api.course.get({ courseId: number });
+  const { accountId } = myCourse;
 };
