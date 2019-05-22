@@ -17,18 +17,30 @@ module.exports = async (api, launchInfo, catalogs) => {
   // *other* accounts in the catalog. If true at all, set isAdmin to true
   const { courseId } = launchInfo;
   // ES-Lint didn't like having courseId: courseId (Fix later if bad syntax)
-  const number = courseId;
-  const myCourse = await api.course.get({ courseId: number });
+  const courseNumber = courseId;
+  const myCourse = await api.course.get({ courseId: courseNumber });
   const { accountId } = myCourse;
+  let isAdmin = false;
+  let catalogMatch;
+
+  
   // Current loop not allowed for ESLint (TODO: find alternative)
   for (let [catalogId, catalogObj] of Object.entries(catalogs)) {
-    const catalogMatch = undefined;
+    
     const { accounts } = catalogObj;
     for (let i = 0; i < accounts.length; i++) {
       if (accountId === accounts[i]) {
         catalogMatch = catalogId;
       }
     }
-
   }
+
+  try {
+    const accountNum = accountId;
+    await api.account.get({ accountId: accountNum });
+    isAdmin = true;
+  } catch (error) {
+  }
+
+  return { catalogMatch, isAdmin };
 };
