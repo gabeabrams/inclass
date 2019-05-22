@@ -24,11 +24,17 @@ module.exports = async (opts) => {
 
   // Checks if app object has screenshot property
   if (Object.prototype.hasOwnProperty.call(app, 'screenshots')) {
+    // Runs through all the screenshots
     for (let i = 0; i < app.screenshots.length; i++) {
       const path = `/public/${catalogId}/${appId}/screenshots/`;
       try {
+        /**
+         * Serves app.screenshots[i].fullPath to 
+         * /public/<catalogId>/<appId>/screenshots/<filename>
+         * Will throw 404 if file doesn't exist (fallthrough)
+         */
         expressApp.use(path, express.static(app.screenshots[i].fullPath,
-          { fallthrough: false })); // Will throw 404 if file doesn't exist
+          { fallthrough: false }));
       } catch (err) {
         const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${app.screenshots[i].filename}, but that file does not exist`;
         throw new Error(errMessage);
