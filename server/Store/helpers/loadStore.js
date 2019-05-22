@@ -23,7 +23,7 @@ const loadCatalogMetadata = require('./loadCatalogMetadata');
 module.exports = async () => {
   const apps = 'apps';
   const storeMetadata = await loadStoreMetadata();
-  // console.log(storeMetadata);
+  console.log(storeMetadata);
 
   // list the apps to load
   const appsToLoad = await listAppsToLoad();
@@ -32,10 +32,15 @@ module.exports = async () => {
   const catalogMap = {}; // {catalogId : catalogMetadata}
 
   // If the apps have parents
-  const loadParentsThenLoadApp = async (catalogId, appId) => {
+  const loadParentsThenLoadApp = async (catalogId, appId, seen) => {
     // if already loaded, just return
     if (catalogMap[catalogId][apps][appId]) {
       return;
+    }
+    if (seen.includes(`${catalogId}${appId}`)) {
+      throw new Error('detected cycle');
+    } else {
+      seen.push(`${catalogId}${appId}`);
     }
     // check if this app has a parent
     const parent = await getAppParent(catalogId, appId);
@@ -43,7 +48,7 @@ module.exports = async () => {
       // Load parent
       const parentCatalogId = parent.catalogId;
       const parentAppId = parent.appId;
-      await loadParentsThenLoadApp(parentCatalogId, parentAppId);
+      await loadParentsThenLoadApp(parentCatalogId, parentAppId, seen);
     }
     // Load self
     catalogMap[catalogId][apps][appId] = await loadApp({
@@ -74,7 +79,8 @@ module.exports = async () => {
   for (let i = 0; i < catalogIds.length; i++) {
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);
     for (let j = 0; j < appIds.length; j++) {
-      await loadParentsThenLoadApp(catalogIds[i], appIds[j]);
+      const seen = [];
+      await loadParentsThenLoadApp(catalogIds[i], appIds[j], seen);
     }
   }
 
@@ -89,8 +95,6 @@ module.exports = async () => {
   console.log("\n");
   console.log(catalogMap['pe'][apps]['swipein']);
 
-
-  // TODO: load the individual apps in order,
   // detect cycles and throw an error if they occur
   return catalogMap;
 };
