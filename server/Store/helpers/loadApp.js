@@ -44,7 +44,7 @@ module.exports = async (opts = {}) => {
       }
     });
   }
-  // add png to screenshot path if it doesn't end with screenshot
+  // add .png to screenshot path if it doesn't end with screenshot
   if (appMetadata.screenshots) {
     for (let i = 0; i < appMetadata.screenshots.length; i++) {
       const file = appMetadata.screenshots[i].filename;
@@ -52,6 +52,11 @@ module.exports = async (opts = {}) => {
       appMetadata.screenshots[i].filename = completeFilename;
     }
   }
+  // if support email is not provided within app, inherent catalog's default
+  if (!appMetadata.supportEmail) {
+    appMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
+  }
+
   // TODO: resolve filepaths (use parent's filepath for screenshots if needed).
   // Add app.screenshots[i].fullPath
 
@@ -65,19 +70,11 @@ module.exports = async (opts = {}) => {
         baseMetadata[key] = value;
       }
     });
-    // if support email is not provided within app, inherent catalog's default
-    if (!baseMetadata.supportEmail) {
-      baseMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
-    }
+
     return baseMetadata;
   }
-  // app has no parent
-  // if support email is not provided within app, inherent catalog's default
-  if (!appMetadata.supportEmail) {
-    appMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
-  }
-  return appMetadata;
 
+  return appMetadata;
 
   // TODO: add more metadata to the store
   // add app without tags,
