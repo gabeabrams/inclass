@@ -23,7 +23,7 @@ module.exports = async (opts) => {
   } = opts;
 
   // Checks if app object has screenshot property
-  if (typeof (app.screenshots) !== 'undefined') {
+  if (Object.prototype.hasOwnProperty.call(app, 'screenshots')) {
     for (let i = 0; i < app.screenshots.length; i++) {
       const path = `/public/${catalogId}/${appId}/screenshots/`;
       try {
