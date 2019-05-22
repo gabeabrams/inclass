@@ -15,11 +15,11 @@ const main = async () => {
   // console.log(storeMetadata);
 
   // test for listAppsToLoad.js
-  const test = await listapps();
+  // const test = await listapps();
   // console.log(test);
 
   // test for loadCatalogMetadata.js
-  const metadata = await loadCatalogMetadata('seas');
+  // const metadata = await loadCatalogMetadata('seas');
   // console.log(metadata);
 
   // test for loadStoreMetadata

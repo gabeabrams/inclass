@@ -1,12 +1,5 @@
-// Import dependencies
-const path = require('path');
-
-// Import constants
-const STORE_PATH = require('../STORE_PATH');
-
 // Import helpers
 const listAppsToLoad = require('./listAppsToLoad');
-const readJSON = require('./readJSON');
 const loadApp = require('./loadApp');
 const loadStoreMetadata = require('./loadStoreMetadata');
 const getAppParent = require('./getAppParent');
@@ -17,13 +10,16 @@ const loadCatalogMetadata = require('./loadCatalogMetadata');
  * Reads the metadata of the store, reads each catalog, and returns a full
  *   catalog metadata object
  * @module /server/Store/helpers/loadStore
- * @return {object} { catalogId: Catalog } mapping
+ * @return {object} { store: store metadata, catalogs: { catalogId: catalog }}
  * @see /server/Store/helpers/loadStore for description of Catalog object
  */
 module.exports = async () => {
   const apps = 'apps';
+  const store = 'store';
+  const catalogs = 'catalogs';
   const storeMetadata = await loadStoreMetadata();
-  console.log(storeMetadata);
+  const storeMap = {};
+  storeMap[store] = storeMetadata;
 
   // list the apps to load
   const appsToLoad = await listAppsToLoad();
@@ -37,6 +33,7 @@ module.exports = async () => {
     if (catalogMap[catalogId][apps][appId]) {
       return;
     }
+    // detect cycles and throw an error if they occur
     if (seen.includes(`${catalogId}${appId}`)) {
       throw new Error('detected cycle');
     } else {
@@ -79,22 +76,11 @@ module.exports = async () => {
   for (let i = 0; i < catalogIds.length; i++) {
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);
     for (let j = 0; j < appIds.length; j++) {
-      const seen = [];
+      const seen = []; // array of 'catalogId'+'appId' strings
       await loadParentsThenLoadApp(catalogIds[i], appIds[j], seen);
     }
   }
-
-  console.log(catalogMap['dce'][apps]['gradeup']);
-  console.log("\n");
-  console.log("\n");
-  console.log(catalogMap['dce'][apps]['swipein']);
-  console.log("\n");
-  console.log("\n");
-  console.log(catalogMap['seas'][apps]['swipein']);
-  console.log("\n");
-  console.log("\n");
-  console.log(catalogMap['pe'][apps]['swipein']);
-
-  // detect cycles and throw an error if they occur
-  return catalogMap;
+  storeMap[catalogs] = catalogMap;
+  console.log(storeMap);
+  return storeMap;
 };

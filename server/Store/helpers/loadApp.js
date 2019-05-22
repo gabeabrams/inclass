@@ -1,6 +1,6 @@
 const path = require('path');
-const clone = require('fast-clone');
 // this is used for cloning the parent
+const clone = require('fast-clone');
 
 const STORE_PATH = require('../STORE_PATH');
 
