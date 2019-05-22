@@ -83,5 +83,5 @@ module.exports = async () => {
 
   // TODO: load the individual apps in order,
   // detect cycles and throw an error if they occur
-  return {};
+  return catalogMap;
 };

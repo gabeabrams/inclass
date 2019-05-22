@@ -44,11 +44,16 @@ module.exports = async (opts = {}) => {
       }
     });
   }
-
+  // add png to screenshot path if it doesn't end with screenshot
+  if (appMetadata.screenshots) {
+    for (let i = 0; i < appMetadata.screenshots.length; i++) {
+      const file = appMetadata.screenshots[i].filename;
+      const completeFilename = `${file}${file.endsWith('.png') ? '' : '.png'}`;
+      appMetadata.screenshots[i].filename = completeFilename;
+    }
+  }
   // TODO: resolve filepaths (use parent's filepath for screenshots if needed).
   // Add app.screenshots[i].fullPath
-
-  // Do the same thing for screenshots
 
   if (parentAppMetadata) {
     const baseMetadata = clone(parentAppMetadata);
@@ -73,13 +78,9 @@ module.exports = async (opts = {}) => {
   }
   return appMetadata;
 
-  // add png to screenshot path if it doesn't end with screenshot
 
-  // TODO: test out loadapp and loadstore.
   // TODO: add more metadata to the store
   // add app without tags,
   // add parent of parent of parent, invalid app to test if it crashes
-  // TODO: use defaultSupportEmail from catalog metadata
-  // if no supportEmail is included
   // TODO: call serveScreenshots
 };
