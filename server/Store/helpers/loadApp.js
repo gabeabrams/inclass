@@ -44,7 +44,7 @@ module.exports = async (opts = {}) => {
       }
     });
   }
-  // add .png to screenshot path if it doesn't end with screenshot
+  // Add .png to screenshot path if it doesn't end with screenshot
   // Add app.screenshots[i].fullPath
   if (appMetadata.screenshots) {
     for (let i = 0; i < appMetadata.screenshots.length; i++) {
@@ -60,7 +60,7 @@ module.exports = async (opts = {}) => {
   if (!appMetadata.supportEmail) {
     appMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
   }
-
+  // If the app extends from parent app, clone parent's metadata then update
   if (parentAppMetadata) {
     const baseMetadata = clone(parentAppMetadata);
 
@@ -71,12 +71,12 @@ module.exports = async (opts = {}) => {
         baseMetadata[key] = value;
       }
     });
-
     return baseMetadata;
   }
 
   return appMetadata;
 
+  // added pe department. app is swipein, changed title, subtitle, screenshot path should be different
   // TODO: add more metadata to the store
   // add app without tags,
   // add parent of parent of parent, invalid app to test if it crashes

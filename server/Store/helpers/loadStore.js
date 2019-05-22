@@ -33,7 +33,7 @@ module.exports = async () => {
 
   // If the apps have parents
   const loadParentsThenLoadApp = async (catalogId, appId) => {
-    // if already loaded, just returnf
+    // if already loaded, just return
     if (catalogMap[catalogId][apps][appId]) {
       return;
     }
@@ -55,9 +55,9 @@ module.exports = async () => {
     });
   };
 
+  // init the "apps" field in catalogMap
   for (let i = 0; i < catalogIds.length; i++) {
     catalogMap[catalogIds[i]] = await loadCatalogMetadata(catalogIds[i]);
-    // load the apps
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);
     // add apps => appId => null to every catalog
     for (let j = 0; j < appIds.length; j++) {
@@ -68,6 +68,11 @@ module.exports = async () => {
       // insert null to each app's metadata, meaning the app is not loaded
       catalogMap[catalogIds[i]][apps][appIds[j]] = null;
     }
+  }
+
+  // load all the apps
+  for (let i = 0; i < catalogIds.length; i++) {
+    const appIds = Object.keys(appsToLoad[catalogIds[i]]);
     for (let j = 0; j < appIds.length; j++) {
       await loadParentsThenLoadApp(catalogIds[i], appIds[j]);
     }
@@ -80,6 +85,10 @@ module.exports = async () => {
   console.log("\n");
   console.log("\n");
   console.log(catalogMap['seas'][apps]['swipein']);
+  console.log("\n");
+  console.log("\n");
+  console.log(catalogMap['pe'][apps]['swipein']);
+
 
   // TODO: load the individual apps in order,
   // detect cycles and throw an error if they occur
