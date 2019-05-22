@@ -20,4 +20,15 @@ module.exports = async (api, launchInfo, catalogs) => {
   const number = courseId;
   const myCourse = await api.course.get({ courseId: number });
   const { accountId } = myCourse;
+  // Current loop not allowed for ESLint (TODO: find alternative)
+  for (let [catalogId, catalogObj] of Object.entries(catalogs)) {
+    const catalogMatch = undefined;
+    const { accounts } = catalogObj;
+    for (let i = 0; i < accounts.length; i++) {
+      if (accountId === accounts[i]) {
+        catalogMatch = catalogId;
+      }
+    }
+
+  }
 };
