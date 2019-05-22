@@ -75,10 +75,5 @@ module.exports = async (opts = {}) => {
   }
 
   return appMetadata;
-
-  // added pe department. app is swipein, changed title, subtitle, screenshot path should be different
-  // TODO: add more metadata to the store
-  // add app without tags,
-  // add parent of parent of parent, invalid app to test if it crashes
   // TODO: call serveScreenshots
 };
