@@ -45,20 +45,21 @@ module.exports = async (opts = {}) => {
     });
   }
   // add .png to screenshot path if it doesn't end with screenshot
+  // Add app.screenshots[i].fullPath
   if (appMetadata.screenshots) {
     for (let i = 0; i < appMetadata.screenshots.length; i++) {
       const file = appMetadata.screenshots[i].filename;
       const completeFilename = `${file}${file.endsWith('.png') ? '' : '.png'}`;
       appMetadata.screenshots[i].filename = completeFilename;
+      // If app already has screenshot object, just add fullpath to it
+      const fullPath = 'fullPath';
+      appMetadata.screenshots[i][fullPath] = path.join(STORE_PATH, catalogId, appId, 'screenshots', completeFilename);
     }
   }
   // if support email is not provided within app, inherent catalog's default
   if (!appMetadata.supportEmail) {
     appMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
   }
-
-  // TODO: resolve filepaths (use parent's filepath for screenshots if needed).
-  // Add app.screenshots[i].fullPath
 
   if (parentAppMetadata) {
     const baseMetadata = clone(parentAppMetadata);
