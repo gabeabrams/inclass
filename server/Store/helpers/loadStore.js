@@ -18,6 +18,7 @@ module.exports = async () => {
   const store = 'store';
   const catalogs = 'catalogs';
   const storeMetadata = await loadStoreMetadata();
+  // initiate storeMap
   const storeMap = {};
   storeMap[store] = storeMetadata;
 
@@ -80,7 +81,7 @@ module.exports = async () => {
       await loadParentsThenLoadApp(catalogIds[i], appIds[j], seen);
     }
   }
+  // add catalogs metadata to storeMap
   storeMap[catalogs] = catalogMap;
-  console.log(storeMap);
   return storeMap;
 };
