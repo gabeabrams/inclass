@@ -7,5 +7,21 @@
  *   unchecked tagValues, the app has at least one tagValue that is checked
  */
 export default (apps, tags) => {
+  const goodApps = [];
+  const added = Array(apps.length).fill(false);
+  for (let i = 0; i < apps.length; i++) {
+    for (let j = 0; j < Object.keys(apps[i].tags).length; j++) {
+      // Avoid adding same app more than once
+      if (added[i]) {
+        continue;
+      }
+      // If the jth tag's itemName isChecked, then app will be added
+      else if (Object.keys(apps[i].tags)[j].items[itemName]) {
+        goodApps.prototype.push(apps[i]);
+        added[i] = true;
+      }
+    }
+  }
+  return goodApps;
 
 };

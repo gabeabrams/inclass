@@ -11,7 +11,7 @@ export default (apps, query) => {
     return apps;
   }
   // Make a new list to add the apps we want to return
-    const goodApps = new Array;
+    const goodApps = [];
     let length = 0;
   // Go through each app in the list
   // If the title, subtitle, or description (if it exists) match CASE
