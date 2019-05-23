@@ -6,7 +6,7 @@
  * @return {object[]} apps that for each tag that has a mix of checked and
  *   unchecked tagValues, the app has at least one tagValue that is checked
  */
-export default (apps, tags) => {
+module.exports = (apps, tags) => {
   const goodApps = [];
   const added = Array(apps.length).fill(false);
   for (let i = 0; i < apps.length; i++) {
@@ -17,11 +17,10 @@ export default (apps, tags) => {
       }
       // If the jth tag's itemName isChecked, then app will be added
       else if (Object.keys(apps[i].tags)[j].items[itemName]) {
-        goodApps.prototype.push(apps[i]);
+        goodApps.push(apps[i]);
         added[i] = true;
       }
     }
   }
   return goodApps;
-
 };
