@@ -18,30 +18,57 @@ module.exports = async (api, launchInfo, catalogs) => {
 
   const { courseId } = launchInfo;
   const courseNumber = courseId;
+
   const myCourse = await api.course.get({ courseId: courseNumber });
+
   const { accountId } = myCourse;
-  let isAdmin = false;
-  let catalogMatch;
+  const accountNum = accountId;
+
+  let catalogId;
+  let matchAccounts;
+  let isAdmin;
 
 
+  // Go through each catalog
   if (catalogs) {
-    Object.keys(catalogs).forEach((catalogId) => {
-      const { accounts } = catalogs[catalogId];
+    Object.keys(catalogs).forEach((id) => {
+      const { accounts } = catalogs[id];
+      /**
+       * Go through all accounts in each catalog
+       * searching for matching accountIds
+       */
       for (let i = 0; i < accounts.length; i++) {
         if (accountId === accounts[i]) {
-          catalogMatch = catalogId;
+          catalogId = id;
+          matchAccounts = accounts;
+
           break;
         }
       }
     });
   }
 
+  /**
+   * Check if person is admin of account the course is in (accountNum)
+   * If not, check if person is admin of
+   * any account in the catalog (matchAccounts)
+   * isAdmin true, if satisfy one of the statements above
+   */
   try {
-    const accountNum = accountId;
-    await api.account.get({ accountId: accountNum });
+    api.course.get({ accountId: accountNum });
     isAdmin = true;
   } catch (error) {
+    for (let i = 0; i < matchAccounts.length; i++) {
+      if (matchAccounts[i] !== accountNum) {
+        try {
+          api.course.get({ accountId: matchAccounts[i] });
+          isAdmin = true;
+          break;
+        } catch (err) {
+          isAdmin = false;
+        }
+      }
+    }
   }
-
-  return { catalogMatch, isAdmin };
+  return { catalogId, isAdmin };
 };
