@@ -6,32 +6,45 @@ describe('client > src > utils > filter > filterByTags', function () {
   const appTest = [
     { name: 'AppOne',
       tags: {
-        tagName => {
+        tagName: {
           color: 'blue',
-          items: itemName => true;
+          items: {
+            itemName: true,
+          },
         }
       }},
     { name: 'AppTwo',
       tags: {
-        tagName => {
+        tagName: {
           color: 'red',
-          items: itemName => false;
+          items: {
+            itemName: false,
+          },
         }
       }},
     { name: 'AppThree',
       tags: {
-        tagName => {
+        tagName: {
           color: 'green',
-          items: itemName => true;
+          items: {
+            itemName: false,
+          },
         }
       }},
   ];
 
-
+  const testTags = {
+    tagName: {
+      color: 'blue',
+      items: {
+        itemName: true,
+      },
+    }
+  };
 
 
   it('Returns a list of apps that have a given tag name checked', async function () {
-    console.log(appTest, tags);
+    console.log(filterByTags(appTest, testTags));
 
   });
 

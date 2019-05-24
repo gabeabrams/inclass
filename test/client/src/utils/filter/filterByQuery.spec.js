@@ -11,10 +11,16 @@ describe('client > src > utils > filter > filterByQuery', function () {
 
   it('Finds a query in an apps title, subtitle, or description', async function () {
 
-    const queryTest = 'Hi';
+    let queryTest = 'Hi';
 
     assert.equal(queryTest, filterByQuery(appTest, queryTest)[0].title);
     console.log(filterByQuery(appTest, queryTest));
+
+    queryTest = 'SAM';
+    assert.equal(1, filterByQuery(appTest, queryTest).length);
+
+    queryTest = 'cool';
+    assert.equal(filterByQuery(appTest, queryTest).length, 2);
   });
 
   it('Returns all apps if query is empty or white space', async function () {
