@@ -3,15 +3,20 @@ const assert = require('assert');
 const excludeTagName = require('../../../../../client/src/utils/filter/excludeTagName.js');
 
 describe('client > src > utils > filter > excludeTagName', function () {
-  const tags = {
+  const testTags = {
     color: 'blue',
     name: 'blah',
     time: 5,
   };
 
-  tagNameToExclude = 'name';
+  it('Deletes a property of a tag given the property name', async function () {
+    console.log(testTags);
+    console.log(excludeTagName(testTags, 'name'));
+  });
 
-  console.log(tags);
-  tags = excludeTagName(tags, tagNameToExclude);
-  console.log(tags);
+  it('Doesn\'t do anything if the property doesn\'t exist', async function () {
+    console.log(testTags);
+    console.log(excludeTagName(testTags, 'mom'));
+  });
+
 });

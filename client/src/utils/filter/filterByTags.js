@@ -7,8 +7,14 @@
  *   unchecked tagValues, the app has at least one tagValue that is checked
  */
 module.exports = (apps, tags) => {
+  // Make new array for apps to keep
   const goodApps = [];
+  // Keep track of which apps have been added to new array (so we don't keep
+  // adding the same ones)
   const added = Array(apps.length).fill(false);
+
+  // Iterate through app array, and check each tagName in each app to see if
+  // it's checked
   for (let i = 0; i < apps.length; i++) {
     for (let j = 0; j < Object.keys(apps[i].tags).length; j++) {
       // Avoid adding same app more than once

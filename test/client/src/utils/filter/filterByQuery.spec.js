@@ -15,7 +15,6 @@ describe('client > src > utils > filter > filterByQuery', function () {
 
     assert.equal(queryTest, filterByQuery(appTest, queryTest)[0].title);
     console.log(filterByQuery(appTest, queryTest));
-    done();
   });
 
   it('Returns all apps if query is empty or white space', async function () {
@@ -23,6 +22,5 @@ describe('client > src > utils > filter > filterByQuery', function () {
     const queryTest = '    ';
 
     assert.equal(filterByQuery(appTest, queryTest).length, 3);
-    done();
   });
 });

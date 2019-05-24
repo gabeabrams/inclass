@@ -8,7 +8,10 @@
  */
 module.exports = (tags, tagNameToExclude) => {
   // Check if tag has the property first
-  delete tags[tagNameToExclude];
+  if (tags.hasOwnProperty(tagNameToExclude)) {
+    // If it exists, delete it
+    delete tags[tagNameToExclude];
+  }
 
   return tags;
 };

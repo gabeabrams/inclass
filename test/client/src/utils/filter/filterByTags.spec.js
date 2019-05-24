@@ -4,22 +4,25 @@ const filterByTags = require('../../../../../client/src/utils/filter/filterByTag
 
 describe('client > src > utils > filter > filterByTags', function () {
   const appTest = [
-   { title: 'Hi', subtitle: 'lala', description: 'this is a cool app!'},
-   { title: 'App2', subtitle: 'HI', description: 'BLEE BLOO HEY!'},
-   { title: 'blue', subtitle: 'sam', description: 'a COoL apPlIcAtion'},
+   { tag: {
+       tagname => {
+         color: 'blue',
+         items: (itemName) => { return true; },
+      }
+    }
   ];
 
   const tags = {
-    tagName => {
+    (tagName) => {
       color: 'red',
-      items: itemName => true
+      items: (itemName) => return true;
     }
   };
 
-  it.skip('Returns a list of apps that have a given tag name checked', async function () {
-    console.log(appTest);
 
-
+  it('Returns a list of apps that have a given tag name checked', async function () {
+    console.log(appTest, tags);
 
   });
+
 });
