@@ -3,43 +3,45 @@ const assert = require('assert');
 const filterByTags = require('../../../../../client/src/utils/filter/filterByTags.js');
 
 describe('client > src > utils > filter > filterByTags', function () {
-  const appTest = [
-    { name: 'AppOne',
+  const testApps = [
+    {
+      name: 'AppOne',
       tags: {
-        tagName: {
-          color: 'blue',
-          items: {
-            itemName: true,
-          },
-        }
-      }},
-    { name: 'AppTwo',
+        cost: ['free'],
+        type: ['import', 'export'],
+      },
+    },
+    {
+      name: 'AppTwo',
       tags: {
-        tagName: {
-          color: 'red',
-          items: {
-            itemName: false,
-          },
-        }
-      }},
-    { name: 'AppThree',
+        cost: ['expensive'],
+        type: ['import'],
+      },
+    },
+    {
+      name: 'AppThree',
       tags: {
-        tagName: {
-          color: 'green',
-          items: {
-            itemName: false,
-          },
-        }
-      }},
+        cost: ['expensive'],
+        type: ['export'],
+      },
+    },
   ];
 
   const testTags = {
-    tagName: {
+    cost: {
       color: 'blue',
-      items: {
-        itemName: true,
+      tagValues: {
+        free: true,
+        expensive: false,
       },
-    }
+    },
+    type: {
+      color: 'red',
+      tagValues: {
+        import: true,
+        export: true,
+      },
+    },
   };
 
 
