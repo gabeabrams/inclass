@@ -83,5 +83,6 @@ module.exports = async () => {
   }
   // add catalogs metadata to storeMap
   storeMap[catalogs] = catalogMap;
+  console.log(catalogMap);
   return storeMap;
 };
