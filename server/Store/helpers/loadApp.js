@@ -52,8 +52,7 @@ module.exports = async (opts = {}) => {
       const completeFilename = `${file}${file.endsWith('.png') ? '' : '.png'}`;
       appMetadata.screenshots[i].filename = completeFilename;
       // If app already has screenshot object, just add fullpath to it
-      const fullPath = 'fullPath';
-      appMetadata.screenshots[i][fullPath] = path.join(STORE_PATH, catalogId, appId, 'screenshots', completeFilename);
+      appMetadata.screenshots[i].fullPath = path.join(STORE_PATH, catalogId, appId, 'screenshots', completeFilename);
     }
   }
   // if support email is not provided within app, inherent catalog's default
