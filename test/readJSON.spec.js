@@ -36,6 +36,6 @@ const main = async () => {
   // });
 
   // test for loadStore
-  // loadStore();
+  loadStore();
 };
 main();

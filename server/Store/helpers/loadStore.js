@@ -28,7 +28,7 @@ module.exports = async () => {
   // If the apps have parents
   const loadParentsThenLoadApp = async (catalogId, appId, seen) => {
     // if already loaded, just return
-    if (catalogMap[catalogId].apps[appId]) {
+    if (catalogMap[catalogId].apps.appId) {
       return;
     }
     // detect cycles and throw an error if they occur
@@ -43,15 +43,18 @@ module.exports = async () => {
       // Load parent
       const parentCatalogId = parent.catalogId;
       const parentAppId = parent.appId;
+      if (!parentCatalogId || !parentAppId) {
+        throw new Error(`We couldn't load the parent app metadata because the file ${parentCatalogId} or ${parentAppId} is not formatted properly`);
+      }
       await loadParentsThenLoadApp(parentCatalogId, parentAppId, seen);
     }
     // Load self
-    catalogMap[catalogId].apps[appId] = await loadApp({
+    catalogMap[catalogId].apps.appId = await loadApp({
       catalogId,
       catalogMetadata: catalogMap[catalogId],
       appId,
       parentAppMetadata:
-      (parent === null ? null : catalogMap[parent.catalogId].apps[appId]),
+      (parent === null ? null : catalogMap[parent.catalogId].apps.appId),
     });
   };
 
@@ -62,7 +65,7 @@ module.exports = async () => {
     // add apps => appId => null to every catalog
     for (let j = 0; j < appIds.length; j++) {
       // initiate the object
-      if (catalogMap[catalogIds[i]].apps) {
+      if (!catalogMap[catalogIds[i]].apps) {
         catalogMap[catalogIds[i]].apps = {};
       }
       // insert null to each app's metadata, meaning the app is not loaded
