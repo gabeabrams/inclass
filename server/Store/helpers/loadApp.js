@@ -75,5 +75,4 @@ module.exports = async (opts = {}) => {
   }
 
   return appMetadata;
-  // TODO: call serveScreenshots
 };
