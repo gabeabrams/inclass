@@ -1,7 +1,7 @@
 const assert = require('assert');
-const loadCatalogMetadata = require('../../../../server/Store/helpers/loadCatalogMetadata');
+const loadStore = require('../../../../server/Store/helpers/loadStore');
 
-describe('server > Store > helpers > loadCatalogMetadata', function () {
+describe('server > Store > helpers > loadStore', function () {
   it('contains all the required fields', async function () {
     const testMetadata = await loadCatalogMetadata('dce');
     const requiredFields = ['title', 'accounts', 'tagColors', 'defaultSupportEmail'];

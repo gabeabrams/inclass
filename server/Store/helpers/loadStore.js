@@ -14,13 +14,10 @@ const loadCatalogMetadata = require('./loadCatalogMetadata');
  * @see /server/Store/helpers/loadStore for description of Catalog object
  */
 module.exports = async () => {
-  const apps = 'apps';
-  const store = 'store';
-  const catalogs = 'catalogs';
   const storeMetadata = await loadStoreMetadata();
   // initiate storeMap
   const storeMap = {};
-  storeMap[store] = storeMetadata;
+  storeMap.store = storeMetadata;
 
   // list the apps to load
   const appsToLoad = await listAppsToLoad();
@@ -31,7 +28,7 @@ module.exports = async () => {
   // If the apps have parents
   const loadParentsThenLoadApp = async (catalogId, appId, seen) => {
     // if already loaded, just return
-    if (catalogMap[catalogId][apps][appId]) {
+    if (catalogMap[catalogId].apps[appId]) {
       return;
     }
     // detect cycles and throw an error if they occur
@@ -49,12 +46,12 @@ module.exports = async () => {
       await loadParentsThenLoadApp(parentCatalogId, parentAppId, seen);
     }
     // Load self
-    catalogMap[catalogId][apps][appId] = await loadApp({
+    catalogMap[catalogId].apps[appId] = await loadApp({
       catalogId,
       catalogMetadata: catalogMap[catalogId],
       appId,
       parentAppMetadata:
-      (parent === null ? null : catalogMap[parent.catalogId][apps][appId]),
+      (parent === null ? null : catalogMap[parent.catalogId].apps[appId]),
     });
   };
 
@@ -65,11 +62,11 @@ module.exports = async () => {
     // add apps => appId => null to every catalog
     for (let j = 0; j < appIds.length; j++) {
       // initiate the object
-      if (catalogMap[catalogIds[i]][apps] === undefined) {
-        catalogMap[catalogIds[i]][apps] = {};
+      if (catalogMap[catalogIds[i]].apps === undefined) {
+        catalogMap[catalogIds[i]].apps = {};
       }
       // insert null to each app's metadata, meaning the app is not loaded
-      catalogMap[catalogIds[i]][apps][appIds[j]] = null;
+      catalogMap[catalogIds[i]].apps[appIds[j]] = null;
     }
   }
 
@@ -82,7 +79,7 @@ module.exports = async () => {
     }
   }
   // add catalogs metadata to storeMap
-  storeMap[catalogs] = catalogMap;
+  storeMap.catalogs = catalogMap;
   console.log(catalogMap);
   return storeMap;
 };
