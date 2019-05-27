@@ -32,10 +32,10 @@ module.exports = async () => {
       return;
     }
     // detect cycles and throw an error if they occur
-    if (seen.includes(`${catalogId}${appId}`)) {
+    if (seen.includes(`${catalogId}=>${appId}`)) {
       throw new Error('detected cycle');
     } else {
-      seen.push(`${catalogId}${appId}`);
+      seen.push(`${catalogId}=>${appId}`);
     }
     // check if this app has a parent
     const parent = await getAppParent(catalogId, appId);
@@ -62,7 +62,7 @@ module.exports = async () => {
     // add apps => appId => null to every catalog
     for (let j = 0; j < appIds.length; j++) {
       // initiate the object
-      if (catalogMap[catalogIds[i]].apps === undefined) {
+      if (catalogMap[catalogIds[i]].apps) {
         catalogMap[catalogIds[i]].apps = {};
       }
       // insert null to each app's metadata, meaning the app is not loaded
@@ -74,7 +74,7 @@ module.exports = async () => {
   for (let i = 0; i < catalogIds.length; i++) {
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);
     for (let j = 0; j < appIds.length; j++) {
-      const seen = []; // array of 'catalogId'+'appId' strings
+      const seen = []; // array of 'catalogId'=>'appId' strings
       await loadParentsThenLoadApp(catalogIds[i], appIds[j], seen);
     }
   }
