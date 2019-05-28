@@ -6,6 +6,7 @@ const readJSON = require('../../../../server/Store/helpers/readJSON');
 const STORE_PATH = require('../../../../server/Store/STORE_PATH');
 
 describe('server > Store > helpers > loadApp', function () {
+  let parentMetadata = '';
   it('loads app with no parent correctly', async function () {
     const catalogId = 'dce';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
@@ -40,6 +41,37 @@ describe('server > Store > helpers > loadApp', function () {
         app[field].forEach((screenshot) => {
           assert(screenshot.filename.endsWith('.png'));
         });
+      }
+    });
+    parentMetadata = app;
+  });
+
+  it('loads app with parent correctly', async function () {
+    const catalogId = 'seas';
+    const catalogMetadata = await loadCatalogMetadata(catalogId);
+    const appId = 'swipein';
+    const parentAppMetadata = parentMetadata;
+    const childApp = await loadApp({
+      catalogId,
+      catalogMetadata,
+      appId,
+      parentAppMetadata,
+    });
+    const testPath = path.join(STORE_PATH, 'seas', 'swipein', 'metadata');
+    const realApp = await readJSON(testPath);
+    console.log(childApp);
+    console.log(realApp);
+    const changed = Object.keys(realApp).filter((key) => {
+      return (key !== 'extends');
+    });
+    Object.keys(childApp).forEach((key) => {
+      if (changed.includes(key)) {
+        assert(childApp[key] === realApp[key]);
+      } else {
+        console.log(key);
+        console.log(JSON.stringify(childApp[key]));
+        console.log(JSON.stringify(parentAppMetadata[key]));
+        assert(JSON.stringify(childApp[key]) === JSON.stringify(parentAppMetadata[key]));
       }
     });
   });

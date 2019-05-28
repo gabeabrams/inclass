@@ -55,10 +55,7 @@ module.exports = async (opts = {}) => {
       appMetadata.screenshots[i].fullPath = path.join(STORE_PATH, catalogId, appId, 'screenshots', completeFilename);
     }
   }
-  // if support email is not provided within app, inherent catalog's default
-  if (!appMetadata.supportEmail) {
-    appMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
-  }
+
   // If the app extends from parent app, clone parent's metadata then update
   if (parentAppMetadata) {
     const baseMetadata = clone(parentAppMetadata);
@@ -72,6 +69,9 @@ module.exports = async (opts = {}) => {
     });
     return baseMetadata;
   }
-
+  // if support email is not provided within app, inherent catalog's default
+  if (!appMetadata.supportEmail) {
+    appMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
+  }
   return appMetadata;
 };
