@@ -14,7 +14,37 @@ const excludeTagName = require('./excludeTagName');
 module.exports = (apps, tags) => {
   // TODO: implement
 
+  // Duplicate before changing
+  let newTags = tags;
+  let newApps = apps;
+
+  // return object looks like this:
+  const countObj = {
+    cost: {
+      free: 5,
+      expensive: 10,
+    },
+  };
+
+  // For each filtercategory other than the one we're in,
+  // This will give an array of all the tag names, and corresponding values
+  const tagNames = Object.keys(newTags);
+  const tagComponents = Object.values(newTags);
+
+  tagNames.forEach((tag) => {
+    
+  });
+
+  // Make an array of the tags that are checked
+
+  // For each tag in that array, filterByTag with app list and that tag.
+
+  // If it isnt already in new app list, add it and add count
+
+
+
   // We need to go through each other filter category
+  newTags = Object.values(newTags)
 
   // Go through each tag in filter cat, if it is checked, look for apps with
   // that tag (filterByTags)
