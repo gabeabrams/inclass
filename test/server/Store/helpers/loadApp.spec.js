@@ -51,27 +51,26 @@ describe('server > Store > helpers > loadApp', function () {
     const catalogMetadata = await loadCatalogMetadata(catalogId);
     const appId = 'swipein';
     const parentAppMetadata = parentMetadata;
+    // load child app
     const childApp = await loadApp({
       catalogId,
       catalogMetadata,
       appId,
       parentAppMetadata,
     });
+    // read in childApp metadata from store
     const testPath = path.join(STORE_PATH, 'seas', 'swipein', 'metadata');
     const realApp = await readJSON(testPath);
-    console.log(childApp);
-    console.log(realApp);
     const changed = Object.keys(realApp).filter((key) => {
       return (key !== 'extends');
     });
+    // check if each field in childApp is updated accordingly
     Object.keys(childApp).forEach((key) => {
       if (changed.includes(key)) {
         assert(childApp[key] === realApp[key]);
       } else {
-        console.log(key);
-        console.log(JSON.stringify(childApp[key]));
-        console.log(JSON.stringify(parentAppMetadata[key]));
-        assert(JSON.stringify(childApp[key]) === JSON.stringify(parentAppMetadata[key]));
+        assert(JSON.stringify(childApp[key])
+           === JSON.stringify(parentAppMetadata[key]));
       }
     });
   });
