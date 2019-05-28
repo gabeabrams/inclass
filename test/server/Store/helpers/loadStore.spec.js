@@ -2,8 +2,9 @@ const assert = require('assert');
 const loadStore = require('../../../../server/Store/helpers/loadStore');
 
 describe('server > Store > helpers > loadStore', function () {
-  it('contains all the required fields', async function () {
+  it('contains correct fields and data is filled', async function () {
     const testStore = await loadStore();
-    console.log(testStore);
+    assert(testStore.store);
+    assert(testStore.catalogs);
   });
 });
