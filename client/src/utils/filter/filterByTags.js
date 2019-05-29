@@ -26,11 +26,14 @@ module.exports = (apps, tags) => {
   //   }
   // }
 
+
+  // Filter will go through each app and filter the ones out that have a
+  // matching tag
   goodApps = goodApps.filter((app) => {
+    // This gets the app tags' values:
     const appTags = Object.keys(app.tags);
-    console.log(appTags);
     appTags.forEach((tag) => {
-      return (Object.keys)
+      return (tag === Object.values(tags))
     });
   });
 

@@ -10,13 +10,14 @@ describe('client > src > utils > filter > excludeTagName', function () {
   };
 
   it('Deletes a property of a tag given the property name', async function () {
-    console.log(testTags);
-    console.log(excludeTagName(testTags, 'name'));
+    const newTags = excludeTagName(testTags, 'name');
+    const deleted = !newTags.name;
+    assert.equal(deleted, true);
   });
 
   it('Doesn\'t do anything if the property doesn\'t exist', async function () {
-    console.log(testTags);
-    console.log(excludeTagName(testTags, 'mom'));
+    const newTags = excludeTagName(testTags, 'mom');
+    const deleted = !newTags.mom;
+    assert.equal(deleted, true);
   });
-
 });
