@@ -26,7 +26,6 @@ describe('client > src > utils > filter > filterByTags', function () {
 
   it('Returns a list of apps that have a given tag name checked', async function () {
     assert.equal(filterByTags(testAppList, testTags).length, 2);
-    console.log(filterByTags(testAppList, testTags));
   });
 
   it('Will not add an app if it doesn\'t have at least one item checked in each tag type', async function () {
