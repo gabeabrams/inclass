@@ -22,7 +22,8 @@ describe('server > Store > helpers > loadApp', function () {
     const realApp = await readJSON(testPath);
     Object.keys(app).forEach((field) => {
       if (field !== 'tags' && field !== 'screenshots'
-          && field !== 'supportEmail') {
+          && field !== 'supportEmail' && field !== 'installXML' 
+          && field !== 'installationCredentials') {
         assert(JSON.stringify(app[field]) === JSON.stringify(realApp[field]));
       } else if (field === 'tags') {
         // check that we have converted tag values to arrays
@@ -35,12 +36,13 @@ describe('server > Store > helpers > loadApp', function () {
         // check that support email field is either from parent or from catalog
         assert(app[field] === realApp[field]
             || app[field] === catalogMetadata.defaultSupportEmail);
-      } else {
-        // field === screenshots
+      } else if (field === 'screenshots') {
         // check that each file ends with .png
         app[field].forEach((screenshot) => {
           assert(screenshot.filename.endsWith('.png'));
         });
+      } else {
+        assert(app[field]);
       }
     });
     parentMetadata = app;
