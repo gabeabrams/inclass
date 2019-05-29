@@ -44,10 +44,9 @@ describe('client > src > utils > filter > filterByTags', function () {
     },
   };
 
-
   it('Returns a list of apps that have a given tag name checked', async function () {
+    // This should be AppOne, AppTwo, AppThree
     console.log(filterByTags(appTest, testTags));
-
+    assert.equal(filterByTags(appTest, testTags).length(), 3);
   });
-
 });

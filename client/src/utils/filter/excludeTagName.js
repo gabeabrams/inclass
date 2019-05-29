@@ -7,11 +7,9 @@
  * @return {object} new tags object with the tagNameToExclude removed
  */
 module.exports = (tags, tagNameToExclude) => {
+  const newTags = tags;
   // Check if tag has the property first
-  if (tags.hasOwnProperty(tagNameToExclude)) {
-    // If it exists, delete it
-    delete tags[tagNameToExclude];
-  }
+  delete newTags[tagNameToExclude];
 
-  return tags;
+  return newTags;
 };

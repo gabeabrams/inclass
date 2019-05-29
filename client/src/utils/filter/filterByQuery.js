@@ -5,25 +5,32 @@
  *   title, subtitle, description -- all case insensitive)
  * @return {object[]} apps that match the query
  */
-module.exports = (apps, query) => {
-  // If query null/empty/only whitespace, return all apps
-  if (query === null || query === '' || query.match(/^\s+$/) !== null) {
+module.exports = (apps, query = '') => {
+  // If query empty/only whitespace, return all apps
+  if (query.trim().length() === 0) {
     return apps;
   }
   // Make a new list to add the apps we want to return
-    const goodApps = [];
+    const goodApps = apps;
 
   // Make the query a regular expression so we can search for it in any string
   const reQuery = new RegExp(query, 'i');
 
   // Go through each app in the list
   // If the title, subtitle, or description match, add app to new list
-  for (let i = 0; i < apps.length; i++) {
-    if (reQuery.test(apps[i].title) || reQuery.test(apps[i].subtitle) ||
-    reQuery.test(apps[i].description)) {
-      goodApps.push(apps[i]);
-    }
-  }
+  // for (let i = 0; i < apps.length; i++) {
+  //   if (reQuery.test(apps[i].title) || reQuery.test(apps[i].subtitle) ||
+  //   reQuery.test(apps[i].description)) {
+  //     goodApps.push(apps[i]);
+  //   }
+  // }
+
+  goodApps = goodApps.filter((app) => {
+    return (reQuery.test(apps[i].title) || reQuery.test(apps[i].subtitle) ||
+      reQuery.test(apps[i].description));
+  });
+
+
 
   return goodApps;
 };

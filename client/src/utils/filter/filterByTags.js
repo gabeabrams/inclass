@@ -8,25 +8,31 @@
  */
 module.exports = (apps, tags) => {
   // Make new array for apps to keep
-  const goodApps = [];
-  // Keep track of which apps have been added to new array (so we don't keep
-  // adding the same ones)
-  const added = Array(apps.length).fill(false);
+  const goodApps = apps;
 
   // Iterate through app array, and check each tagName in each app to see if
   // it's checked
-  for (let i = 0; i < apps.length; i++) {
-    for (let j = 0; j < Object.keys(apps[i].tags).length; j++) {
-      // Avoid adding same app more than once
-      if (added[i]) {
-        continue;
-      }
-      // If the jth tag's itemName isChecked, then app will be added
-      else if (Object.keys(apps[i].tags)[j].items[itemName]) {
-        goodApps.push(apps[i]);
-        added[i] = true;
-      }
-    }
-  }
+  // for (let i = 0; i < apps.length; i++) {
+  //   for (let j = 0; j < Object.keys(apps[i].tags).length; j++) {
+  //     // Avoid adding same app more than once
+  //     if (added[i]) {
+  //       continue;
+  //     }
+  //     // If the jth tag's itemName isChecked, then app will be added
+  //     else if (Object.keys(apps[i].tags)[j].items[itemName]) {
+  //       goodApps.push(apps[i]);
+  //       added[i] = true;
+  //     }
+  //   }
+  // }
+
+  goodApps = goodApps.filter((app) => {
+    const appTags = Object.keys(app.tags);
+    console.log(appTags);
+    appTags.forEach((tag) => {
+      return (Object.keys)
+    });
+  });
+
   return goodApps;
 };
