@@ -39,11 +39,9 @@ module.exports = async (opts) => {
         const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
         throw new Error(errMessage);
       }
-      if (screenshot.url === false) {
-        // Should be able to add a new parameter
-        // eslint-disable-next-line no-param-reassign
-        screenshot.url = `${path}${filename}`; // Add url property to each screenshot
-      }
+      // Should be able to add a new parameter
+      // eslint-disable-next-line no-param-reassign
+      screenshot.url = `${path}${filename}`; // Add url property to each screenshot
     });
   }
 
