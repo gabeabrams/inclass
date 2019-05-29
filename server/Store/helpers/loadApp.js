@@ -5,6 +5,7 @@ const clone = require('fast-clone');
 const STORE_PATH = require('../STORE_PATH');
 
 const readJSON = require('./readJSON');
+const readXML = require('./readXML');
 
 /**
  * Loads an app, merging with parentApp if applicable. If the app has a parent
@@ -31,6 +32,16 @@ module.exports = async (opts = {}) => {
   // load app metadata
   const appPath = path.join(STORE_PATH, catalogId, appId, 'metadata');
   const appMetadata = await readJSON(appPath);
+
+  // TODO: add read XML file here
+  const xmlPath = path.join(STORE_PATH, catalogId, appId, 'install.xml');
+  const installXML = await readXML(xmlPath);
+  appMetadata.installXML = installXML;
+
+  // TODO: add read credentials.json here
+  const credPath = path.join(STORE_PATH, catalogId, appId, 'credentials');
+  const credData = await readJSON(credPath);
+  appMetadata.installationCredentials = credData;
 
   // process metadata information
   // for tags, if the value is not an array, turn it into one
@@ -75,3 +86,4 @@ module.exports = async (opts = {}) => {
   }
   return appMetadata;
 };
+// TODO: change store path to not hardcoded
