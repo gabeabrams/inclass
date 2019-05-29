@@ -18,13 +18,6 @@ module.exports = (apps, tags) => {
   let newTags = tags;
   let newApps = apps;
 
-  // return object looks like this:
-  const countObj = {
-    cost: {
-      free: 5,
-      expensive: 10,
-    },
-  };
 
   // For each filtercategory other than the one we're in,
   // This will give an array of all the tag names, and corresponding values
@@ -32,7 +25,7 @@ module.exports = (apps, tags) => {
   const tagComponents = Object.values(newTags);
 
   tagNames.forEach((tag) => {
-    
+    const newApps = filterByTags(apps, excludeTagName(tag));
   });
 
   // Make an array of the tags that are checked
