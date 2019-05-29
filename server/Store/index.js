@@ -5,6 +5,7 @@
  */
 
 /* ------------------------- Store Class ------------------------ */
+const loadStore = require('./helpers/loadStore');
 
 class Store {
   constructor(expressApp) {
@@ -26,7 +27,14 @@ class Store {
    *   metadata objects. If failed, leaves current metadata objects as is.
    */
   async _attemptLoad() {
-    // TODO: implement
+    try {
+      const myStore = loadStore();
+      const { store, catalogs } = myStore;
+      this.storeMetadata = store;
+      Object.values(catalogs)
+    } catch (error) {
+
+    }
   }
 
   /**
