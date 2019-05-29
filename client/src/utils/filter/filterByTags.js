@@ -8,7 +8,7 @@
  */
 module.exports = (apps, tags) => {
   // Make new array for apps to keep
-  const goodApps = apps;
+  let goodApps = apps;
 
   // Iterate through app array, and check each tagName in each app to see if
   // it's checked
@@ -33,6 +33,7 @@ module.exports = (apps, tags) => {
     // This gets the app tags' values:
     const appTags = Object.keys(app.tags);
     appTags.forEach((tag) => {
+      // Check in here if the tag is found and 'true' for any tagValue
       return (tag === Object.values(tags))
     });
   });

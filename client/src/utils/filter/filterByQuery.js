@@ -7,30 +7,20 @@
  */
 module.exports = (apps, query = '') => {
   // If query empty/only whitespace, return all apps
-  if (query.trim().length() === 0) {
+  if (query.trim() === '') {
     return apps;
   }
   // Make a new list to add the apps we want to return
-    const goodApps = apps;
+  let goodApps = apps;
 
   // Make the query a regular expression so we can search for it in any string
   const reQuery = new RegExp(query, 'i');
 
   // Go through each app in the list
   // If the title, subtitle, or description match, add app to new list
-  // for (let i = 0; i < apps.length; i++) {
-  //   if (reQuery.test(apps[i].title) || reQuery.test(apps[i].subtitle) ||
-  //   reQuery.test(apps[i].description)) {
-  //     goodApps.push(apps[i]);
-  //   }
-  // }
-
   goodApps = goodApps.filter((app) => {
-    return (reQuery.test(apps[i].title) || reQuery.test(apps[i].subtitle) ||
-      reQuery.test(apps[i].description));
+    return (reQuery.test(app.title) || reQuery.test(app.subtitle) ||
+      reQuery.test(app.description));
   });
-
-
-
   return goodApps;
 };
