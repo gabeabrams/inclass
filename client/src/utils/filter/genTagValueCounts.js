@@ -12,20 +12,28 @@ const excludeTagName = require('./excludeTagName');
  *   applied as filters
  */
 module.exports = (apps, tags) => {
-  // TODO: implement
-
   // Duplicate before changing
   let newTags = tags;
   let newApps = apps;
 
-
-  // For each filtercategory other than the one we're in,
   // This will give an array of all the tag names, and corresponding values
   const tagNames = Object.keys(newTags);
   const tagComponents = Object.values(newTags);
 
-  tagNames.forEach((tag) => {
-    const newApps = filterByTags(apps, excludeTagName(tag));
+  // Go through each tagName, and call filterByTags with the app list and every
+  // tag name EXCEPT the one we are currently in
+  tagNames.forEach((tagName) => {
+    // The apps that match based on other filter categories' checks
+    const newApps = filterByTags(apps, excludeTagName(tagName));
+    // Now we go through each tagValue in this tagName and count how many of
+    // those apps have it checked -> filter? And that number is the count for
+    // that tagValue
+
+  });
+    const tagsWithCounts = tagName.map((tagItem) => {
+      const countedTag =
+    });
+
   });
 
   // Make an array of the tags that are checked
