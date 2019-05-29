@@ -5,7 +5,6 @@ const testAppList = require('../../../../dummy-data/app-lists/basicAppList');
 const filterByTags = require('../../../../../client/src/utils/filter/filterByTags.js');
 
 describe('client > src > utils > filter > filterByTags', function () {
-
   const testTags = {
     cost: {
       color: 'blue',
