@@ -7,36 +7,30 @@
  *   unchecked tagValues, the app has at least one tagValue that is checked
  */
 module.exports = (apps, tags) => {
-  // Make new array for apps to keep
-  let goodApps = apps;
 
-  // Iterate through app array, and check each tagName in each app to see if
-  // it's checked
-  // for (let i = 0; i < apps.length; i++) {
-  //   for (let j = 0; j < Object.keys(apps[i].tags).length; j++) {
-  //     // Avoid adding same app more than once
-  //     if (added[i]) {
-  //       continue;
-  //     }
-  //     // If the jth tag's itemName isChecked, then app will be added
-  //     else if (Object.keys(apps[i].tags)[j].items[itemName]) {
-  //       goodApps.push(apps[i]);
-  //       added[i] = true;
-  //     }
-  //   }
-  // }
+  // Filters list of apps based on whether the app has at least one checked item
+  const filterApps = apps.filter((app) => {
 
+   // This gets the app tags' values:
+   const appTags = Object.keys(app.tags);
 
-  // Filter will go through each app and filter the ones out that have a
-  // matching tag
-  goodApps = goodApps.filter((app) => {
-    // This gets the app tags' values:
-    const appTags = Object.keys(app.tags);
-    appTags.forEach((tag) => {
-      // Check in here if the tag is found and 'true' for any tagValue
-      return (tag === Object.values(tags))
+   // Looking for each app tag, returns true if each one has at least one value
+   // that is checked
+   const everyOneChecked = appTags.every((tagName) => {
+     // The list of tags in an app: ex. free, expensive, import, export
+     const tagValues = app.tags[tagName];
+
+     // Using that list of tags, check if any of them are checked
+     const atLeastOneItemIsChecked = tagValues.some((itemName) => {
+       // Check if any of the itemNames are true in the tags
+       return tags[tagName].tagValues[itemName];
+     });
+
+     return atLeastOneItemIsChecked;
     });
+    
+    return everyOneChecked;
   });
 
-  return goodApps;
+  return filterApps;
 };
