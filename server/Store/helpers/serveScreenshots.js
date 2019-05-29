@@ -24,10 +24,11 @@ module.exports = async (opts) => {
   const path = `/public/${catalogId}/${appId}/screenshots/`;
 
   // Checks if app object has screenshot property
-  if (Object.prototype.hasOwnProperty.call(app, 'screenshots')) {
+  if (app.screenshots) {
     // Runs through all the screenshots
-    Object.values(app.screenshots).forEach((screenshot) => {
-      const { fullPath, filename } = screenshot;
+    app.screenshots = app.screenshots.map((screenshot) => {
+      const screenshotWithURL = screenshot;
+      const { fullPath, filename } = screenshotWithURL;
       try {
         /**
          * Serves screenshot.fullPath to
@@ -35,13 +36,12 @@ module.exports = async (opts) => {
          * Will throw 404 if file doesn't exist (fallthrough)
          */
         expressApp.use(path, express.static(fullPath, { fallthrough: false }));
-      } catch (err) {
+      } catch (error) {
         const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
         throw new Error(errMessage);
       }
-      // Should be able to add a new parameter
-      // eslint-disable-next-line no-param-reassign
-      screenshot.url = `${path}${filename}`; // Add url property to each screenshot
+      screenshotWithURL.url = `${path}${filename}`;
+      return screenshotWithURL;
     });
   }
 
