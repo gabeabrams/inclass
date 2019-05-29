@@ -48,13 +48,13 @@ module.exports = async (api, launchInfo, catalogs) => {
    * isAdmin true, if satisfy one of the statements above
    */
   try {
-    api.account.get({ accountId: myAccountId });
+    await api.account.get({ accountId: myAccountId });
     isAdmin = true;
   } catch (error) {
     for (let i = 0; i < matchAccounts.length; i++) {
       if (matchAccounts[i] !== myAccountId) {
         try {
-          await api.course.get({ accountId: matchAccounts[i] });
+          await api.account.get({ accountId: matchAccounts[i] });
           isAdmin = true;
           break;
         } catch (err) {
