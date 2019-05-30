@@ -1,8 +1,17 @@
 const assert = require('assert');
-const loadCatalogMetadata = require('../../../../server/Store/helpers/loadCatalogMetadata');
+const path = require('path');
+const proxyquire = require('proxyquire');
+
+// use proxiquire to redirect store path to testing folder
+const dummyPath = path.join(__dirname, '../../../dummy-data/store/simple');
+const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
+  '../STORE_CONSTANTS': {
+    path: dummyPath,
+  },
+});
 
 describe('server > Store > helpers > loadCatalogMetadata', function () {
-  it('contains all the required fields', async function () {
+  it.only('contains all the required fields', async function () {
     const testMetadata = await loadCatalogMetadata('dce');
     const requiredFields = ['title', 'accounts', 'tagColors', 'defaultSupportEmail'];
     Object.keys(testMetadata).forEach((testField) => {
