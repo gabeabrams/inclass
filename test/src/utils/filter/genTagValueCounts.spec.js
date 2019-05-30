@@ -2,9 +2,9 @@
 
 const assert = require('assert');
 
-const genTagValueCounts = require('../../../../../client/src/utils/filter/genTagValueCounts');
+const genTagValueCounts = require('../../../../client/src/utils/filter/genTagValueCounts.js');
 
-describe('client > src > utils > filter > filterByTags', function () {
+describe('client > src > utils > filter > genTagValueCounts', function () {
   const testTags = {
     cost: {
       color: 'blue',

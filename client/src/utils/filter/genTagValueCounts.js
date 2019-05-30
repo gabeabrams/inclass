@@ -29,13 +29,10 @@ module.exports = (apps, tags) => {
     const tagValues = tagName.tagValues;
     // Go through each tagValue in this current tag
     tagValues.forEach((tagValue) => {
-      console.log('Tag value is', tagValue);
       const countedApps = filteredApps.filter((app) => {
-        console.log('Inside app ', app);
         // Will return the app if the given tagValue exists, false if not
         return app.tags[tagName][tagValue];
       });
-      console.log('Counted apps,' countedApps);
     });
   });
 };
