@@ -14,46 +14,28 @@ const excludeTagName = require('./excludeTagName');
 module.exports = (apps, tags) => {
   // Duplicate before changing
   let newTags = tags;
-  let newApps = apps;
-
-  // This will give an array of all the tag names, and corresponding values
-  const tagNames = Object.keys(newTags);
-  const tagComponents = Object.values(newTags);
 
   // Go through each tagName, and call filterByTags with the app list and every
   // tag name EXCEPT the one we are currently in
-  tagNames.forEach((tagName) => {
+  Object.keys(newTags).forEach((tagName) => {
+    console.log('Tag name', tagName);
     // The apps that match based on other filter categories' checks
-    const newApps = filterByTags(apps, excludeTagName(tagName));
+    const filteredApps = filterByTags(apps, excludeTagName(tagName));
     // Now we go through each tagValue in this tagName and count how many of
     // those apps have it checked -> filter? And that number is the count for
     // that tagValue
 
-  });
-    const tagsWithCounts = tagName.map((tagItem) => {
-      const countedTag =
+    // array of tag values for a given tag name ex. 'free' or 'expensive'
+    const tagValues = tagName.tagValues;
+    // Go through each tagValue in this current tag
+    tagValues.forEach((tagValue) => {
+      console.log('Tag value is', tagValue);
+      const countedApps = filteredApps.filter((app) => {
+        console.log('Inside app ', app);
+        // Will return the app if the given tagValue exists, false if not
+        return app.tags[tagName][tagValue];
+      });
+      console.log('Counted apps,' countedApps);
     });
-
   });
-
-  // Make an array of the tags that are checked
-
-  // For each tag in that array, filterByTag with app list and that tag.
-
-  // If it isnt already in new app list, add it and add count
-
-
-
-  // We need to go through each other filter category
-  newTags = Object.values(newTags)
-
-  // Go through each tag in filter cat, if it is checked, look for apps with
-  // that tag (filterByTags)
-  // FOR EACH app, add it to a new app array (check for dupes) and increment
-  // the count
-
-  // Then, we need to go through for each tag in THIS filter category, count
-  // how many apps from previous step have this current tag
-
-  // Put this number in this filter tag's count.
 };
