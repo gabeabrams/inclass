@@ -16,7 +16,6 @@ const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
 });
 
 describe('server > Store > helpers > loadApp', function () {
-  let parentMetadata = '';
   it.only('loads app with no parent correctly', async function () {
     const catalogId = 'pe';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
@@ -56,15 +55,25 @@ describe('server > Store > helpers > loadApp', function () {
         assert(app[field]);
       }
     });
-    parentMetadata = app;
   });
 
   it.only('loads app with parent correctly', async function () {
+    // load parent app
+    const parentCatalogId = 'dce';
+    const parentCatalogMetadata = await loadCatalogMetadata(parentCatalogId);
+    const parentAppId = 'gradeup';
+    const parentParentAppMetadata = null;
+    const parentMetadata = await loadApp({
+      catalogId: parentCatalogId,
+      catalogMetadata: parentCatalogMetadata,
+      appId: parentAppId,
+      parentAppMetadata: parentParentAppMetadata,
+    });
+    // load child app
     const catalogId = 'seas';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
     const appId = 'swipein';
     const parentAppMetadata = parentMetadata;
-    // load child app
     const childApp = await loadApp({
       catalogId,
       catalogMetadata,
