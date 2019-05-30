@@ -166,4 +166,37 @@ describe('server > Store > helpers > loadApp', function () {
     // test that it will throw an error
     assert(error);
   });
+
+  it.only('throws an error if metadata is formatted incorrectly', async function () {
+    // use proxiquire to redirect store path to testing folder
+    const dummyPath = path.join(__dirname, '../../../dummy-data/store/invalid-metadata');
+    const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    // try to load the app without metadata file
+    const catalogId = 'dce';
+    const catalogMetadata = await loadCatalogMetadata(catalogId);
+    const appId = 'swipein';
+    const parentAppMetadata = null;
+    let error;
+    try {
+      await loadApp({
+        catalogId,
+        catalogMetadata,
+        appId,
+        parentAppMetadata,
+      });
+    } catch (err) {
+      error = err;
+    }
+    // test that it will throw an error
+    assert(error);
+  });
 });
