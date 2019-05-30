@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 
-const genTagValueCounts = require('../../../../client/src/utils/filter/genTagValueCounts.js');
+const genTagValueCounts = require('../../../../client/src/utils/filter/genTagValueCounts');
 
 describe('client > src > utils > filter > genTagValueCounts', function () {
   const testTags = {
