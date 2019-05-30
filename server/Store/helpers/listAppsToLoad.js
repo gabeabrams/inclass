@@ -3,7 +3,9 @@ const path = require('path');
 
 // Import our own helpers
 const listFolders = require('../helpers/listFolders');
-const STORE_PATH = require('../STORE_PATH');
+const STORE_CONSTANTS = require('../STORE_CONSTANTS');
+
+const STORE_PATH = STORE_CONSTANTS.path;
 
 /**
  * Crawls store metadata to get all of the apps that we need to load

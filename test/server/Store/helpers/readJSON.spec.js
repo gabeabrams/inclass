@@ -1,7 +1,9 @@
 const path = require('path');
 const assert = require('assert');
 const readJSON = require('../../../../server/Store/helpers/readJSON');
-const STORE_PATH = require('../../../../server/Store/STORE_PATH');
+const STORE_CONSTANTS = require('../../../../server/Store/STORE_CONSTANTS');
+
+const STORE_PATH = STORE_CONSTANTS.path;
 
 describe('server > Store > helpers > readJSON', function () {
   it('throws an error file does not exist', async function () {

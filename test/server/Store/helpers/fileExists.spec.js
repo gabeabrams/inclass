@@ -1,9 +1,11 @@
 const path = require('path');
 const assert = require('assert');
 const fileExist = require('../../../../server/Store/helpers/fileExists');
-const STORE_PATH = require('../../../../server/Store/STORE_PATH');
+const STORE_CONSTANTS = require('../../../../server/Store/STORE_CONSTANTS');
 
-describe('server > Store > helpers > listFolders', function () {
+const STORE_PATH = STORE_CONSTANTS.path;
+
+describe('server > Store > helpers > fileExists', function () {
   it('returns true if file exist', async function () {
     const filePath = path.join(STORE_PATH, 'dce', 'gradeup', 'metadata.json');
     assert(await fileExist(filePath));

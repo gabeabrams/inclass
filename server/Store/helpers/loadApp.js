@@ -2,10 +2,11 @@ const path = require('path');
 // this is used for cloning the parent
 const clone = require('fast-clone');
 
-const STORE_PATH = require('../STORE_PATH');
-
+const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 const readJSON = require('./readJSON');
 const readXML = require('./readXML');
+
+const STORE_PATH = STORE_CONSTANTS.path;
 
 /**
  * Loads an app, merging with parentApp if applicable. If the app has a parent

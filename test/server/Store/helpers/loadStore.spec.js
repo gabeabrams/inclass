@@ -1,8 +1,17 @@
 const assert = require('assert');
-const loadStore = require('../../../../server/Store/helpers/loadStore');
+const path = require('path');
+const proxyquire = require('proxyquire');
+
+const dummyPath = path.join(__dirname, '../../../dummy-data/store/simple');
+const loadStore = proxyquire('../../../../server/Store/helpers/loadStore', {
+  '../STORE_CONSTANTS': {
+    path: dummyPath,
+    '@global': true,
+  },
+});
 
 describe('server > Store > helpers > loadStore', function () {
-  it('contains correct fields and data is filled', async function () {
+  it.only('contains correct fields and data is filled', async function () {
     const testStore = await loadStore();
     assert(testStore.store);
     assert(testStore.catalogs);

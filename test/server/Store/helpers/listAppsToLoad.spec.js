@@ -2,7 +2,9 @@ const assert = require('assert');
 const listapps = require('../../../../server/Store/helpers/listAppsToLoad');
 const fileExists = require('../../../../server/Store/helpers/fileExists');
 const listFolders = require('../../../../server/Store/helpers/listFolders');
-const STORE_PATH = require('../../../../server/Store/STORE_PATH');
+const STORE_CONSTANTS = require('../../../../server/Store/STORE_CONSTANTS');
+
+const STORE_PATH = STORE_CONSTANTS.path;
 
 describe('server > Store > helpers > getAppsToLoad', function () {
   it('returns an object', async function () {

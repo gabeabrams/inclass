@@ -3,7 +3,9 @@ const assert = require('assert');
 const loadApp = require('../../../../server/Store/helpers/loadApp');
 const loadCatalogMetadata = require('..//../../../server/Store/helpers/loadCatalogMetadata');
 const readJSON = require('../../../../server/Store/helpers/readJSON');
-const STORE_PATH = require('../../../../server/Store/STORE_PATH');
+const STORE_CONSTANTS = require('../../../../server/Store/STORE_CONSTANTS');
+
+const STORE_PATH = STORE_CONSTANTS.path;
 
 describe('server > Store > helpers > loadApp', function () {
   let parentMetadata = '';

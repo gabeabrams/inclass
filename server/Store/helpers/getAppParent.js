@@ -1,7 +1,9 @@
 const path = require('path');
 
 const readJSON = require('./readJSON');
-const STORE_PATH = require('../STORE_PATH');
+const STORE_CONSTANTS = require('../STORE_CONSTANTS');
+
+const STORE_PATH = STORE_CONSTANTS.path;
 
 /**
  * Checks if an app extends any other app. If it does, return that parent. If it
