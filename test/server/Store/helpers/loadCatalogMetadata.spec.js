@@ -3,7 +3,7 @@ const path = require('path');
 const proxyquire = require('proxyquire');
 
 // use proxiquire to redirect store path to testing folder
-const dummyPath = path.join(__dirname, '../../../dummy-data/store/simple');
+const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
 const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
   '../STORE_CONSTANTS': {
     path: dummyPath,

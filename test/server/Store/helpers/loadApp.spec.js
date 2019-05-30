@@ -3,7 +3,7 @@ const assert = require('assert');
 const proxyquire = require('proxyquire');
 const readJSON = require('../../../../server/Store/helpers/readJSON');
 // use proxiquire to redirect store path to testing folder
-const dummyPath = path.join(__dirname, '../../../dummy-data/store/simple');
+const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
 const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
   '../STORE_CONSTANTS': {
     path: dummyPath,
@@ -18,9 +18,9 @@ const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
 describe('server > Store > helpers > loadApp', function () {
   let parentMetadata = '';
   it.only('loads app with no parent correctly', async function () {
-    const catalogId = 'dce';
+    const catalogId = 'pe';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
-    const appId = 'swipein';
+    const appId = 'condition';
     const parentAppMetadata = null;
     const app = await loadApp({
       catalogId,
@@ -28,7 +28,7 @@ describe('server > Store > helpers > loadApp', function () {
       appId,
       parentAppMetadata,
     });
-    const testPath = path.join(dummyPath, 'dce', 'swipein', 'metadata');
+    const testPath = path.join(dummyPath, catalogId, appId, 'metadata');
     const realApp = await readJSON(testPath);
     Object.keys(app).forEach((field) => {
       if (field !== 'tags' && field !== 'screenshots'
@@ -72,7 +72,7 @@ describe('server > Store > helpers > loadApp', function () {
       parentAppMetadata,
     });
     // read in childApp metadata from store
-    const testPath = path.join(dummyPath, 'seas', 'swipein', 'metadata');
+    const testPath = path.join(dummyPath, catalogId, appId, 'metadata');
     const realApp = await readJSON(testPath);
     const changed = Object.keys(realApp).filter((key) => {
       return (key !== 'extends');

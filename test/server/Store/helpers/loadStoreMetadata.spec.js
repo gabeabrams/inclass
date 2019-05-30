@@ -2,7 +2,7 @@ const assert = require('assert');
 const path = require('path');
 const proxyquire = require('proxyquire');
 
-const dummyPath = path.join(__dirname, '../../../dummy-data/store/simple');
+const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
 const loadStoreMetadata = proxyquire('../../../../server/Store/helpers/loadStoreMetadata', {
   '../STORE_CONSTANTS': {
     path: dummyPath,
