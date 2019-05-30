@@ -15,11 +15,14 @@ describe('server > Store > helpers > loadCatalogMetadata', function () {
     const testMetadata = await loadCatalogMetadata('dce');
     const requiredFields = ['title', 'accounts', 'tagColors', 'defaultSupportEmail'];
     Object.keys(testMetadata).forEach((testField) => {
+      // check that key is populated
+      assert(testMetadata[testField]);
       const index = requiredFields.indexOf(testField);
       if (index !== -1) {
         requiredFields.splice(index, 1);
       }
     });
+    // check that file has all fields
     assert(requiredFields.length === 0);
   });
 });

@@ -1,15 +1,23 @@
 const path = require('path');
 const assert = require('assert');
-const loadApp = require('../../../../server/Store/helpers/loadApp');
-const loadCatalogMetadata = require('..//../../../server/Store/helpers/loadCatalogMetadata');
+const proxyquire = require('proxyquire');
 const readJSON = require('../../../../server/Store/helpers/readJSON');
-const STORE_CONSTANTS = require('../../../../server/Store/STORE_CONSTANTS');
-
-const STORE_PATH = STORE_CONSTANTS.path;
+// use proxiquire to redirect store path to testing folder
+const dummyPath = path.join(__dirname, '../../../dummy-data/store/simple');
+const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
+  '../STORE_CONSTANTS': {
+    path: dummyPath,
+  },
+});
+const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
+  '../STORE_CONSTANTS': {
+    path: dummyPath,
+  },
+});
 
 describe('server > Store > helpers > loadApp', function () {
   let parentMetadata = '';
-  it('loads app with no parent correctly', async function () {
+  it.only('loads app with no parent correctly', async function () {
     const catalogId = 'dce';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
     const appId = 'swipein';
@@ -20,7 +28,7 @@ describe('server > Store > helpers > loadApp', function () {
       appId,
       parentAppMetadata,
     });
-    const testPath = path.join(STORE_PATH, 'dce', 'swipein', 'metadata');
+    const testPath = path.join(dummyPath, 'dce', 'swipein', 'metadata');
     const realApp = await readJSON(testPath);
     Object.keys(app).forEach((field) => {
       if (field !== 'tags' && field !== 'screenshots'
@@ -51,7 +59,7 @@ describe('server > Store > helpers > loadApp', function () {
     parentMetadata = app;
   });
 
-  it('loads app with parent correctly', async function () {
+  it.only('loads app with parent correctly', async function () {
     const catalogId = 'seas';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
     const appId = 'swipein';
@@ -64,7 +72,7 @@ describe('server > Store > helpers > loadApp', function () {
       parentAppMetadata,
     });
     // read in childApp metadata from store
-    const testPath = path.join(STORE_PATH, 'seas', 'swipein', 'metadata');
+    const testPath = path.join(dummyPath, 'seas', 'swipein', 'metadata');
     const realApp = await readJSON(testPath);
     const changed = Object.keys(realApp).filter((key) => {
       return (key !== 'extends');

@@ -1,10 +1,9 @@
 const path = require('path');
 // this is used for cloning the parent
 const clone = require('fast-clone');
-
-const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 const readJSON = require('./readJSON');
 const readXML = require('./readXML');
+const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 
 const STORE_PATH = STORE_CONSTANTS.path;
 
