@@ -34,7 +34,8 @@
 	"homepage": "https://github.com/gabeabrams/inclass#readme",
 	"dependencies": {
 		"caccl": "^1.0.77",
-		"chai": "^4.2.0",
+		"chai": "^4.0.0-canary.2",
+		"chai-as-promised": "^7.1.1",
 		"fast-clone": "^1.5.13",
 		"fs": "0.0.1-security"
 	},
