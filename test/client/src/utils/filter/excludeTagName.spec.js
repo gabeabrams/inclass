@@ -13,7 +13,7 @@ describe.only('client > src > utils > filter > excludeTagName', function () {
   it('Deletes a property of a tag given the property name', async function () {
     const newTags = excludeTagName(testTags, 'name');
     const deleted = !newTags.name;
-    assert.equal(deleted, true, `'name' was successfully deleted from newTags: ${newTags}`);
+    assert.equal(deleted, true['\'name\' was not properly deleted from newTags']);
   });
 
   it('Doesn\'t do anything if the property doesn\'t exist', async function () {
@@ -24,7 +24,7 @@ describe.only('client > src > utils > filter > excludeTagName', function () {
 
   it('Does not delete the tagName from the original tags', async function () {
     const newTags = excludeTagName(testTags, 'sky');
-    assert.true(testTags.sky, 'blue');
-    assert.true(newTags.sky, undefined);
+    assert.equal(testTags.sky, 'blue');
+    assert.equal(newTags.sky, undefined);
   });
 });
