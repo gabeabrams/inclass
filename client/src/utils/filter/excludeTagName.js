@@ -1,3 +1,5 @@
+const clone = require('fast-clone');
+
 /**
  * Returns a new tags object with the tagNameToExclude excluded
  * @param {object} tags - the original tags object, a tag mapping that stores
@@ -7,8 +9,10 @@
  * @return {object} new tags object with the tagNameToExclude removed
  */
 module.exports = (tags, tagNameToExclude) => {
-  const newTags = tags;
-  // Check if tag has the property first
+  // Makes a deep clone of tags without changing original
+  const newTags = clone(tags);
+
+  
   delete newTags[tagNameToExclude];
 
   return newTags;
