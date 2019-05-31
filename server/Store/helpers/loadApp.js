@@ -30,15 +30,15 @@ module.exports = async (opts = {}) => {
   } = opts;
 
   // load app metadata
-  const appPath = path.join(STORE_PATH, catalogId, appId, 'metadata');
-  const appMetadata = await readJSON(appPath);
+  const appMetadataPath = path.join(STORE_PATH, catalogId, appId, 'metadata');
+  const appMetadata = await readJSON(appMetadataPath);
 
-  // TODO: add read XML file here
+  // add read XML file here
   const xmlPath = path.join(STORE_PATH, catalogId, appId, 'install.xml');
   const installXML = await readXML(xmlPath);
   appMetadata.installXML = installXML;
 
-  // TODO: add read credentials.json here
+  // add read credentials.json here
   const credPath = path.join(STORE_PATH, catalogId, appId, 'credentials');
   const credData = await readJSON(credPath);
   appMetadata.installationCredentials = credData;
