@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const excludeTagName = require('../../../../../client/src/utils/filter/excludeTagName.js');
 
-describe.only('client > src > utils > filter > excludeTagName', function () {
+describe('client > src > utils > filter > excludeTagName', function () {
   // This is a fake tag object for testing purposes only
   const testTags = {
     sky: 'blue',

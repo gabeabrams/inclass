@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const filterByTags = require('../../../../../client/src/utils/filter/filterByTags.js');
 
-describe('client > src > utils > filter > filterByTags', function () {
+describe.only('client > src > utils > filter > filterByTags', function () {
   const testTags = {
     cost: {
       color: 'blue',
