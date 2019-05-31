@@ -21,7 +21,7 @@ module.exports = async (opts) => {
     appId,
     app,
   } = opts;
-  const path = `/public/${catalogId}/${appId}/screenshots/`;
+  const path = `/store/${catalogId}/${appId}/screenshots/`;
 
   // Checks if app object has screenshot property
   if (app.screenshots) {
@@ -44,7 +44,6 @@ module.exports = async (opts) => {
       return screenshotWithURL;
     });
   }
-
 
   // Use this path: /public/<catalogId>/<appId>/screenshots/<filename>
   return app;
