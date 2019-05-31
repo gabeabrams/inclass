@@ -55,6 +55,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   ];
 
   it('Creates counts for each filter tag', async function () {
+    console.log('Calling genTagValueCounts');
     genTagValueCounts(testApps, testTags);
   });
 });
