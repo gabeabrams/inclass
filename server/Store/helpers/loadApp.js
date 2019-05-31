@@ -78,14 +78,14 @@ module.exports = async (opts = {}) => {
         baseMetadata[key] = value;
       }
     });
-    // console.log(baseMetadata);
+    console.log('app data is ', baseMetadata);
     return baseMetadata;
   }
   // if support email is not provided within app, inherent catalog's default
   if (!appMetadata.supportEmail) {
     appMetadata.supportEmail = catalogMetadata.defaultSupportEmail;
   }
-  // console.log(appMetadata);
+  console.log('app data is ', appMetadata);
   return appMetadata;
 };
 // TODO: change store path to not hardcoded

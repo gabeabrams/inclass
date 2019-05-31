@@ -27,7 +27,6 @@ module.exports = async () => {
 
   // If the apps have parents
   const loadParentsThenLoadApp = async (catalogId, appId, seen) => {
-    // if already loaded, just return
     if (catalogMap[catalogId].apps.appId) {
       return;
     }
@@ -49,12 +48,12 @@ module.exports = async () => {
       await loadParentsThenLoadApp(parentCatalogId, parentAppId, seen);
     }
     // Load self
-    catalogMap[catalogId].apps.appId = await loadApp({
+    catalogMap[catalogId].apps[appId] = await loadApp({
       catalogId,
       catalogMetadata: catalogMap[catalogId],
       appId,
       parentAppMetadata:
-      (parent === null ? null : catalogMap[parent.catalogId].apps.appId),
+      (parent === null ? null : catalogMap[parent.catalogId].apps[appId]),
     });
   };
 
