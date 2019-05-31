@@ -17,6 +17,11 @@ module.exports = (apps, tags) => {
    // Looking for each app tag, returns true if each one has at least one value
    // that is checked
    const everyOneChecked = appTags.every((tagName) => {
+     // If the tags mapping doesn't have a certain tagName, we want to skip it
+     if (tags[tagName] === undefined) {
+       return true;
+     }
+
      // The list of tags in an app: ex. free, expensive, import, export
      const tagValues = app.tags[tagName];
 
@@ -28,9 +33,8 @@ module.exports = (apps, tags) => {
 
      return atLeastOneItemIsChecked;
     });
-    
+
     return everyOneChecked;
   });
-
   return filterApps;
 };
