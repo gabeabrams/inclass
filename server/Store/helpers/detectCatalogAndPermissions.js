@@ -54,6 +54,7 @@ module.exports = async (api, launchInfo, catalogs) => {
     for (let i = 0; i < matchAccounts.length; i++) {
       if (matchAccounts[i] !== myAccountId) {
         try {
+          // eslint-disable-next-line no-await-in-loop
           await api.account.get({ accountId: matchAccounts[i] });
           isAdmin = true;
           break;
