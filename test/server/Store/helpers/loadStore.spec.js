@@ -24,8 +24,11 @@ describe('server > Store > helpers > loadStore', function () {
         '@global': true,
       },
     });
-    const testStore = await loadStore();
-    console.log(testStore);
+    try {
+      await loadStore();
+    } catch (err) {
+      assert(err.message === 'detected cycle');
+    }
   });
 
   it.only('throws error if store is being edited', async function () {
