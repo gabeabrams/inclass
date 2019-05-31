@@ -18,10 +18,5 @@ module.exports = async (catalogId, appId) => {
   // get the metadata file of the app
   const appPath = path.join(STORE_PATH, catalogId, appId, 'metadata');
   const metadata = await readJSON(appPath);
-  if (metadata.extends) {
-    // extends property exists
-    return metadata.extends;
-  }
-  // extends property does not exist
-  return null;
+  return (metadata.extends || null);
 };

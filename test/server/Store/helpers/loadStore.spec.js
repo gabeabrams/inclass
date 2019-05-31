@@ -24,11 +24,14 @@ describe('server > Store > helpers > loadStore', function () {
         '@global': true,
       },
     });
+    // check if it throws an error when encountering circular reference
+    let error;
     try {
       await loadStore();
     } catch (err) {
-      assert(err.message === 'detected cycle');
+      error = err;
     }
+    assert(error);
   });
 
   it.only('throws error if store is being edited', async function () {
@@ -40,10 +43,12 @@ describe('server > Store > helpers > loadStore', function () {
       },
     });
     // check that store is not being loaded while editing
+    let error;
     try {
       await loadStore();
     } catch (err) {
-      assert(err.message === 'Metadata being edited. Metadata not loaded.');
+      error = err;
     }
+    assert(error);
   });
 });
