@@ -1,3 +1,4 @@
+const path = require('path');
 const assert = require('assert');
 const express = require('../../../dummy-objects/ExpressApp');
 const serveScreenshots = require('../../../../server/Store/helpers/serveScreenshots');
@@ -27,6 +28,8 @@ describe('server > Store > helpers > serveScreenshots', function () {
   // });
 
   it('correct url added to all screenshots\' property', async function () {
+    appWithScreenshots.screenshots[0].fullPath = path.join(__dirname, '../../../dummy-data/images');
+    appWithScreenshots.screenshots[0].fullPath = path.join(__dirname, '../../../dummy-data/images');
     const opts = {
       expressApp: express,
       catalogId: 'dce',
@@ -34,9 +37,6 @@ describe('server > Store > helpers > serveScreenshots', function () {
       app: appWithScreenshots,
     };
     const app = await serveScreenshots(opts);
-    Object.values(opts.app.screenshots).forEach((screenshot) => {
-
-    });
     // assert(app.screenshots[0].url === '/public/dce/swipein/screenshots/event_chooser');
     // assert(app.screenshots[1].url === '/public/dce/swipein/screenshots/man_dash');
   });

@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 /**
  * Serves the screenshots for each app
@@ -21,7 +22,7 @@ module.exports = async (opts) => {
     appId,
     app,
   } = opts;
-  const path = `/store/${catalogId}/${appId}/screenshots/`;
+  const startPath = `/public/${catalogId}/${appId}/screenshots/`;
 
   // Checks if app object has screenshot property
   if (app.screenshots) {
@@ -35,12 +36,14 @@ module.exports = async (opts) => {
          * /public/<catalogId>/<appId>/screenshots/<filename>
          * Will throw 404 if file doesn't exist (fallthrough)
          */
-        expressApp.use(path, express.static(fullPath, { fallthrough: false }));
+        console.log('Start Path: ', startPath);
+        console.log('FullPath: ', fullPath);
+        expressApp.use(startPath, express.static(fullPath, { fallthrough: false }));
       } catch (error) {
         const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
         throw new Error(errMessage);
       }
-      screenshotWithURL.url = `${path}${filename}`;
+      screenshotWithURL.url = path.join(startPath, filename);
       return screenshotWithURL;
     });
   }
