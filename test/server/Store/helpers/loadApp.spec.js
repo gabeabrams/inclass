@@ -4,7 +4,7 @@ const proxyquire = require('proxyquire');
 const readJSON = require('../../../../server/Store/helpers/readJSON');
 
 describe('server > Store > helpers > loadApp', function () {
-  it.only('loads app with no parent correctly', async function () {
+  it('loads app with no parent correctly', async function () {
     // use proxiquire to redirect store path to testing folder
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
     const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
@@ -59,7 +59,7 @@ describe('server > Store > helpers > loadApp', function () {
     });
   });
 
-  it.only('loads app with parent correctly', async function () {
+  it('loads app with parent correctly', async function () {
     // use proxiquire to redirect store path to testing folder
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
     const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
@@ -135,7 +135,7 @@ describe('server > Store > helpers > loadApp', function () {
     });
   });
 
-  it.only('throws an error loading app with missing metadata', async function () {
+  it('throws an error loading app with missing metadata', async function () {
     // use proxiquire to redirect store path to testing folder
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/missing-metadata');
     const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
@@ -168,7 +168,7 @@ describe('server > Store > helpers > loadApp', function () {
     assert(error);
   });
 
-  it.only('throws an error if metadata is formatted incorrectly', async function () {
+  it('throws an error if metadata is formatted incorrectly', async function () {
     // use proxiquire to redirect store path to testing folder
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/invalid-metadata');
     const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {

@@ -3,7 +3,7 @@ const path = require('path');
 const proxyquire = require('proxyquire');
 
 describe('server > Store > helpers > loadStore', function () {
-  it.only('contains correct fields and data is filled', async function () {
+  it('contains correct fields and data is filled', async function () {
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
     const loadStore = proxyquire('../../../../server/Store/helpers/loadStore', {
       '../STORE_CONSTANTS': {
@@ -16,7 +16,7 @@ describe('server > Store > helpers > loadStore', function () {
     assert(testStore.catalogs);
   });
 
-  it.only('throws error if there is circular dependency', async function () {
+  it('throws error if there is circular dependency', async function () {
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/circular-dependency');
     const loadStore = proxyquire('../../../../server/Store/helpers/loadStore', {
       '../STORE_CONSTANTS': {
@@ -34,7 +34,7 @@ describe('server > Store > helpers > loadStore', function () {
     assert(error);
   });
 
-  it.only('throws error if store is being edited', async function () {
+  it('throws error if store is being edited', async function () {
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/store-being-edited');
     const loadStore = proxyquire('../../../../server/Store/helpers/loadStore', {
       '../STORE_CONSTANTS': {
