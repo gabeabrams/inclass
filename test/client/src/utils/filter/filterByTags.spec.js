@@ -21,6 +21,42 @@ describe.only('client > src > utils > filter > filterByTags', function () {
     },
   };
 
+  const testTagsFreeTeaching = {
+    cost: {
+      color: 'purple',
+      tagValues: {
+        free: true,
+        expensive: false,
+      },
+    },
+    type: {
+      color: 'yellow',
+      tagValues: {
+        import: false,
+        export: false,
+        teaching: true,
+      },
+    },
+  };
+
+  const testTagsAllCosts = {
+    cost: {
+      color: 'purple',
+      tagValues: {
+        free: false,
+        expensive: false,
+      },
+    },
+    type: {
+      color: 'yellow',
+      tagValues: {
+        import: false,
+        export: false,
+        teaching: true,
+      },
+    },
+  };
+
   const AppOne = {
     name: 'AppOne',
     tags: {
@@ -53,10 +89,17 @@ describe.only('client > src > utils > filter > filterByTags', function () {
   const testAppList = [AppOne, AppTwo, AppThree, AppFour];
 
   it('Returns a list of apps that have a given tag name checked', async function () {
+    // Expected Apps are 2 and 4 because they are both 'expensive' and have one
+    // of the type tags
     assert.deepEqual(filterByTags(testAppList, testTagsExpensiveAllTypes), [AppTwo, AppFour], 'Returned applist is not equal to the expected apps');
   });
 
   it('Will not add an app if it doesn\'t have at least one item checked in each tag type', async function () {
-    assert.deepEqual(filterByTags(testAppList, testTags)[0].name, 'AppTwo');
+    // Expected Apps are none because no app is both free and has teaching
+    assert.deepEqual(filterByTags(testAppList, testTagsFreeTeaching), [], 'Returned applist is not equal to the expected apps');
+  });
+
+  it('Will return all apps if all the tagValues for a tagName are false', async function () {
+    assert.deepEqual(filterByTags(testAppList, testTagsAllCosts), [], 'Returned applist is not equal to the expected apps');
   });
 });
