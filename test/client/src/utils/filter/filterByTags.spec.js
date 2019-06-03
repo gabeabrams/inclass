@@ -39,7 +39,7 @@ describe.only('client > src > utils > filter > filterByTags', function () {
     },
   };
 
-  const testTagsAllCosts = {
+  const testTagsNoCosts = {
     cost: {
       color: 'purple',
       tagValues: {
@@ -99,7 +99,7 @@ describe.only('client > src > utils > filter > filterByTags', function () {
     assert.deepEqual(filterByTags(testAppList, testTagsFreeTeaching), [], 'Returned applist is not equal to the expected apps');
   });
 
-  it('Will return all apps if all the tagValues for a tagName are false', async function () {
-    assert.deepEqual(filterByTags(testAppList, testTagsAllCosts), [], 'Returned applist is not equal to the expected apps');
+  it('Will return no apps if all the tagValues for a tagName are false', async function () {
+    assert.deepEqual(filterByTags(testAppList, testTagsNoCosts), [], 'Returned applist is not equal to the expected apps');
   });
 });
