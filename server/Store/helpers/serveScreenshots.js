@@ -36,8 +36,6 @@ module.exports = async (opts) => {
          * /public/<catalogId>/<appId>/screenshots/<filename>
          * Will throw 404 if file doesn't exist (fallthrough)
          */
-        console.log('Start Path: ', startPath);
-        console.log('FullPath: ', fullPath);
         expressApp.use(startPath, express.static(fullPath, { fallthrough: false }));
       } catch (error) {
         const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
