@@ -22,7 +22,7 @@ module.exports = async (opts) => {
     appId,
     app,
   } = opts;
-  const startPath = `/public/${catalogId}/${appId}/screenshots/`;
+  const webPath = `/public/${catalogId}/${appId}/screenshots/`;
 
   // Checks if app object has screenshot property
   if (app.screenshots) {
@@ -36,13 +36,13 @@ module.exports = async (opts) => {
          * /public/<catalogId>/<appId>/screenshots/<filename>
          * Will throw 404 if file doesn't exist (fallthrough)
          */
-        expressApp.use(startPath,
+        expressApp.use(webPath,
           express.static(fullPath, { fallthrough: false }));
       } catch (error) {
         const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
         throw new Error(errMessage);
       }
-      screenshotWithURL.url = path.join(startPath, filename);
+      screenshotWithURL.url = path.join(webPath, filename);
       return screenshotWithURL;
     });
   }
