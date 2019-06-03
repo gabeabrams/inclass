@@ -62,16 +62,14 @@ module.exports = async () => {
     catalogMap[catalogIds[i]] = await loadCatalogMetadata(catalogIds[i]);
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);
     // add apps => appId => null to every catalog
-    for (let j = 0; j < appIds.length; j++) {
-      // initiate the object
-      if (!catalogMap[catalogIds[i]].apps) {
-        catalogMap[catalogIds[i]].apps = {};
-      }
-      // insert null to each app's metadata, meaning the app is not loaded
-      catalogMap[catalogIds[i]].apps[appIds[j]] = null;
+    if (!catalogMap[catalogIds[i]].apps) {
+      catalogMap[catalogIds[i]].apps = {};
     }
+    // insert null to each app's metadata, meaning the app is not loaded
+    appIds.forEach((app) => {
+      catalogMap[catalogIds[i]].apps[app] = null;
+    });
   }
-
   // load all the apps
   for (let i = 0; i < catalogIds.length; i++) {
     const appIds = Object.keys(appsToLoad[catalogIds[i]]);

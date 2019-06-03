@@ -86,4 +86,3 @@ module.exports = async (opts = {}) => {
   }
   return appMetadata;
 };
-// TODO: change store path to not hardcoded
