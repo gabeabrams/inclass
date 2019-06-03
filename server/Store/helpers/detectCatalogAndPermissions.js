@@ -11,28 +11,36 @@
  *   of the accounts that are associated with this catalog
  */
 module.exports = async (api, launchInfo, catalogs) => {
-  const courseNumber = launchInfo.courseId;
+  const { courseId } = launchInfo;
 
-  const myCourse = await api.course.get({ courseId: courseNumber });
+  const myCourse = await api.course.get({ courseId });
   const myAccountId = myCourse.account_id;
 
-  let catalogId;
+  let matchCatalogId;
   let matchAccounts;
   let isAdmin;
 
   // Go through each catalog
   if (catalogs) {
-    Object.keys(catalogs).forEach((id) => {
-      if (catalogs[id].accounts) {
-        const { accounts } = catalogs[id];
+    Object.keys(catalogs).forEach((catalogId) => {
+      if (catalogs[catalogId].accounts) {
+        const { accounts } = catalogs[catalogId];
         /**
          * Go through all accounts in each catalog
          * searching for matching accountIds
          */
         for (let i = 0; i < accounts.length; i++) {
           if (myAccountId === accounts[i]) {
-            catalogId = id;
+            matchCatalogId = catalogId;
             matchAccounts = accounts;
+            /**
+             * Places the matching account into first position
+             * Switches out the account in the first position
+             * to original position of the matching account
+             */
+            const firstAcct = matchAccounts[0];
+            matchAccounts[0] = matchAccounts[i];
+            matchAccounts[i] = firstAcct;
 
             break;
           }
@@ -48,21 +56,19 @@ module.exports = async (api, launchInfo, catalogs) => {
    * isAdmin true, if satisfy one of the statements above
    */
   try {
-    await api.account.get({ accountId: myAccountId });
+    await api.account.get({ accountId: matchAccounts[0] });
     isAdmin = true;
   } catch (error) {
-    for (let i = 0; i < matchAccounts.length; i++) {
-      if (matchAccounts[i] !== myAccountId) {
-        try {
-          // eslint-disable-next-line no-await-in-loop
-          await api.account.get({ accountId: matchAccounts[i] });
-          isAdmin = true;
-          break;
-        } catch (err) {
-          isAdmin = false;
-        }
+    for (let i = 1; i < matchAccounts.length; i++) {
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        await api.account.get({ accountId: matchAccounts[i] });
+        isAdmin = true;
+        break;
+      } catch (err) {
+        isAdmin = false;
       }
     }
   }
-  return { catalogId, isAdmin };
+  return { matchCatalogId, isAdmin };
 };
