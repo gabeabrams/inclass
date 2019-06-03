@@ -3,9 +3,10 @@ const assert = require('assert');
 const ExpressApp = require('../../../dummy-objects/ExpressApp');
 const serveScreenshots = require('../../../../server/Store/helpers/serveScreenshots');
 const appWithScreenshots = require('../../../dummy-data/app-lists/appWithScreenshots');
+const appWithNoFile = require('../../../dummy-data/app-lists/appWithNoFile');
 
 describe('server > Store > helpers > serveScreenshots', function () {
-  it('Does nothing if no screenshot property', async function () {
+  it('does nothing if no screenshot property', async function () {
     const opts = {
       expressApp: new ExpressApp(),
       catalogId: 'dce',
@@ -16,18 +17,27 @@ describe('server > Store > helpers > serveScreenshots', function () {
     assert.deepEqual(opts.app, app);
   });
 
-  // it('throws error for non-existing file', async function () {
-  //   const opts = {
-  //     expressApp: express,
-  //     catalogId: 'dce',
-  //     appId: 'swipein',
-  //     app: appWithScreenshots,
-  //   };
+  it('throws error for non-existing file', async function () {
+    const myExpressApp = new ExpressApp();
+    let errorOccurred = false;
+    const opts = {
+      expressApp: myExpressApp,
+      catalogId: 'dce',
+      appId: 'swipein',
+      app: appWithNoFile,
+    };
+    try {
+      await serveScreenshots(opts);
+    } catch (err) {
+      errorOccurred = true;
+    }
 
-  //   const app = await serveScreenshots(opts);
-  // });
+    if (!errorOccurred) {
+      throw new Error('This test should have thrown error for a non-existant file');
+    }
+  });
 
-  it('correct url added to all screenshots\' property', async function () {
+  it('checks correct url added to all screenshots\' property', async function () {
     appWithScreenshots.screenshots[0].fullPath = path.join(__dirname, '../../../dummy-data/images/event_chooser.png');
     appWithScreenshots.screenshots[1].fullPath = path.join(__dirname, '../../../dummy-data/images/man_dash.png');
     const myExpressApp = new ExpressApp();
