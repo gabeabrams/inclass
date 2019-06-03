@@ -14,7 +14,7 @@ describe('server > Store > helpers > serveScreenshots', function () {
       app: { title: 'GradeUp', creator: 'dce' },
     };
     const app = await serveScreenshots(opts);
-    assert.deepEqual(opts.app, app);
+    assert.deepEqual(opts.app, app, 'The app returned is not the same app');
   });
 
   it('throws error for non-existing file', async function () {
@@ -37,6 +37,21 @@ describe('server > Store > helpers > serveScreenshots', function () {
     }
   });
 
+  it('returns updated app if there are screenshots', async function () {
+    appWithScreenshots.screenshots[0].fullPath = path.join(__dirname, '../../../dummy-data/images/event_chooser.png');
+    appWithScreenshots.screenshots[1].fullPath = path.join(__dirname, '../../../dummy-data/images/man_dash.png');
+    const myExpressApp = new ExpressApp();
+    const opts = {
+      expressApp: myExpressApp,
+      catalogId: 'dce',
+      appId: 'swipein',
+      app: appWithScreenshots,
+    };
+    const app = await serveScreenshots(opts);
+    assert(app.screenshots[0].url, 'URL property does not exists for first screenshot');
+    assert(app.screenshots[1].url, 'URL property does not exists for second screenshot');
+  });
+
   it('checks correct url added to all screenshots\' property', async function () {
     appWithScreenshots.screenshots[0].fullPath = path.join(__dirname, '../../../dummy-data/images/event_chooser.png');
     appWithScreenshots.screenshots[1].fullPath = path.join(__dirname, '../../../dummy-data/images/man_dash.png');
@@ -48,20 +63,7 @@ describe('server > Store > helpers > serveScreenshots', function () {
       app: appWithScreenshots,
     };
     const app = await serveScreenshots(opts);
-    assert.equal(app.screenshots[0].url, '/public/dce/swipein/screenshots/event_chooser.png');
-    assert.equal(app.screenshots[1].url, '/public/dce/swipein/screenshots/man_dash');
+    assert.equal(app.screenshots[0].url, '/public/dce/swipein/screenshots/event_chooser.png', 'The first URL does not match format ');
+    assert.equal(app.screenshots[1].url, '/public/dce/swipein/screenshots/man_dash', 'The second URL does not match format');
   });
-
-  // it('returns updated app if there are screenshots', async function () {
-  //   const opts = {
-  //     expressApp: express,
-  //     catalogId: 'dce',
-  //     appId: 'swipein',
-  //     app: '', // TODO
-  //   };
-  //   const app = await serveScreenshots(opts);
-  //   assert(Object.prototype.hasOwnProperty.call(app.screenshots[0], 'url'));
-  // });
-
-
 });
