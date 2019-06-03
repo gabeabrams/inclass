@@ -21,10 +21,10 @@ module.exports = async () => {
   for (let i = 0; i < catalogIds.length; i++) {
     appsToLoad[catalogIds[i]] = {};
     const apps = await listFolders(path.join(STORE_PATH, catalogIds[i]));
-    for (let j = 0; j < apps.length; j++) {
-      const appPath = path.join(STORE_PATH, catalogIds[i], apps[j]);
-      appsToLoad[catalogIds[i]][apps[j]] = appPath;
-    }
+    apps.forEach((app) => {
+      const appPath = path.join(STORE_PATH, catalogIds[i], app);
+      appsToLoad[catalogIds[i]][app] = appPath;
+    });
   }
   return appsToLoad;
 };

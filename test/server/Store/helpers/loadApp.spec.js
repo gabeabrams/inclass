@@ -18,6 +18,7 @@ describe('server > Store > helpers > loadApp', function () {
       },
     });
 
+    // loading app with no parent
     const catalogId = 'pe';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
     const appId = 'condition';
@@ -30,30 +31,30 @@ describe('server > Store > helpers > loadApp', function () {
     });
     const testPath = path.join(dummyPath, catalogId, appId, 'metadata');
     const realApp = await readJSON(testPath);
-    Object.keys(app).forEach((field) => {
-      if (field !== 'tags' && field !== 'screenshots'
-          && field !== 'supportEmail' && field !== 'installXML'
-          && field !== 'installationCredentials') {
-        assert(JSON.stringify(app[field]) === JSON.stringify(realApp[field]));
-      } else if (field === 'tags') {
+    Object.keys(app).forEach((key) => {
+      if (key !== 'tags' && key !== 'screenshots'
+          && key !== 'supportEmail' && key !== 'installXML'
+          && key !== 'installationCredentials') {
+        assert(JSON.stringify(app[key]) === JSON.stringify(realApp[key]));
+      } else if (key === 'tags') {
         // check that we have converted tag values to arrays
-        Object.keys(realApp[field]).forEach((tag) => {
-          if (!Array.isArray(realApp[field][tag])) {
-            assert(Array.isArray(app[field][tag]));
+        Object.keys(realApp[key]).forEach((tag) => {
+          if (!Array.isArray(realApp[key][tag])) {
+            assert(Array.isArray(app[key][tag]));
           }
         });
-      } else if (field === 'supportEmail') {
-        // check that support email field is either from parent or from catalog
-        assert(app[field] === realApp[field]
-            || app[field] === catalogMetadata.defaultSupportEmail);
-      } else if (field === 'screenshots') {
+      } else if (key === 'supportEmail') {
+        // check that support email key is either from parent or from catalog
+        assert(app[key] === realApp[key]
+            || app[key] === catalogMetadata.defaultSupportEmail);
+      } else if (key === 'screenshots') {
         // check that each file ends with .png
-        app[field].forEach((screenshot) => {
+        app[key].forEach((screenshot) => {
           assert(screenshot.filename.endsWith('.png'));
         });
       } else {
-        // check if app has mandatory fields such as credentials and installData
-        assert(app[field]);
+        // check if app has mandatory keys such as credentials and installData
+        assert(app[key]);
       }
     });
   });

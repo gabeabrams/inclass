@@ -16,7 +16,7 @@ const loadCatalogMetadata = require('./loadCatalogMetadata');
 module.exports = async () => {
   const storeMetadata = await loadStoreMetadata();
   // initiate storeMap
-  const storeMap = {};
+  const storeMap = {}; // {store: storeMetadata, catalogIds: catalog}
   storeMap.store = storeMetadata;
 
   // list the apps to load
