@@ -49,7 +49,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
       name: 'AppFour',
       tags: {
         cost: ['free'],
-        type: ['grading'],
+        type: ['grading', 'teaching'],
       },
     },
   ];
