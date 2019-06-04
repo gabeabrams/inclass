@@ -11,6 +11,6 @@ describe('server > Store > helpers > loadStoreMetadata', function () {
       },
     });
     const testStoreMetadata = await loadStoreMetadata();
-    assert(!testStoreMetadata.beingEdited);
+    assert.equal(testStoreMetadata.beingEdited, undefined);
   });
 });

@@ -16,7 +16,7 @@ describe('server > Store > helpers > loadCatalogMetadata', function () {
     const requiredFields = ['title', 'accounts', 'tagColors', 'defaultSupportEmail'];
     Object.keys(testMetadata).forEach((testField) => {
       // check that key is populated
-      assert(testMetadata[testField]);
+      assert.notEqual(testMetadata[testField], undefined);
       const index = requiredFields.indexOf(testField);
       if (index !== -1) {
         requiredFields.splice(index, 1);

@@ -31,31 +31,42 @@ describe('server > Store > helpers > loadApp', function () {
     });
     const testPath = path.join(dummyPath, catalogId, appId, 'metadata');
     const realApp = await readJSON(testPath);
-    Object.keys(app).forEach((key) => {
-      if (key !== 'tags' && key !== 'screenshots'
-          && key !== 'supportEmail' && key !== 'installXML'
-          && key !== 'installationCredentials') {
-        assert(JSON.stringify(app[key]) === JSON.stringify(realApp[key]));
-      } else if (key === 'tags') {
-        // check that we have converted tag values to arrays
-        Object.keys(realApp[key]).forEach((tag) => {
-          if (!Array.isArray(realApp[key][tag])) {
-            assert(Array.isArray(app[key][tag]));
-          }
-        });
-      } else if (key === 'supportEmail') {
-        // check that support email key is either from parent or from catalog
-        assert(app[key] === realApp[key]
-            || app[key] === catalogMetadata.defaultSupportEmail);
-      } else if (key === 'screenshots') {
-        // check that each file ends with .png
-        app[key].forEach((screenshot) => {
-          assert(screenshot.filename.endsWith('.png'));
-        });
-      } else {
-        // check if app has mandatory keys such as credentials and installData
-        assert(app[key]);
-      }
+    const appKeys = Object.keys(app);
+    // check that we have converted tag values to arrays
+    if (appKeys.includes('tags')) {
+      Object.keys(realApp.tags).forEach((tag) => {
+        if (!Array.isArray(realApp.tags[tag])) {
+          assert.equal(Array.isArray(app.tags[tag]), true);
+        }
+      });
+      appKeys.splice(appKeys.indexOf('tags'), 1);
+    }
+    // check that each file ends with .png
+    if (appKeys.includes('screenshots')) {
+      app.screenshots.forEach((screenshot) => {
+        assert.equal(screenshot.filename.endsWith('.png'), true);
+      });
+      appKeys.splice(appKeys.indexOf('screenshots'), 1);
+    }
+    // check that support email key is either from parent or from catalog
+    if (appKeys.includes('supportEmail')) {
+      assert(app.supportEmail === realApp.supportEmail
+        || app.supportEmail === catalogMetadata.defaultSupportEmail);
+      appKeys.splice(appKeys.indexOf('supportEmail'), 1);
+    }
+    // check if app has mandatory keys such as credentials and installData
+    if (appKeys.includes('installXML')) {
+      assert.notEqual(app.installXML, undefined);
+      appKeys.splice(appKeys.indexOf('installXML'), 1);
+    }
+    // check if app has mandatory keys such as credentials and installData
+    if (appKeys.includes('installationCredentials')) {
+      assert.notEqual(app.installationCredentials, undefined);
+      appKeys.splice(appKeys.indexOf('installationCredentials'), 1);
+    }
+    // check for every other key we copied straight from metadata file
+    appKeys.forEach((key) => {
+      assert(JSON.stringify(app[key]) === JSON.stringify(realApp[key]));
     });
   });
 
@@ -97,38 +108,38 @@ describe('server > Store > helpers > loadApp', function () {
     });
     // read in childApp metadata from store
     const testPath = path.join(dummyPath, catalogId, appId, 'metadata');
-    const realApp = await readJSON(testPath);
-    const changed = Object.keys(realApp).filter((key) => {
+    const childAppMetadata = await readJSON(testPath);
+    const changed = Object.keys(childAppMetadata).filter((key) => {
       return (key !== 'extends');
     });
     // check if each field in childApp is updated accordingly
     Object.keys(childApp).forEach((key) => {
       if (changed.includes(key)) {
-        if (key !== 'tags' && key !== 'screenshots' && key !== 'supportEmail'
-        && key !== 'installXML' && key !== 'installationCredentials') {
-          assert(JSON.stringify(childApp[key])
-          === JSON.stringify(realApp[key]));
-        } else if (key === 'tags') {
+        if (key === 'tags') {
           // check that tags are converted to arrays
-          Object.keys(realApp[key]).forEach((tag) => {
-            if (!Array.isArray(realApp[key][tag])) {
+          Object.keys(childAppMetadata[key]).forEach((tag) => {
+            if (!Array.isArray(childAppMetadata[key][tag])) {
               assert(Array.isArray(childApp[key][tag]));
             }
           });
         } else if (key === 'supportEmail') {
           // check that supportEmail field is either from parent or from catalog
-          assert(childApp[key] === realApp[key]
+          assert(childApp[key] === childAppMetadata[key]
             || childApp[key] === catalogMetadata.defaultSupportEmail);
         } else if (key === 'screenshots') {
           // check that each file ends with .png
           childApp[key].forEach((screenshot) => {
             assert(screenshot.filename.endsWith('.png'));
           });
-        } else {
+        } else if (key === 'installXML' || key === 'installationCredentials') {
           // app has mandatory fields such as credentials and installData
           assert(childApp[key]);
+        } else {
+          assert(JSON.stringify(childApp[key])
+          === JSON.stringify(childAppMetadata[key]));
         }
       } else {
+        // check that child app extended the value of parent app
         assert(JSON.stringify(childApp[key])
            === JSON.stringify(parentAppMetadata[key]));
       }
@@ -165,7 +176,7 @@ describe('server > Store > helpers > loadApp', function () {
       error = err;
     }
     // test that it will throw an error
-    assert(error);
+    assert.notEqual(error, undefined);
   });
 
   it('throws an error if metadata is formatted incorrectly', async function () {
@@ -198,6 +209,6 @@ describe('server > Store > helpers > loadApp', function () {
       error = err;
     }
     // test that it will throw an error
-    assert(error);
+    assert.notEqual(error, undefined);
   });
 });
