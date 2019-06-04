@@ -9,7 +9,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
     cost: {
       color: 'blue',
       tagValues: {
-        free: false,
+        free: true,
         expensive: true,
       },
     },

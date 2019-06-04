@@ -27,15 +27,29 @@ module.exports = (apps, tags) => {
     // that tagValue
 
     console.log('tagName is', tagName);
-    // array of tag values for a given tag name ex. 'free' or 'expensive'
-    const tagVals = newTags[tagName].tagValues;
+    // array of tagValues for a given tagName ex. 'free' or 'expensive'
+    const tagVals = Object.keys(newTags[tagName].tagValues);
     console.log('tagValues', tagVals);
     // Go through each tagValue in this current tag
-    tagVals.forEach((tagValue) => {
+    tagVals.forEach((tagItem) => {
+      console.log('tagValue is', tagItem);
+      console.log(`Searching for ${tagItem} in filtered apps`);
       const countedApps = filteredApps.filter((app) => {
+        console.log(`Inside app ${app.name}`);
+        console.log('tagItem is', tagItem);
         // Will return the app if the given tagValue exists, false if not
-        return app.tags[tagName][tagValue];
+        console.log('DEBUGGING');
+        // Go through the array of this tagName (ex. 'cost') in this app and
+        // check if the array has the tagItem we're looking for (ex. 'free')
+        console.log('App array of tagName tags', app.tags[tagName]);
+        console.log(`App's tag tagValue is ${app.tags[tagName]}`);
+        return app.tags[tagName].some((appTagItem) => {
+          console.log(`appTagItem is ${appTagItem}`);
+          console.log(`tag's tagItem is ${tagItem}`);
+          return (appTagItem === tagItem);
+        });
       });
+      console.log('Counted apps is ', countedApps);
     });
   });
 };
