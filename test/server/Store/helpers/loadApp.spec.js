@@ -36,7 +36,7 @@ describe('server > Store > helpers > loadApp', function () {
     if (appKeys.includes('tags')) {
       Object.keys(realApp.tags).forEach((tag) => {
         if (!Array.isArray(realApp.tags[tag])) {
-          assert.equal(Array.isArray(app.tags[tag]), true);
+          assert(Array.isArray(app.tags[tag]), 'tags value is not array');
         }
       });
       appKeys.splice(appKeys.indexOf('tags'), 1);
@@ -44,29 +44,29 @@ describe('server > Store > helpers > loadApp', function () {
     // check that each file ends with .png
     if (appKeys.includes('screenshots')) {
       app.screenshots.forEach((screenshot) => {
-        assert.equal(screenshot.filename.endsWith('.png'), true);
+        assert(screenshot.filename.endsWith('.png'), 'screenshots filename does not end with .png');
       });
       appKeys.splice(appKeys.indexOf('screenshots'), 1);
     }
     // check that support email key is either from parent or from catalog
     if (appKeys.includes('supportEmail')) {
       assert(app.supportEmail === realApp.supportEmail
-        || app.supportEmail === catalogMetadata.defaultSupportEmail);
+        || app.supportEmail === catalogMetadata.defaultSupportEmail, 'support Email is incorrect');
       appKeys.splice(appKeys.indexOf('supportEmail'), 1);
     }
     // check if app has mandatory keys such as credentials and installData
     if (appKeys.includes('installXML')) {
-      assert.notEqual(app.installXML, undefined);
+      assert(app.installXML, 'installXML data is not loaded');
       appKeys.splice(appKeys.indexOf('installXML'), 1);
     }
     // check if app has mandatory keys such as credentials and installData
     if (appKeys.includes('installationCredentials')) {
-      assert.notEqual(app.installationCredentials, undefined);
+      assert(app.installationCredentials, 'credentials data is not loaded');
       appKeys.splice(appKeys.indexOf('installationCredentials'), 1);
     }
     // check for every other key we copied straight from metadata file
     appKeys.forEach((key) => {
-      assert(JSON.stringify(app[key]) === JSON.stringify(realApp[key]));
+      assert(JSON.stringify(app[key]) === JSON.stringify(realApp[key]), `the value of key: ${key} was not read in from metadata file correctly`);
     });
   });
 
@@ -119,29 +119,32 @@ describe('server > Store > helpers > loadApp', function () {
           // check that tags are converted to arrays
           Object.keys(childAppMetadata[key]).forEach((tag) => {
             if (!Array.isArray(childAppMetadata[key][tag])) {
-              assert(Array.isArray(childApp[key][tag]));
+              assert(Array.isArray(childApp[key][tag]), 'tags value is not array');
             }
           });
         } else if (key === 'supportEmail') {
           // check that supportEmail field is either from parent or from catalog
           assert(childApp[key] === childAppMetadata[key]
-            || childApp[key] === catalogMetadata.defaultSupportEmail);
+            || childApp[key] === catalogMetadata.defaultSupportEmail, 'support Email is incorrect');
         } else if (key === 'screenshots') {
           // check that each file ends with .png
           childApp[key].forEach((screenshot) => {
-            assert(screenshot.filename.endsWith('.png'));
+            assert(screenshot.filename.endsWith('.png'), 'screenshots filename does not end with .png');
           });
-        } else if (key === 'installXML' || key === 'installationCredentials') {
-          // app has mandatory fields such as credentials and installData
-          assert(childApp[key]);
+        } else if (key === 'installXML') {
+          // check that app installData is loaded
+          assert(childApp[key], 'installXML data is not loaded');
+        } else if (key === 'installationCredentials') {
+          // check that app credentials are loaded
+          assert(childApp[key], 'credentials data is not loaded');
         } else {
           assert(JSON.stringify(childApp[key])
-          === JSON.stringify(childAppMetadata[key]));
+          === JSON.stringify(childAppMetadata[key]), `the value of key: ${key} is not read in from metadata file correctly`);
         }
       } else {
         // check that child app extended the value of parent app
         assert(JSON.stringify(childApp[key])
-           === JSON.stringify(parentAppMetadata[key]));
+           === JSON.stringify(parentAppMetadata[key]), `the value of key: ${key} did not extend from parent correctly`);
       }
     });
   });
@@ -176,7 +179,7 @@ describe('server > Store > helpers > loadApp', function () {
       error = err;
     }
     // test that it will throw an error
-    assert.notEqual(error, undefined);
+    assert(error, 'did not throw error when loading app without metadata file');
   });
 
   it('throws an error if metadata is formatted incorrectly', async function () {
@@ -209,6 +212,6 @@ describe('server > Store > helpers > loadApp', function () {
       error = err;
     }
     // test that it will throw an error
-    assert.notEqual(error, undefined);
+    assert(error, 'did not throw error when loading app with badly formatted metadata file');
   });
 });

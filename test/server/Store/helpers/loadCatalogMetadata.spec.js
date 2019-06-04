@@ -17,10 +17,10 @@ describe('server > Store > helpers > loadCatalogMetadata', function () {
     const testKeys = Object.keys(testMetadata);
     Object.keys(testMetadata).forEach((testKey) => {
       // check that key is populated
-      assert.notEqual(testMetadata[testKey], undefined);
-      assert(requiredKeys.includes(testKey));
+      assert(testMetadata[testKey], `the key: ${testKey} is not populated`);
+      assert(requiredKeys.includes(testKey), `the key ${testKey} is not read in correctly`);
     });
     // check that file has all fields
-    assert(requiredKeys.length === testKeys.length);
+    assert(requiredKeys.length === testKeys.length, 'number of keys read in does not match in the metadata file');
   });
 });

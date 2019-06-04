@@ -12,8 +12,8 @@ describe('server > Store > helpers > loadStore', function () {
       },
     });
     const testStore = await loadStore();
-    assert.notEqual(testStore.store, undefined);
-    assert.notEqual(testStore.catalogs, undefined);
+    assert(testStore.store, 'store metadata is not correctly loaded');
+    assert(testStore.catalogs, 'catalogs are not correctly loaded');
   });
 
   it('throws error if there is circular dependency', async function () {
@@ -31,7 +31,7 @@ describe('server > Store > helpers > loadStore', function () {
     } catch (err) {
       error = err;
     }
-    assert.notEqual(error, undefined, 'throws error when encountering circular reference');
+    assert(error, 'does not throw error when encountering circular reference');
   });
 
   it('throws error if store is being edited', async function () {
@@ -49,6 +49,6 @@ describe('server > Store > helpers > loadStore', function () {
     } catch (err) {
       error = err;
     }
-    assert.notEqual(error, undefined);
+    assert(error, 'does not throw error when reading a store that is being edited');
   });
 });

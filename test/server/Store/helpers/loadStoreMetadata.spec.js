@@ -11,6 +11,6 @@ describe('server > Store > helpers > loadStoreMetadata', function () {
       },
     });
     const testStoreMetadata = await loadStoreMetadata();
-    assert.equal(testStoreMetadata.beingEdited, undefined);
+    assert.equal(testStoreMetadata.beingEdited, undefined, 'the store is read in while being edited');
   });
 });
