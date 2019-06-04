@@ -15,9 +15,14 @@ module.exports = (apps, tags) => {
   // Duplicate before changing
   const newTags = tags;
 
+  // Create the tag object that we're going to be returning
+  const tagCounts = {};
+
   // Go through each tagName, and call filterByTags with the app list and every
   // tag name EXCEPT the one we are currently in
   Object.keys(newTags).forEach((tagName) => {
+    // Add this tagName to the tagCounts Object
+    tagCounts[tagName] = {};
     // The apps that match based on other filter categories' checks
     const tagsWithoutTagName = excludeTagName(newTags, tagName);
     const filteredApps = filterByTags(apps, tagsWithoutTagName);
@@ -50,6 +55,8 @@ module.exports = (apps, tags) => {
         });
       });
       console.log('Counted apps is ', countedApps);
+      tagCounts[tagName][tagItem] = countedApps.length;
     });
   });
+  console.log(tagCounts);
 };
