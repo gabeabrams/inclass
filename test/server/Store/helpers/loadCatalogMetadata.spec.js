@@ -13,16 +13,14 @@ const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCat
 describe('server > Store > helpers > loadCatalogMetadata', function () {
   it('contains all the required fields', async function () {
     const testMetadata = await loadCatalogMetadata('dce');
-    const requiredFields = ['title', 'accounts', 'tagColors', 'defaultSupportEmail'];
-    Object.keys(testMetadata).forEach((testField) => {
+    const requiredKeys = ['title', 'accounts', 'tagColors', 'defaultSupportEmail'];
+    const testKeys = Object.keys(testMetadata);
+    Object.keys(testMetadata).forEach((testKey) => {
       // check that key is populated
-      assert.notEqual(testMetadata[testField], undefined);
-      const index = requiredFields.indexOf(testField);
-      if (index !== -1) {
-        requiredFields.splice(index, 1);
-      }
+      assert.notEqual(testMetadata[testKey], undefined);
+      assert(requiredKeys.includes(testKey));
     });
     // check that file has all fields
-    assert(requiredFields.length === 0);
+    assert(requiredKeys.length === testKeys.length);
   });
 });
