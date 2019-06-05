@@ -21,7 +21,7 @@ module.exports = async (path, parentAppMetadata) => {
     // file does not exist and does not have a parent
     throw new Error(`We couldn't load the app store metadata because the file ${fixedPath} does not exist`);
   }
-  // if the file exist, read the file as text
+  // if the file exist, read the file
   const credentials = await readJSON(path);
   return credentials;
 };
