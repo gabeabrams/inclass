@@ -10,15 +10,13 @@ module.exports = (apps, query = '') => {
   if (query.trim() === '') {
     return apps;
   }
-  // Make a new list to add the apps we want to return
-  let goodApps = apps;
 
   // Make the query a regular expression so we can search for it in any string
   const reQuery = new RegExp(query, 'i');
 
   // Go through each app in the list
   // If the title, subtitle, or description match, add app to new list
-  goodApps = goodApps.filter((app) => {
+  const goodApps = apps.filter((app) => {
     return (reQuery.test(app.title) || reQuery.test(app.subtitle) ||
       reQuery.test(app.description));
   });
