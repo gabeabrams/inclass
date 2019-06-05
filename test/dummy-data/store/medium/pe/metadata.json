@@ -3,9 +3,15 @@
     "accounts": [
       123321
     ],
-    "tagColors": {
-      "cost": "blue",
-      "type": "red"
-    },
+    "tagsToShow": [
+      {
+        "tagName": "cost",
+        "color": "blue"
+      },
+      {
+        "tagName": "type",
+        "color": "red"
+      }
+    ],
     "defaultSupportEmail": "example@harvard.edu"
   }
