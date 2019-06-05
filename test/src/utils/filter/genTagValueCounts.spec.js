@@ -56,6 +56,18 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
 
   it('Creates counts for each filter tag', async function () {
     console.log('Calling genTagValueCounts');
-    genTagValueCounts(testApps, testTags);
+    const expectedItem = {
+      cost: {
+        free: 2,
+        expensive: 2,
+      },
+      type: {
+        import: 2,
+        export: 2,
+        teaching: 1,
+      },
+    };
+    const actualItem = genTagValueCounts(testApps, testTags);
+    assert.deepEqual(expectedItem, actualItem);
   });
 });

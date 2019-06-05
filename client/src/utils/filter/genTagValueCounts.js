@@ -58,5 +58,5 @@ module.exports = (apps, tags) => {
       tagCounts[tagName][tagItem] = countedApps.length;
     });
   });
-  console.log(tagCounts);
+  return tagCounts;
 };
