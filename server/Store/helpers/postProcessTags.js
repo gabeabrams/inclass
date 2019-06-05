@@ -8,5 +8,19 @@
  *   'other/uncategorized' as the tagItem)
  */
 module.exports = async (catalog) => {
-  // TODO: implement
+  // We want to get the apps and tagsToShow out of the catalog
+  const {apps, tagsToShow} = catalog;
+
+  // Make array of random colors
+  const someRandomColor = [];
+
+  // Now that we have apps and tagsToShow, make sure tag data is correct
+  // If tag doesn't have a tagColor, give it one
+  tagsToShow.forEach((tag) => {
+    if (!tag.tagColor) {
+      tag.tagColor = someRandomColor;
+    }
+  });
+
+
 };
