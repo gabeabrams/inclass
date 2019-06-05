@@ -3,7 +3,7 @@ const assert = require('assert');
 const proxyquire = require('proxyquire');
 const readJSON = require('../../../../server/Store/helpers/readJSON');
 
-describe.only('server > Store > helpers > loadApp', function () {
+describe('server > Store > helpers > loadApp', function () {
   it('loads app with no parent correctly', async function () {
     // use proxiquire to redirect store path to testing folder
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
@@ -253,5 +253,45 @@ describe.only('server > Store > helpers > loadApp', function () {
     });
     console.log(appMetadata);
     assert(appMetadata.installXML === parentMetadata.installXML, 'child app missing installXMl file did not extend from parent correctly');
+  });
+
+  it('extends parent credentials if has parent and file not found', async function () {
+    // use proxiquire to redirect store path to testing folder
+    const dummyPath = path.join(__dirname, '../../../dummy-data/store/missing-credentials');
+    const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    // load parent app
+    const parentCatalogId = 'dce';
+    const parentCatalogMetadata = await loadCatalogMetadata(parentCatalogId);
+    const parentAppId = 'swipein';
+    const parentParentAppMetadata = null;
+    const parentMetadata = await loadApp({
+      catalogId: parentCatalogId,
+      catalogMetadata: parentCatalogMetadata,
+      appId: parentAppId,
+      parentAppMetadata: parentParentAppMetadata,
+    });
+    console.log(parentMetadata);
+    // try child app with missing xml file
+    const catalogId = 'seas';
+    const catalogMetadata = await loadCatalogMetadata(catalogId);
+    const appId = 'swipein';
+    const parentAppMetadata = parentMetadata;
+    const appMetadata = await loadApp({
+      catalogId,
+      catalogMetadata,
+      appId,
+      parentAppMetadata,
+    });
+    console.log(appMetadata);
+    assert(appMetadata.installationCredentials === parentMetadata.installationCredentials, 'child app missing credentials file did not extend from parent correctly');
   });
 });

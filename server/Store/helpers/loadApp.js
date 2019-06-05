@@ -3,6 +3,7 @@ const path = require('path');
 const clone = require('fast-clone');
 const readJSON = require('./readJSON');
 const readXML = require('./readXML');
+const loadCredentials = require('./loadCredentials');
 const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 
 const STORE_PATH = STORE_CONSTANTS.path;
@@ -40,7 +41,7 @@ module.exports = async (opts = {}) => {
 
   // add read credentials.json here
   const credPath = path.join(STORE_PATH, catalogId, appId, 'credentials');
-  const credData = await readJSON(credPath);
+  const credData = await loadCredentials(credPath, parentAppMetadata);
   appMetadata.installationCredentials = credData;
 
   // process metadata information
