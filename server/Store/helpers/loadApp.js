@@ -35,7 +35,7 @@ module.exports = async (opts = {}) => {
 
   // add read XML file here
   const xmlPath = path.join(STORE_PATH, catalogId, appId, 'install.xml');
-  const installXML = await readXML(xmlPath);
+  const installXML = await readXML(xmlPath, parentAppMetadata);
   appMetadata.installXML = installXML;
 
   // add read credentials.json here

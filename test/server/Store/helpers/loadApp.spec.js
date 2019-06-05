@@ -3,7 +3,7 @@ const assert = require('assert');
 const proxyquire = require('proxyquire');
 const readJSON = require('../../../../server/Store/helpers/readJSON');
 
-describe('server > Store > helpers > loadApp', function () {
+describe.only('server > Store > helpers > loadApp', function () {
   it('loads app with no parent correctly', async function () {
     // use proxiquire to redirect store path to testing folder
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
@@ -213,5 +213,45 @@ describe('server > Store > helpers > loadApp', function () {
     }
     // test that it will throw an error
     assert(error, 'did not throw error when loading app with badly formatted metadata file');
+  });
+
+  it('extends parent xml if has parent and file not found', async function () {
+    // use proxiquire to redirect store path to testing folder
+    const dummyPath = path.join(__dirname, '../../../dummy-data/store/missing-xml');
+    const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    // load parent app
+    const parentCatalogId = 'dce';
+    const parentCatalogMetadata = await loadCatalogMetadata(parentCatalogId);
+    const parentAppId = 'swipein';
+    const parentParentAppMetadata = null;
+    const parentMetadata = await loadApp({
+      catalogId: parentCatalogId,
+      catalogMetadata: parentCatalogMetadata,
+      appId: parentAppId,
+      parentAppMetadata: parentParentAppMetadata,
+    });
+    console.log(parentMetadata);
+    // try child app with missing xml file
+    const catalogId = 'seas';
+    const catalogMetadata = await loadCatalogMetadata(catalogId);
+    const appId = 'swipein';
+    const parentAppMetadata = parentMetadata;
+    const appMetadata = await loadApp({
+      catalogId,
+      catalogMetadata,
+      appId,
+      parentAppMetadata,
+    });
+    console.log(appMetadata);
+    assert(appMetadata.installXML === parentMetadata.installXML, 'child app missing installXMl file did not extend from parent correctly');
   });
 });
