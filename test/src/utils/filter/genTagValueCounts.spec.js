@@ -5,7 +5,7 @@ const assert = require('assert');
 const genTagValueCounts = require('../../../../client/src/utils/filter/genTagValueCounts');
 
 describe('client > src > utils > filter > genTagValueCounts', function () {
-  const testTags = {
+  const testTagsAllChecked = {
     cost: {
       color: 'blue',
       tagValues: {
@@ -19,6 +19,50 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
         import: true,
         export: true,
         teaching: true,
+      },
+    },
+  };
+
+  const testTagsFreeTeaching = {
+    cost: {
+      color: 'blue',
+      tagValues: {
+        free: true,
+        expensive: false,
+      },
+    },
+    type: {
+      color: 'red',
+      tagValues: {
+        import: false,
+        export: false,
+        teaching: true,
+      },
+    },
+  };
+
+  const testTagsExtraValue = {
+    cost: {
+      color: 'blue',
+      tagValues: {
+        free: false,
+        expensive: true,
+      },
+    },
+    type: {
+      color: 'red',
+      tagValues: {
+        import: true,
+        export: false,
+        teaching: true,
+      },
+    },
+    language: {
+      color: 'green',
+      tagValues: {
+        english: true,
+        spanish: true,
+        french: false,
       },
     },
   };
@@ -55,7 +99,6 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   ];
 
   it('Creates counts for each filter tag', async function () {
-    console.log('Calling genTagValueCounts');
     const expectedItem = {
       cost: {
         free: 2,
@@ -67,7 +110,44 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
         teaching: 1,
       },
     };
-    const actualItem = genTagValueCounts(testApps, testTags);
+    const actualItem = genTagValueCounts(testApps, testTagsAllChecked);
+    assert.deepEqual(expectedItem, actualItem);
+  });
+
+  it('Will only count tags marked as true', async function () {
+    const expectedItem = {
+      cost: {
+        free: 1,
+        expensive: 0,
+      },
+      type: {
+        import: 1,
+        export: 1,
+        teaching: 1,
+      },
+    };
+    const actualItem = genTagValueCounts(testApps, testTagsFreeTeaching);
+    assert.deepEqual(expectedItem, actualItem);
+  });
+
+  it('Will keep an app if it doesn\'t have a tagName', async function () {
+    const expectedItem = {
+      cost: {
+        free: 2,
+        expensive: 1,
+      },
+      type: {
+        import: 1,
+        export: 1,
+        teaching: 0,
+      },
+      language: {
+        english: 1,
+        spanish: 1,
+        french: 1,
+      },
+    };
+    const actualItem = genTagValueCounts(testApps, testTagsExtraValue);
     assert.deepEqual(expectedItem, actualItem);
   });
 });

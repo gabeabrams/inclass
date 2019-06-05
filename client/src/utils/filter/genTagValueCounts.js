@@ -40,6 +40,9 @@ module.exports = (apps, tags) => {
       const countedApps = filteredApps.filter((app) => {
         // Go through the array of this tagName (ex. 'cost') in this app and
         // check if the array has the tagItem we're looking for (ex. 'free')
+        if (apps.tags[tagName] === undefined) {
+          return true;
+        }
         return app.tags[tagName].some((appTagItem) => {
           return (appTagItem === tagItem);
         });
