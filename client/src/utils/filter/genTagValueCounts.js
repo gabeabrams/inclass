@@ -21,42 +21,34 @@ module.exports = (apps, tags) => {
   // Go through each tagName, and call filterByTags with the app list and every
   // tag name EXCEPT the one we are currently in
   Object.keys(newTags).forEach((tagName) => {
-    // Add this tagName to the tagCounts Object
+    // Add this tagName to the tagCounts object
     tagCounts[tagName] = {};
-    // The apps that match based on other filter categories' checks
-    const tagsWithoutTagName = excludeTagName(newTags, tagName);
-    const filteredApps = filterByTags(apps, tagsWithoutTagName);
-    console.log(filteredApps);
-    // Now we go through each tagValue in this tagName and count how many of
-    // those apps have it checked -> filter? And that number is the count for
-    // that tagValue
 
-    console.log('tagName is', tagName);
+    // We only want the tags excluding the one we're currently in
+    const tagsWithoutTagName = excludeTagName(newTags, tagName);
+    // The apps that match based on other filter categories' checks
+    const filteredApps = filterByTags(apps, tagsWithoutTagName);
+
     // array of tagValues for a given tagName ex. 'free' or 'expensive'
     const tagVals = Object.keys(newTags[tagName].tagValues);
-    console.log('tagValues', tagVals);
-    // Go through each tagValue in this current tag
+
+    // Go through each tagValue in this current tag ex. 'free'
     tagVals.forEach((tagItem) => {
-      console.log('tagValue is', tagItem);
-      console.log(`Searching for ${tagItem} in filtered apps`);
+
+      // Take the filtered apps that match our other tags, and only count the
+      // ones that have this tagItem
       const countedApps = filteredApps.filter((app) => {
-        console.log(`Inside app ${app.name}`);
-        console.log('tagItem is', tagItem);
-        // Will return the app if the given tagValue exists, false if not
-        console.log('DEBUGGING');
         // Go through the array of this tagName (ex. 'cost') in this app and
         // check if the array has the tagItem we're looking for (ex. 'free')
-        console.log('App array of tagName tags', app.tags[tagName]);
-        console.log(`App's tag tagValue is ${app.tags[tagName]}`);
         return app.tags[tagName].some((appTagItem) => {
-          console.log(`appTagItem is ${appTagItem}`);
-          console.log(`tag's tagItem is ${tagItem}`);
           return (appTagItem === tagItem);
         });
       });
-      console.log('Counted apps is ', countedApps);
+      // The count of the apps that match this tagItem's count will be equal to
+      // the length of the list of apps we found that tagItem in
       tagCounts[tagName][tagItem] = countedApps.length;
     });
   });
+  // Return completed object
   return tagCounts;
 };
