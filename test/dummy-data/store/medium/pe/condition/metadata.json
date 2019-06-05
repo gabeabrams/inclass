@@ -2,9 +2,7 @@
     "title": "Condition App",
     "subtitle": "An app that allows people to follow conditioning exercises",
     "description": "longer version of the subtitle",
-    "creator": [
-        "pe"
-    ],
+    "creator": "pe",
     "supportEmail": "ithelp@harvard.edu",
     "requestInstallEmail": "instructionaltechnology@dce.harvard.edu",
     "requestUninstallEmail": "instructionaltechnology@dce.harvard.edu",
