@@ -1,3 +1,9 @@
+/**
+ * Returns a fake course where the account_id is the course_id / 2
+ * @param {object} opts - an object containing the arguments
+ * @param {number} opts.courseId - the id of the fake course
+ * @return {Course} fake course
+ */
 const courseOperations = {
   get: (opts) => {
     const { courseId } = opts;
@@ -17,6 +23,14 @@ const courseOperations = {
   },
 };
 
+/**
+ * Returns a fake account if the user is an admin. Our test user is an admin of
+ *   accounts 50 through 99 (inclusive) and is not an admin for accounts 1
+ *   through 49 (inclusive) and accounts 100 and higher do not exist
+ * @param {object} opts - an object containing the arguments
+ * @param {number} opts.accountId - the id of the fake acccount
+ * @return {Account} fake account
+ */
 const accountOperations = {
   get: (opts) => {
     const { accountId } = opts;
