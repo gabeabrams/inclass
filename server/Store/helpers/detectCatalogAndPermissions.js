@@ -11,8 +11,63 @@
  *   of the accounts that are associated with this catalog
  */
 module.exports = async (api, launchInfo, catalogs) => {
-  // TODO: figure out which catalog to show
-  // TODO: first, check if the current user can access the catalog for this
-  // course, then if that fails, check if they have access to any of the
-  // *other* accounts in the catalog. If true at all, set isAdmin to true
+  const { courseId } = launchInfo;
+
+  const myCourse = await api.course.get({ courseId });
+  const myAccountId = myCourse.account_id;
+
+  let matchCatalogId;
+  let matchAccounts;
+  let isAdmin;
+
+  // Go through each catalog
+  if (catalogs) {
+    Object.keys(catalogs).forEach((catalogId) => {
+      if (catalogs[catalogId].accounts) {
+        const { accounts } = catalogs[catalogId];
+        /**
+         * Go through all accounts in each catalog
+         * searching for matching accountIds
+         */
+        for (let i = 0; i < accounts.length; i++) {
+          if (myAccountId === accounts[i]) {
+            matchCatalogId = catalogId;
+            matchAccounts = accounts;
+            /**
+             * Places the matching account into first position
+             * Switches out the account in the first position
+             * to original position of the matching account
+             */
+            const firstAcct = matchAccounts[0];
+            matchAccounts[0] = matchAccounts[i];
+            matchAccounts[i] = firstAcct;
+
+            break;
+          }
+        }
+      }
+    });
+  }
+
+  /**
+   * Check if person is admin of account the course is in
+   * If not, check if person is admin of
+   * any account in the catalog (matchAccounts)
+   * isAdmin true, if satisfy one of the statements above
+   */
+  if (!matchCatalogId) {
+    throw new Error('There is no catalog for this course');
+  }
+
+  for (let i = 0; i < matchAccounts.length; i++) {
+    try {
+      await api.account.get({ accountId: matchAccounts[i] });
+      isAdmin = true;
+      break;
+    } catch (err) {
+      isAdmin = false;
+    }
+  }
+
+  return { matchCatalogId, isAdmin };
 };
