@@ -73,7 +73,5 @@ module.exports = async (api, launchInfo, catalogs) => {
       }
     }
   }
-  console.log('ID: ', matchCatalogId);
-  console.log('Admin: ', isAdmin);
-  return { catalogId: matchCatalogId, isAdmin };
+  return { matchCatalogId, isAdmin };
 };

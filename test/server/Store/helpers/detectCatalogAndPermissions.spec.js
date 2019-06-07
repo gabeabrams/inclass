@@ -17,7 +17,7 @@ const catalogTwo = {
 };
 const catalogThree = {
   title: 'catalog 3',
-  accounts: [100, 99, 400],
+  accounts: [100, 200, 400],
   tagColors: { tagName: 'red' },
   defaultSupportEmail: 'fake@gmail.com',
 };
@@ -39,26 +39,25 @@ const api = new API();
 describe('server > Store > helpers > detectCatalogAndPermissions', function () {
   it('checks correct catalog is found', async function () {
     const launchInfo = { courseId: 100 };
-    const match = detectCatalogAndPermissions(api, launchInfo, catalogs);
-    console.log('Match: ', match);
+    const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
     assert.equal(match.matchCatalogId, 542, 'Catalog Id does not match what is expected');
   });
 
   it('checks isAdmin is true when person is admin of course they are in', async function () {
     const launchInfo = { courseId: 100 };
-    const match = detectCatalogAndPermissions(api, launchInfo, catalogs);
+    const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
     assert.equal(match.isAdmin, true, 'iAdmin is false when it should be true');
   });
 
   it('checks isAdmin is true when person is admin to any account in catalog', async function () {
     const launchInfo = { courseId: 2 };
-    const match = detectCatalogAndPermissions(api, launchInfo, catalogs);
-    assert.equal(match.isAdmin, true);
+    const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
+    assert.equal(match.isAdmin, true, 'isAdmin is false when it should be true');
   });
 
   it('checks isAdmin is false when person does not satisfy admin requirements', async function () {
     const launchInfo = { courseId: 200 };
-    const match = detectCatalogAndPermissions(api, launchInfo, catalogs);
+    const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
     assert.equal(match.isAdmin, false);
   });
 
@@ -66,7 +65,7 @@ describe('server > Store > helpers > detectCatalogAndPermissions', function () {
     const launchInfo = { courseId: 50 };
     let errorOccurred = false;
     try {
-      detectCatalogAndPermissions(api, launchInfo, catalogs);
+      await detectCatalogAndPermissions(api, launchInfo, catalogs);
     } catch (err) {
       errorOccurred = true;
     }
