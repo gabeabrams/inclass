@@ -1,7 +1,7 @@
 const assert = require('assert');
+
 const detectCatalogAndPermissions = require('../../../../server/Store/helpers/detectCatalogAndPermissions');
 const API = require('../../../dummy-objects/API');
-
 
 const catalogOne = {
   title: 'catalog 1',
@@ -34,6 +34,9 @@ const catalogs = {
   4: catalogThree,
   300: catalogFour,
 };
+
+const noCatalogs = {};
+
 const api = new API();
 
 describe('server > Store > helpers > detectCatalogAndPermissions', function () {
@@ -58,7 +61,7 @@ describe('server > Store > helpers > detectCatalogAndPermissions', function () {
   it('checks isAdmin is false when person does not satisfy admin requirements', async function () {
     const launchInfo = { courseId: 200 };
     const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
-    assert.equal(match.isAdmin, false);
+    assert.equal(match.isAdmin, false, 'isAdmin is true when the person is not an admin');
   });
 
   it('checks error thrown for no catalog for the course', async function () {
@@ -67,7 +70,33 @@ describe('server > Store > helpers > detectCatalogAndPermissions', function () {
     try {
       await detectCatalogAndPermissions(api, launchInfo, catalogs);
     } catch (err) {
-      errorOccurred = true;
+      if (err.message.includes('There is no catalog for this course')) {
+        // The correct error occurred
+        errorOccurred = true;
+      } else {
+        // Another error occurred that we did not expect
+        throw err;
+      }
+    }
+
+    if (!errorOccurred) {
+      throw new Error('This test should have thrown an error for no catalog for course given');
+    }
+  });
+
+  it('checks error thrown when no catalogs given', async function () {
+    const launchInfo = { courseId: 366};
+    let errorOccurred = false;
+    try {
+      await detectCatalogAndPermissions(api, launchInfo, noCatalogs);
+    } catch (err) {
+      if (err.message.includes('There is no catalog for this course')) {
+        // The correct error occurred
+        errorOccurred = true;
+      } else {
+        // Another error occurred that we did not expect
+        throw err;
+      }
     }
 
     if (!errorOccurred) {
