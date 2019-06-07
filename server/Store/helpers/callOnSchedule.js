@@ -1,11 +1,14 @@
 /**
- * Takes a function and calls it every x miliseconds
- * @param {function} func - the function to call x miliseconds
+ * Takes a function and calls it every x seconds
+ * @param {function} func - the function to call x seconds
  * @param {number} [delay=500] - number of miliseconds to wait between calls
- * @return {Interval Id} used to kill the timer and stop repeating call
+ * @return {funtion} used to kill the timer and stop repeating call
  */
-module.exports = async (func, delay = 500) => {
-  const refreshIntervalId = setInterval(func, delay);
+module.exports = (func, delay = 0.5) => {
+  const delayInMiliseconds = delay * 1000;
+  // calls the function passed in repeatedly with 'delay' miliseconds in between
+  const refreshIntervalId = setInterval(func, delayInMiliseconds);
+  // kill function that stops the recurring calls
   const kill = () => {
     clearInterval(refreshIntervalId);
   };

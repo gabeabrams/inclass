@@ -1,10 +1,7 @@
-const assert = require('assert');
 const sinon = require('sinon');
 const callOnSchedule = require('../../../../server/Store/helpers/callOnSchedule');
 
-const aFuncShouldBeRunned = sinon.spy();
-
-describe.only('testing scheduled function calls', function () {
+describe('server > Store > helpers > callOnSchedule', function () {
   before(function () {
     this.clock = sinon.useFakeTimers();
   });
@@ -13,68 +10,37 @@ describe.only('testing scheduled function calls', function () {
     this.clock.restore();
   });
 
-  it('calls function on time', function () {
+  it('calls function on schedule', function () {
     let counter = 1;
     const kill = callOnSchedule(() => {
-      if (counter === 3) {
-        aFuncShouldBeRunned();
-      }
-      if (counter === 5) {
-        aFuncShouldBeRunned();
-      }
       counter += 1;
-      console.log(counter);
-    }, 500);
-    // At time 0, we don't expect the function to have been called.
-    assert(aFuncShouldBeRunned.called === false, 'function was called before timer started');
+    }, 0.5);
+    // At time 0, the function should not be called
+    if (!counter === 1) {
+      kill();
+      throw new Error('function was called before timer started');
+    }
+
     // Advance clock 500ms.
     this.clock.tick(500);
-    assert(aFuncShouldBeRunned.called === false, 'function was called prematurely');
+    if (!counter === 2) {
+      kill();
+      throw new Error('function was not called on schedule');
+    }
 
-    // Advance clock again (1s since start)
+    // Advance clock 500ms again
     this.clock.tick(500);
-    assert(aFuncShouldBeRunned.called === false, 'function was called prematurely');
+    if (!counter === 3) {
+      kill();
+      throw new Error('function was not called on schedule');
+    }
 
-    // Advance clock again (1.5s since start). This should
-    // trigger the call to `aFuncShouldBeRunned`.
-    this.clock.tick(500);
-    assert(aFuncShouldBeRunned.called === true, 'function was not called on schedule');
+    kill();
+    // check that the kill function actually kills the recurring calls
     this.clock.tick(1000);
-    assert(aFuncShouldBeRunned.calledTwice, 'function was not called on schedule');
-    // kill();
+    if (!counter === 3) {
+      kill();
+      throw new Error('kill function failed to stop recurring calls');
+    }
   });
-
-  // it('stops the recurring call when killed', function () {
-  //   before();
-  //   console.log(this.clock);
-  //   let counter = 1;
-  //   const kill = callOnSchedule(() => {
-  //     if (counter === 3) {
-  //       aFuncShouldBeRunned();
-  //     }
-  //     if (counter === 5) {
-  //       aFuncShouldBeRunned();
-  //     }
-  //     counter += 1;
-  //     console.log(counter);
-  //   }, 500);
-  //   // At time 0, we don't expect the function to have been called.
-  //   assert(aFuncShouldBeRunned.called === false, 'function was called before timer started');
-  //   // Advance clock 500ms.
-  //   this.clock.tick(500);
-  //   assert(aFuncShouldBeRunned.called === false, 'function was called prematurely');
-
-  //   // Advance clock again (1s since start)
-  //   this.clock.tick(500);
-  //   assert(aFuncShouldBeRunned.called === false, 'function was called prematurely');
-
-  //   // Advance clock again (1.5s since start). This should
-  //   // trigger the call to `aFuncShouldBeRunned`.
-  //   this.clock.tick(500);
-  //   assert(aFuncShouldBeRunned.called === true, 'function was not called on schedule');
-  //   this.clock.tick(1000);
-  //   assert(aFuncShouldBeRunned.calledTwice, 'function was not called on schedule');
-  //   // kill();
-  //   after();
-  // });
 });
