@@ -239,7 +239,7 @@ describe('server > Store > helpers > loadApp', function () {
       appId: parentAppId,
       parentAppMetadata: parentParentAppMetadata,
     });
-    console.log(parentMetadata);
+
     // try child app with missing xml file
     const catalogId = 'seas';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
@@ -251,7 +251,7 @@ describe('server > Store > helpers > loadApp', function () {
       appId,
       parentAppMetadata,
     });
-    console.log(appMetadata);
+
     assert(appMetadata.installXML === parentMetadata.installXML, 'child app missing installXMl file did not extend from parent correctly');
   });
 
@@ -279,7 +279,7 @@ describe('server > Store > helpers > loadApp', function () {
       appId: parentAppId,
       parentAppMetadata: parentParentAppMetadata,
     });
-    console.log(parentMetadata);
+
     // try child app with missing xml file
     const catalogId = 'seas';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
@@ -291,7 +291,7 @@ describe('server > Store > helpers > loadApp', function () {
       appId,
       parentAppMetadata,
     });
-    console.log(appMetadata);
+
     assert(appMetadata.installationCredentials === parentMetadata.installationCredentials, 'child app missing credentials file did not extend from parent correctly');
   });
 });
