@@ -59,19 +59,15 @@ module.exports = async (api, launchInfo, catalogs) => {
     throw new Error('There is no catalog for this course');
   }
 
-  try {
-    await api.account.get({ accountId: matchAccounts[0] });
-    isAdmin = true;
-  } catch (error) {
-    for (let i = 1; i < matchAccounts.length; i++) {
-      try {
-        await api.account.get({ accountId: matchAccounts[i] });
-        isAdmin = true;
-        break;
-      } catch (err) {
-        isAdmin = false;
-      }
+  for (let i = 0; i < matchAccounts.length; i++) {
+    try {
+      await api.account.get({ accountId: matchAccounts[i] });
+      isAdmin = true;
+      break;
+    } catch (err) {
+      isAdmin = false;
     }
   }
+
   return { matchCatalogId, isAdmin };
 };
