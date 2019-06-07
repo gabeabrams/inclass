@@ -43,4 +43,7 @@
  * @param {object[]} [guides] - list of short guides for users who want to get
  *   started with the app. Each of the form:
  *   { title, steps: [step1String, step2String, ...]}
+ * @param {object} [icon] - data on the app's icon (added dynamically, not in
+ *   metadata.json) in the form { fullPath, url }. fullPath is added during load
+ *   and url is added once the icon has been served
  */

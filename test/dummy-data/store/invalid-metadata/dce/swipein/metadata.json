@@ -1,0 +1,35 @@
+{
+    "title" : "SwipeIn",
+    "screenshots": [
+        {
+            "title": "Event Chooser",
+            "filename": "event_chooser.png"
+        },
+        {
+            "title": "Manual Seating Dashboard",
+            "filename": "man_dash"
+        }
+    ]
+    "guides": [
+        {
+            "title": "Getting Started",
+            "steps": [
+                "Launch the app",
+                "Fill in the form",
+                "Click 'Go'"
+            ]
+        },
+        {
+            "title": "Taking Attendance",
+            "steps": [
+                "Launch the app",
+                "Choose an event",
+                "Plug in your swiper",
+                "Swipe someone's ID"
+            ]
+        }
+    ]
+    // this comment is invalid
+    // first line semicolon is separated with title by a space
+    // missing a , after screenshots property
+}

@@ -1,0 +1,15 @@
+{
+    "extends": {
+        "catalogId": "pe",
+        "appId": "swipein"
+    },
+    "title": "Progress Tracker",
+    "subtitle": "An app that allows people to track lifting progress",
+    "description": "longer version of the subtitle",
+    "screenshots": [
+        {
+            "title": "Sample Bird",
+            "filename": "bird.png"
+        }
+    ]
+}
