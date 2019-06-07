@@ -1,9 +1,9 @@
 // Import helpers
-import filterByQuery from './filterByQuery';
-import excludeTagName from './excludeTagName';
-import filterByTags from './filterByTags';
+const filterByQuery = require('./filterByQuery');
+const excludeTagName = require('./excludeTagName');
+const filterByTags = require('./filterByTags');
 
-export default (opts) => {
+module.exports = (opts) => {
   // Deconstruct opts
   const {
     apps,

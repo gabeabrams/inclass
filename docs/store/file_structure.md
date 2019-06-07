@@ -117,3 +117,11 @@ Each app must have a credentials object `credentials.json`. Remember that these 
     "consumer_secret": <the installation credentials consumer_secret>
 }
 ```
+
+### Install XML
+
+Each app must have an install xml object `install.xml`.
+
+### Icon
+
+Each app must have an icon image. It will either be in a file `icon.png` or `icon.jpg`.

@@ -1,0 +1,7 @@
+{
+    "extends": {
+        "catalogId": "dce",
+        "appId": "swipein"
+    },
+    "title": "CheckIn"
+}
