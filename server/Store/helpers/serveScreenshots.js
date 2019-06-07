@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 /**
- * Serves the screenshots for each app
+ * Serves the screenshots for an app
  * @module server/Store/helpers/serveScreenshots
  * @param {object} opts - the object holding all args
  * @param {express app} opts.expressApp - the express app to adds routes to
