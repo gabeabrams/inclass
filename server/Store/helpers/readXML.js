@@ -19,7 +19,7 @@ module.exports = async (path, parentAppMetadata) => {
       return parentAppMetadata.installXML;
     }
     // file does not exist and does not have a parent
-    throw new Error(`We couldn't load the app store metadata because the file ${fixedPath} does not exist`);
+    throw new Error(`We couldn't load an app's installation XML metadata because the file ${fixedPath} does not exist`);
   }
   // if the file exist, read the file as text
   try {
@@ -27,6 +27,6 @@ module.exports = async (path, parentAppMetadata) => {
     return fileContent;
   } catch (err) {
     // throw an error if the file cannot be read properly
-    throw new Error(`We couldn't load the app store metadata because the file ${fixedPath} is not formatted properly`);
+    throw new Error(`We couldn't load an app's installation XML because the file ${fixedPath} is not formatted properly`);
   }
 };
