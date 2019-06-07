@@ -15,7 +15,7 @@ describe('server > Store > helpers > callOnSchedule', function () {
     const kill = callOnSchedule(() => {
       counter += 1;
     }, 0.5);
-    // At time 0, the function should not be called
+    // At time 0
     if (!counter === 1) {
       kill();
       throw new Error('function was called before timer started');
