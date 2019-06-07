@@ -41,6 +41,13 @@ describe('server > Store > helpers > loadApp', function () {
       });
       appKeys.splice(appKeys.indexOf('tags'), 1);
     }
+    // check that we have converted creator value to array
+    if (appKeys.includes('creator')) {
+      if (!Array.isArray(realApp.creator)) {
+        assert(Array.isArray(app.creator), 'creator value is not array');
+      }
+      appKeys.splice(appKeys.indexOf('creator'), 1);
+    }
     // check that each file ends with .png
     if (appKeys.includes('screenshots')) {
       app.screenshots.forEach((screenshot) => {
@@ -122,6 +129,11 @@ describe('server > Store > helpers > loadApp', function () {
               assert(Array.isArray(childApp[key][tag]), 'tags value is not array');
             }
           });
+        } else if (key === 'creator') {
+          // check that we have converted creator value to array
+          if (!Array.isArray(childAppMetadata.creator)) {
+            assert(Array.isArray(childApp.creator), 'creator value is not array');
+          }
         } else if (key === 'supportEmail') {
           // check that supportEmail field is either from parent or from catalog
           assert(childApp[key] === childAppMetadata[key]
