@@ -26,6 +26,20 @@ module.exports = (catalog) => {
 
   // We need to make sure tagsToShow object exists and build it if it doesn't
   // If it doesn't exist, we need to build object from list of tags in apps
+  if (!tagsToShow) {
+    // Make a Set that we're going to use to collect all of the tagNames we
+    // need to add to the tagsToShow object
+    const tagNamesForCatalog = new Set();
+    apps.forEach((app) => {
+      // For each app, we want to look at its list of tags and add them to our
+      // set of tagNames
+      if (app.tags) {
+        Object.keys(apps.tags).forEach((tagName) => {
+          tagNamesForCatalog.add(tagName);
+        });
+      }
+    });
+  }
 
   // Set object for list of tags
 
@@ -38,7 +52,7 @@ module.exports = (catalog) => {
     // If a tag doesn't have a tagColor attribute or it's empty, we will
     // add a color from the list
     if (!tagsToShow[tag].tagColor) {
-      tagsToShow[tag].tagColor = COLORS[nextColorIndex %  COLORS.length];
+      tagsToShow[tag].tagColor = COLORS[nextColorIndex % COLORS.length];
       nextColorIndex += 1;
     }
   });
