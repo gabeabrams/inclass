@@ -29,7 +29,16 @@ describe('server > Store > helpers > serveScreenshots', function () {
     try {
       await serveScreenshots(opts);
     } catch (err) {
-      errorOccurred = true;
+      if (
+        err.message.startsWith('The app')
+        && err.message.includes('but that file does not exist')
+      ) {
+        // The correct error occurred
+        errorOccurred = true;
+      } else {
+        // Another error occurred (we didn't expect this!)
+        throw err;
+      }
     }
 
     if (!errorOccurred) {
@@ -67,6 +76,5 @@ describe('server > Store > helpers > serveScreenshots', function () {
     assert.equal(app.screenshots[1].url, '/public/dce/swipein/screenshots/man_dash', 'The second URL does not match format');
     assert.equal(myExpressApp.used[0].path, '/public/dce/swipein/screenshots/', 'Express app was not called for first screenshot');
     assert.equal(myExpressApp.used[1].path, '/public/dce/swipein/screenshots/', 'Express app was not called for second screenshot');
-    console.log('EXPRESS APP: ', myExpressApp.used[0]);
   });
 });
