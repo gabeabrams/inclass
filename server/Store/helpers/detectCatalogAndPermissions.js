@@ -50,18 +50,21 @@ module.exports = async (api, launchInfo, catalogs) => {
   }
 
   /**
-   * Check if person is admin of account the course is in (accountNum)
+   * Check if person is admin of account the course is in
    * If not, check if person is admin of
    * any account in the catalog (matchAccounts)
    * isAdmin true, if satisfy one of the statements above
    */
+  if (!matchCatalogId) {
+    throw new Error('There is no catalog for this course');
+  }
+
   try {
     await api.account.get({ accountId: matchAccounts[0] });
     isAdmin = true;
   } catch (error) {
     for (let i = 1; i < matchAccounts.length; i++) {
       try {
-        // eslint-disable-next-line no-await-in-loop
         await api.account.get({ accountId: matchAccounts[i] });
         isAdmin = true;
         break;
@@ -70,5 +73,7 @@ module.exports = async (api, launchInfo, catalogs) => {
       }
     }
   }
-  return { matchCatalogId, isAdmin };
+  console.log('ID: ', matchCatalogId);
+  console.log('Admin: ', isAdmin);
+  return { catalogId: matchCatalogId, isAdmin };
 };
