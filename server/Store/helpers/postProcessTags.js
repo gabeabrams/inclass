@@ -39,6 +39,11 @@ module.exports = (catalog) => {
         });
       }
     });
+
+    // Add every tagName from the set to the tagsToShow Object
+    tagNamesForCatalog.forEach((tagName) => {
+
+    });
   }
 
   // Set object for list of tags
