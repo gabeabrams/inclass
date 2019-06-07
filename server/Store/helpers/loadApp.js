@@ -55,14 +55,12 @@ module.exports = async (opts = {}) => {
       }
     });
   }
+
   // if creator is not an array, turn it into one
-  if (appMetadata.creator) {
-    let creatorValue = appMetadata.creator;
-    if (!Array.isArray(creatorValue)) {
-      creatorValue = [creatorValue];
-      appMetadata.creator = creatorValue;
-    }
+  if (appMetadata.creator && !Array.isArray(appMetadata.creator)) {
+    appMetadata.creator = [appMetadata.creator];
   }
+
   // Add .png to screenshot path if it doesn't end with screenshot
   // Add app.screenshots[i].fullPath
   if (appMetadata.screenshots) {
