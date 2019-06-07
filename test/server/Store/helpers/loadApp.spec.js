@@ -226,4 +226,84 @@ describe('server > Store > helpers > loadApp', function () {
     // test that it will throw an error
     assert(error, 'did not throw error when loading app with badly formatted metadata file');
   });
+
+  it('extends parent xml if has parent and file not found', async function () {
+    // use proxiquire to redirect store path to testing folder
+    const dummyPath = path.join(__dirname, '../../../dummy-data/store/missing-xml');
+    const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    // load parent app
+    const parentCatalogId = 'dce';
+    const parentCatalogMetadata = await loadCatalogMetadata(parentCatalogId);
+    const parentAppId = 'swipein';
+    const parentParentAppMetadata = null;
+    const parentMetadata = await loadApp({
+      catalogId: parentCatalogId,
+      catalogMetadata: parentCatalogMetadata,
+      appId: parentAppId,
+      parentAppMetadata: parentParentAppMetadata,
+    });
+
+    // try child app with missing xml file
+    const catalogId = 'seas';
+    const catalogMetadata = await loadCatalogMetadata(catalogId);
+    const appId = 'swipein';
+    const parentAppMetadata = parentMetadata;
+    const appMetadata = await loadApp({
+      catalogId,
+      catalogMetadata,
+      appId,
+      parentAppMetadata,
+    });
+
+    assert(appMetadata.installXML === parentMetadata.installXML, 'child app missing installXMl file did not extend from parent correctly');
+  });
+
+  it('extends parent credentials if has parent and file not found', async function () {
+    // use proxiquire to redirect store path to testing folder
+    const dummyPath = path.join(__dirname, '../../../dummy-data/store/missing-credentials');
+    const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    // load parent app
+    const parentCatalogId = 'dce';
+    const parentCatalogMetadata = await loadCatalogMetadata(parentCatalogId);
+    const parentAppId = 'swipein';
+    const parentParentAppMetadata = null;
+    const parentMetadata = await loadApp({
+      catalogId: parentCatalogId,
+      catalogMetadata: parentCatalogMetadata,
+      appId: parentAppId,
+      parentAppMetadata: parentParentAppMetadata,
+    });
+
+    // try child app with missing xml file
+    const catalogId = 'seas';
+    const catalogMetadata = await loadCatalogMetadata(catalogId);
+    const appId = 'swipein';
+    const parentAppMetadata = parentMetadata;
+    const appMetadata = await loadApp({
+      catalogId,
+      catalogMetadata,
+      appId,
+      parentAppMetadata,
+    });
+
+    assert(appMetadata.installationCredentials === parentMetadata.installationCredentials, 'child app missing credentials file did not extend from parent correctly');
+  });
 });
