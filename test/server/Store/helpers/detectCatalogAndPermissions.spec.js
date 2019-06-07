@@ -17,7 +17,7 @@ const catalogTwo = {
 };
 const catalogThree = {
   title: 'catalog 3',
-  accounts: [100, 200, 400],
+  accounts: [10, 11, 12],
   tagColors: { tagName: 'red' },
   defaultSupportEmail: 'fake@gmail.com',
 };
@@ -29,10 +29,10 @@ const catalogFour = {
 };
 
 const catalogs = {
-  600: catalogOne,
-  542: catalogTwo,
-  4: catalogThree,
-  300: catalogFour,
+  one: catalogOne,
+  two: catalogTwo,
+  three: catalogThree,
+  four: catalogFour,
 };
 
 const noCatalogs = {};
@@ -43,7 +43,7 @@ describe('server > Store > helpers > detectCatalogAndPermissions', function () {
   it('checks correct catalog is found', async function () {
     const launchInfo = { courseId: 100 };
     const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
-    assert.equal(match.matchCatalogId, 542, 'Catalog Id does not match what is expected');
+    assert.equal(match.matchCatalogId, 'two', 'Catalog Id does not match what is expected');
   });
 
   it('checks isAdmin is true when person is admin of course they are in', async function () {
@@ -59,7 +59,7 @@ describe('server > Store > helpers > detectCatalogAndPermissions', function () {
   });
 
   it('checks isAdmin is false when person does not satisfy admin requirements', async function () {
-    const launchInfo = { courseId: 200 };
+    const launchInfo = { courseId: 20 };
     const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
     assert.equal(match.isAdmin, false, 'isAdmin is true when the person is not an admin');
   });
@@ -85,7 +85,7 @@ describe('server > Store > helpers > detectCatalogAndPermissions', function () {
   });
 
   it('checks error thrown when no catalogs given', async function () {
-    const launchInfo = { courseId: 366};
+    const launchInfo = { courseId: 366 };
     let errorOccurred = false;
     try {
       await detectCatalogAndPermissions(api, launchInfo, noCatalogs);
