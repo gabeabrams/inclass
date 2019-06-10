@@ -7,6 +7,7 @@
 /* ------------------------- Store Class ------------------------ */
 const loadStore = require('./helpers/loadStore');
 const serveScreenshots = require('./helpers/serveScreenshots');
+const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
 
 class Store {
   constructor(expressApp) {
@@ -53,12 +54,17 @@ class Store {
           delete apps[appId].installationCredentials;
           return newCatalog;
         });
+        Object.keys(apps).forEach((appId) => {
+          const opts = {
+            expressApp: this.expressApp,
+            catalogId,
+            appId,
+            app: apps[appId],
+          };
+          apps[appId] = serveScreenshots(opts);
+        });
       });
-      const opts = {
-        expressApp: this.expressApp,
-        
-      };
-      serveScreenshots()
+
       this.storeMetadata = storeMetadata;
       this.accountIdToCatalogId = accountIdToCatalogId;
       this.catalogIdToCatalogMetadata = catalogIdToCatalogMetadata;
@@ -81,7 +87,11 @@ class Store {
    * }
    */
   async getCatalogAndPermissions(api, launchInfo) {
-    // TODO: implement
+    return detectCatalogAndPermissions(
+      api,
+      launchInfo,
+      this.catalogIdToCatalogMetadata
+    );
   }
 
   /**
