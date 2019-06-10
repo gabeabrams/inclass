@@ -6,6 +6,7 @@
 
 /* ------------------------- Store Class ------------------------ */
 const loadStore = require('./helpers/loadStore');
+const serveScreenshots = require('./helpers/serveScreenshots');
 
 class Store {
   constructor(expressApp) {
@@ -27,25 +28,44 @@ class Store {
    *   metadata objects. If failed, leaves current metadata objects as is.
    */
   async _attemptLoad() {
-    const myStore = loadStore();
-    const { store, catalogs } = myStore;
-    const storeMetadata = store;
-    const accountIdToCatalogId = {};
-    const catalogIdToCatalogMetadata = {}
-    Object.keys(catalogs).forEach((catalogId) => {
-      if(catalogs[catalogId].accounts) {
-        catalogs[catalogId].accounts.forEach((accountId) => {
-          accountIdToCatalogId.accountId = catalogId;
+    try {
+      const myStore = loadStore();
+      const { store, catalogs } = myStore;
+      const storeMetadata = store;
+      const accountIdToCatalogId = {};
+      const catalogIdToCatalogMetadata = {};
+      const installData = {};
+
+      Object.keys(catalogs).forEach((catalogId) => {
+        const newCatalog = catalogs[catalogId];
+        const { apps } = newCatalog;
+
+        if (newCatalog.accounts) {
+          newCatalog.accounts.forEach((accountId) => {
+            accountIdToCatalogId[accountId] = catalogId;
+          });
+        }
+        catalogIdToCatalogMetadata[catalogId] = Object.keys(apps).map((appId) => {
+          const { installXML, installationCredentials } = apps[appId];
+          installData[catalogId][appId] = { installXML, installationCredentials };
+
+          delete apps[appId].installXML;
+          delete apps[appId].installationCredentials;
+          return newCatalog;
         });
-      }
-      catalogs[catalogId].appId
-    });
-    const installData = ;
-
-
-
-
-    // this.storeMetadata = ;
+      });
+      const opts = {
+        expressApp: this.expressApp,
+        
+      };
+      serveScreenshots()
+      this.storeMetadata = storeMetadata;
+      this.accountIdToCatalogId = accountIdToCatalogId;
+      this.catalogIdToCatalogMetadata = catalogIdToCatalogMetadata;
+      this.installData = installData;
+    } catch (error) {
+      console.log(`An error occurred while attempting to load store information: ${error.message}`);
+    }
   }
 
   /**
