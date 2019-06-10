@@ -24,6 +24,9 @@ module.exports = (catalog) => {
   // We want to get the apps and tagsToShow out of the catalog
   const { apps, tagsToShow } = catalog;
 
+  // Set color index to start at 0
+  let nextColorIndex = 0;
+
   // We need to make sure tagsToShow object exists and build it if it doesn't
   // If it doesn't exist, we need to build object from list of tags in apps
   if (!tagsToShow) {
@@ -31,25 +34,31 @@ module.exports = (catalog) => {
     // need to add to the tagsToShow object
     const tagNamesForCatalog = new Set();
     apps.forEach((app) => {
-      // For each app, we want to look at its list of tags and add them to our
-      // set of tagNames
+      // For each app, we want to look at its list of tags (if it has any) and
+      // add them to our set of tagNames
       if (app.tags) {
         Object.keys(apps.tags).forEach((tagName) => {
+          // Add tagName to the set
           tagNamesForCatalog.add(tagName);
         });
       }
     });
 
+    // We now have a set with every tagName that has appeared in any app
     // Add every tagName from the set to the tagsToShow Object
     tagNamesForCatalog.forEach((tagName) => {
-
+      // Create a new object to push to the tagsToShow list that will have
+      // the tagName and the tagColor
+      const newTag = {
+        tagName: tagName,
+        tagColor: COLORS[nextColorIndex],
+      };
+      // Add the new tag to the list of tagsToShow
+      tagsToShow.push(newTag);
     });
   }
 
   // Set object for list of tags
-
-  // Make array of random colors
-  let nextColorIndex = 0;
 
   // Now that we have apps and tagsToShow, make sure tag data is correct
   // If tag doesn't have a tagColor, give it one
