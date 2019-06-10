@@ -27,14 +27,25 @@ class Store {
    *   metadata objects. If failed, leaves current metadata objects as is.
    */
   async _attemptLoad() {
-    try {
-      const myStore = loadStore();
-      const { store, catalogs } = myStore;
-      this.storeMetadata = store;
-      Object.values(catalogs)
-    } catch (error) {
+    const myStore = loadStore();
+    const { store, catalogs } = myStore;
+    const storeMetadata = store;
+    const accountIdToCatalogId = {};
+    const catalogIdToCatalogMetadata = {}
+    Object.keys(catalogs).forEach((catalogId) => {
+      if(catalogs[catalogId].accounts) {
+        catalogs[catalogId].accounts.forEach((accountId) => {
+          accountIdToCatalogId.accountId = catalogId;
+        });
+      }
+      catalogs[catalogId].appId
+    });
+    const installData = ;
 
-    }
+
+
+
+    // this.storeMetadata = ;
   }
 
   /**
