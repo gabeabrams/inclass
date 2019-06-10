@@ -1,3 +1,4 @@
+// Colors we're going to be using for the tags
 const COLORS = [
   '#701938',
   '#12327c',
@@ -41,6 +42,9 @@ module.exports = (catalog) => {
           // Add tagName to the set
           tagNamesForCatalog.add(tagName);
         });
+      } else {
+        // If app doesn't have a tags object, add it because we'll need it later
+        apps[app].tags = {};
       }
     });
 
@@ -50,26 +54,42 @@ module.exports = (catalog) => {
       // Create a new object to push to the tagsToShow list that will have
       // the tagName and the tagColor
       const newTag = {
-        tagName: tagName,
-        tagColor: COLORS[nextColorIndex],
+        tagName,
+        tagColor: COLORS[nextColorIndex % COLORS.length],
       };
       // Add the new tag to the list of tagsToShow
       tagsToShow.push(newTag);
+      // Increment color picker
+      nextColorIndex += 1;
     });
   }
-
-  // Set object for list of tags
 
   // Now that we have apps and tagsToShow, make sure tag data is correct
   // If tag doesn't have a tagColor, give it one
   tagsToShow.forEach((tag) => {
+    // If a tag doesn't have a tagName, throw an error
+    if (!tagsToShow[tag].tagName) {
+      // TODO: Throw an error here
+    }
     // If a tag doesn't have a tagColor attribute or it's empty, we will
     // add a color from the list
     if (!tagsToShow[tag].tagColor) {
       tagsToShow[tag].tagColor = COLORS[nextColorIndex % COLORS.length];
       nextColorIndex += 1;
     }
+
+    // Increment through each app and make sure that each one has this tagName,
+    // if not then add it as 'other/uncategorized'
+    apps.forEach((app) => {
+      // If the app doesn't have this tagName, we add it to the tags object
+      // as 'other/uncategorized'
+      if (!apps[app].tags[tagsToShow[tag].tagName]) {
+        apps[app].tags[tagsToShow[tag].tagName] = ['other/uncategorized'];
+      }
+    });
   });
   const updatedCatalog = catalog;
   updatedCatalog.tagsToShow = tagsToShow;
+
+  return updatedCatalog;
 };
