@@ -118,7 +118,7 @@ class Store {
    * @return {object} store metadata
    */
   getStoreMetadata() {
-    // TODO: implement
+    return this.storeMetadata;
   }
 }
 
