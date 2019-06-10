@@ -110,7 +110,15 @@ class Store {
    * }
    */
   getInstallData(catalogId, appId) {
-    // TODO: implement
+    if (!this.installData[catalogId]) {
+      // No install data for this catalog
+      return null;
+    }
+    if (!this.installData[catalogId][appId]) {
+      // No install data for this app
+      return null;
+    }
+    return this.installData[catalogId][appId];
   }
 
   /**
