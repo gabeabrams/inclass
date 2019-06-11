@@ -26,7 +26,8 @@ class Store {
 
   /**
    * Function that attempts to perform a load. If successful, swaps out our
-   *   metadata objects. If failed, leaves current metadata objects as is.
+   *   metadata objects. If failed, leaves current metadata objects as is
+   *   and prints error to console.
    */
   async _attemptLoad() {
     try {
@@ -37,15 +38,27 @@ class Store {
       const catalogIdToCatalogMetadata = {};
       const installData = {};
 
+      /**
+       * Goes through each catalog in catalogs
+       *    and create metadata objects.
+       * Calls serveScreenshots
+       */
       Object.keys(catalogs).forEach((catalogId) => {
         const newCatalog = catalogs[catalogId];
         const { apps } = newCatalog;
 
+        // Creates accountIdToCatalogId metadata object
         if (newCatalog.accounts) {
           newCatalog.accounts.forEach((accountId) => {
             accountIdToCatalogId[accountId] = catalogId;
           });
         }
+
+        /**
+         * Goes through each app to remove installXML and
+         *    installationCredentials. It places that information
+         *    in installData.
+         */
         catalogIdToCatalogMetadata[catalogId] = Object.keys(apps).map((appId) => {
           const { installXML, installationCredentials } = apps[appId];
           installData[catalogId][appId] = { installXML, installationCredentials };
@@ -54,6 +67,11 @@ class Store {
           delete apps[appId].installationCredentials;
           return newCatalog;
         });
+
+        /**
+         * Calls serveScreenshots for each appId in a catalog
+         * Replaces the app with new one returned from serveScreenshots
+         */
         Object.keys(apps).forEach((appId) => {
           const opts = {
             expressApp: this.expressApp,
@@ -65,6 +83,7 @@ class Store {
         });
       });
 
+      // Swaps out metadata object
       this.storeMetadata = storeMetadata;
       this.accountIdToCatalogId = accountIdToCatalogId;
       this.catalogIdToCatalogMetadata = catalogIdToCatalogMetadata;
