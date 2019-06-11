@@ -23,7 +23,7 @@ const COLORS = [
  */
 module.exports = (catalog) => {
   // We want to get the apps and tagsToShow out of the catalog
-  const { apps, tagsToShow } = catalog;
+  let { apps, tagsToShow } = catalog;
 
   // Set color index to start at 0
   let nextColorIndex = 0;
@@ -31,6 +31,7 @@ module.exports = (catalog) => {
   // We need to make sure tagsToShow object exists and build it if it doesn't
   // If it doesn't exist, we need to build object from list of tags in apps
   if (!tagsToShow) {
+    tagsToShow = [];
     console.log('There is no tagsToShow');
     // Make a Set that we're going to use to collect all of the tagNames we
     // need to add to the tagsToShow object
@@ -91,6 +92,7 @@ module.exports = (catalog) => {
   });
   const updatedCatalog = catalog;
   updatedCatalog.tagsToShow = tagsToShow;
+  updatedCatalog.apps = apps;
 
   return updatedCatalog;
 };
