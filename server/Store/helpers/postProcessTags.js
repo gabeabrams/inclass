@@ -46,7 +46,7 @@ module.exports = (catalog) => {
         });
       } else {
         // If app doesn't have a tags object, add it because we'll need it later
-        app.tags = {};
+        apps[app].tags = {};
       }
     });
 
@@ -76,7 +76,7 @@ module.exports = (catalog) => {
     // If a tag doesn't have a tagColor attribute or it's empty, we will
     // add a color from the list
     if (!tag.color) {
-      tag.color = COLORS[nextColorIndex % COLORS.length];
+      tagsToShow[tag].color = COLORS[nextColorIndex % COLORS.length];
       nextColorIndex += 1;
     }
 
@@ -86,7 +86,7 @@ module.exports = (catalog) => {
       // If the app doesn't have this tagName, we add it to the tags object
       // as 'other/uncategorized'
       if (!app.tags[tag.tagName]) {
-        app.tags[tag.tagName] = ['other/uncategorized'];
+        apps[app].tags[tag.tagName] = ['other/uncategorized'];
       }
     });
   });
