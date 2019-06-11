@@ -85,6 +85,50 @@ describe.only('server > Store > helpers > postProcessTags', function () {
     ],
   };
 
+  const testCatalogMissingTagNames = {
+    title: 'SEAS Catalog',
+    accounts: [26, 30],
+    defaultSupportEmail: 'example@harvard.edu',
+    tagsToShow: [
+      {
+        tagName: 'cost',
+        color: 'blue',
+      },
+      {
+        color: 'red',
+      },
+    ],
+    apps: [
+      {
+        name: 'AppOne',
+        tags: {
+          cost: ['free'],
+          type: ['import', 'export'],
+        },
+      },
+      {
+        name: 'AppTwo',
+        tags: {
+          type: ['import'],
+        },
+      },
+      {
+        name: 'AppThree',
+        tags: {
+          cost: ['free'],
+          type: ['export'],
+        },
+      },
+      {
+        name: 'AppFour',
+        tags: {
+          cost: ['expensive'],
+          type: ['teaching'],
+        },
+      },
+    ],
+  };
+
   it('Will update an app so it has each tag found in the tagsToShow', async function () {
     console.log('Catalog before postProcessTags: ', JSON.stringify(testCatalogAppsMissingTags, undefined, 2));
     console.log('Catalog after postProcessTags: ', JSON.stringify(postProcessTags(testCatalogAppsMissingTags), undefined, 2));
@@ -97,7 +141,7 @@ describe.only('server > Store > helpers > postProcessTags', function () {
   });
 
   it('Will throw an error if a tag does not have a tagName key', async function () {
-
+    postProcessTags(testCatalogMissingTagNames);
   });
 
 });
