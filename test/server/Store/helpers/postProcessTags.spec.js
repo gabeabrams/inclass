@@ -7,16 +7,16 @@ describe.only('server > Store > helpers > postProcessTags', function () {
   const testCatalog = {
     title: 'SEAS Catalog',
     accounts: [26, 30],
-    tagsToShow: [
-      {
-        tagName: 'cost',
-        color: 'blue',
-      },
-      {
-        tagName: 'type',
-        color: 'red',
-      },
-    ],
+    // tagsToShow: [
+    //   {
+    //     tagName: 'cost',
+    //     color: 'blue',
+    //   },
+    //   {
+    //     tagName: 'type',
+    //     color: 'red',
+    //   },
+    // ],
     defaultSupportEmail: 'example@harvard.edu',
     apps: [
       {

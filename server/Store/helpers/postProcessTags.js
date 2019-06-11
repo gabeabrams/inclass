@@ -39,13 +39,13 @@ module.exports = (catalog) => {
       // For each app, we want to look at its list of tags (if it has any) and
       // add them to our set of tagNames
       if (app.tags) {
-        Object.keys(apps.tags).forEach((tagName) => {
+        Object.keys(app.tags).forEach((tagName) => {
           // Add tagName to the set
           tagNamesForCatalog.add(tagName);
         });
       } else {
         // If app doesn't have a tags object, add it because we'll need it later
-        apps[app].tags = {};
+        app.tags = {};
       }
     });
 
