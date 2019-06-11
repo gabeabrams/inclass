@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const postProcessTags = require('../../../../server/Store/helpers/postProcessTags');
 
-describe('server > Store > helpers > postProcessTags', function () {
+describe.only('server > Store > helpers > postProcessTags', function () {
   // Fake Catalog
   const testCatalog = {
     title: 'SEAS Catalog',
@@ -49,5 +49,17 @@ describe('server > Store > helpers > postProcessTags', function () {
       },
     ],
   };
+
+  it.only('Will update an app so it has each tag found in the tagsToShow', async function () {
+    console.log(postProcessTags(testCatalog));
+  });
+
+  it('Will create a tagsToShow object if there is not already one', async function () {
+
+  });
+
+  it('Will throw an error if a tag does not have a tagName key', async function () {
+
+  });
 
 });

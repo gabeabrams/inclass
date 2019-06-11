@@ -31,6 +31,7 @@ module.exports = (catalog) => {
   // We need to make sure tagsToShow object exists and build it if it doesn't
   // If it doesn't exist, we need to build object from list of tags in apps
   if (!tagsToShow) {
+    console.log('There is no tagsToShow');
     // Make a Set that we're going to use to collect all of the tagNames we
     // need to add to the tagsToShow object
     const tagNamesForCatalog = new Set();
@@ -55,7 +56,7 @@ module.exports = (catalog) => {
       // the tagName and the tagColor
       const newTag = {
         tagName,
-        tagColor: COLORS[nextColorIndex % COLORS.length],
+        color: COLORS[nextColorIndex % COLORS.length],
       };
       // Add the new tag to the list of tagsToShow
       tagsToShow.push(newTag);
@@ -68,13 +69,13 @@ module.exports = (catalog) => {
   // If tag doesn't have a tagColor, give it one
   tagsToShow.forEach((tag) => {
     // If a tag doesn't have a tagName, throw an error
-    if (!tagsToShow[tag].tagName) {
+    if (!tag.tagName) {
       // TODO: Throw an error here
     }
     // If a tag doesn't have a tagColor attribute or it's empty, we will
     // add a color from the list
-    if (!tagsToShow[tag].tagColor) {
-      tagsToShow[tag].tagColor = COLORS[nextColorIndex % COLORS.length];
+    if (!tag.color) {
+      tag.color = COLORS[nextColorIndex % COLORS.length];
       nextColorIndex += 1;
     }
 
@@ -83,8 +84,8 @@ module.exports = (catalog) => {
     apps.forEach((app) => {
       // If the app doesn't have this tagName, we add it to the tags object
       // as 'other/uncategorized'
-      if (!apps[app].tags[tagsToShow[tag].tagName]) {
-        apps[app].tags[tagsToShow[tag].tagName] = ['other/uncategorized'];
+      if (!app.tags[tag.tagName]) {
+        app.tags[tag.tagName] = ['other/uncategorized'];
       }
     });
   });
