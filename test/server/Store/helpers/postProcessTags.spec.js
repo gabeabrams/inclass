@@ -44,6 +44,16 @@ describe.only('server > Store > helpers > postProcessTags', function () {
     title: 'SEAS Catalog',
     accounts: [26, 30],
     defaultSupportEmail: 'example@harvard.edu',
+    tagsToShow: [
+      {
+        tagName: 'cost',
+        color: 'blue',
+      },
+      {
+        tagName: 'type',
+        color: 'red',
+      },
+    ],
     apps: [
       {
         name: 'AppOne',
@@ -75,7 +85,7 @@ describe.only('server > Store > helpers > postProcessTags', function () {
     ],
   };
 
-  it.only('Will update an app so it has each tag found in the tagsToShow', async function () {
+  it('Will update an app so it has each tag found in the tagsToShow', async function () {
     console.log('Catalog before postProcessTags: ', JSON.stringify(testCatalogAppsMissingTags, undefined, 2));
     console.log('Catalog after postProcessTags: ', JSON.stringify(postProcessTags(testCatalogAppsMissingTags), undefined, 2));
 

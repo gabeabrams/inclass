@@ -66,9 +66,12 @@ module.exports = (catalog) => {
     });
   }
 
+  console.log('This is the tagsToShow object: ', JSON.stringify(tagsToShow, undefined, 2));
+
   // Now that we have apps and tagsToShow, make sure tag data is correct
   // If tag doesn't have a tagColor, give it one
   tagsToShow.forEach((tag) => {
+    console.log('Tag is: ', tag);
     // If a tag doesn't have a tagName, throw an error
     if (!tag.tagName) {
       // TODO: Throw an error here
@@ -82,11 +85,14 @@ module.exports = (catalog) => {
 
     // Increment through each app and make sure that each one has this tagName,
     // if not then add it as 'other/uncategorized'
+    console.log('List of apps is: ', JSON.stringify(apps, undefined, 2));
     apps.forEach((app) => {
+      console.log('App is: ', app);
       // If the app doesn't have this tagName, we add it to the tags object
       // as 'other/uncategorized'
+      console.log('App\'s taglist is: ', JSON.stringify(app.tags, undefined, 2));
       if (!app.tags[tag.tagName]) {
-        apps[app].tags[tag.tagName] = ['other/uncategorized'];
+        app.tags[tag.tagName] = ['other/uncategorized'];
       }
     });
   });
