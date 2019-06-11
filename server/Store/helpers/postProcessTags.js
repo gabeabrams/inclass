@@ -32,7 +32,6 @@ module.exports = (catalog) => {
   // If it doesn't exist, we need to build object from list of tags in apps
   if (!tagsToShow) {
     tagsToShow = [];
-    console.log('There is no tagsToShow');
     // Make a Set that we're going to use to collect all of the tagNames we
     // need to add to the tagsToShow object
     const tagNamesForCatalog = new Set();
@@ -66,15 +65,14 @@ module.exports = (catalog) => {
     });
   }
 
-  console.log('This is the tagsToShow object: ', JSON.stringify(tagsToShow, undefined, 2));
-
   // Now that we have apps and tagsToShow, make sure tag data is correct
   // If tag doesn't have a tagColor, give it one
   tagsToShow.forEach((tag) => {
-    console.log('Tag is: ', tag);
     // If a tag doesn't have a tagName, throw an error
     if (!tag.tagName) {
-      // TODO: Throw an error here
+      // Throw an error
+      console.error('ERROR: Tag object  has no tagName');
+      return;
     }
     // If a tag doesn't have a tagColor attribute or it's empty, we will
     // add a color from the list
@@ -85,12 +83,9 @@ module.exports = (catalog) => {
 
     // Increment through each app and make sure that each one has this tagName,
     // if not then add it as 'other/uncategorized'
-    console.log('List of apps is: ', JSON.stringify(apps, undefined, 2));
     apps.forEach((app) => {
-      console.log('App is: ', app);
       // If the app doesn't have this tagName, we add it to the tags object
       // as 'other/uncategorized'
-      console.log('App\'s taglist is: ', JSON.stringify(app.tags, undefined, 2));
       if (!app.tags[tag.tagName]) {
         app.tags[tag.tagName] = ['other/uncategorized'];
       }
