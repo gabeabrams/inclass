@@ -70,14 +70,14 @@ module.exports = (catalog) => {
   tagsToShow.forEach((tag) => {
     // If a tag doesn't have a tagName, throw an error
     if (!tag.tagName) {
-      // Throw an error
-      console.error('ERROR: Tag object  has no tagName');
+      // Error message
+      console.error('ERROR: Tag object has no tagName');
       return;
     }
     // If a tag doesn't have a tagColor attribute or it's empty, we will
     // add a color from the list
     if (!tag.color) {
-      tagsToShow[tag].color = COLORS[nextColorIndex % COLORS.length];
+      tag.color = COLORS[nextColorIndex % COLORS.length];
       nextColorIndex += 1;
     }
 
