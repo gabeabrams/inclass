@@ -129,10 +129,62 @@ describe.only('server > Store > helpers > postProcessTags', function () {
     ],
   };
 
-  it('Will update an app so it has each tag found in the tagsToShow', async function () {
-    console.log('Catalog before postProcessTags: ', JSON.stringify(testCatalogAppsMissingTags, undefined, 2));
-    console.log('Catalog after postProcessTags: ', JSON.stringify(postProcessTags(testCatalogAppsMissingTags), undefined, 2));
+  const testCatalogAddTag = {
+    title: 'SEAS Catalog',
+    accounts: [26, 30],
+    defaultSupportEmail: 'example@harvard.edu',
+    tagsToShow: [
+      {
+        tagName: 'cost',
+        color: 'blue',
+      },
+      {
+        tagName: 'type',
+        color: 'red',
+      },
+      {
+        tagName: 'fake tag',
+      },
+    ],
+    apps: [
+      {
+        name: 'AppOne',
+        tags: {
+          cost: ['free'],
+          type: ['import', 'export'],
+        },
+      },
+      {
+        name: 'AppTwo',
+        tags: {
+          type: ['import'],
+        },
+      },
+      {
+        name: 'AppThree',
+        tags: {
+          cost: ['free'],
+          type: ['export'],
+        },
+      },
+      {
+        name: 'AppFour',
+        tags: {
+          cost: ['expensive'],
+          type: ['teaching'],
+        },
+      },
+    ],
+  };
 
+  it('Will update an app so it has each tag found in the tagsToShow', async function () {
+    assert.equal(postProcessTags(testCatalogAppsMissingTags).apps[1].tags.cost, 'other/uncategorized');
+  });
+
+  it('Will add a tag to every app if it is in the tagsToShow', async function () {
+    postProcessTags(testCatalogAddTag).apps.forEach((app) => {
+      assert.equal(app.tags['fake tag'], 'other/uncategorized');
+    });
   });
 
   it('Will create a tagsToShow object if there is not already one', async function () {
