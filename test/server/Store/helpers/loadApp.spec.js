@@ -319,4 +319,45 @@ describe('server > Store > helpers > loadApp', function () {
 
     assert(appMetadata.installationCredentials === parentMetadata.installationCredentials, 'child app missing credentials file did not extend from parent correctly');
   });
+
+  it('extends parent icon fullPath if file not present', async function () {
+    // use proxiquire to redirect store path to testing folder
+    const dummyPath = path.join(__dirname, '../../../dummy-data/store/with-icons');
+    const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    const loadApp = proxyquire('../../../../server/Store/helpers/loadApp', {
+      '../STORE_CONSTANTS': {
+        path: dummyPath,
+      },
+    });
+    // load parent app
+    const parentCatalogId = 'dce';
+    const parentCatalogMetadata = await loadCatalogMetadata(parentCatalogId);
+    const parentAppId = 'swipein';
+    const parentParentAppMetadata = null;
+    const parentMetadata = await loadApp({
+      catalogId: parentCatalogId,
+      catalogMetadata: parentCatalogMetadata,
+      appId: parentAppId,
+      parentAppMetadata: parentParentAppMetadata,
+    });
+
+    // try child app with missing xml file
+    const catalogId = 'seas';
+    const catalogMetadata = await loadCatalogMetadata(catalogId);
+    const appId = 'swipein';
+    const parentAppMetadata = parentMetadata;
+    const appMetadata = await loadApp({
+      catalogId,
+      catalogMetadata,
+      appId,
+      parentAppMetadata,
+    });
+    // this tests for the case where child app does not have icon file
+    // the case where child app has icon has been tested in load app with parent
+    assert.equal(appMetadata.icon.fullPath, parentMetadata.icon.fullPath, 'app did not extend parent icon fullPath correctly');
+  });
 });
