@@ -195,5 +195,4 @@ describe.only('server > Store > helpers > postProcessTags', function () {
   it('Will throw an error if a tag does not have a tagName key', async function () {
     postProcessTags(testCatalogMissingTagNames);
   });
-
 });
