@@ -4,6 +4,7 @@ const clone = require('fast-clone');
 const readJSON = require('./readJSON');
 const readXML = require('./readXML');
 const loadCredentials = require('./loadCredentials');
+const loadIcon = require('./loadIcon');
 const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 
 const STORE_PATH = STORE_CONSTANTS.path;
@@ -34,15 +35,22 @@ module.exports = async (opts = {}) => {
   const appMetadataPath = path.join(STORE_PATH, catalogId, appId, 'metadata');
   const appMetadata = await readJSON(appMetadataPath);
 
-  // add read XML file here
+  // read XML file here
   const xmlPath = path.join(STORE_PATH, catalogId, appId, 'install.xml');
   const installXML = await readXML(xmlPath, parentAppMetadata);
   appMetadata.installXML = installXML;
 
-  // add read credentials.json here
+  // read credentials.json here
   const credPath = path.join(STORE_PATH, catalogId, appId, 'credentials');
   const credData = await loadCredentials(credPath, parentAppMetadata);
   appMetadata.installationCredentials = credData;
+
+  // load the app icon
+  const jpgPath = path.join(STORE_PATH, catalogId, appId, 'icon.jpg');
+  const jpegPath = path.join(STORE_PATH, catalogId, appId, 'icon.jpeg');
+  const pngPath = path.join(STORE_PATH, catalogId, appId, 'icon.png');
+  appMetadata.icon = {};
+  appMetadata.icon.fullPath = await loadIcon(jpgPath, jpegPath, pngPath, parentAppMetadata);
 
   // process metadata information
   // for tags, if the value is not an array, turn it into one

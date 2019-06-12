@@ -71,6 +71,11 @@ describe('server > Store > helpers > loadApp', function () {
       assert(app.installationCredentials, 'credentials data is not loaded');
       appKeys.splice(appKeys.indexOf('installationCredentials'), 1);
     }
+    // check that app has icon loaded
+    if (appKeys.includes('icon')) {
+      assert(app.icon.fullPath, 'app icon is not loaded correctly');
+      appKeys.splice(appKeys.indexOf('icon'), 1);
+    }
     // check for every other key we copied straight from metadata file
     appKeys.forEach((key) => {
       assert(JSON.stringify(app[key]) === JSON.stringify(realApp[key]), `the value of key: ${key} was not read in from metadata file correctly`);
