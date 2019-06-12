@@ -46,11 +46,9 @@ module.exports = async (opts = {}) => {
   appMetadata.installationCredentials = credData;
 
   // load the app icon
-  const jpgPath = path.join(STORE_PATH, catalogId, appId, 'icon.jpg');
-  const jpegPath = path.join(STORE_PATH, catalogId, appId, 'icon.jpeg');
-  const pngPath = path.join(STORE_PATH, catalogId, appId, 'icon.png');
+  const iconPath = path.join(STORE_PATH, catalogId, appId, 'icon');
   appMetadata.icon = {};
-  const iconP = await loadIcon(jpgPath, jpegPath, pngPath, parentAppMetadata);
+  const iconP = await loadIcon(iconPath, parentAppMetadata);
   appMetadata.icon.fullPath = iconP;
 
   // process metadata information

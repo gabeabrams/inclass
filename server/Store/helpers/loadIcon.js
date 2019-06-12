@@ -10,7 +10,10 @@ const fileExists = require('./fileExists');
  *   app has one)
  * @return {string} the fullPath of the icon
  */
-module.exports = async (jpgPath, jpegPath, pngPath, parentAppMetadata) => {
+module.exports = async (iconPath, parentAppMetadata) => {
+  const jpgPath = `${iconPath}.jpg`;
+  const jpegPath = `${iconPath}.jpeg`;
+  const pngPath = `${iconPath}.png`;
   if (!await fileExists(jpgPath) && !await fileExists(jpegPath)
   && !await fileExists(pngPath)) {
     // file does not exist but has parent
