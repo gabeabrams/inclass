@@ -107,7 +107,6 @@ describe('server > Store > helpers > loadApp', function () {
       appId: parentAppId,
       parentAppMetadata: parentParentAppMetadata,
     });
-    console.log('parent app is', parentMetadata);
     // load child app
     const catalogId = 'pe';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
@@ -119,7 +118,6 @@ describe('server > Store > helpers > loadApp', function () {
       appId,
       parentAppMetadata,
     });
-    console.log('child app is ', childApp);
     // read in childApp metadata from store
     const testPath = path.join(dummyPath, catalogId, appId, 'metadata');
     const childAppMetadata = await readJSON(testPath);

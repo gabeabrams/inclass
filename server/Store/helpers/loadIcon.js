@@ -1,5 +1,4 @@
 const fileExists = require('./fileExists');
-const readJSON = require('./readJSON');
 /**
  * Reads the credentials file in JSON format, throws an error
  *   if the file doesn't exist or if the file is malformed

@@ -27,7 +27,7 @@ module.exports = async () => {
 
   // If the apps have parents
   const loadParentsThenLoadApp = async (catalogId, appId, seen) => {
-    if (catalogMap[catalogId].apps.appId) {
+    if (catalogMap[catalogId].apps[appId]) {
       return;
     }
     // detect cycles and throw an error if they occur
@@ -53,7 +53,7 @@ module.exports = async () => {
       catalogMetadata: catalogMap[catalogId],
       appId,
       parentAppMetadata:
-      (parent === null ? null : catalogMap[parent.catalogId].apps[appId]),
+      (parent === null ? null : catalogMap[parent.catalogId].apps[parent.appId]),
     });
   };
 
