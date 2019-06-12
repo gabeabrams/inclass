@@ -46,10 +46,9 @@ module.exports = async (opts = {}) => {
   appMetadata.installationCredentials = credData;
 
   // load the app icon
-  const iconPath = path.join(STORE_PATH, catalogId, appId, 'icon');
-  appMetadata.icon = {};
-  const iconP = await loadIcon(iconPath, parentAppMetadata);
-  appMetadata.icon.fullPath = iconP;
+  const iconPathWithoutExt = path.join(STORE_PATH, catalogId, appId, 'icon');
+  const iconFullPath = await loadIcon(iconPathWithoutExt, parentAppMetadata);
+  appMetadata.icon = { fullPath: iconFullPath };
 
   // process metadata information
   // for tags, if the value is not an array, turn it into one
