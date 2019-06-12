@@ -13,7 +13,7 @@ const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCat
 describe('server > Store > helpers > loadCatalogMetadata', function () {
   it('contains all the required fields', async function () {
     const testMetadata = await loadCatalogMetadata('dce');
-    const requiredKeys = ['title', 'accounts', 'tagColors', 'defaultSupportEmail'];
+    const requiredKeys = ['title', 'accounts', 'tagsToShow', 'defaultSupportEmail'];
     const testKeys = Object.keys(testMetadata);
     Object.keys(testMetadata).forEach((testKey) => {
       // check that key is populated
