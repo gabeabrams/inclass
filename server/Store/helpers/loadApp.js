@@ -3,6 +3,7 @@ const path = require('path');
 const clone = require('fast-clone');
 const readJSON = require('./readJSON');
 const readXML = require('./readXML');
+const loadCredentials = require('./loadCredentials');
 const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 
 const STORE_PATH = STORE_CONSTANTS.path;
@@ -35,12 +36,12 @@ module.exports = async (opts = {}) => {
 
   // add read XML file here
   const xmlPath = path.join(STORE_PATH, catalogId, appId, 'install.xml');
-  const installXML = await readXML(xmlPath);
+  const installXML = await readXML(xmlPath, parentAppMetadata);
   appMetadata.installXML = installXML;
 
   // add read credentials.json here
   const credPath = path.join(STORE_PATH, catalogId, appId, 'credentials');
-  const credData = await readJSON(credPath);
+  const credData = await loadCredentials(credPath, parentAppMetadata);
   appMetadata.installationCredentials = credData;
 
   // process metadata information
@@ -55,6 +56,12 @@ module.exports = async (opts = {}) => {
       }
     });
   }
+
+  // if creator is not an array, turn it into one
+  if (appMetadata.creator && !Array.isArray(appMetadata.creator)) {
+    appMetadata.creator = [appMetadata.creator];
+  }
+
   // Add .png to screenshot path if it doesn't end with screenshot
   // Add app.screenshots[i].fullPath
   if (appMetadata.screenshots) {
