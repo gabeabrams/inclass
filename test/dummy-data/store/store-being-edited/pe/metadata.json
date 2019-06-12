@@ -1,0 +1,17 @@
+{
+    "title": "PE catalog",
+    "accounts": [
+      123321
+    ],
+    "tagsToShow": [
+      {
+        "tagName": "cost",
+        "color": "blue"
+      },
+      {
+        "tagName": "type",
+        "color": "red"
+      }
+    ],
+    "defaultSupportEmail": "example@harvard.edu"
+  }

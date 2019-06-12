@@ -1,4 +1,9 @@
+const path = require('path');
+
 const readJSON = require('./readJSON');
+const STORE_CONSTANTS = require('../STORE_CONSTANTS');
+
+const STORE_PATH = STORE_CONSTANTS.path;
 
 /**
  * Checks if an app extends any other app. If it does, return that parent. If it
@@ -10,6 +15,8 @@ const readJSON = require('./readJSON');
  *   the parent information if the app extends a parent app
  */
 module.exports = async (catalogId, appId) => {
-  // TODO: implements
-  return null;
+  // get the metadata file of the app
+  const appPath = path.join(STORE_PATH, catalogId, appId, 'metadata');
+  const metadata = await readJSON(appPath);
+  return (metadata.extends || null);
 };

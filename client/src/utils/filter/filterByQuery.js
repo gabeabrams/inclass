@@ -5,6 +5,20 @@
  *   title, subtitle, description -- all case insensitive)
  * @return {object[]} apps that match the query
  */
-export default (apps, query) => {
+module.exports = (apps, query = '') => {
+  // If query empty/only whitespace, return all apps
+  if (query.trim() === '') {
+    return apps;
+  }
 
+  // Make the query a regular expression so we can search for it in any string
+  const reQuery = new RegExp(query, 'i');
+
+  // Go through each app in the list
+  // If the title, subtitle, or description match, add app to new list
+  const goodApps = apps.filter((app) => {
+    return (reQuery.test(app.title) || reQuery.test(app.subtitle) ||
+      reQuery.test(app.description));
+  });
+  return goodApps;
 };
