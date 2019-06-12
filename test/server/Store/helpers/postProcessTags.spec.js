@@ -197,6 +197,14 @@ describe.only('server > Store > helpers > postProcessTags', function () {
   });
 
   it('Will throw an error if a tag does not have a name key', async function () {
-    postProcessTags(testCatalogMissingNames);
+    let errorOccurred = false;
+    try {
+      postProcessTags(testCatalogMissingNames);
+    } catch (err) {
+      if (err.message.startsWith('In Catalog')) {
+        errorOccurred = true;
+      }
+    }
+    assert.equal(errorOccurred, true);
   });
 });
