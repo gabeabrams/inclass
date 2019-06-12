@@ -46,11 +46,11 @@ describe.only('server > Store > helpers > postProcessTags', function () {
     defaultSupportEmail: 'example@harvard.edu',
     tagsToShow: [
       {
-        tagName: 'cost',
+        name: 'cost',
         color: 'blue',
       },
       {
-        tagName: 'type',
+        name: 'type',
         color: 'red',
       },
     ],
@@ -85,13 +85,13 @@ describe.only('server > Store > helpers > postProcessTags', function () {
     ],
   };
 
-  const testCatalogMissingTagNames = {
+  const testCatalogMissingNames = {
     title: 'SEAS Catalog',
     accounts: [26, 30],
     defaultSupportEmail: 'example@harvard.edu',
     tagsToShow: [
       {
-        tagName: 'cost',
+        name: 'cost',
         color: 'blue',
       },
       {
@@ -135,15 +135,15 @@ describe.only('server > Store > helpers > postProcessTags', function () {
     defaultSupportEmail: 'example@harvard.edu',
     tagsToShow: [
       {
-        tagName: 'cost',
+        name: 'cost',
         color: 'blue',
       },
       {
-        tagName: 'type',
+        name: 'type',
         color: 'red',
       },
       {
-        tagName: 'fake tag',
+        name: 'fake tag',
       },
     ],
     apps: [
@@ -196,7 +196,7 @@ describe.only('server > Store > helpers > postProcessTags', function () {
     !== undefined, true);
   });
 
-  it('Will throw an error if a tag does not have a tagName key', async function () {
-    postProcessTags(testCatalogMissingTagNames);
+  it('Will throw an error if a tag does not have a name key', async function () {
+    postProcessTags(testCatalogMissingNames);
   });
 });

@@ -34,14 +34,14 @@ module.exports = (catalog) => {
     tagsToShow = [];
     // Make a Set that we're going to use to collect all of the tagNames we
     // need to add to the tagsToShow object
-    const tagNamesForCatalog = new Set();
+    const namesForCatalog = new Set();
     apps.forEach((app) => {
       // For each app, we want to look at its list of tags (if it has any) and
       // add them to our set of tagNames
       if (app.tags) {
-        Object.keys(app.tags).forEach((tagName) => {
-          // Add tagName to the set
-          tagNamesForCatalog.add(tagName);
+        Object.keys(app.tags).forEach((name) => {
+          // Add name to the set
+          namesForCatalog.add(name);
         });
       } else {
         // If app doesn't have a tags object, add it because we'll need it later
@@ -51,11 +51,11 @@ module.exports = (catalog) => {
 
     // We now have a set with every tagName that has appeared in any app
     // Add every tagName from the set to the tagsToShow Object
-    tagNamesForCatalog.forEach((tagName) => {
+    namesForCatalog.forEach((name) => {
       // Create a new object to push to the tagsToShow list that will have
       // the tagName and the tagColor
       const newTag = {
-        tagName,
+        name,
         color: COLORS[nextColorIndex % COLORS.length],
       };
       // Add the new tag to the list of tagsToShow
@@ -69,9 +69,9 @@ module.exports = (catalog) => {
   // If tag doesn't have a tagColor, give it one
   tagsToShow.forEach((tag) => {
     // If a tag doesn't have a tagName, throw an error
-    if (!tag.tagName) {
+    if (!tag.name) {
       // Error message
-      console.error('ERROR: Tag object has no tagName');
+      console.error('ERROR: Tag object has no name');
       return;
     }
     // If a tag doesn't have a tagColor attribute or it's empty, we will
@@ -86,8 +86,8 @@ module.exports = (catalog) => {
     apps.forEach((app) => {
       // If the app doesn't have this tagName, we add it to the tags object
       // as 'other/uncategorized'
-      if (!app.tags[tag.tagName]) {
-        app.tags[tag.tagName] = ['other/uncategorized'];
+      if (!app.tags[tag.name]) {
+        app.tags[tag.name] = ['other/uncategorized'];
       }
     });
   });
