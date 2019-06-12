@@ -3,7 +3,8 @@ const fileExists = require('./fileExists');
  * Reads the credentials file in JSON format, throws an error
  *   if the file doesn't exist or if the file is malformed
  * @module server/Store/helpers/loadIcon
- * @param {string} iconPathWithoutExtension - the path of the icon file (excluding extension)
+ * @param {string} iconPathWithoutExtension - the path of the icon file
+ * (excluding extension)
  * @param {App} parentAppMetadata - metadata for the parent app (if this
  *   app has one)
  * @return {string} the fullPath of the icon
