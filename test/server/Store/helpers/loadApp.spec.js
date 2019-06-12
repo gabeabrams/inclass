@@ -82,7 +82,7 @@ describe('server > Store > helpers > loadApp', function () {
     });
   });
 
-  it.only('loads app with parent correctly', async function () {
+  it('loads app with parent correctly', async function () {
     // use proxiquire to redirect store path to testing folder
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
     const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
@@ -107,6 +107,7 @@ describe('server > Store > helpers > loadApp', function () {
       appId: parentAppId,
       parentAppMetadata: parentParentAppMetadata,
     });
+    console.log('parent app is', parentMetadata);
     // load child app
     const catalogId = 'pe';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
@@ -118,6 +119,7 @@ describe('server > Store > helpers > loadApp', function () {
       appId,
       parentAppMetadata,
     });
+    console.log('child app is ', childApp);
     // read in childApp metadata from store
     const testPath = path.join(dummyPath, catalogId, appId, 'metadata');
     const childAppMetadata = await readJSON(testPath);
@@ -148,20 +150,24 @@ describe('server > Store > helpers > loadApp', function () {
           childApp[key].forEach((screenshot) => {
             assert(screenshot.filename.endsWith('.png'), 'screenshots filename does not end with .png');
           });
-        } else if (key === 'installXML') {
-          // check that app installData is loaded
-          assert(childApp[key], 'installXML data is not loaded');
-        } else if (key === 'installationCredentials') {
-          // check that app credentials are loaded
-          assert(childApp[key], 'credentials data is not loaded');
         } else {
           assert(JSON.stringify(childApp[key])
           === JSON.stringify(childAppMetadata[key]), `the value of key: ${key} is not read in from metadata file correctly`);
         }
       } else {
         // check that child app extended the value of parent app
-        assert(JSON.stringify(childApp[key])
+        if (key === 'installXML') {
+          // check that app installData is loaded
+          assert(childApp[key], 'installXML data is not loaded');
+        } else if (key === 'installationCredentials') {
+          // check that app credentials are loaded
+          assert(childApp[key], 'credentials data is not loaded');
+        } else if (key === 'icon') {
+          assert.notEqual(childApp[key].fullPath, parentMetadata[key].fullPath, 'icon is not extended correctly');
+        } else {
+          assert(JSON.stringify(childApp[key])
            === JSON.stringify(parentAppMetadata[key]), `the value of key: ${key} did not extend from parent correctly`);
+        }
       }
     });
   });
