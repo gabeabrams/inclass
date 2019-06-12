@@ -5,6 +5,7 @@
  */
 
 /* ------------------------- Store Class ------------------------ */
+// TODO: Add awaits to function calls
 const loadStore = require('./helpers/loadStore');
 const serveScreenshots = require('./helpers/serveScreenshots');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
@@ -31,7 +32,7 @@ class Store {
    */
   async _attemptLoad() {
     try {
-      const myStore = loadStore();
+      const myStore = await loadStore();
       const { store, catalogs } = myStore;
       const storeMetadata = store;
       const accountIdToCatalogId = {};
