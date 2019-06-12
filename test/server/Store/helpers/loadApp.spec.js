@@ -108,6 +108,8 @@ describe('server > Store > helpers > loadApp', function () {
       parentAppMetadata: parentParentAppMetadata,
     });
     // load child app
+    // this child app has a different icon, different xml content, and different
+    // credentials information. Also has added app metadata
     const catalogId = 'pe';
     const catalogMetadata = await loadCatalogMetadata(catalogId);
     const appId = 'absence';
@@ -121,53 +123,55 @@ describe('server > Store > helpers > loadApp', function () {
     // read in childApp metadata from store
     const testPath = path.join(dummyPath, catalogId, appId, 'metadata');
     const childAppMetadata = await readJSON(testPath);
+    // this checks the keys inside app's metadata
     const changed = Object.keys(childAppMetadata).filter((key) => {
       return (key !== 'extends');
     });
-    // check if each field in childApp is updated accordingly
-    Object.keys(childApp).forEach((key) => {
-      if (changed.includes(key)) {
-        if (key === 'tags') {
-          // check that tags are converted to arrays
-          Object.keys(childAppMetadata[key]).forEach((tag) => {
-            if (!Array.isArray(childAppMetadata[key][tag])) {
-              assert(Array.isArray(childApp[key][tag]), 'tags value is not array');
-            }
-          });
-        } else if (key === 'creator') {
-          // check that we have converted creator value to array
-          if (!Array.isArray(childAppMetadata.creator)) {
-            assert(Array.isArray(childApp.creator), 'creator value is not array');
+    let numOfKeys = Object.keys(childApp).length;
+    changed.forEach((key) => {
+      if (key === 'tags') {
+        // check that tags are converted to arrays
+        Object.keys(childAppMetadata[key]).forEach((tag) => {
+          if (!Array.isArray(childAppMetadata[key][tag])) {
+            assert(Array.isArray(childApp[key][tag]), 'tags value is not array');
           }
-        } else if (key === 'supportEmail') {
-          // check that supportEmail field is either from parent or from catalog
-          assert(childApp[key] === childAppMetadata[key]
-            || childApp[key] === catalogMetadata.defaultSupportEmail, 'support Email is incorrect');
-        } else if (key === 'screenshots') {
-          // check that each file ends with .png
-          childApp[key].forEach((screenshot) => {
-            assert(screenshot.filename.endsWith('.png'), 'screenshots filename does not end with .png');
-          });
-        } else {
-          assert(JSON.stringify(childApp[key])
-          === JSON.stringify(childAppMetadata[key]), `the value of key: ${key} is not read in from metadata file correctly`);
+        });
+        numOfKeys -= 1;
+      } else if (key === 'creator') {
+      // check that we have converted creator value to array
+        if (!Array.isArray(childAppMetadata.creator)) {
+          assert(Array.isArray(childApp.creator), 'creator value is not array');
         }
+        numOfKeys -= 1;
+      } else if (key === 'supportEmail') {
+        // check that supportEmail field is either from parent or from catalog
+        assert(childApp[key] === childAppMetadata[key]
+        || childApp[key] === catalogMetadata.defaultSupportEmail, 'support Email is incorrect');
+        numOfKeys -= 1;
+      } else if (key === 'screenshots') {
+      // check that each file ends with .png
+        childApp[key].forEach((screenshot) => {
+          assert(screenshot.filename.endsWith('.png'), 'screenshots filename does not end with .png');
+        });
+        numOfKeys -= 1;
       } else {
-        // check that child app extended the value of parent app
-        if (key === 'installXML') {
-          // check that app installData is loaded
-          assert(childApp[key], 'installXML data is not loaded');
-        } else if (key === 'installationCredentials') {
-          // check that app credentials are loaded
-          assert(childApp[key], 'credentials data is not loaded');
-        } else if (key === 'icon') {
-          assert.notEqual(childApp[key].fullPath, parentMetadata[key].fullPath, 'icon is not extended correctly');
-        } else {
-          assert(JSON.stringify(childApp[key])
-           === JSON.stringify(parentAppMetadata[key]), `the value of key: ${key} did not extend from parent correctly`);
-        }
+        assert(JSON.stringify(childApp[key])
+        === JSON.stringify(childAppMetadata[key]), `the value of key: ${key} is not read in from metadata file correctly`);
+        numOfKeys -= 1;
       }
     });
+    // test separately for keys that are not in app metadata
+    // test app icon
+    assert.notEqual(childApp.icon.fullPath, parentMetadata.icon.fullPath, 'child app did not create own full path for icon');
+    numOfKeys -= 1;
+    // test app installXML
+    assert.notEqual(childApp.installXML, parentMetadata.installXML, 'child app extended parent app installXML file incorrectly');
+    numOfKeys -= 1;
+    // test app credentials
+    assert.notEqual(JSON.stringify(childApp.installationCredentials), JSON.stringify(parentMetadata.installationCredentials), 'child app extended parent app credentials incorrectly');
+    numOfKeys -= 1;
+    // these tests should exaust all possible app keys, otherwise throw error
+    assert(numOfKeys === 0, 'did not test all keys included in child app');
   });
 
   it('throws an error loading app with missing metadata', async function () {
