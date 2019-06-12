@@ -50,7 +50,8 @@ module.exports = async (opts = {}) => {
   const jpegPath = path.join(STORE_PATH, catalogId, appId, 'icon.jpeg');
   const pngPath = path.join(STORE_PATH, catalogId, appId, 'icon.png');
   appMetadata.icon = {};
-  appMetadata.icon.fullPath = await loadIcon(jpgPath, jpegPath, pngPath, parentAppMetadata);
+  const iconP = await loadIcon(jpgPath, jpegPath, pngPath, parentAppMetadata);
+  appMetadata.icon.fullPath = iconP;
 
   // process metadata information
   // for tags, if the value is not an array, turn it into one

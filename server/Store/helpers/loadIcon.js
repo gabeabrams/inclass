@@ -23,5 +23,11 @@ module.exports = async (jpgPath, jpegPath, pngPath, parentAppMetadata) => {
   }
 
   // file exists
-  return (await fileExists(jpgPath)) ? jpgPath : (await fileExists(pngPath) ? pngPath : jpegPath);
+  if (await fileExists(jpgPath)) {
+    return jpgPath;
+  }
+  if (await fileExists(jpegPath)) {
+    return jpegPath;
+  }
+  return pngPath;
 };

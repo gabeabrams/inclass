@@ -82,7 +82,7 @@ describe('server > Store > helpers > loadApp', function () {
     });
   });
 
-  it('loads app with parent correctly', async function () {
+  it.only('loads app with parent correctly', async function () {
     // use proxiquire to redirect store path to testing folder
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
     const loadCatalogMetadata = proxyquire('../../../../server/Store/helpers/loadCatalogMetadata', {
