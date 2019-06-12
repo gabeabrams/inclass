@@ -182,14 +182,18 @@ describe.only('server > Store > helpers > postProcessTags', function () {
   });
 
   it('Will add a tag to every app if it is in the tagsToShow', async function () {
+    testCatalogAddTag.apps.forEach((app) => {
+      assert.equal(app.tags['fake tag'], undefined);
+    });
     postProcessTags(testCatalogAddTag).apps.forEach((app) => {
       assert.equal(app.tags['fake tag'], 'other/uncategorized');
     });
   });
 
   it('Will create a tagsToShow object if there is not already one', async function () {
-    console.log('Catalog before postProcessTags: ', JSON.stringify(testCatalogNoTagsToShow, undefined, 2));
-    console.log('Catalog after postProcessTags: ', JSON.stringify(postProcessTags(testCatalogNoTagsToShow), undefined, 2));
+    assert.equal(testCatalogNoTagsToShow.tagsToShow, undefined);
+    assert.equal(postProcessTags(testCatalogNoTagsToShow).tagsToShow
+    !== undefined, true);
   });
 
   it('Will throw an error if a tag does not have a tagName key', async function () {
