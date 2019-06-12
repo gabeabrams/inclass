@@ -32,7 +32,7 @@ module.exports = (catalog) => {
   // If it doesn't exist, we need to build object from list of tags in apps
   if (!tagsToShow) {
     tagsToShow = [];
-    // Make a Set that we're going to use to collect all of the tagNames we
+    // Make a Set that we're going to use to collect all of the names we
     // need to add to the tagsToShow object
     const namesForCatalog = new Set();
     apps.forEach((app) => {
@@ -49,11 +49,11 @@ module.exports = (catalog) => {
       }
     });
 
-    // We now have a set with every tagName that has appeared in any app
-    // Add every tagName from the set to the tagsToShow Object
+    // We now have a set with every name that has appeared in any app
+    // Add every name from the set to the tagsToShow Object
     namesForCatalog.forEach((name) => {
       // Create a new object to push to the tagsToShow list that will have
-      // the tagName and the tagColor
+      // the name and the color
       const newTag = {
         name,
         color: COLORS[nextColorIndex % COLORS.length],
@@ -66,30 +66,32 @@ module.exports = (catalog) => {
   }
 
   // Now that we have apps and tagsToShow, make sure tag data is correct
-  // If tag doesn't have a tagColor, give it one
-  tagsToShow.forEach((tag) => {
-    // If a tag doesn't have a tagName, throw an error
+  // If tag doesn't have a color, give it one
+  tagsToShow.forEach((tag, i) => {
+    // If a tag doesn't have a name, throw an error
     if (!tag.name) {
-      // Error message
-      console.error('ERROR: Tag object has no name');
-      return;
+      // Throw an error
+      throw new Error(`In Catalog ${catalog.title} in tagsToShow tag #${i + 1}, there is no 'name' field.`);
     }
-    // If a tag doesn't have a tagColor attribute or it's empty, we will
+    // If a tag doesn't have a color attribute or it's empty, we will
     // add a color from the list
     if (!tag.color) {
       tag.color = COLORS[nextColorIndex % COLORS.length];
       nextColorIndex += 1;
     }
 
-    // Increment through each app and make sure that each one has this tagName,
+    // Increment through each app and make sure that each one has this name,
     // if not then add it as 'other/uncategorized'
-    apps.forEach((app) => {
-      // If the app doesn't have this tagName, we add it to the tags object
+    apps.forEach((app, j) => {
+      // If the app doesn't have this name, we add it to the tags object
       // as 'other/uncategorized'
       if (!app.tags[tag.name]) {
         app.tags[tag.name] = ['other/uncategorized'];
       }
+      apps[j] = app;
     });
+
+    tagsToShow[i] = tag;
   });
   const updatedCatalog = catalog;
   updatedCatalog.tagsToShow = tagsToShow;
