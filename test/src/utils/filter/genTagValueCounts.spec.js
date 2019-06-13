@@ -8,14 +8,14 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   const testTagsAllChecked = {
     cost: {
       color: 'blue',
-      tagValues: {
+      values: {
         free: true,
         expensive: true,
       },
     },
     type: {
       color: 'red',
-      tagValues: {
+      values: {
         import: true,
         export: true,
         teaching: true,
@@ -26,14 +26,14 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   const testTagsFreeTeaching = {
     cost: {
       color: 'blue',
-      tagValues: {
+      values: {
         free: true,
         expensive: false,
       },
     },
     type: {
       color: 'red',
-      tagValues: {
+      values: {
         import: false,
         export: false,
         teaching: true,
@@ -44,14 +44,14 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   const testTagsExtraValue = {
     cost: {
       color: 'blue',
-      tagValues: {
+      values: {
         free: false,
         expensive: true,
       },
     },
     type: {
       color: 'red',
-      tagValues: {
+      values: {
         import: true,
         export: false,
         teaching: true,
@@ -59,7 +59,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
     },
     language: {
       color: 'green',
-      tagValues: {
+      values: {
         english: true,
         spanish: true,
         french: false,

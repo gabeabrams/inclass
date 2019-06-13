@@ -30,7 +30,7 @@ module.exports = (apps, tags) => {
     const filteredApps = filterByTags(apps, tagsWithoutTagName);
 
     // array of tagValues for a given tagName ex. 'free' or 'expensive'
-    const tagVals = Object.keys(newTags[tagName].tagValues);
+    const tagVals = Object.keys(newTags[tagName].values);
 
     // Go through each tagValue in this current tag ex. 'free'
     tagVals.forEach((tagItem) => {
