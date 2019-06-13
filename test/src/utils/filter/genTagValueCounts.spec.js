@@ -63,6 +63,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
         english: true,
         spanish: true,
         french: false,
+        'other/uncategorized': true,
       },
     },
   };
@@ -73,6 +74,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
       tags: {
         cost: ['free'],
         type: ['import', 'export'],
+        language: ['french'],
       },
     },
     {
@@ -80,6 +82,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
       tags: {
         cost: ['expensive'],
         type: ['import'],
+        language: ['other/uncategorized'],
       },
     },
     {
@@ -87,6 +90,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
       tags: {
         cost: ['expensive'],
         type: ['export'],
+        language: ['french', 'spanish'],
       },
     },
     {
@@ -94,6 +98,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
       tags: {
         cost: ['free'],
         type: ['grading', 'teaching'],
+        language: ['english'],
       },
     },
   ];
@@ -133,7 +138,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   it('Will keep an app if it doesn\'t have a tagName', async function () {
     const expectedItem = {
       cost: {
-        free: 2,
+        free: 1,
         expensive: 1,
       },
       type: {
@@ -142,9 +147,10 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
         teaching: 0,
       },
       language: {
-        english: 1,
-        spanish: 1,
-        french: 1,
+        english: 0,
+        spanish: 0,
+        french: 0,
+        'other/uncategorized': 1,
       },
     };
     const actualItem = genTagValueCounts(testApps, testTagsExtraValue);
