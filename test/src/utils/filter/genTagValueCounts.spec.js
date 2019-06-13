@@ -116,7 +116,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
       },
     };
     const actualItem = genTagValueCounts(testApps, testTagsAllChecked);
-    assert.deepEqual(expectedItem, actualItem);
+    assert.deepEqual(expectedItem, actualItem, 'Expected counts are not equal to actual counts');
   });
 
   it('Will only count tags marked as true', async function () {
@@ -132,7 +132,7 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
       },
     };
     const actualItem = genTagValueCounts(testApps, testTagsFreeTeaching);
-    assert.deepEqual(expectedItem, actualItem);
+    assert.deepEqual(expectedItem, actualItem, 'Expected counts are not equal to actual counts');
   });
 
   it('Will keep an app if it doesn\'t have a tagName', async function () {
@@ -154,6 +154,6 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
       },
     };
     const actualItem = genTagValueCounts(testApps, testTagsExtraValue);
-    assert.deepEqual(expectedItem, actualItem);
+    assert.deepEqual(expectedItem, actualItem, 'Expected counts are not equal to actual counts');
   });
 });
