@@ -5,69 +5,6 @@ const assert = require('assert');
 const genTagValueCounts = require('../../../../client/src/utils/filter/genTagValueCounts');
 
 describe('client > src > utils > filter > genTagValueCounts', function () {
-  const testTagsAllChecked = {
-    cost: {
-      color: 'blue',
-      values: {
-        free: true,
-        expensive: true,
-      },
-    },
-    type: {
-      color: 'red',
-      values: {
-        import: true,
-        export: true,
-        teaching: true,
-      },
-    },
-  };
-
-  const testTagsFreeTeaching = {
-    cost: {
-      color: 'blue',
-      values: {
-        free: true,
-        expensive: false,
-      },
-    },
-    type: {
-      color: 'red',
-      values: {
-        import: false,
-        export: false,
-        teaching: true,
-      },
-    },
-  };
-
-  const testTagsExtraValue = {
-    cost: {
-      color: 'blue',
-      values: {
-        free: false,
-        expensive: true,
-      },
-    },
-    type: {
-      color: 'red',
-      values: {
-        import: true,
-        export: false,
-        teaching: true,
-      },
-    },
-    language: {
-      color: 'green',
-      values: {
-        english: true,
-        spanish: true,
-        french: false,
-        'other/uncategorized': true,
-      },
-    },
-  };
-
   const testApps = [
     {
       name: 'AppOne',
@@ -104,6 +41,23 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   ];
 
   it('Creates counts for each filter tag', async function () {
+    const testTagsAllChecked = {
+      cost: {
+        color: 'blue',
+        values: {
+          free: true,
+          expensive: true,
+        },
+      },
+      type: {
+        color: 'red',
+        values: {
+          import: true,
+          export: true,
+          teaching: true,
+        },
+      },
+    };
     const expectedItem = {
       cost: {
         free: 2,
@@ -120,6 +74,23 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   });
 
   it('Will only count tags marked as true', async function () {
+    const testTagsFreeTeaching = {
+      cost: {
+        color: 'blue',
+        values: {
+          free: true,
+          expensive: false,
+        },
+      },
+      type: {
+        color: 'red',
+        values: {
+          import: false,
+          export: false,
+          teaching: true,
+        },
+      },
+    };
     const expectedItem = {
       cost: {
         free: 1,
@@ -136,6 +107,32 @@ describe('client > src > utils > filter > genTagValueCounts', function () {
   });
 
   it('Will keep an app if it doesn\'t have a tagName', async function () {
+    const testTagsExtraValue = {
+      cost: {
+        color: 'blue',
+        values: {
+          free: false,
+          expensive: true,
+        },
+      },
+      type: {
+        color: 'red',
+        values: {
+          import: true,
+          export: false,
+          teaching: true,
+        },
+      },
+      language: {
+        color: 'green',
+        values: {
+          english: true,
+          spanish: true,
+          french: false,
+          'other/uncategorized': true,
+        },
+      },
+    };
     const expectedItem = {
       cost: {
         free: 1,
