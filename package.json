@@ -33,7 +33,7 @@
 	},
 	"homepage": "https://github.com/gabeabrams/inclass#readme",
 	"dependencies": {
-		"caccl": "^1.0.77",
+		"caccl": "^1.0.81",
 		"express": "^4.17.0",
 		"fast-clone": "^1.5.13",
 		"fs": "0.0.1-security"
@@ -45,6 +45,7 @@
 		"eslint-plugin-jsx-a11y": "^6.2.1",
 		"eslint-plugin-react": "^7.13.0",
 		"mocha": "^6.1.4",
-		"proxyquire": "^2.1.0"
+		"proxyquire": "^2.1.0",
+		"sinon": "^7.3.2"
 	}
 }

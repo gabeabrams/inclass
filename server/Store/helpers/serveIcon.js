@@ -8,7 +8,7 @@
  * @param {App} opts.app - an app that was just loaded
  * @return {App} new app object with a new app.icon.url field added
  */
-module.exports = async (opts) => {
+module.exports = (opts) => {
   // TODO: serve the app's icon
   // use app.icon.fullPath
 

@@ -6,9 +6,9 @@
  *   inside of one of these accounts, the user will be shown this catalog
  * @param {object[]} [tagsToShow] - if excluded, all tags from all the apps are
  *   shown to the user. This is an array of objects of the form:
- *   { tagName, tagColor } where tagColor is an optional css color field. If
- *   this array is included, the tagNames in this array are the only ones to be
- *   shown to the user. The tagColor field is optional and auto-populated with
+ *   { name, color } where color is an optional css color field. If
+ *   this array is included, the names in this array are the only tagNames to be
+ *   shown to the user. The color field is optional and auto-populated with
  *   a random color if excluded
  * @param {string} [defaultSupportEmail] - a default support email to use if
  *   an app doesn't have a support email
