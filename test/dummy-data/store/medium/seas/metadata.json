@@ -1,6 +1,6 @@
 {
     "title": "SEAS Catalog",
-    "accounts": [26, 30],
+    "accounts": [26, 30, 51],
     "tagsToShow": [
       {
         "tagName": "cost",
