@@ -1,11 +1,11 @@
 const path = require('path');
 const assert = require('assert');
 const ExpressApp = require('../../../dummy-objects/ExpressApp');
-const loadIcon = require('../../../../server/Store/helpers/loadIcon');
+const serveIcon = require('../../../../server/Store/helpers/serveIcon');
 const appWithIcon = require('../../../dummy-data/app-lists/appWithIcon');
 const appWithNoFile = require('../../../dummy-data/app-lists/appWithNoFile');
 
-describe('server > Store > helpers > loadIcon', function () {
+describe('server > Store > helpers > serveIcon', function () {
   it('does nothing if no icon property', async function () {
     const opts = {
       expressApp: new ExpressApp(),
@@ -13,7 +13,7 @@ describe('server > Store > helpers > loadIcon', function () {
       appId: 'gradeup',
       app: { title: 'GradeUp', creator: 'dce' },
     };
-    const app = await loadIcon(opts);
+    const app = await serveIcon(opts);
     assert.deepEqual(opts.app, app, 'The app returned is not the same app');
   });
 
@@ -27,7 +27,7 @@ describe('server > Store > helpers > loadIcon', function () {
       app: appWithNoFile,
     };
     try {
-      await loadIcon(opts);
+      await serveIcon(opts);
     } catch (err) {
       if (
         err.message.startsWith('The app')
@@ -55,7 +55,7 @@ describe('server > Store > helpers > loadIcon', function () {
       appId: 'swipein',
       app: appWithIcon,
     };
-    const app = await loadIcon(opts);
+    const app = await serveIcon(opts);
     assert(app.icon.url, 'URL property does not exists for the icon');
   });
 
@@ -68,7 +68,7 @@ describe('server > Store > helpers > loadIcon', function () {
       appId: 'swipein',
       app: appWithIcon,
     };
-    const app = await loadIcon(opts);
+    const app = await serveIcon(opts);
     assert.equal(app.icon.url, '/public/dce/swipein/icon/question_mark.png', 'The URL does not match the format ');
   });
 });
