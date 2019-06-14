@@ -56,7 +56,7 @@ module.exports = (catalog) => {
 
     // We now have a set with every name that has appeared in any app
     // Add every name from the set to the tagsToShow Object
-    tagsToShow = namesForCatalog.map((name) => {
+    tagsToShow = Array.from(namesForCatalog).map((name) => {
       // Create a new object to push to the tagsToShow list that will have
       // the name and the color
       return {
@@ -86,7 +86,7 @@ module.exports = (catalog) => {
     apps.forEach((app, j) => {
       // If the app doesn't have this name, we add it to the tags object
       // as 'other/uncategorized'
-      if (!app.tags[tag.name] || app.tags[tag.name].length === 0// ) {
+      if (!app.tags[tag.name] || app.tags[tag.name].length === 0) {
         app.tags[tag.name] = ['other/uncategorized'];
       }
       apps[j] = app;
