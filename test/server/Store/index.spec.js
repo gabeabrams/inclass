@@ -1,18 +1,24 @@
 const assert = require('assert');
+const proxyquire = require('proxyquire');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
 const Store = require('../../../server/Store/index');
 
 const expressApp = new ExpressApp();
+const badExpressApp = 'Not Real';
 
 describe.only('server > Store > index', function () {
-  it('Checks metatdata objects untouched when error occurs', async function () {
-    console.log('HERE WE GO');
-    // const store = new Store(expressApp);
-    console.log(store);
+  it('Checks metadata objects untouched when error occurs', async function () {
+    const store = new Store(badExpressApp);
+    const { storeMetadata } = store;
+    if (Object.keys(storeMetadata).length !== 0) {
+      throw new Error('storeMetadata shoudl be empty');
+    }
   });
 
   // it('Checks metadata objects are accurate', async function () {
-  //   // Check app has url property now
+  //   const store = new Store(expressApp);
+  //   const storeMetadata = store.getStoreMetadata();
+  //   const 
   //   // Check app doesn't have XML etc
   // });
 

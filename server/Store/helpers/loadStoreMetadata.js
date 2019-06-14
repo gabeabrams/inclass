@@ -11,6 +11,7 @@ const STORE_PATH = STORE_CONSTANTS.path;
  * @return {object} store metadata
  */
 module.exports = async () => {
+  console.log(path.join(STORE_PATH, 'metadata'));
   const metadata = await readJSON(path.join(STORE_PATH, 'metadata'));
   // if beingEdited is true, store will not load
   if (metadata.beingEdited) {

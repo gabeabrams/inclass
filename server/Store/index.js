@@ -56,34 +56,32 @@ class Store {
         }
 
         /**
-         * Goes through each app to remove installXML and
-         *    installationCredentials. It places that information
-         *    in installData.
+         * Runs through each app and does the following:
+         * It places installXML & installation credentials
+         *  information in installData.
+         *  ({catalogId => appId => { installXML, installationCredentials }})
+         * Deletes the install information from each app
+         * Calls serveScreenshots
+         * Saves the updated catalog in catalogIdToCatalogMetadata
          */
-        const appIds = Object.keys(apps);
-        // For i through appIds and merge the two loops below
-        catalogIdToCatalogMetadata[catalogId] = Object.keys(apps).map((appId) => {
-          const { installXML, installationCredentials } = apps[appId];
-          installData[catalogId][appId] = { installXML, installationCredentials };
+        catalogIdToCatalogMetadata[catalogId] = Object.keys(apps).map(
+          (appId) => {
+            const { installXML, installationCredentials } = apps[appId];
+            installData[catalogId][appId] = { installXML, installationCredentials };
 
-          delete apps[appId].installXML;
-          delete apps[appId].installationCredentials;
-          return newCatalog;
-        });
+            delete apps[appId].installXML;
+            delete apps[appId].installationCredentials;
 
-        /**
-         * Calls serveScreenshots for each appId in a catalog
-         * Replaces the app with new one returned from serveScreenshots
-         */
-        Object.keys(apps).forEach((appId) => {
-          const opts = {
-            expressApp: this.expressApp,
-            catalogId,
-            appId,
-            app: apps[appId],
-          };
-          apps[appId] = serveScreenshots(opts);
-        });
+            const opts = {
+              expressApp: this.expressApp,
+              catalogId,
+              appId,
+              app: apps[appId],
+            };
+            apps[appId] = serveScreenshots(opts);
+            return newCatalog;
+          }
+        );
       });
 
       // Swaps out metadata object
