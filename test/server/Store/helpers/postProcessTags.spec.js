@@ -194,12 +194,20 @@ describe('server > Store > helpers > postProcessTags', function () {
       );
     });
     postProcessTags(testCatalogAddTag).apps.forEach((app) => {
-      assert.equal(app.tags['fake tag'], 'other/uncategorized');
+      assert.equal(
+        app.tags['fake tag'],
+        'other/uncategorized',
+        '\'fake tag\' attribute should be initialized in every app with the value \'other/uncategorized\''
+      );
     });
   });
 
   it('Will create a tagsToShow object if there is not already one', async function () {
-    assert.equal(testCatalogNoTagsToShow.tagsToShow, undefined);
+    assert.equal(
+      testCatalogNoTagsToShow.tagsToShow,
+      undefined,
+      'tagsToShow object should not exist yet'
+    );
     assert.equal(
       postProcessTags(testCatalogNoTagsToShow).tagsToShow !== undefined,
       true,
@@ -216,6 +224,10 @@ describe('server > Store > helpers > postProcessTags', function () {
         errorOccurred = true;
       }
     }
-    assert.equal(errorOccurred, true);
+    assert.equal(
+      errorOccurred,
+      true,
+      'There was no error in the function'
+    );
   });
 });
