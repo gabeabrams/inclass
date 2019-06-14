@@ -77,7 +77,7 @@ module.exports = (catalog) => {
     // If a tag doesn't have a color attribute or it's empty, we will
     // add a color from the list
     if (!tag.color) {
-      tag.color = COLORS[nextColorIndex % COLORS.length];
+      tag.color = getNextRandomColor();
       nextColorIndex += 1;
     }
 
@@ -86,7 +86,7 @@ module.exports = (catalog) => {
     apps.forEach((app, j) => {
       // If the app doesn't have this name, we add it to the tags object
       // as 'other/uncategorized'
-      if (!app.tags[tag.name]) {
+      if (!app.tags[tag.name] || app.tags[tag.name].length === 0// ) {
         app.tags[tag.name] = ['other/uncategorized'];
       }
       apps[j] = app;
