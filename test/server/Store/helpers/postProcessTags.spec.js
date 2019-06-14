@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const postProcessTags = require('../../../../server/Store/helpers/postProcessTags');
 
-describe.only('server > Store > helpers > postProcessTags', function () {
+describe('server > Store > helpers > postProcessTags', function () {
   // Fake Catalog
   const testCatalogNoTagsToShow = {
     title: 'SEAS Catalog',
@@ -178,12 +178,20 @@ describe.only('server > Store > helpers > postProcessTags', function () {
   };
 
   it('Will update an app so it has each tag found in the tagsToShow', async function () {
-    assert.equal(postProcessTags(testCatalogAppsMissingTags).apps[1].tags.cost, 'other/uncategorized');
+    assert.equal(
+      postProcessTags(testCatalogAppsMissingTags).apps[1].tags.cost,
+      'other/uncategorized',
+      'testApp #2\'s cost tag is not being initialized correctly'
+    );
   });
 
   it('Will add a tag to every app if it is in the tagsToShow', async function () {
     testCatalogAddTag.apps.forEach((app) => {
-      assert.equal(app.tags['fake tag'], undefined);
+      assert.equal(
+        app.tags['fake tag'],
+        undefined,
+        '\'fake tag\' should be undefined before postProcessTags is called.'
+      );
     });
     postProcessTags(testCatalogAddTag).apps.forEach((app) => {
       assert.equal(app.tags['fake tag'], 'other/uncategorized');
@@ -192,8 +200,11 @@ describe.only('server > Store > helpers > postProcessTags', function () {
 
   it('Will create a tagsToShow object if there is not already one', async function () {
     assert.equal(testCatalogNoTagsToShow.tagsToShow, undefined);
-    assert.equal(postProcessTags(testCatalogNoTagsToShow).tagsToShow
-    !== undefined, true);
+    assert.equal(
+      postProcessTags(testCatalogNoTagsToShow).tagsToShow !== undefined,
+      true,
+      'The tagsToShow object is still undefined'
+    );
   });
 
   it('Will throw an error if a tag does not have a name key', async function () {
