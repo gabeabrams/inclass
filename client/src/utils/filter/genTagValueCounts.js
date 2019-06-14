@@ -16,7 +16,7 @@ module.exports = (apps, tags) => {
   const newTags = tags;
 
   // Create the tag object that we're going to be returning
-  const tagCounts = {};
+  const tagCounts = {}; // { tagName => tagItem => count }
 
   // Go through each tagName, and call filterByTags with the app list and every
   // tag name EXCEPT the one we are currently in
