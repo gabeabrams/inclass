@@ -27,8 +27,14 @@ module.exports = (catalog) => {
 
   // Set color index to start at 0
   let nextColorIndex = 0;
+  // Helper function to pick a color for our tags
+  const getNextRandomColor = () => {
+    const color = COLORS[nextColorIndex % COLORS.length];
+    nextColorIndex += 1;
+    return color;
+  };
 
-  // We need to make sure tagsToShow object exists and build it if it doesn't
+  // We need to make sure tagsToShow array exists and build it if it doesn't
   // If it doesn't exist, we need to build object from list of tags in apps
   if (!tagsToShow) {
     tagsToShow = [];
