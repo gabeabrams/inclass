@@ -1,3 +1,5 @@
+const express = require('express');
+const path = require('path');
 /**
  * Serves the icon for this app
  * @module server/Store/helpers/serveIcon
@@ -13,4 +15,33 @@ module.exports = (opts) => {
   // use app.icon.fullPath
 
   // Use this path: /public/<catalogId>/<appId>/icon
+
+  const {
+    expressApp,
+    catalogId,
+    appId,
+    app,
+  } = opts;
+  const webPath = `/public/${catalogId}/${appId}/icon/`;
+
+  // Checks if app object has icon property
+  if (app.icon) {
+    const appWithURL = app;
+    const { fullPath, filename } = appWithURL;
+    try {
+      /**
+         * Serves icon.fullPath to
+         * /public/<catalogId>/<appId>/icon/<filename>
+         * Will throw 404 if file doesn't exist (fallthrough)
+         */
+      expressApp.use(webPath,
+        express.static(fullPath, { fallthrough: false }));
+    } catch (error) {
+      const errMessage = `The app ${appId} in catalog ${catalogId} listed an icon with filename ${filename}, but that file does not exist`;
+      throw new Error(errMessage);
+    }
+    appWithURL.url = path.join(webPath, filename);
+    return appWithURL;
+  }
+  return app;
 };
