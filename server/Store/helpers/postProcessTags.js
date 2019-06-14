@@ -37,7 +37,6 @@ module.exports = (catalog) => {
   // We need to make sure tagsToShow array exists and build it if it doesn't
   // If it doesn't exist, we need to build object from list of tags in apps
   if (!tagsToShow) {
-    tagsToShow = [];
     // Make a Set that we're going to use to collect all of the names we
     // need to add to the tagsToShow object
     const namesForCatalog = new Set();
@@ -57,17 +56,13 @@ module.exports = (catalog) => {
 
     // We now have a set with every name that has appeared in any app
     // Add every name from the set to the tagsToShow Object
-    namesForCatalog.forEach((name) => {
+    tagsToShow = namesForCatalog.map((name) => {
       // Create a new object to push to the tagsToShow list that will have
       // the name and the color
-      const newTag = {
+      return {
         name,
-        color: COLORS[nextColorIndex % COLORS.length],
+        color: getNextRandomColor(),
       };
-      // Add the new tag to the list of tagsToShow
-      tagsToShow.push(newTag);
-      // Increment color picker
-      nextColorIndex += 1;
     });
   }
 
