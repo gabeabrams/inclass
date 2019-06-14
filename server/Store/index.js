@@ -138,7 +138,15 @@ class Store {
       // No install data for this app
       return null;
     }
-    return this.installData[catalogId][appId];
+    const appInstallData = {
+      name: this.storeMetadata.title,
+      description: this.storeMetadata.description,
+      key: this.installData.installationCredentials.consumer_key,
+      secret: this.installData.installationCredentials.consumer_secret,
+      xml: this.installData.installXML,
+      launchPrivacy: this.storeMetadata.launchPrivacy,
+    };
+    return appInstallData;
   }
 
   /**
