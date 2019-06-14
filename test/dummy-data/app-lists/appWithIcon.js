@@ -19,15 +19,11 @@ module.exports = {
       'grading',
     ],
   },
-  icon: { fullPath: 'fake_icon.png' },
+  icon: { fullPath: 'question_mark.png' },
   screenshots: [
     {
       title: 'Event Chooser',
       filename: 'event_chooser.png',
-    },
-    {
-      title: 'Non Existant',
-      filename: 'non_existant.png',
     },
     {
       title: 'Manual Seating Dashboard',
@@ -54,4 +50,3 @@ module.exports = {
     },
   ],
 };
-  

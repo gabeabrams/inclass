@@ -27,7 +27,7 @@ module.exports = (opts) => {
   // Checks if app object has icon property
   if (app.icon) {
     const appWithURL = app;
-    const { fullPath, filename } = appWithURL;
+    const { fullPath } = appWithURL;
     try {
       /**
          * Serves icon.fullPath to
