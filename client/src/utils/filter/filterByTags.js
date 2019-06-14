@@ -28,7 +28,7 @@ module.exports = (apps, tags) => {
      // Using that list of tags, check if any of them are checked
      const atLeastOneItemIsChecked = tagValues.some((itemName) => {
        // Check if any of the itemNames are true in the tags
-       return tags[tagName].tagValues[itemName];
+       return tags[tagName].values[itemName];
      });
 
      return atLeastOneItemIsChecked;
