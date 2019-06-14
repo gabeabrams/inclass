@@ -60,6 +60,8 @@ class Store {
          *    installationCredentials. It places that information
          *    in installData.
          */
+        const appIds = Object.keys(apps);
+        // For i through appIds and merge the two loops below
         catalogIdToCatalogMetadata[catalogId] = Object.keys(apps).map((appId) => {
           const { installXML, installationCredentials } = apps[appId];
           installData[catalogId][appId] = { installXML, installationCredentials };

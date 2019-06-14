@@ -13,7 +13,7 @@ const path = require('path');
  *   new app.screenshots[i].url field for each screenshot (the screenshot's url)
  */
 
-module.exports = async (opts) => {
+module.exports = (opts) => {
   // TODO: serve the app's screenshots individually
   // use app.screenshots[i].fullPath
   const {
