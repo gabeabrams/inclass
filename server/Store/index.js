@@ -29,6 +29,12 @@ class Store {
    * Function that attempts to perform a load. If successful, swaps out our
    *   metadata objects. If failed, leaves current metadata objects as is
    *   and prints error to console.
+   * @return {object} states whether the attemptLoad is successful or not
+   *   with error message if success is false
+   * {
+   *   success: <true if no error occurs, false otherwise>,
+   *   message: <only given when success is false>,
+   * }
    */
   async _attemptLoad() {
     try {
@@ -64,24 +70,31 @@ class Store {
          * Calls serveScreenshots
          * Saves the updated catalog in catalogIdToCatalogMetadata
          */
-        catalogIdToCatalogMetadata[catalogId] = Object.keys(apps).map(
-          (appId) => {
-            const { installXML, installationCredentials } = apps[appId];
-            installData[catalogId][appId] = { installXML, installationCredentials };
+        const appIds = Object.keys(apps);
 
-            delete apps[appId].installXML;
-            delete apps[appId].installationCredentials;
-
-            const opts = {
-              expressApp: this.expressApp,
-              catalogId,
-              appId,
-              app: apps[appId],
-            };
-            apps[appId] = serveScreenshots(opts);
-            return newCatalog;
+        appIds.forEach((appId) => {
+          const { installXML, installationCredentials } = apps[appId];
+          if (!installData[catalogId]) {
+            installData[catalogId] = {};
           }
-        );
+
+          installData[catalogId][appId] = {
+            installXML,
+            installationCredentials,
+          };
+
+          delete apps[appId].installXML;
+          delete apps[appId].installationCredentials;
+
+          const opts = {
+            expressApp: this.expressApp,
+            catalogId,
+            appId,
+            app: apps[appId],
+          };
+          apps[appId] = serveScreenshots(opts);
+          catalogIdToCatalogMetadata[catalogId] = newCatalog;
+        });
       });
 
       // Swaps out metadata object
@@ -89,8 +102,10 @@ class Store {
       this.accountIdToCatalogId = accountIdToCatalogId;
       this.catalogIdToCatalogMetadata = catalogIdToCatalogMetadata;
       this.installData = installData;
+      return { success: true };
     } catch (error) {
       console.log(`An error occurred while attempting to load store information: ${error.message}`);
+      return { success: false, message: error.message };
     }
   }
 
@@ -138,14 +153,16 @@ class Store {
       // No install data for this app
       return null;
     }
-    const appInstallData = {
-      name: this.storeMetadata.title,
-      description: this.storeMetadata.description,
-      key: this.installData.installationCredentials.consumer_key,
-      secret: this.installData.installationCredentials.consumer_secret,
-      xml: this.installData.installXML,
-      launchPrivacy: this.storeMetadata.launchPrivacy,
-    };
+    const { installXML, installationCredentials } = this
+      .installData[catalogId][appId];
+    const { title, description, launchPrivacy } = this.storeMetadata;
+    const appInstallData = {};
+    appInstallData.name = title;
+    appInstallData.description = description;
+    appInstallData.key = installationCredentials.consumer_key;
+    appInstallData.secret = installationCredentials.consumer_secret;
+    appInstallData.xml = installXML;
+    appInstallData.launchPrivacy = launchPrivacy;
     return appInstallData;
   }
 

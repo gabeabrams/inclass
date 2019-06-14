@@ -13,6 +13,7 @@ module.exports = async (path) => {
 
   // throw an error if the file doesn't exist:
   if (!await fileExists(fixedPath)) {
+    console.log('File exists! should not print this');
     throw new Error(`We couldn't load the app store metadata because the file ${fixedPath} does not exist`);
   }
   // read the file, parse it, and return
