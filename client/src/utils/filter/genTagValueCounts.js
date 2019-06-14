@@ -34,7 +34,6 @@ module.exports = (apps, tags) => {
 
     // Go through each tagValue in this current tag ex. 'free'
     tagVals.forEach((tagItem) => {
-
       // Take the filtered apps that match our other tags, and only count the
       // ones that have this tagItem
       const countedApps = filteredApps.filter((app) => {
