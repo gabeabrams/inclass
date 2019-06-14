@@ -27,20 +27,19 @@ module.exports = (opts) => {
   // Checks if app object has icon property
   if (app.icon) {
     const appWithURL = app;
-    const { fullPath } = appWithURL;
+    const { fullPath } = appWithURL.icon;
     try {
       /**
          * Serves icon.fullPath to
          * /public/<catalogId>/<appId>/icon/<filename>
          * Will throw 404 if file doesn't exist (fallthrough)
          */
-      expressApp.use(webPath,
-        express.static(fullPath, { fallthrough: false }));
+      expressApp.use(webPath, express.static(fullPath, { fallthrough: false }));
     } catch (error) {
       const errMessage = `The app ${appId} in catalog ${catalogId} listed an icon with filename ${filename}, but that file does not exist`;
       throw new Error(errMessage);
     }
-    appWithURL.url = path.join(webPath, filename);
+    appWithURL.icon.url = path.join(webPath, fullPath);
     return appWithURL;
   }
   return app;
