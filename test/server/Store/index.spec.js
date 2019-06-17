@@ -7,7 +7,7 @@ const API = require('../../dummy-objects/API');
 const expressApp = new ExpressApp();
 const badExpressApp = 'Not Real';
 const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
-const Store = proxyquire('../../../server/Store/index', {
+const Store = proxyquire('../../../server/Store', {
   './STORE_CONSTANTS': {
     path: dummyPath,
     '@global': true,
