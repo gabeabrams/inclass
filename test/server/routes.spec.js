@@ -5,59 +5,57 @@ const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
 
 const initRoutesWithStore = (expressApp, storeOpts) => {
+  // generate fake Store and replace all instances of Store in index.js
   const routesUninitialized = proxyquire(
     '../../server/routes',
     {
       './Store': genStore(storeOpts),
     }
   );
+  // use the fake store for testing, return the fake Store object
   return routesUninitialized(expressApp);
 };
 
 describe('server > routes', function () {
-  // describe.skip('Gabe\'s example', function () {
-  //   it('Does it', async function () {
-  //     const fakeExpressApp = new ExpressApp();
-  //     const fakeAPI = new API();
-  //
-  //     const routes = initRoutesWithStore(
-  //       fakeExpressApp,
-  //       {
-  //         storeMetadata: {
-  //           title: 'My Store',
-  //         },
-  //       }
-  //     );
-  //
-  //
-  //     let jsonCalled;
-  //     let payload;
-  //     const res = {
-  //       json: (data) => {
-  //         payload = data;
-  //         jsonCalled = true;
-  //       }
-  //     };
-  //
-  //     const req = {
-  //       api: fakeAPI,
-  //       launchInfo: {
-  //         courseId: <put something here>,
-  //       },
-  //     };
-  //
-  //     fakeExpressApp.simulateGETRequest('/store', req, res);
-  //
-  //     // Call routes
-  //     routes(fakeExpressApp);
-  //   });
-  // });
+  describe.skip('Gabe\'s example', function () {
+    it('Does it', async function () {
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
 
-  describe('server > routes /store', function () {
+      const routes = initRoutesWithStore(
+        fakeExpressApp,
+        {
+          storeMetadata: {
+            title: 'My Store',
+          },
+        }
+      );
+
+      let jsonCalled;
+      let payload;
+      const res = {
+        json: (data) => {
+          payload = data;
+          jsonCalled = true;
+        },
+      };
+      const req = {
+        api: fakeAPI,
+        launchInfo: {
+          courseId: 48,
+        },
+      };
+      fakeExpressApp.simulateGETRequest('/store', req, res);
+      // Call routes
+      routes(fakeExpressApp);
+    });
+  });
+
+  describe.skip('server > routes /store', function () {
     // Sam's tests
   });
 
-  describe('server > routes /catalog', function () {
+  describe.skip('server > routes /catalog', function () {
     // Henry's tests
   });
 });
