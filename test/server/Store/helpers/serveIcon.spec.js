@@ -16,19 +16,10 @@ describe('server > Store > helpers > serveIcon', function () {
     // URL was added
     assert(app.icon.url, 'URL property does not exist for the icon');
 
+    // URL is correct
+    assert.equal(app.icon.url, '/public/dce/swipein/icon', 'The URL does not match the format ');
+
     // Express.use was called
     assert.equal(myExpressApp.used[0].path, '/public/dce/swipein/icon', 'did not call express.use');
-  });
-
-  it('checks correct url added to icon\'s property', async function () {
-    const myExpressApp = new ExpressApp();
-    const opts = {
-      expressApp: myExpressApp,
-      catalogId: 'dce',
-      appId: 'swipein',
-      app: appWithIcon,
-    };
-    const app = await serveIcon(opts);
-    assert.equal(app.icon.url, '/public/dce/swipein/icon', 'The URL does not match the format ');
   });
 });
