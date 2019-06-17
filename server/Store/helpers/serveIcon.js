@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 /**
  * Serves the icon for this app
  * @module server/Store/helpers/serveIcon
@@ -28,6 +27,7 @@ module.exports = (opts) => {
   if (app.icon) {
     const appWithURL = app;
     const { fullPath } = appWithURL.icon;
+    console.log('FULLPATH: ', fullPath);
     try {
       /**
          * Serves icon.fullPath to

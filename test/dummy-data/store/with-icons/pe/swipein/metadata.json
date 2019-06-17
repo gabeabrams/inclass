@@ -5,6 +5,7 @@
     },
     "title": "Physical CheckIn",
     "subtitle": "An app that allows people to swipe into facilities in the physical education department",
+    "icon": { "fullPath": "icon.jpeg" },
     "screenshots": [
         {
             "title": "Event Chooser",

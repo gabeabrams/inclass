@@ -2,37 +2,36 @@ const path = require('path');
 const assert = require('assert');
 const ExpressApp = require('../../../dummy-objects/ExpressApp');
 const serveIcon = require('../../../../server/Store/helpers/serveIcon');
-const appWithIcon = require('../../../dummy-data/app-lists/appWithIcon');
-const appWithNoFile = require('../../../dummy-data/app-lists/appWithNoFile');
+const appWithNoFile = require('../../../dummy-data/store/medium/pe/swipein/metadata');
+
+const myExpressApp = new ExpressApp();
 
 describe.only('server > Store > helpers > serveIcon', function () {
-  // it('does nothing if no icon property', async function () {
-  //   const opts = {
-  //     expressApp: new ExpressApp(),
-  //     catalogId: 'dce',
-  //     appId: 'gradeup',
-  //     app: { title: 'GradeUp', creator: 'dce' },
-  //   };
-  //   const app = await serveIcon(opts);
-  //   assert.deepEqual(opts.app, app, 'The app returned is not the same app');
-  // });
+  it('does nothing if no icon property', async function () {
+    const opts = {
+      expressApp: new ExpressApp(),
+      catalogId: 'dce',
+      appId: 'gradeup',
+      app: { title: 'GradeUp', creator: 'dce' },
+    };
+    const app = await serveIcon(opts);
+    assert.deepEqual(opts.app, app, 'The app returned is not the same app');
+  });
 
-  it('throws error for non-existing file', async function () {
-    // appWithNoFile.icon.fullPath = path.join(__dirname, '../../../dummy-data/images/non-exist.png');
-    const myExpressApp = new ExpressApp();
-    let errorOccurred = false;
+  it('throws error for non-existing icon', async function () {
     const opts = {
       expressApp: myExpressApp,
-      catalogId: 'dce',
+      catalogId: 'pe',
       appId: 'swipein',
       app: appWithNoFile,
     };
+    let errorOccurred = false;
     try {
-      console.log('Icon Served: ', await serveIcon(opts));
+      await serveIcon(opts);
     } catch (err) {
       if (
         err.message.startsWith('The app')
-        && err.message.includes('but that file does not exist')
+        && err.message.includes('but that icon does not exist')
       ) {
         // The correct error occurred
         errorOccurred = true;

@@ -19,7 +19,7 @@ module.exports = {
       'grading',
     ],
   },
-  icon: { fullPath: 'fake_icon.png' },
+  icon: { fullPath: 'icon.png' },
   screenshots: [
     {
       title: 'Event Chooser',
