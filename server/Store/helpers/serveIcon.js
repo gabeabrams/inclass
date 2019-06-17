@@ -29,7 +29,7 @@ module.exports = (opts) => {
      */
     expressApp.use(webPath, express.static(fullPath, { fallthrough: false }));
   } catch (error) {
-    const errMessage = 'We ran into an issue';
+    const errMessage = `We ran into an issue preparing the icon for the app ${appId} in catalog ${catalogId}`;
     throw new Error(errMessage);
   }
   appWithURL.icon.url = webPath;
