@@ -37,7 +37,7 @@ module.exports = (expressApp) => {
     try {
       const { catalog, isAdmin } = await store.getCatalogAndPermissions(
         req.api,
-        req.sessions.launchInfo
+        req.session.launchInfo
       );
       return res.json({
         catalog,
