@@ -18,9 +18,11 @@ describe('server > Store > index', function () {
   it('Checks metadata objects untouched when error occurs', async function () {
     const badStore = new Store(badExpressApp);
     const successful = await badStore._attemptLoad();
+
+    assert(!successful.success, 'No error occurred');
+
     if (
-      successful.success === true
-      || Object.keys(badStore.storeMetadata).length !== 0
+      Object.keys(badStore.storeMetadata).length !== 0
       || Object.keys(badStore.accountIdToCatalogId).length !== 0
       || Object.keys(badStore.catalogIdToCatalogMetadata).length !== 0
       || Object.keys(badStore.installData).length !== 0
