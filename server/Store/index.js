@@ -158,17 +158,23 @@ class Store {
       // No install data for this app
       return null;
     }
-    const { installXML, installationCredentials } = this
-      .installData[catalogId][appId];
+
+    const {
+      installXML,
+      installationCredentials,
+    } = this.installData[catalogId][appId];
+
     const appData = this.catalogIdToCatalogMetadata[catalogId].apps[appId];
     const { title, description, launchPrivacy } = appData;
-    const appInstallData = {};
-    appInstallData.name = title;
-    appInstallData.description = description;
-    appInstallData.key = installationCredentials.consumer_key;
-    appInstallData.secret = installationCredentials.consumer_secret;
-    appInstallData.xml = installXML;
-    appInstallData.launchPrivacy = launchPrivacy;
+    const appInstallData = {
+      description,
+      launchPrivacy,
+      name: title,
+      key: installationCredentials.consumer_key,
+      secret: installationCredentials.consumer_secret,
+      xml: installXML,
+    };
+
     return appInstallData;
   }
 
