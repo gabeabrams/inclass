@@ -68,6 +68,6 @@ module.exports = async (api, launchInfo, catalogs) => {
       isAdmin = false;
     }
   }
-
+  console.log('AHHH: ', isAdmin);
   return { matchCatalogId, isAdmin };
 };

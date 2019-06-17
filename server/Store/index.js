@@ -38,8 +38,8 @@ class Store {
   async _attemptLoad() {
     try {
       const myStore = await loadStore();
-      const { store, catalogs } = myStore;
-      const storeMetadata = store;
+      const { catalogs } = myStore;
+      const storeMetadata = myStore.store;
       const accountIdToCatalogId = {};
       const catalogIdToCatalogMetadata = {};
       const installData = {};
@@ -121,11 +121,13 @@ class Store {
    * }
    */
   async getCatalogAndPermissions(api, launchInfo) {
-    return detectCatalogAndPermissions(
+    const { matchCatalogId, isAdmin } = await detectCatalogAndPermissions(
       api,
       launchInfo,
       this.catalogIdToCatalogMetadata
     );
+    const catalog = this.catalogIdToCatalogMetadata[matchCatalogId];
+    return { catalog, isAdmin };
   }
 
   /**

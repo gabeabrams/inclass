@@ -15,7 +15,7 @@ const Store = proxyquire('../../../server/Store', {
 });
 const store = new Store(expressApp);
 
-describe('server > Store > index', function () {
+describe.only('server > Store > index', function () {
   it('Checks metadata objects untouched when error occurs', async function () {
     const badStore = new Store(badExpressApp);
     const successful = await badStore._attemptLoad();
@@ -54,7 +54,7 @@ describe('server > Store > index', function () {
     const launchInfo = { courseId: 102 };
     const dataPermissions = await store
       .getCatalogAndPermissions(api, launchInfo);
-    assert.equal(dataPermissions.matchCatalogId, 'seas', 'Did not return the right catalog');
+    assert.equal(dataPermissions.catalog.title, 'SEAS Catalog', 'Did not return the right catalog');
     assert.equal(dataPermissions.isAdmin, true, 'Did not return the right admin permission');
   });
 
@@ -62,8 +62,8 @@ describe('server > Store > index', function () {
     await store._attemptLoad();
     const myInstallData = store.getInstallData('dce', 'gradeup');
     const expectedData = {
-      name: 'Harvard Appstore',
-      description: undefined,
+      name: 'GradeUp',
+      description: 'longer version of the subtitle',
       key: 'consumer key is here',
       secret: 'this is the consumer\'s secret',
       xml: '<?xml version = "1.0"?>\n<contact-info>\n   <name>Tanmay Patil</name>\n   <company>TutorialsPoint</company>\n   <phone>(011) 123-4567</phone>\n</contact-info>',
