@@ -94,6 +94,7 @@ class Store {
             app: apps[appId],
           };
           apps[appId] = serveScreenshots(opts);
+          // save updated catalog to catalogIdToCatalogMetadata
           catalogIdToCatalogMetadata[catalogId] = newCatalog;
         });
       });
