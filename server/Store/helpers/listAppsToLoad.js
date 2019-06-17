@@ -20,8 +20,6 @@ module.exports = async () => {
   // populate object
   for (let i = 0; i < catalogIds.length; i++) {
     appsToLoad[catalogIds[i]] = {};
-    if(i === 1) {
-    }
     const apps = await listFolders(path.join(STORE_PATH, catalogIds[i]));
     apps.forEach((app) => {
       const appPath = path.join(STORE_PATH, catalogIds[i], app);
