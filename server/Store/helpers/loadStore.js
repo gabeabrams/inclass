@@ -15,6 +15,9 @@ const loadCatalogMetadata = require('./loadCatalogMetadata');
  */
 module.exports = async () => {
   const storeMetadata = await loadStoreMetadata();
+
+  // TODO: add storeMetadata.logoFullPath by detecting if the logo is .png/.jpg/.jpeg
+
   // initiate storeMap
   const storeMap = {}; // {store: storeMetadata, catalogIds: catalog}
   storeMap.store = storeMetadata;
