@@ -76,6 +76,11 @@ describe('server > Store > helpers > loadApp', function () {
       assert(app.icon.fullPath, 'app icon is not loaded correctly');
       appKeys.splice(appKeys.indexOf('icon'), 1);
     }
+    // check launchPrivacy
+    if (appKeys.includes('launchPrivacy')) {
+      assert.equal(app.launchPrivacy, 'public', 'app launch privacy is not "public"');
+      appKeys.splice(appKeys.indexOf('launchPrivacy'), 1);
+    }
     // check for every other key we copied straight from metadata file
     appKeys.forEach((key) => {
       assert(JSON.stringify(app[key]) === JSON.stringify(realApp[key]), `the value of key: ${key} was not read in from metadata file correctly`);
@@ -145,11 +150,16 @@ describe('server > Store > helpers > loadApp', function () {
         numOfKeys -= 1;
       } else if (key === 'supportEmail') {
         // check that supportEmail field is either from parent or from catalog
-        assert(childApp[key] === childAppMetadata[key]
-        || childApp[key] === catalogMetadata.defaultSupportEmail, 'support Email is incorrect');
+        assert(
+          (
+            childApp[key] === childAppMetadata[key]
+            || childApp[key] === catalogMetadata.defaultSupportEmail
+          ),
+          'support Email is incorrect'
+        );
         numOfKeys -= 1;
       } else if (key === 'screenshots') {
-      // check that each file ends with .png
+        // check that each file ends with .png
         childApp[key].forEach((screenshot) => {
           assert(screenshot.filename.endsWith('.png'), 'screenshots filename does not end with .png');
         });
@@ -169,6 +179,9 @@ describe('server > Store > helpers > loadApp', function () {
     numOfKeys -= 1;
     // test app credentials
     assert.notEqual(JSON.stringify(childApp.installationCredentials), JSON.stringify(parentMetadata.installationCredentials), 'child app extended parent app credentials incorrectly');
+    numOfKeys -= 1;
+    // test launchPrivacy
+    assert.equal(childApp.launchPrivacy, 'public', 'app launchPrivacy was not "public"');
     numOfKeys -= 1;
     // these tests should exaust all possible app keys, otherwise throw error
     assert(numOfKeys === 0, 'did not test all keys included in child app');
