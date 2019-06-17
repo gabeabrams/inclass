@@ -123,12 +123,12 @@ class Store {
    * }
    */
   async getCatalogAndPermissions(api, launchInfo) {
-    const { matchCatalogId, isAdmin } = await detectCatalogAndPermissions(
+    const { catalogId, isAdmin } = await detectCatalogAndPermissions(
       api,
       launchInfo,
       this.catalogIdToCatalogMetadata
     );
-    const catalog = this.catalogIdToCatalogMetadata[matchCatalogId];
+    const catalog = this.catalogIdToCatalogMetadata[catalogId];
     return { catalog, isAdmin };
   }
 

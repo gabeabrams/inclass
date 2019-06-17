@@ -68,5 +68,6 @@ module.exports = async (api, launchInfo, catalogs) => {
       isAdmin = false;
     }
   }
-  return { matchCatalogId, isAdmin };
+
+  return { catalogId: matchCatalogId, isAdmin };
 };
