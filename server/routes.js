@@ -29,7 +29,8 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/catalog', async (req, res) => {
-    // TODO: implement
+    // TODO: respond with an error if req.api or req.session.launchInfo does
+    //   not exist
   });
 
   /**

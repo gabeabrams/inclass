@@ -16,15 +16,15 @@ module.exports = [
   {
     name: 'AppThree',
     tags: {
-      cost: ['free'],
+      cost: ['expensive'],
       type: ['export'],
     },
   },
   {
     name: 'AppFour',
     tags: {
-      cost: ['expensive'],
-      type: ['teaching'],
+      cost: ['free'],
+      type: ['grading'],
     },
   },
 ];
