@@ -12,7 +12,7 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
       './Store': genStore(storeOpts),
     }
   );
-  // use the fake store for testing, return the fake Store object
+  // use the fake store for testing, return the fake Store routes export
   return routesUninitialized(expressApp);
 };
 
@@ -55,7 +55,10 @@ describe('server > routes', function () {
     // Sam's tests
   });
 
-  describe.skip('server > routes /catalog', function () {
+  describe('server > routes /catalog', function () {
     // Henry's tests
+    it('tests catalog', function () {
+      console.log('hello');
+    });
   });
 });

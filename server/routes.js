@@ -29,7 +29,7 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/catalog', async (req, res) => {
-    // TODO: respond with an error if req.api or req.session.launchInfo does
+    // respond with an error if req.api or req.session.launchInfo does
     //   not exist
     if (!req.api || !req.session.launchInfo) {
       throw new Error('We could not load your customized list of apps because we couldn\'t connect to Canvas and process your launch info. Please re-launch. If this error occurs again, contact an admin.');
