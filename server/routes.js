@@ -1,8 +1,8 @@
 const Store = require('./Store');
+
 module.exports = (expressApp) => {
   // Create an instance of the store
   const store = new Store(expressApp);
-  console.log('store is ', store.getCatalogAndPermissions);
 
   /**
    * Endpoint that returns the store metadata
