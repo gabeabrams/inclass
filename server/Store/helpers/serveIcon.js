@@ -30,7 +30,7 @@ module.exports = (opts) => {
          */
       expressApp.use(webPath, express.static(fullPath, { fallthrough: false }));
     } catch (error) {
-      const errMessage = `The app ${appId} in catalog ${catalogId} listed an icon, but that icon does not exist`;
+      const errMessage = 'We ran into an issue';
       throw new Error(errMessage);
     }
     appWithURL.icon.url = webPath;
