@@ -43,7 +43,7 @@ describe('server > Store > helpers > detectCatalogAndPermissions', function () {
   it('checks correct catalog is found', async function () {
     const launchInfo = { courseId: 100 };
     const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
-    assert.equal(match.matchCatalogId, 'two', 'Catalog Id does not match what is expected');
+    assert.equal(match.catalogId, 'two', 'Catalog Id does not match what is expected');
   });
 
   it('checks isAdmin is true when person is admin of course they are in', async function () {
