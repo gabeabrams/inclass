@@ -13,9 +13,8 @@ const Store = proxyquire('../../../server/Store', {
     '@global': true,
   },
 });
-const store = new Store(expressApp);
 
-describe.only('server > Store > index', function () {
+describe('server > Store > index', function () {
   it('Checks metadata objects untouched when error occurs', async function () {
     const badStore = new Store(badExpressApp);
     const successful = await badStore._attemptLoad();
@@ -31,6 +30,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks metadata objects are filled', async function () {
+    const store = new Store(expressApp);
     await store._attemptLoad();
     const {
       storeMetadata,
@@ -49,6 +49,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks getCatalogAndPermissions returns expected item', async function () {
+    const store = new Store(expressApp);
     await store._attemptLoad();
     const api = new API();
     const launchInfo = { courseId: 102 };
@@ -59,6 +60,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks getInstallData returns expected item', async function () {
+    const store = new Store(expressApp);
     await store._attemptLoad();
 
     const myInstallData = store.getInstallData('dce', 'gradeup');
@@ -74,15 +76,38 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks getInstallData returns null when there is no installdata for a catalog or app', async function () {
+    const store = new Store(expressApp);
     await store._attemptLoad();
     const myInstallData = store.getInstallData('notReal', 'fakeApp');
     assert(!myInstallData, 'getInstallData did not return null');
   });
 
   it('Checks getStoreMetadata returns expected item', async function () {
+    const store = new Store(expressApp);
     await store._attemptLoad();
     const myStoreMetadata = store.getStoreMetadata();
     const values = Object.values(myStoreMetadata);
     assert.equal(values[0], 'Harvard Appstore', 'getStoreMetadata did not return expected item');
+  });
+
+  it('Deletes installXML and installationCredentials from app metadata', async function () {
+    const store = new Store(expressApp);
+    await store._attemptLoad();
+
+    const swipeIn = store.catalogIdToCatalogMetadata.seas.apps.swipein;
+
+    // Make sure installationCredentials are deleted
+    assert.equal(
+      swipeIn.installationCredentials,
+      undefined,
+      'installationCredentials are not deleted'
+    );
+
+    // Make sure installXML is deleted
+    assert.equal(
+      swipeIn.installXML,
+      undefined,
+      'installXML was not deleted'
+    );
   });
 });
