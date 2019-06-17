@@ -60,7 +60,7 @@ describe.only('server > Store > index', function () {
 
   it('Checks getInstallData returns expected item', async function () {
     await store._attemptLoad();
-    
+
     const myInstallData = store.getInstallData('dce', 'gradeup');
     const expectedData = {
       name: 'GradeUp',
@@ -68,9 +68,8 @@ describe.only('server > Store > index', function () {
       key: 'consumer key is here',
       secret: 'this is the consumer\'s secret',
       xml: '<?xml version = "1.0"?>\n<contact-info>\n   <name>Tanmay Patil</name>\n   <company>TutorialsPoint</company>\n   <phone>(011) 123-4567</phone>\n</contact-info>',
-      launchPrivacy: undefined,
+      launchPrivacy: 'public',
     };
-    console.log('myInstallData', myInstallData);
     assert.deepEqual(myInstallData, expectedData, 'installData returned was not what is expected');
   });
 

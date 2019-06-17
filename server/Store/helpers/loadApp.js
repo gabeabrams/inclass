@@ -35,6 +35,9 @@ module.exports = async (opts = {}) => {
   const appMetadataPath = path.join(STORE_PATH, catalogId, appId, 'metadata');
   const appMetadata = await readJSON(appMetadataPath);
 
+  // Set default value for launchPrivacy
+  appMetadata.launchPrivacy = appMetadata.launchPrivacy || 'public';
+
   // read XML file here
   const xmlPath = path.join(STORE_PATH, catalogId, appId, 'install.xml');
   const installXML = await readXML(xmlPath, parentAppMetadata);
