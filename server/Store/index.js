@@ -70,21 +70,23 @@ class Store {
          * Saves the updated catalog in catalogIdToCatalogMetadata
          */
         const appIds = Object.keys(apps);
-
         appIds.forEach((appId) => {
           const { installXML, installationCredentials } = apps[appId];
+          // Ensures only one copy per catalog
           if (!installData[catalogId]) {
             installData[catalogId] = {};
           }
-
+          // saves secret credentials to installData
           installData[catalogId][appId] = {
             installXML,
             installationCredentials,
           };
 
+          // deletes those secret credentials from each app
           delete apps[appId].installXML;
           delete apps[appId].installationCredentials;
 
+          // calls serveScreenshots with the secrets-removed app
           const opts = {
             expressApp: this.expressApp,
             catalogId,
