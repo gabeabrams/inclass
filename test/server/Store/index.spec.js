@@ -55,8 +55,9 @@ describe('server > Store > index', function () {
     await store._attemptLoad();
     const api = new API();
     const launchInfo = { courseId: 102 };
-    const dataPermissions = await store
-      .getCatalogAndPermissions(api, launchInfo);
+    const dataPermissions = (
+      await store.getCatalogAndPermissions(api, launchInfo)
+    );
     assert.equal(dataPermissions.catalog.title, 'SEAS Catalog', 'Did not return the right catalog');
     assert.equal(dataPermissions.isAdmin, true, 'Did not return the right admin permission');
   });
