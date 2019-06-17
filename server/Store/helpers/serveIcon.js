@@ -19,22 +19,19 @@ module.exports = (opts) => {
   const webPath = `/public/${catalogId}/${appId}/icon`;
 
   // Checks if app object has icon property
-  if (app.icon) {
-    const appWithURL = app;
-    const { fullPath } = appWithURL.icon;
-    try {
-      /**
+  const appWithURL = app;
+  const { fullPath } = appWithURL.icon;
+  try {
+    /**
          * Serves icon.fullPath to
          * /public/<catalogId>/<appId>/icon
          * Will throw 404 if file doesn't exist (fallthrough)
          */
-      expressApp.use(webPath, express.static(fullPath, { fallthrough: false }));
-    } catch (error) {
-      const errMessage = 'We ran into an issue';
-      throw new Error(errMessage);
-    }
-    appWithURL.icon.url = webPath;
-    return appWithURL;
+    expressApp.use(webPath, express.static(fullPath, { fallthrough: false }));
+  } catch (error) {
+    const errMessage = 'We ran into an issue';
+    throw new Error(errMessage);
   }
-  return app;
+  appWithURL.icon.url = webPath;
+  return appWithURL;
 };
