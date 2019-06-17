@@ -10,11 +10,6 @@ const express = require('express');
  * @return {App} new app object with a new app.icon.url field added
  */
 module.exports = (opts) => {
-  // TODO: serve the app's icon
-  // use app.icon.fullPath
-
-  // Use this path: /public/<catalogId>/<appId>/icon
-
   const {
     expressApp,
     catalogId,
