@@ -69,5 +69,5 @@ module.exports = async (api, launchInfo, catalogs) => {
     }
   }
 
-  return { matchCatalogId, isAdmin };
+  return { catalogId: matchCatalogId, isAdmin };
 };

@@ -8,7 +8,7 @@ const fs = require('fs');
  * @param {string} path - the path to the enclosing folder to search
  * @return {string[]} the names of all the folders in the enclosing folder
  */
-module.exports = async (folderPath) => {
+module.exports = (folderPath) => {
   return new Promise((resolve, reject) => {
     fs.readdir(folderPath, (err, list) => {
       if (err) {
