@@ -22,11 +22,11 @@ module.exports = (opts) => {
   const appWithURL = app;
   const { fullPath } = appWithURL.icon;
   try {
-    /**
-         * Serves icon.fullPath to
-         * /public/<catalogId>/<appId>/icon
-         * Will throw 404 if file doesn't exist (fallthrough)
-         */
+    /*
+     * Serves icon.fullPath to
+     * /public/<catalogId>/<appId>/icon
+     * Will throw 404 if file doesn't exist (fallthrough)
+     */
     expressApp.use(webPath, express.static(fullPath, { fallthrough: false }));
   } catch (error) {
     const errMessage = 'We ran into an issue';
