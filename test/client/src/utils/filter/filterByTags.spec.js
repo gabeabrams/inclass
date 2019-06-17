@@ -88,7 +88,7 @@ describe('client > src > utils > filter > filterByTags', function () {
 
   const testAppList = [AppOne, AppTwo, AppThree, AppFour];
 
-  it('Returns a list of apps that have a given tag name checked', async function () {
+  it('Will filter a list of apps based on the checked tags', async function () {
     // Expected Apps are 2 and 4 because they are both 'expensive' and have one
     // of the type tags
     assert.deepEqual(filterByTags(testAppList, testTagsExpensiveAllTypes), [AppTwo, AppFour], 'Returned applist is not equal to the expected apps');
