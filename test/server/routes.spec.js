@@ -4,12 +4,17 @@ const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
 
+// thie imports routes and replaces all instances of store to our generated one
 const initRoutesWithStore = (expressApp, storeOpts) => {
-  // generate fake Store and replace all instances of Store in index.js
+  const fakeStore = genStore(storeOpts);
+  console.log('new fake store is ', fakeStore.getCatalogAndPermissions);
+  
+  // generate fake Store and replace all instances of Store in routes.js
   const routesUninitialized = proxyquire(
     '../../server/routes',
     {
       './Store': genStore(storeOpts),
+      '@global': true,
     }
   );
   // use the fake store for testing, return the fake Store routes export
@@ -56,9 +61,35 @@ describe('server > routes', function () {
   });
 
   describe('server > routes /catalog', function () {
-    // Henry's tests
-    it('tests catalog', function () {
-      console.log('hello');
+    it.only('tests catalog route', async function () {
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+      // init store with only metadata
+      initRoutesWithStore(
+        fakeExpressApp,
+        {
+          storeMetadata: {
+            title: 'Harvard Store',
+          },
+        }
+      );
+
+      const req = {
+        api: fakeAPI,
+        session: {
+          launchInfo: {
+            courseId: 60,
+          },
+        },
+      };
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+      await fakeExpressApp.simulateGETRequest('/catalog', req, res);
+      console.log('data returned is ', dataReturnedToClient);
     });
   });
 });

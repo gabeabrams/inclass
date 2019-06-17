@@ -18,7 +18,8 @@ module.exports = (opts) => {
       return storeMetadata;
     }
 
-    async detectCatalogAndPermissions(api, launchInfo) {
+    async getCatalogAndPermissions(api, launchInfo) {
+      console.log('this is called');
       if (!api) {
         throw new Error('API not included');
       }

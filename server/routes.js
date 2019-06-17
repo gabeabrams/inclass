@@ -1,8 +1,8 @@
 const Store = require('./Store');
-
 module.exports = (expressApp) => {
   // Create an instance of the store
   const store = new Store(expressApp);
+  console.log('store is ', store.getCatalogAndPermissions);
 
   /**
    * Endpoint that returns the store metadata
@@ -13,9 +13,9 @@ module.exports = (expressApp) => {
    *   store: <store metadata if success is true>,
    * }
    */
-  expressApp.get('/store', async (req, res) => {
-    // TODO: implement
-  });
+  // expressApp.get('/store', async (req, res) => {
+  //   // TODO: implement
+  // });
 
   /**
    * Endpoint that determines the correct catalog for a user and returns the
@@ -30,7 +30,7 @@ module.exports = (expressApp) => {
    */
   expressApp.get('/catalog', async (req, res) => {
     // respond with an error if req.api or req.session.launchInfo does
-    //   not exist
+    // not exist
     if (!req.api || !req.session.launchInfo) {
       throw new Error('We could not load your customized list of apps because we couldn\'t connect to Canvas and process your launch info. Please re-launch. If this error occurs again, contact an admin.');
     }
@@ -67,7 +67,7 @@ module.exports = (expressApp) => {
    *   message: <error message if success is false>,
    * }
    */
-  expressApp.get('/catalogs/:catalogId/apps/:appId/install', async (req, res) => {
-    // TODO: implement
-  });
+  // expressApp.get('/catalogs/:catalogId/apps/:appId/install', async (req, res) => {
+  //   // TODO: implement
+  // });
 };
