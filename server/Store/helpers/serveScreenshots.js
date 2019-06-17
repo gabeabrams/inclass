@@ -14,8 +14,6 @@ const path = require('path');
  */
 
 module.exports = (opts) => {
-  // TODO: serve the app's screenshots individually
-  // use app.screenshots[i].fullPath
   const {
     expressApp,
     catalogId,
@@ -46,7 +44,5 @@ module.exports = (opts) => {
       return screenshotWithURL;
     });
   }
-
-  // Use this path: /public/<catalogId>/<appId>/screenshots/<filename>
   return app;
 };

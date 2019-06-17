@@ -5,7 +5,6 @@
  */
 
 /* ------------------------- Store Class ------------------------ */
-// TODO: Add awaits to function calls
 const loadStore = require('./helpers/loadStore');
 const serveScreenshots = require('./helpers/serveScreenshots');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
@@ -155,7 +154,8 @@ class Store {
     }
     const { installXML, installationCredentials } = this
       .installData[catalogId][appId];
-    const { title, description, launchPrivacy } = this.storeMetadata;
+    const appData = this.catalogIdToCatalogMetadata[catalogId].apps[appId];
+    const { title, description, launchPrivacy } = appData;
     const appInstallData = {};
     appInstallData.name = title;
     appInstallData.description = description;
