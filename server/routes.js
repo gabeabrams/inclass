@@ -14,7 +14,20 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/store', async (req, res) => {
-    // TODO: implement
+    // Get the store metadata using the getStoreMetadata function
+    // If that doesn't work, we throw an error
+    try {
+      const storeMetadata = Store.getStoreMetadata();
+      return res.json({
+        success: true,
+        store: storeMetadata,
+      });
+    } catch (err) {
+      return res.json({
+        success: false,
+        message: 'An unknown error occurred while getting store metadata. If this error continues after a few minutes, please contact an admin.',
+      });
+    }
   });
 
   /**
