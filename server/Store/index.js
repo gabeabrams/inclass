@@ -30,10 +30,10 @@ class Store {
    *   and prints error to console.
    * @return {object} states whether the attemptLoad is successful or not
    *   with error message if success is false
-   * {
-   *   success: <true if no error occurs, false otherwise>,
-   *   message: <only given when success is false>,
-   * }
+   *   {
+   *     success: <true if no error occurs, false otherwise>,
+   *     message: <only given when success is false>,
+   *   }
    */
   async _attemptLoad() {
     try {
