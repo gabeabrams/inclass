@@ -19,11 +19,13 @@ describe('server > Store > index', function () {
   it('Checks metadata objects untouched when error occurs', async function () {
     const badStore = new Store(badExpressApp);
     const successful = await badStore._attemptLoad();
-    if (successful.success === true
-    && Object.keys(badStore.storeMetadata).length !== 0
-    && Object.keys(badStore.accountIdToCatalogId).length !== 0
-    && Object.keys(badStore.catalogIdToCatalogMetadata).length !== 0
-    && Object.keys(badStore.installData).length !== 0) {
+    if (
+      successful.success === true
+      || Object.keys(badStore.storeMetadata).length !== 0
+      || Object.keys(badStore.accountIdToCatalogId).length !== 0
+      || Object.keys(badStore.catalogIdToCatalogMetadata).length !== 0
+      || Object.keys(badStore.installData).length !== 0
+    ) {
       throw new Error('metadata variables should be empty');
     }
   });
@@ -36,10 +38,12 @@ describe('server > Store > index', function () {
       catalogIdToCatalogMetadata,
       installData,
     } = store;
-    if (Object.keys(storeMetadata).length === 0
-    && Object.keys(accountIdToCatalogId).length === 0
-    && Object.keys(catalogIdToCatalogMetadata).length === 0
-    && Object.keys(installData).length === 0) {
+    if (
+      Object.keys(storeMetadata).length === 0
+      || Object.keys(accountIdToCatalogId).length === 0
+      || Object.keys(catalogIdToCatalogMetadata).length === 0
+      || Object.keys(installData).length === 0
+    ) {
       throw new Error('metadata variables should be filled');
     }
   });
