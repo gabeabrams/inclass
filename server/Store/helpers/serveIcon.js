@@ -27,7 +27,6 @@ module.exports = (opts) => {
   if (app.icon) {
     const appWithURL = app;
     const { fullPath } = appWithURL.icon;
-    console.log('FULLPATH: ', fullPath);
     try {
       /**
          * Serves icon.fullPath to
