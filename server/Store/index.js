@@ -8,6 +8,7 @@
 const loadStore = require('./helpers/loadStore');
 const serveScreenshots = require('./helpers/serveScreenshots');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
+const callOnSchedule = require('./helpers/callOnSchedule');
 
 class Store {
   constructor(expressApp) {
@@ -22,6 +23,10 @@ class Store {
 
     // Perform first load attempt
     this._attemptLoad();
+    // reloading Store
+    const hotReload = () => {
+      this._attemptLoad();
+    };
   }
 
   /**
