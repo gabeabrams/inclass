@@ -46,19 +46,45 @@ describe('server > routes', function () {
         },
       };
 
-      fakeExpressApp.simulateGETRequest('/store', req, res);
-
-      // Call routes
-      routes(fakeExpressApp);
     });
   });
 
   describe('server > routes /store', function () {
-    // Sam's tests
+    it('Gets store metadata and sends it back in the expressApp response', async function() {
+      // We make a fake express app using the dummy ExpressApp we made
+      const fakeExpressApp = new ExpressApp();
+      // Use initRoutesWithStore to initialize the routes
+      const routes = initRoutesWithStore(
+        fakeExpressApp,
+        {
+          storeMetadata: {
+            title: 'My Store',
+          },
+        }
+      );
 
-  });
+      // Variables to check that json was called and to get the data from the
+      // json object
+      let jsonCalled;
+      let payload;
+      const res = {
+        json: (data) => {
+          payload = data;
+          jsonCalled = true;
+        }
+      };
 
-  describe('server > routes /catalog', function () {
-    // Henry's tests
+      await fakeExpressApp.simulateGETRequest('/store', req, res);
+
+
+
+
+
+    });
+    it('Will send back an error message if there is a problem getting the store metadata', async function () {
+      try {
+
+      }
+    });
   });
 });
