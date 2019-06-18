@@ -52,11 +52,11 @@ describe('server > routes', function () {
   // });
 
   describe.only('server > routes /store', function () {
-    it.only('Gets store metadata and sends it back in the expressApp response', async function() {
+    it.only('Gets store metadata and sends it back in the expressApp response', async function () {
       // We make a fake express app using the dummy ExpressApp we made
       const fakeExpressApp = new ExpressApp();
       // Use initRoutesWithStore to initialize the routes
-      const routes = initRoutesWithStore(
+      initRoutesWithStore(
         fakeExpressApp,
         {
           storeMetadata: {
@@ -71,7 +71,6 @@ describe('server > routes', function () {
       let payload;
       const res = {
         json: (data) => {
-          console.log(data);
           payload = data;
           jsonCalled = true;
         },
