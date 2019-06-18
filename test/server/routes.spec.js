@@ -1,3 +1,5 @@
+const assert = require('assert');
+
 const proxyquire = require('proxyquire');
 
 const ExpressApp = require('../dummy-objects/ExpressApp');
@@ -15,39 +17,39 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
 };
 
 describe('server > routes', function () {
-  describe.skip('Gabe\'s example', function () {
-    it('Does it', async function () {
-      const fakeExpressApp = new ExpressApp();
-      const fakeAPI = new API();
-
-      const routes = initRoutesWithStore(
-        fakeExpressApp,
-        {
-          storeMetadata: {
-            title: 'My Store',
-          },
-        }
-      );
-
-
-      let jsonCalled;
-      let payload;
-      const res = {
-        json: (data) => {
-          payload = data;
-          jsonCalled = true;
-        }
-      };
-
-      const req = {
-        api: fakeAPI,
-        launchInfo: {
-          courseId: <put something here>,
-        },
-      };
-
-    });
-  });
+  // describe.skip('Gabe\'s example', function () {
+  //   it('Does it', async function () {
+  //     const fakeExpressApp = new ExpressApp();
+  //     const fakeAPI = new API();
+  //
+  //     const routes = initRoutesWithStore(
+  //       fakeExpressApp,
+  //       {
+  //         storeMetadata: {
+  //           title: 'My Store',
+  //         },
+  //       }
+  //     );
+  //
+  //
+  //     let jsonCalled;
+  //     let payload;
+  //     const res = {
+  //       json: (data) => {
+  //         payload = data;
+  //         jsonCalled = true;
+  //       }
+  //     };
+  //
+  //     const req = {
+  //       api: fakeAPI,
+  //       launchInfo: {
+  //         courseId: <put something here>,
+  //       },
+  //     };
+  //
+  //   });
+  // });
 
   describe.only('server > routes /store', function () {
     it.only('Gets store metadata and sends it back in the expressApp response', async function() {
@@ -69,14 +71,17 @@ describe('server > routes', function () {
       let payload;
       const res = {
         json: (data) => {
+          console.log(data);
           payload = data;
           jsonCalled = true;
-        }
+        },
       };
+
+      const req = {};
 
       await fakeExpressApp.simulateGETRequest('/store', req, res);
       assert.equal(jsonCalled, true);
-      assert.deepEqual(payload, data);
+      assert.equal(payload.success, true);
     });
   });
 });
