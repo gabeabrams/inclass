@@ -22,7 +22,6 @@ describe('server > routes', function () {
   describe.only('server > routes /catalog', function () {
     it('throws an error if API is missing', async function () {
       const fakeExpressApp = new ExpressApp();
-      const fakeAPI = new API();
       initRoutesWithStore(
         fakeExpressApp,
         {
@@ -51,6 +50,7 @@ describe('server > routes', function () {
         error = err;
       }
       assert(error, 'catalog route did not throw an error with incomplete launch information');
+      assert(!dataReturnedToClient, 'falsely returned data when should throw error');
     });
 
     it('throws an error if launchInfo is in wrong format', async function () {
@@ -65,7 +65,7 @@ describe('server > routes', function () {
           },
         }
       );
-
+      // the session object inside req is missing the launchInfo object
       const req = {
         api: fakeAPI,
         session: {
@@ -85,9 +85,10 @@ describe('server > routes', function () {
         error = err;
       }
       assert(error, 'catalog route did not throw an error with incorrect launchInformation format');
+      assert(!dataReturnedToClient, 'falsely returned data when should throw error');
     });
 
-    it('returns success when ', async function () {
+    it('throws an error if getCatalogAndPermissions failed', async function () {
       const fakeExpressApp = new ExpressApp();
       const fakeAPI = new API();
       // init store with only metadata
@@ -99,12 +100,12 @@ describe('server > routes', function () {
           },
         }
       );
-
+      // req with courseId object replaced with wrong object inside req.session
       const req = {
         api: fakeAPI,
         session: {
           launchInfo: {
-            courseId: 60,
+            coursework: 54,
           },
         },
       };
@@ -115,7 +116,55 @@ describe('server > routes', function () {
         },
       };
       await fakeExpressApp.simulateGETRequest('/catalog', req, res);
-      console.log('data returned is ', dataReturnedToClient);
+      assert(dataReturnedToClient.success === false, 'did not return correct success object');
+      assert(dataReturnedToClient.message, 'did not populate message when success is false');
+    });
+
+    it('returns original object when getCatalog successful', async function () {
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+      const fakeCatalog = {
+        title: 'SEAS Catalog',
+        accounts: [26, 30, 51],
+        tagsToShow: [
+          {
+            tagName: 'cost',
+            color: 'blue',
+          },
+        ],
+        defaultSupportEmail: 'example@harvard.edu',
+      };
+
+      // init store with only metadata
+      initRoutesWithStore(
+        fakeExpressApp,
+        {
+          storeMetadata: {
+            title: 'Harvard Store',
+          },
+          catalog: fakeCatalog,
+          isAdmin: true,
+        }
+      );
+
+      const req = {
+        api: fakeAPI,
+        session: {
+          launchInfo: {
+            courseId: 54,
+          },
+        },
+      };
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+      await fakeExpressApp.simulateGETRequest('/catalog', req, res);
+      assert(dataReturnedToClient.success, 'failed when it should return success');
+      assert.deepEqual(dataReturnedToClient.catalog, fakeCatalog, 'did not return correct catalog');
+      assert.equal(dataReturnedToClient.isAdmin, true, 'did not return correct isAdmin object');
     });
   });
 });
