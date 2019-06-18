@@ -5,7 +5,7 @@ const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
 
-// thie imports routes and replaces all instances of store to our generated one
+// this imports routes and replaces all instances of store to our generated one
 const initRoutesWithStore = (expressApp, storeOpts) => {
   // generate fake Store and replace all instances of Store in routes.js
   const routesUninitialized = proxyquire(
@@ -19,7 +19,7 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
 };
 
 describe('server > routes', function () {
-  describe.only('server > routes /catalog', function () {
+  describe('server > routes /catalog', function () {
     it('throws an error if API is missing', async function () {
       const fakeExpressApp = new ExpressApp();
       initRoutesWithStore(
@@ -30,6 +30,7 @@ describe('server > routes', function () {
           },
         }
       );
+      // req is missing api object
       const req = {
         session: {
           launchInfo: {
