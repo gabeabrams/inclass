@@ -17,7 +17,7 @@ module.exports = (expressApp) => {
     // Get the store metadata using the getStoreMetadata function
     // If that doesn't work, we throw an error
     try {
-      const storeMetadata = Store.getStoreMetadata();
+      const storeMetadata = store.getStoreMetadata();
       return res.json({
         success: true,
         store: storeMetadata,
