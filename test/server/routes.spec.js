@@ -117,7 +117,7 @@ describe('server > routes', function () {
         },
       };
       await fakeExpressApp.simulateGETRequest('/catalog', req, res);
-      assert(dataReturnedToClient.success === false, 'did not return correct success object');
+      assert(!dataReturnedToClient.success, 'did not return correct success object');
       assert(dataReturnedToClient.message, 'did not populate message when success is false');
     });
 
@@ -136,7 +136,7 @@ describe('server > routes', function () {
         defaultSupportEmail: 'example@harvard.edu',
       };
 
-      // init store with only metadata
+      // init store with metadata, catalog, and isAdmin
       initRoutesWithStore(
         fakeExpressApp,
         {
