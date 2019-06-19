@@ -29,6 +29,7 @@ module.exports = async () => {
   } else {
     throw new Error('We cannot load store logo because the file does not exist');
   }
+
   // initiate storeMap
   const storeMap = {}; // {store: storeMetadata, catalogIds: catalog}
   storeMap.store = storeMetadata;
