@@ -51,6 +51,7 @@ module.exports = (expressApp) => {
         });
       }
       // if error does not have code, log the error into console
+      // eslint-disable-next-line no-console
       console.log(err);
       return res.json({
         success: false,
