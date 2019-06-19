@@ -46,7 +46,7 @@ describe('server > routes', function () {
       };
       let error;
       try {
-        await fakeExpressApp.simulateGETRequest('/catalog', req, res);
+        await fakeExpressApp.simulateRequest('/catalog', req, res);
       } catch (err) {
         error = err;
       }
@@ -81,7 +81,7 @@ describe('server > routes', function () {
       };
       let error;
       try {
-        await fakeExpressApp.simulateGETRequest('/catalog', req, res);
+        await fakeExpressApp.simulateRequest('/catalog', req, res);
       } catch (err) {
         error = err;
       }
@@ -116,7 +116,7 @@ describe('server > routes', function () {
           dataReturnedToClient = data;
         },
       };
-      await fakeExpressApp.simulateGETRequest('/catalog', req, res);
+      await fakeExpressApp.simulateRequest('/catalog', req, res);
       assert(!dataReturnedToClient.success, 'did not return correct success object');
       assert(dataReturnedToClient.message, 'did not populate message when success is false');
     });
@@ -162,7 +162,7 @@ describe('server > routes', function () {
           dataReturnedToClient = data;
         },
       };
-      await fakeExpressApp.simulateGETRequest('/catalog', req, res);
+      await fakeExpressApp.simulateRequest('/catalog', req, res);
       assert(dataReturnedToClient.success, 'failed when it should return success');
       assert.deepEqual(dataReturnedToClient.catalog, fakeCatalog, 'did not return correct catalog');
       assert.equal(dataReturnedToClient.isAdmin, true, 'did not return correct isAdmin object');
