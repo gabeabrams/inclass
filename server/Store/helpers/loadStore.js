@@ -1,10 +1,16 @@
 // Import helpers
+const path = require('path');
 const listAppsToLoad = require('./listAppsToLoad');
 const loadApp = require('./loadApp');
 const loadStoreMetadata = require('./loadStoreMetadata');
 const getAppParent = require('./getAppParent');
 const loadCatalogMetadata = require('./loadCatalogMetadata');
+const fileExists = require('./fileExists');
+const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 
+const STORE_PATH = STORE_CONSTANTS.path;
+
+const ALLOWED_LOGO_EXTENSIONS = ['jpg', 'jpeg', 'png'];
 
 /**
  * Reads the metadata of the store, reads each catalog, and returns a full
@@ -15,8 +21,19 @@ const loadCatalogMetadata = require('./loadCatalogMetadata');
  */
 module.exports = async () => {
   const storeMetadata = await loadStoreMetadata();
-
-  // TODO: add storeMetadata.logoFullPath by detecting if the logo is .png/.jpg/.jpeg
+  // load store logo
+  const logoPathWithoutExt = path.join(STORE_PATH, 'logo');
+  for (let i = 0; i < ALLOWED_LOGO_EXTENSIONS.length; i++) {
+    const extension = ALLOWED_LOGO_EXTENSIONS[i];
+    const potentialLogoFullPath = `${logoPathWithoutExt}.${extension}`;
+    if (await fileExists(potentialLogoFullPath)) {
+      storeMetadata.logoFullPath = potentialLogoFullPath;
+      break;
+    }
+  }
+  if (!storeMetadata.logoFullPath) {
+    throw new Error('We cannot load store logo because the file does not exist');
+  }
 
   // initiate storeMap
   const storeMap = {}; // {store: storeMetadata, catalogIds: catalog}
@@ -35,7 +52,7 @@ module.exports = async () => {
     }
     // detect cycles and throw an error if they occur
     if (seen.includes(`${catalogId}=>${appId}`)) {
-      throw new Error('detected cycle');
+      throw new Error('Could not load apps because there was a circular dependency');
     } else {
       seen.push(`${catalogId}=>${appId}`);
     }
