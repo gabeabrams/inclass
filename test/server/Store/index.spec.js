@@ -1,4 +1,5 @@
 const assert = require('assert');
+const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const path = require('path');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
@@ -15,6 +16,25 @@ const Store = proxyquire('../../../server/Store', {
 });
 
 describe('server > Store > index', function () {
+  let hello = 0;
+  it.only('replaces store if reload successful', async function (done) {
+    // set the maximum timeout for this test to be 40 seconds
+    this.timeout(40000);
+
+    const kill = setInterval(() => {
+      if (hello === 3) {
+        done();
+      }
+      hello += 1;
+      console.log('hello is ', hello);
+    }, 1000);
+  });
+  it('does not replace the store if reload failed', async function () {
+
+  });
+  it('does not update store if being edited is true', async function () {
+
+  });
   it('Checks metadata objects untouched when error occurs', async function () {
     const badStore = new Store(badExpressApp);
     const successful = await badStore._attemptLoad();

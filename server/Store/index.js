@@ -9,6 +9,7 @@ const loadStore = require('./helpers/loadStore');
 const serveScreenshots = require('./helpers/serveScreenshots');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
 const callOnSchedule = require('./helpers/callOnSchedule');
+const STORE_CONSTANTS = require('./STORE_CONSTANTS');
 
 class Store {
   constructor(expressApp) {
@@ -26,7 +27,10 @@ class Store {
     // reloading Store
     const hotReload = () => {
       this._attemptLoad();
+      console.log('1');
     };
+    // reload the store every 'hotReloadSec' dictated by STORE_CONSTANTS
+    this.kill = callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
   }
 
   /**
