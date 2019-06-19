@@ -40,14 +40,15 @@ class Store {
   async _attemptLoad() {
     try {
       const myStore = await loadStore();
-      const { catalogs, logoFullPath } = myStore;
+      const { catalogs } = myStore;
       const storeMetadata = myStore.store;
+      const { logoFullPath } = storeMetadata;
       const accountIdToCatalogId = {};
       const catalogIdToCatalogMetadata = {};
       const installData = {};
 
       // Serves logoFullPath using serveStoreLogo function
-      serveStoreLogo(storeMetadata.logoFullPath, this.expressApp);
+      serveStoreLogo(logoFullPath, this.expressApp);
 
       /**
        * Goes through each catalog in catalogs

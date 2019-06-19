@@ -55,7 +55,7 @@ describe.only('server > Store > index', function () {
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
-    // assert.equal(expressApp.used[0].path, '/public/logo', 'The URL does not match what is expected');
+    assert.equal(expressApp.used[0].path, '/public/logo', 'The URL does not match what is expected');
     const { catalogIdToCatalogMetadata } = store;
     Object.keys(catalogIdToCatalogMetadata).forEach((catalogId) => {
       const { apps } = catalogIdToCatalogMetadata[catalogId];
