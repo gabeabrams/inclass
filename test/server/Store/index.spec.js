@@ -1,5 +1,4 @@
 const assert = require('assert');
-const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const path = require('path');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
@@ -16,18 +15,20 @@ const Store = proxyquire('../../../server/Store', {
 });
 
 describe('server > Store > index', function () {
-  let hello = 0;
-  it.only('replaces store if reload successful', async function (done) {
+  // delay function using promises
+  async function delay(ms) {
+    // return await for better async stack trace support in case of errors.
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  it.only('replaces store if reload successful', async function () {
     // set the maximum timeout for this test to be 40 seconds
     this.timeout(40000);
-
-    const kill = setInterval(() => {
-      if (hello === 3) {
-        done();
-      }
-      hello += 1;
-      console.log('hello is ', hello);
-    }, 1000);
+    const store = new Store(expressApp);
+    await delay(25000);
+    // check if the newly loaded store is the same as the old one
+    const newStore = new Store(expressApp);
+    assert.deepEqual(store, newStore);
   });
   it('does not replace the store if reload failed', async function () {
 

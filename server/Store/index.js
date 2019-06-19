@@ -27,10 +27,10 @@ class Store {
     // reloading Store
     const hotReload = () => {
       this._attemptLoad();
-      console.log('1');
+      console.log(this.storeMetadata);
     };
     // reload the store every 'hotReloadSec' dictated by STORE_CONSTANTS
-    this.kill = callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
+    const kill = callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
   }
 
   /**
