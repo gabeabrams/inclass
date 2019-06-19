@@ -1,11 +1,14 @@
 // Import helpers
+const path = require('path');
 const listAppsToLoad = require('./listAppsToLoad');
 const loadApp = require('./loadApp');
 const loadStoreMetadata = require('./loadStoreMetadata');
 const getAppParent = require('./getAppParent');
 const loadCatalogMetadata = require('./loadCatalogMetadata');
+const fileExists = require('./fileExists');
+const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 
-
+const STORE_PATH = STORE_CONSTANTS.path;
 /**
  * Reads the metadata of the store, reads each catalog, and returns a full
  *   catalog metadata object
@@ -15,9 +18,17 @@ const loadCatalogMetadata = require('./loadCatalogMetadata');
  */
 module.exports = async () => {
   const storeMetadata = await loadStoreMetadata();
-
-  // TODO: add storeMetadata.logoFullPath by detecting if the logo is .png/.jpg/.jpeg
-
+  // load store logo
+  const logoPathWithoutExt = path.join(STORE_PATH, 'logo');
+  if (await fileExists(`${logoPathWithoutExt}.jpg`)) {
+    storeMetadata.logoFullPath = `${logoPathWithoutExt}.jpg`;
+  } else if (await fileExists(`${logoPathWithoutExt}.jpeg`)) {
+    storeMetadata.logoFullPath = `${logoPathWithoutExt}.jpeg`;
+  } else if (await fileExists(`${logoPathWithoutExt}.png`)) {
+    storeMetadata.logoFullPath = `${logoPathWithoutExt}.png`;
+  } else {
+    throw new Error('We cannot load store logo because the file does not exist');
+  }
   // initiate storeMap
   const storeMap = {}; // {store: storeMetadata, catalogIds: catalog}
   storeMap.store = storeMetadata;

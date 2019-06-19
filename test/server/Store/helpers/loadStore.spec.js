@@ -2,7 +2,7 @@ const assert = require('assert');
 const path = require('path');
 const proxyquire = require('proxyquire');
 
-describe('server > Store > helpers > loadStore', function () {
+describe.only('server > Store > helpers > loadStore', function () {
   it('contains correct fields and data is filled', async function () {
     const dummyPath = path.join(__dirname, '../../../dummy-data/store/medium');
     const loadStore = proxyquire('../../../../server/Store/helpers/loadStore', {
