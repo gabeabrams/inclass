@@ -52,6 +52,7 @@ describe('server > routes', function () {
       assert.equal(payload.success, true, 'Payload success is not correct value');
       assert.deepEqual(payload.store, storeMetadata, 'Store metadata is not correct');
     });
+
     it('Will return an error message if it cannot get the store metadata', async function () {
       // We make a fake express app using the dummy ExpressApp we made
       const fakeExpressApp = new ExpressApp();
@@ -78,5 +79,9 @@ describe('server > routes', function () {
       assert.equal(payload.success, false, 'Did not return correct value for success');
       assert.equal(payload.message, 'Store metadata is not ready. If this error continues after a few minutes, please contact an admin.', 'Message is undefined');
     });
+  });
+
+  describe('server > routes /catalog', function () {
+    // Henry's tests
   });
 });
