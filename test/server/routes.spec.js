@@ -121,7 +121,7 @@ describe('server > routes', function () {
       assert(dataReturnedToClient.message, 'did not populate message when success is false');
     });
 
-    it('returns original object when getCatalog successful', async function () {
+    it.only('returns original object when GET /catalog successful', async function () {
       const fakeExpressApp = new ExpressApp();
       const fakeAPI = new API();
       const fakeCatalog = {
@@ -154,6 +154,7 @@ describe('server > routes', function () {
           launchInfo: {
             courseId: 54,
           },
+          save: (callback) => { callback(); },
         },
       };
       let dataReturnedToClient;

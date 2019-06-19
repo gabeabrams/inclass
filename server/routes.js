@@ -1,5 +1,3 @@
-const util = require('util');
-
 const Store = require('./Store');
 
 module.exports = (expressApp) => {
@@ -52,7 +50,15 @@ module.exports = (expressApp) => {
       req.session.isAdmin = isAdmin;
 
       // Save the session
-      await util.promisify(req.session.save);
+      await new Promise((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
 
       return res.json({
         catalog,
