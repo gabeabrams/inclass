@@ -29,8 +29,35 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/catalog', async (req, res) => {
-    // TODO: respond with an error if req.api or req.session.launchInfo does
-    //   not exist
+    // respond with an error if req.api or req.session.launchInfo does not exist
+    if (!req.api || !req.session.launchInfo) {
+      throw new Error('We could not load your customized list of apps because we couldn\'t connect to Canvas and process your launch info. Please re-launch. If this error occurs again, contact an admin.');
+    }
+    try {
+      const { catalog, isAdmin } = await store.getCatalogAndPermissions(
+        req.api,
+        req.session.launchInfo
+      );
+      return res.json({
+        catalog,
+        isAdmin,
+        success: true,
+      });
+    } catch (err) {
+      if (err.code) {
+        return res.json({
+          success: false,
+          message: `An error occurred while getting the list of apps in the current catalog: ${err.message}`,
+        });
+      }
+      // if error does not have code, log the error into console
+      // eslint-disable-next-line no-console
+      console.log(err);
+      return res.json({
+        success: false,
+        message: 'An unknown error occurred while getting the list of apps in the current catalog. Please contact an admin.',
+      });
+    }
   });
 
   /**
