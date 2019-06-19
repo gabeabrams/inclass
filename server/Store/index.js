@@ -121,6 +121,7 @@ class Store {
    * @return {object} metadata and permissions in the form:
    * {
    *   catalog: <catalog metadata object>,
+   *   catalogId: <catalog id>,
    *   isAdmin: <true if the user is an admin>,
    * }
    */
@@ -131,7 +132,11 @@ class Store {
       this.catalogIdToCatalogMetadata
     );
     const catalog = this.catalogIdToCatalogMetadata[catalogId];
-    return { catalog, isAdmin };
+    return {
+      catalog,
+      catalogId,
+      isAdmin,
+    };
   }
 
   /**
