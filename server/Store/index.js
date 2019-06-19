@@ -7,6 +7,8 @@
 /* ------------------------- Store Class ------------------------ */
 const loadStore = require('./helpers/loadStore');
 const serveScreenshots = require('./helpers/serveScreenshots');
+const serveIcon = require('./helpers/serveIcon');
+const serveStoreLogo = require('./helpers/serveStoreLogo');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
 
 class Store {
@@ -38,11 +40,15 @@ class Store {
   async _attemptLoad() {
     try {
       const myStore = await loadStore();
-      const { catalogs } = myStore;
+      const { catalogs, logoFullPath } = myStore;
       const storeMetadata = myStore.store;
       const accountIdToCatalogId = {};
       const catalogIdToCatalogMetadata = {};
       const installData = {};
+
+      // Serves logoFullPath using serveStoreLogo function
+      // Note: need to uncomment next line after serveStoreLogo is merged
+      // serveStoreLogo(logoFullPath, this.expressApp);
 
       /**
        * Goes through each catalog in catalogs
@@ -94,6 +100,9 @@ class Store {
             app: apps[appId],
           };
           apps[appId] = serveScreenshots(opts);
+          // Update opts object after serveScreenshots
+          opts.app = apps[appId];
+          apps[appId] = serveIcon(opts);
           // save updated catalog to catalogIdToCatalogMetadata
           catalogIdToCatalogMetadata[catalogId] = newCatalog;
         });

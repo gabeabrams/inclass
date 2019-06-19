@@ -14,7 +14,7 @@ const Store = proxyquire('../../../server/Store', {
   },
 });
 
-describe('server > Store > index', function () {
+describe.only('server > Store > index', function () {
   it('Checks metadata objects untouched when error occurs', async function () {
     const badStore = new Store(badExpressApp);
     const successful = await badStore._attemptLoad();
@@ -48,6 +48,18 @@ describe('server > Store > index', function () {
     ) {
       throw new Error('metadata variables should be filled');
     }
+  });
+
+  it('serves apps icons properly', async function () {
+    const store = new Store(expressApp);
+    await store._attemptLoad();
+    const { catalogIdToCatalogMetadata } = store;
+    Object.keys(catalogIdToCatalogMetadata).forEach((catalogId) => {
+      const { apps } = catalogIdToCatalogMetadata[catalogId];
+      Object.keys(apps).forEach((appId) => {
+        assert(apps[appId].icon.url, `Did not update icon url for catalog ${catalogId} in app ${appId}`);
+      });
+    });
   });
 
   it('Checks getCatalogAndPermissions returns expected item', async function () {
