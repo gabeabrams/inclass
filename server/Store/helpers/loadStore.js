@@ -9,6 +9,9 @@ const fileExists = require('./fileExists');
 const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 
 const STORE_PATH = STORE_CONSTANTS.path;
+
+const ALLOWED_LOGO_EXTENSIONS = ['jpg', 'jpeg', 'png'];
+
 /**
  * Reads the metadata of the store, reads each catalog, and returns a full
  *   catalog metadata object
@@ -20,13 +23,15 @@ module.exports = async () => {
   const storeMetadata = await loadStoreMetadata();
   // load store logo
   const logoPathWithoutExt = path.join(STORE_PATH, 'logo');
-  if (await fileExists(`${logoPathWithoutExt}.jpg`)) {
-    storeMetadata.logoFullPath = `${logoPathWithoutExt}.jpg`;
-  } else if (await fileExists(`${logoPathWithoutExt}.jpeg`)) {
-    storeMetadata.logoFullPath = `${logoPathWithoutExt}.jpeg`;
-  } else if (await fileExists(`${logoPathWithoutExt}.png`)) {
-    storeMetadata.logoFullPath = `${logoPathWithoutExt}.png`;
-  } else {
+  for (let i = 0; i < ALLOWED_LOGO_EXTENSIONS.length; i++) {
+    const extension = ALLOWED_LOGO_EXTENSIONS[i];
+    const potentialLogoFullPath = `${logoPathWithoutExt}.${extension}`;
+    if (await fileExists(potentialLogoFullPath)) {
+      storeMetadata.logoFullPath = potentialLogoFullPath;
+      break;
+    }
+  }
+  if (!storeMetadata.logoFullPath) {
     throw new Error('We cannot load store logo because the file does not exist');
   }
 
