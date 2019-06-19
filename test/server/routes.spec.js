@@ -64,6 +64,10 @@ describe('server > routes', function () {
         }
       );
 
+      const storeMetadata = {
+        title: 'My Store',
+      };
+
       // Variables to check that json was called and to get the data from the
       // json object
       let jsonCalled;
@@ -77,8 +81,9 @@ describe('server > routes', function () {
 
       const req = {};
       await fakeExpressApp.simulateGETRequest('/store', req, res);
-      assert.equal(jsonCalled, true);
-      assert.equal(payload.success, true);
+      assert.equal(jsonCalled, true, 'JSON object not called');
+      assert.equal(payload.success, true, 'Payload success is not correct value');
+      assert.deepEqual(payload.store, storeMetadata, 'Store metadata is not correct');
     });
     it('Will return an error message if it cannot get the store metadata', async function () {
       // We make a fake express app using the dummy ExpressApp we made
@@ -105,7 +110,9 @@ describe('server > routes', function () {
       const req = {};
       await fakeExpressApp.simulateGETRequest('/store', req, res);
 
-      assert(!payload.success, 'Did not return correct value for success');
+      assert.equal(payload.success, false, 'Did not return correct value for success');
+      console.log(payload.message);
+      assert.equal(payload.message, !undefined, 'Message is undefined');
     });
   });
 });
