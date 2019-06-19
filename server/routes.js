@@ -18,11 +18,15 @@ module.exports = (expressApp) => {
     // If that doesn't work, we throw an error
     try {
       const storeMetadata = store.getStoreMetadata();
+      console.log('store Metadata is: ', storeMetadata);
+      // getStoreMetadata doesn't throw an error if
+      console.log('success');
       return res.json({
         success: true,
         store: storeMetadata,
       });
     } catch (err) {
+      console.log('error');
       return res.json({
         success: false,
         message: (err.code ? err.message : 'An unknown error occurred while getting store metadata. If this error continues after a few minutes, please contact an admin.'),
