@@ -1,10 +1,20 @@
 const express = require('express');
-const path = require('path');
 
 /**
  * Serve the store's logo
  * @param {string} logoFullPath - the full path of the logo to serve
+ * @param {express app} expressApp - the express app to adds routes to
  */
-module.exports = (logoFullPath) => {
-  // TODO: serve logoFullPath at /public/logo
+module.exports = (logoFullPath, expressApp) => {
+  const webPath = 'public/logo';
+
+  try {
+    expressApp.use(
+      webPath,
+      express.static(logoFullPath, { fallthrough: false })
+    );
+  } catch (err) {
+    const errMessage = 'We ran into an issue preparing the logo for the store';
+    throw new Error(errMessage);
+  }
 };

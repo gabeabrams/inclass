@@ -18,7 +18,6 @@ module.exports = (opts) => {
   } = opts;
   const webPath = `/public/${catalogId}/${appId}/icon`;
 
-  // Checks if app object has icon property
   const appWithURL = app;
   const { fullPath } = appWithURL.icon;
   try {
