@@ -1,6 +1,5 @@
-const assert = require('assert');
-
 const proxyquire = require('proxyquire');
+const assert = require('assert');
 
 const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
@@ -52,7 +51,7 @@ describe('server > routes', function () {
   // });
 
   describe.only('server > routes /store', function () {
-    it.only('Gets store metadata and sends it back in the expressApp response', async function () {
+    it('Gets store metadata and sends it back in the expressApp response', async function () {
       // We make a fake express app using the dummy ExpressApp we made
       const fakeExpressApp = new ExpressApp();
       // Use initRoutesWithStore to initialize the routes
@@ -81,6 +80,40 @@ describe('server > routes', function () {
       await fakeExpressApp.simulateGETRequest('/store', req, res);
       assert.equal(jsonCalled, true);
       assert.equal(payload.success, true);
+    });
+    it('Will return an error message if it cannot get the store metadata', async function () {
+      // We make a fake express app using the dummy ExpressApp we made
+      const fakeExpressApp = new ExpressApp();
+      // Use initRoutesWithStore to initialize the routes
+      initRoutesWithStore(
+        fakeExpressApp,
+        {
+          // without store metadata
+        }
+      );
+
+      // Variables to check that json was called and to get the data from the
+      // json object
+      let jsonCalled;
+      let payload;
+      const res = {
+        json: (data) => {
+          payload = data;
+          jsonCalled = true;
+        },
+      };
+
+      const req = {};
+
+      let error;
+      try {
+        await fakeExpressApp.simulateGETRequest('/store', req, res);
+      } catch (err) {
+        error = err;
+      }
+
+      assert(error);
+      assert.equal(payload.success, false);
     });
   });
 });
