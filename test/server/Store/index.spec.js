@@ -13,7 +13,7 @@ const Store = proxyquire('../../../server/Store', {
   },
 });
 
-describe.only('server > Store > index', function () {
+describe('server > Store > index', function () {
   it('Checks metadata objects untouched when error occurs', async function () {
     const badStore = new Store(badExpressApp);
     const successful = await badStore._attemptLoad();
