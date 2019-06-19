@@ -68,7 +68,7 @@ module.exports = (expressApp) => {
    *   message: <error message if success is false>,
    * }
    */
-  expressApp.get('/install/:appId', async (req, res) => {
+  expressApp.post('/install/:appId', async (req, res) => {
     // TODO: implement
   });
 
@@ -80,7 +80,7 @@ module.exports = (expressApp) => {
    *   message: <error message if success is false>,
    * }
    */
-  expressApp.get('/uninstall/:ltiId', async (req, res) => {
+  expressApp.delete('/uninstall', async (req, res) => {
     // TODO: implement
   });
 
