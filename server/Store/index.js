@@ -7,6 +7,8 @@
 /* ------------------------- Store Class ------------------------ */
 const loadStore = require('./helpers/loadStore');
 const serveScreenshots = require('./helpers/serveScreenshots');
+const serveIcon = require('./helpers/serveIcon');
+const serveStoreLogo = require('./helpers/serveStoreLogo');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
 const callOnSchedule = require('./helpers/callOnSchedule');
 const STORE_CONSTANTS = require('./STORE_CONSTANTS');
@@ -49,9 +51,13 @@ class Store {
       const myStore = await loadStore();
       const { catalogs } = myStore;
       const storeMetadata = myStore.store;
+      const { logoFullPath } = storeMetadata;
       const accountIdToCatalogId = {};
       const catalogIdToCatalogMetadata = {};
       const installData = {};
+
+      // Serves logoFullPath using serveStoreLogo function
+      serveStoreLogo(logoFullPath, this.expressApp);
 
       /**
        * Goes through each catalog in catalogs
@@ -96,13 +102,19 @@ class Store {
           delete apps[appId].installationCredentials;
 
           // calls serveScreenshots with the secrets-removed app
-          const opts = {
+          apps[appId] = serveScreenshots({
             expressApp: this.expressApp,
             catalogId,
             appId,
             app: apps[appId],
-          };
-          apps[appId] = serveScreenshots(opts);
+          });
+          // Update opts object after serveScreenshots
+          apps[appId] = serveIcon({
+            expressApp: this.expressApp,
+            catalogId,
+            appId,
+            app: apps[appId],
+          });
           // save updated catalog to catalogIdToCatalogMetadata
           catalogIdToCatalogMetadata[catalogId] = newCatalog;
         });
@@ -130,6 +142,7 @@ class Store {
    * @return {object} metadata and permissions in the form:
    * {
    *   catalog: <catalog metadata object>,
+   *   catalogId: <catalog id>,
    *   isAdmin: <true if the user is an admin>,
    * }
    */
@@ -140,7 +153,11 @@ class Store {
       this.catalogIdToCatalogMetadata
     );
     const catalog = this.catalogIdToCatalogMetadata[catalogId];
-    return { catalog, isAdmin };
+    return {
+      catalog,
+      catalogId,
+      isAdmin,
+    };
   }
 
   /**
@@ -193,6 +210,15 @@ class Store {
    */
   getStoreMetadata() {
     return this.storeMetadata;
+  }
+
+  /**
+   * Returns a catalog object
+   * @param {string} catalogId - the id of the catalog to return
+   * @return {Catalog} the catalog
+   */
+  getCatalog(catalogId) {
+    return this.catalogIdToCatalogMetadata[catalogId];
   }
 }
 

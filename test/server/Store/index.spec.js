@@ -4,7 +4,6 @@ const path = require('path');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
 const API = require('../../dummy-objects/API');
 
-const expressApp = new ExpressApp();
 const badExpressApp = 'Not Real';
 const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
 const Store = proxyquire('../../../server/Store', {
@@ -53,8 +52,10 @@ describe('server > Store > index', function () {
   });
 
   it('Checks metadata objects are filled', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
+
     const {
       storeMetadata,
       accountIdToCatalogId,
@@ -71,7 +72,22 @@ describe('server > Store > index', function () {
     }
   });
 
+  it('serves apps icons and store logo properly', async function () {
+    const expressApp = new ExpressApp();
+    const store = new Store(expressApp);
+    await store._attemptLoad();
+    assert.equal(expressApp.used[0].path, '/public/logo', 'The URL does not match what is expected');
+    const { catalogIdToCatalogMetadata } = store;
+    Object.keys(catalogIdToCatalogMetadata).forEach((catalogId) => {
+      const { apps } = catalogIdToCatalogMetadata[catalogId];
+      Object.keys(apps).forEach((appId) => {
+        assert(apps[appId].icon.url, `Did not update icon url for catalog ${catalogId} in app ${appId}`);
+      });
+    });
+  });
+
   it('Checks getCatalogAndPermissions returns expected item', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
     const api = new API();
@@ -79,11 +95,13 @@ describe('server > Store > index', function () {
     const dataPermissions = (
       await store.getCatalogAndPermissions(api, launchInfo)
     );
+    assert.equal(dataPermissions.catalogId, 'seas', 'Did not return the right catalogId');
     assert.equal(dataPermissions.catalog.title, 'SEAS Catalog', 'Did not return the right catalog');
     assert.equal(dataPermissions.isAdmin, true, 'Did not return the right admin permission');
   });
 
   it('Checks getInstallData returns expected item', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
 
@@ -100,6 +118,7 @@ describe('server > Store > index', function () {
   });
 
   it('Checks getInstallData returns null when there is no installdata for a catalog or app', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
     const myInstallData = store.getInstallData('notReal', 'fakeApp');
@@ -107,6 +126,7 @@ describe('server > Store > index', function () {
   });
 
   it('Checks getStoreMetadata returns expected item', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
     const myStoreMetadata = store.getStoreMetadata();
@@ -115,6 +135,7 @@ describe('server > Store > index', function () {
   });
 
   it('Deletes installXML and installationCredentials from app metadata', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
 

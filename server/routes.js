@@ -14,7 +14,34 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/store', async (req, res) => {
-    // TODO: implement
+    // Get the store metadata using the getStoreMetadata function
+    // If that doesn't work, we throw an error
+    try {
+      const storeMetadata = store.getStoreMetadata();
+      // If storeMetadata 'exists' but is empty, we want to show an error
+      if (!storeMetadata || Object.keys(storeMetadata).length === 0) {
+        return res.json({
+          success: false,
+          message: 'Store metadata is not ready. If this error continues after a few minutes, please contact an admin.',
+        });
+      }
+      return res.json({
+        success: true,
+        store: storeMetadata,
+      });
+    } catch (err) {
+      if (!err.code) {
+        console.log(err);
+      }
+      return res.json({
+        success: false,
+        message: (
+          err.code
+            ? err.message
+            : 'An unknown error occurred while getting store metadata. If this error continues after a few minutes, please contact an admin.'
+        ),
+      });
+    }
   });
 
   /**
@@ -34,10 +61,32 @@ module.exports = (expressApp) => {
       throw new Error('We could not load your customized list of apps because we couldn\'t connect to Canvas and process your launch info. Please re-launch. If this error occurs again, contact an admin.');
     }
     try {
-      const { catalog, isAdmin } = await store.getCatalogAndPermissions(
+      const {
+        catalog,
+        catalogId,
+        isAdmin,
+      } = await store.getCatalogAndPermissions(
         req.api,
         req.session.launchInfo
       );
+
+      // Store the catalogId to the user's session
+      req.session.catalogId = catalogId;
+
+      // Store isAdmin to the user's session
+      req.session.isAdmin = isAdmin;
+
+      // Save the session
+      await new Promise((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
+
       return res.json({
         catalog,
         isAdmin,
@@ -68,20 +117,23 @@ module.exports = (expressApp) => {
    *   message: <error message if success is false>,
    * }
    */
-  expressApp.get('/install/:appId', async (req, res) => {
+  expressApp.post('/install/:appId', async (req, res) => {
     // TODO: implement
   });
 
   /**
    * Endpoint that uninstalls an app from the current course
+   * @param {string[]} ltiIds - the list of lti app ids from Canvas to uninstall
    * @return {object} success description response of the form:
    * {
    *   success: <true/false>,
    *   message: <error message if success is false>,
    * }
    */
-  expressApp.get('/uninstall/:ltiId', async (req, res) => {
+  expressApp.delete('/uninstall', async (req, res) => {
     // TODO: implement
+
+    // NOTE: to get the list of ltiIds, use: req.body.ltiIds
   });
 
   /**
@@ -92,7 +144,7 @@ module.exports = (expressApp) => {
    *   message: <error message if success is false>,
    *   apps: [
    *     {
-   *       ltiId: the id from Canvas,
+   *       ltiIds: array of the lti ids that match this appId,
    *       appId: the app's app store id,
    *     },
    *     ...
