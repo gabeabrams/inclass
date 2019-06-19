@@ -14,7 +14,34 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/store', async (req, res) => {
-    // TODO: implement
+    // Get the store metadata using the getStoreMetadata function
+    // If that doesn't work, we throw an error
+    try {
+      const storeMetadata = store.getStoreMetadata();
+      // If storeMetadata 'exists' but is empty, we want to show an error
+      if (!storeMetadata || Object.keys(storeMetadata).length === 0) {
+        return res.json({
+          success: false,
+          message: 'Store metadata is not ready. If this error continues after a few minutes, please contact an admin.',
+        });
+      }
+      return res.json({
+        success: true,
+        store: storeMetadata,
+      });
+    } catch (err) {
+      if (!err.code) {
+        console.log(err);
+      }
+      return res.json({
+        success: false,
+        message: (
+          err.code
+            ? err.message
+            : 'An unknown error occurred while getting store metadata. If this error continues after a few minutes, please contact an admin.'
+        ),
+      });
+    }
   });
 
   /**
