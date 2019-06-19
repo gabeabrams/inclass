@@ -52,7 +52,7 @@ module.exports = async () => {
     }
     // detect cycles and throw an error if they occur
     if (seen.includes(`${catalogId}=>${appId}`)) {
-      throw new Error('detected cycle');
+      throw new Error('Could not load apps because there was a circular dependency');
     } else {
       seen.push(`${catalogId}=>${appId}`);
     }
