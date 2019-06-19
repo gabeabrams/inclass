@@ -54,7 +54,7 @@ describe('server > routes', function () {
     it('Gets store metadata and sends back the metadata in json object', async function () {
       // We make a fake express app using the dummy ExpressApp we made
       const fakeExpressApp = new ExpressApp();
-      // Use initRoutesWithStore to initialize the routes
+      // Use initRoutesWithStore to initialize the routes to use our fake data
       initRoutesWithStore(
         fakeExpressApp,
         {
@@ -76,7 +76,6 @@ describe('server > routes', function () {
       };
 
       const req = {};
-
       await fakeExpressApp.simulateGETRequest('/store', req, res);
       assert.equal(jsonCalled, true);
       assert.equal(payload.success, true);
@@ -104,7 +103,6 @@ describe('server > routes', function () {
       };
 
       const req = {};
-
       await fakeExpressApp.simulateGETRequest('/store', req, res);
 
       assert(!payload.success, 'Did not return correct value for success');
