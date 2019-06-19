@@ -6,7 +6,7 @@ const serveStoreLogo = require('../../../../server/Store/helpers/serveStoreLogo'
 describe('server > Store > helpers > serveStoreLogo', function () {
   it('serves logo to expressApp', async function () {
     const myExpressApp = new ExpressApp();
-    const logoFullPath = path.join(__dirname, '../../../dummy-data/store/logo');
+    const logoFullPath = path.join(__dirname, '../../../dummy-data/store/medium/logo');
 
     await serveStoreLogo(logoFullPath, myExpressApp);
 
