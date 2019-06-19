@@ -93,16 +93,19 @@ class Store {
           delete apps[appId].installationCredentials;
 
           // calls serveScreenshots with the secrets-removed app
-          const opts = {
+          apps[appId] = serveScreenshots({
             expressApp: this.expressApp,
             catalogId,
             appId,
             app: apps[appId],
-          };
-          apps[appId] = serveScreenshots(opts);
+          });
           // Update opts object after serveScreenshots
-          opts.app = apps[appId];
-          apps[appId] = serveIcon(opts);
+          apps[appId] = serveIcon({
+            expressApp: this.expressApp,
+            catalogId,
+            appId,
+            app: apps[appId],
+          });
           // save updated catalog to catalogIdToCatalogMetadata
           catalogIdToCatalogMetadata[catalogId] = newCatalog;
         });
