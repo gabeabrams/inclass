@@ -1,6 +1,8 @@
 {
-    "title": "SEAS Catalog",
-    "accounts": [26, 30, 51],
+    "title": "PE catalog",
+    "accounts": [
+      123321
+    ],
     "tagsToShow": [
       {
         "tagName": "cost",
@@ -12,4 +14,4 @@
       }
     ],
     "defaultSupportEmail": "example@harvard.edu"
-}
+  }

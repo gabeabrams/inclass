@@ -13,9 +13,7 @@ const path = require('path');
  *   new app.screenshots[i].url field for each screenshot (the screenshot's url)
  */
 
-module.exports = async (opts) => {
-  // TODO: serve the app's screenshots individually
-  // use app.screenshots[i].fullPath
+module.exports = (opts) => {
   const {
     expressApp,
     catalogId,
@@ -46,7 +44,5 @@ module.exports = async (opts) => {
       return screenshotWithURL;
     });
   }
-
-  // Use this path: /public/<catalogId>/<appId>/screenshots/<filename>
   return app;
 };
