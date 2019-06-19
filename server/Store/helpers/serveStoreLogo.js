@@ -6,7 +6,7 @@ const express = require('express');
  * @param {express app} expressApp - the express app to adds routes to
  */
 module.exports = (logoFullPath, expressApp) => {
-  const webPath = 'public/logo';
+  const webPath = '/public/logo';
 
   try {
     /*
