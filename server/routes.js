@@ -35,7 +35,11 @@ module.exports = (expressApp) => {
       }
       return res.json({
         success: false,
-        message: (err.code ? err.message : 'An unknown error occurred while getting store metadata. If this error continues after a few minutes, please contact an admin.'),
+        message: (
+          err.code
+            ? err.message
+            : 'An unknown error occurred while getting store metadata. If this error continues after a few minutes, please contact an admin.'
+        ),
       });
     }
   });
