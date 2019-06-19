@@ -190,6 +190,15 @@ class Store {
   getStoreMetadata() {
     return this.storeMetadata;
   }
+
+  /**
+   * Returns a catalog object
+   * @param {string} catalogId - the id of the catalog to return
+   * @return {Catalog} the catalog
+   */
+  getCatalog(catalogId) {
+    return this.catalogIdToCatalogMetadata[catalogId];
+  }
 }
 
 // Export the class
