@@ -74,6 +74,7 @@ module.exports = (expressApp) => {
 
   /**
    * Endpoint that uninstalls an app from the current course
+   * @param {string[]} ltiIds - the list of lti app ids from Canvas to uninstall
    * @return {object} success description response of the form:
    * {
    *   success: <true/false>,
@@ -82,6 +83,8 @@ module.exports = (expressApp) => {
    */
   expressApp.delete('/uninstall', async (req, res) => {
     // TODO: implement
+
+    // NOTE: to get the list of ltiIds, use: req.body.ltiIds
   });
 
   /**
@@ -92,7 +95,7 @@ module.exports = (expressApp) => {
    *   message: <error message if success is false>,
    *   apps: [
    *     {
-   *       ltiId: the id from Canvas,
+   *       ltiIds: array of the lti ids that match this appId,
    *       appId: the app's app store id,
    *     },
    *     ...
