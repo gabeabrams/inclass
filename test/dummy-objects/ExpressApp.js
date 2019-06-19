@@ -1,7 +1,7 @@
 class ExpressApp {
   constructor() {
     this.used = [];
-    this.getHandlers = {}; // path => handler function
+    this.handlers = {}; // path => handler function
   }
 
   use(path, handler) {
@@ -25,19 +25,35 @@ class ExpressApp {
    * @param {string} path - the path to listen to
    * @param {function} handler - the function to call when the path is hit
    */
+  _addHandler(path, handler) {
+    this.handlers[path] = handler;
+  }
+
   get(path, handler) {
-    this.getHandlers[path] = handler;
+    this._addHandler(path, handler);
+  }
+
+  post(path, handler) {
+    this._addHandler(path, handler);
+  }
+
+  delete(path, handler) {
+    this._addHandler(path, handler);
+  }
+
+  put(path, handler) {
+    this._addHandler(path, handler);
   }
 
   /**
-   * Simulates a GET response to a specific path using the given req and res
+   * Simulates a response to a specific path using the given req and res
    *   objects
    * @param {string} path - the path to listen to
    * @param {object} req - the request object to pass to the handler
    * @param {object} res - the response object to pass to the handler
    */
-  async simulateGETRequest(path, req, res) {
-    await this.getHandlers[path](req, res);
+  async simulateRequest(path, req, res) {
+    await this.handlers[path](req, res);
   }
 }
 module.exports = ExpressApp;
