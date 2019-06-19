@@ -47,7 +47,6 @@ class Store {
       const installData = {};
 
       // Serves logoFullPath using serveStoreLogo function
-      console.log(logoFullPath);
       serveStoreLogo(logoFullPath, this.expressApp);
 
       /**

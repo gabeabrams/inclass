@@ -34,6 +34,7 @@ describe.only('server > Store > index', function () {
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
+
     const {
       storeMetadata,
       accountIdToCatalogId,
