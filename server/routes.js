@@ -1,3 +1,5 @@
+const util = require('util');
+
 const Store = require('./Store');
 
 module.exports = (expressApp) => {
@@ -34,10 +36,24 @@ module.exports = (expressApp) => {
       throw new Error('We could not load your customized list of apps because we couldn\'t connect to Canvas and process your launch info. Please re-launch. If this error occurs again, contact an admin.');
     }
     try {
-      const { catalog, isAdmin } = await store.getCatalogAndPermissions(
+      const {
+        catalog,
+        catalogId,
+        isAdmin,
+      } = await store.getCatalogAndPermissions(
         req.api,
         req.session.launchInfo
       );
+
+      // Store the catalogId to the user's session
+      req.session.catalogId = catalogId;
+
+      // Store isAdmin to the user's session
+      req.session.isAdmin = isAdmin;
+
+      // Save the session
+      await util.promisify(req.session.save);
+
       return res.json({
         catalog,
         isAdmin,
