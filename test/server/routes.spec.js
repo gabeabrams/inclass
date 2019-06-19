@@ -50,8 +50,8 @@ describe('server > routes', function () {
   //   });
   // });
 
-  describe.only('server > routes /store', function () {
-    it('Gets store metadata and sends it back in the expressApp response', async function () {
+  describe.only('server > routes /store', async function () {
+    it('Gets store metadata and sends back the metadata in json object', async function () {
       // We make a fake express app using the dummy ExpressApp we made
       const fakeExpressApp = new ExpressApp();
       // Use initRoutesWithStore to initialize the routes
@@ -105,15 +105,9 @@ describe('server > routes', function () {
 
       const req = {};
 
-      let error;
-      try {
-        await fakeExpressApp.simulateGETRequest('/store', req, res);
-      } catch (err) {
-        error = err;
-      }
+      await fakeExpressApp.simulateGETRequest('/store', req, res);
 
-      assert(error);
-      assert.equal(payload.success, false);
+      assert(!payload.success, 'Did not return correct value for success');
     });
   });
 });
