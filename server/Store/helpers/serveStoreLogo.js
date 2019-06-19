@@ -9,6 +9,11 @@ module.exports = (logoFullPath, expressApp) => {
   const webPath = 'public/logo';
 
   try {
+    /*
+     * Serves logoFullPath to
+     * /public/logo
+     * Will throw 404 if any error occurs (fallthrough)
+     */
     expressApp.use(
       webPath,
       express.static(logoFullPath, { fallthrough: false })
