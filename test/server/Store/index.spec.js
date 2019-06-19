@@ -4,7 +4,6 @@ const path = require('path');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
 const API = require('../../dummy-objects/API');
 
-const expressApp = new ExpressApp();
 const badExpressApp = 'Not Real';
 const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
 const Store = proxyquire('../../../server/Store', {
@@ -32,6 +31,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks metadata objects are filled', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
     const {
@@ -50,9 +50,11 @@ describe.only('server > Store > index', function () {
     }
   });
 
-  it('serves apps icons properly', async function () {
+  it('serves apps icons and store logo properly', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
+    // assert.equal(expressApp.used[0].path, '/public/logo', 'The URL does not match what is expected');
     const { catalogIdToCatalogMetadata } = store;
     Object.keys(catalogIdToCatalogMetadata).forEach((catalogId) => {
       const { apps } = catalogIdToCatalogMetadata[catalogId];
@@ -63,6 +65,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks getCatalogAndPermissions returns expected item', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
     const api = new API();
@@ -75,6 +78,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks getInstallData returns expected item', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
 
@@ -91,6 +95,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks getInstallData returns null when there is no installdata for a catalog or app', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
     const myInstallData = store.getInstallData('notReal', 'fakeApp');
@@ -98,6 +103,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Checks getStoreMetadata returns expected item', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
     const myStoreMetadata = store.getStoreMetadata();
@@ -106,6 +112,7 @@ describe.only('server > Store > index', function () {
   });
 
   it('Deletes installXML and installationCredentials from app metadata', async function () {
+    const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
 

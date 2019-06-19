@@ -47,8 +47,8 @@ class Store {
       const installData = {};
 
       // Serves logoFullPath using serveStoreLogo function
-      // Note: need to uncomment next line after serveStoreLogo is merged
-      // serveStoreLogo(logoFullPath, this.expressApp);
+      console.log(logoFullPath);
+      serveStoreLogo(logoFullPath, this.expressApp);
 
       /**
        * Goes through each catalog in catalogs
