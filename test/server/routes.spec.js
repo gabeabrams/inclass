@@ -186,7 +186,7 @@ describe('server > routes', function () {
       assert(dataReturnedToClient.message, 'did not populate message when success is false');
     });
 
-    it.only('returns original object when GET /catalog successful', async function () {
+    it('returns original object when GET /catalog successful', async function () {
       const fakeExpressApp = new ExpressApp();
       const fakeAPI = new API();
       const fakeCatalog = {
