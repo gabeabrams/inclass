@@ -41,7 +41,38 @@ module.exports = (expressApp) => {
    *   message: <error message if success is false>,
    * }
    */
-  expressApp.get('/catalogs/:catalogId/apps/:appId/install', async (req, res) => {
+  expressApp.get('/install/:appId', async (req, res) => {
+    // TODO: implement
+  });
+
+  /**
+   * Endpoint that uninstalls an app from the current course
+   * @return {object} success description response of the form:
+   * {
+   *   success: <true/false>,
+   *   message: <error message if success is false>,
+   * }
+   */
+  expressApp.get('/uninstall/:ltiId', async (req, res) => {
+    // TODO: implement
+  });
+
+  /**
+   * Endpoint that returns a list of installed apps
+   * @return {object} success description response of the form:
+   * {
+   *   success: <true/false>,
+   *   message: <error message if success is false>,
+   *   apps: [
+   *     {
+   *       ltiId: the id from Canvas,
+   *       appId: the app's app store id,
+   *     },
+   *     ...
+   *   ],
+   * }
+   */
+  expressApp.get('/installed-apps', async (req, res) => {
     // TODO: implement
   });
 };
