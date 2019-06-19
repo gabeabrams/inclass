@@ -98,12 +98,10 @@ describe('server > routes', function () {
 
       // Variables to check that json was called and to get the data from the
       // json object
-      let jsonCalled;
       let payload;
       const res = {
         json: (data) => {
           payload = data;
-          jsonCalled = true;
         },
       };
 
@@ -111,8 +109,7 @@ describe('server > routes', function () {
       await fakeExpressApp.simulateGETRequest('/store', req, res);
 
       assert.equal(payload.success, false, 'Did not return correct value for success');
-      console.log(payload.message);
-      assert.equal(payload.message, !undefined, 'Message is undefined');
+      assert.equal(payload.message, 'Store metadata is not ready. If this error continues after a few minutes, please contact an admin.', 'Message is undefined');
     });
   });
 });
