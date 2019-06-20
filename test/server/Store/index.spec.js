@@ -20,7 +20,7 @@ describe('server > Store > index', function () {
     return new Promise((resolve) => { return setTimeout(resolve, ms); });
   }
 
-  it.only('replaces store if reload successful', async function () {
+  it('replaces store if reload successful', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test to be 15 seconds
     this.timeout(450000);
@@ -32,11 +32,12 @@ describe('server > Store > index', function () {
     // wait for the store to reload
     // I will physically change the store title from 'Harvard Appstore' to
     // 'Tufts Appstore', and assert if the hot reloaded store updated correctly
+    console.log('change the store metadata title from \'Harvard Appstore\' to \'Tufts Appstore\' now');
     await delay(35000);
     assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
   });
 
-  it.only('does not update store if being edited is true', async function () {
+  it('does not update store if being edited is true', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test to be 15 seconds
     this.timeout(45000);
@@ -49,17 +50,20 @@ describe('server > Store > index', function () {
     // during this time, add beingEdited proterty to true in the store
     // metadata, change the store title to 'Apple Appstore', however the store
     // object should not be updated
+    console.log('change the store metadata title from \'Tufts Appstore\' to \'Apple Appstore\' now');
+    console.log('add "beingEdited": true to store metadata');
     await delay(35000);
     assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'updated store while store beingEdited is true');
     // after this test passed, delete the beingEdited property, storeMetadata
     // title should be 'Apple Appstore' for the upcoming test
   });
 
-  it.only('does not replace the store if reload failed', async function () {
+  it('does not replace the store if reload failed', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test to be 15 seconds
-    this.timeout(45000);
+    this.timeout(50000);
     // delay 5 seconds to delete the beingEdited property from the previous test
+    console.log('delete the "beingEdited": true from store metadata now');
     await delay(5000);
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -69,8 +73,13 @@ describe('server > Store > index', function () {
     // wait for the store to reload, during this time, break the JSON format
     // in medium > gradeup > metadata.json, this causes the reload to fail and
     // should not update the store object
+    console.log('break the medium > gradeup > metadata.json file format by adding a period at the end, change the title in store metadata back to \'Harvard Appstore\'');
     await delay(35000);
     assert.equal(store.storeMetadata.title, 'Apple Appstore', 'update store while reloading failed');
+    console.log('return modified metadata file to correct format now');
+    // return the modified metadata file medium > gradeup > metadata.json to
+    // correct format so other test can resume
+    await delay(8000);
   });
 
   it('Checks metadata objects untouched when error occurs', async function () {
