@@ -118,7 +118,44 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.post('/install/:appId', async (req, res) => {
-    // TODO: implement
+    try {
+      const { appId } = req.params;
+      const { catalogId } = req.session;
+      const { courseId } = req.session.launchInfo;
+      const installData = store.getInstallData(catalogId, appId);
+      const {
+        name,
+        description,
+        key,
+        secret,
+        xml,
+        launchPrivacy,
+      } = installData;
+      req.api.course.addApp(
+        {
+          courseId,
+          name,
+          key,
+          secret,
+          xml,
+          description,
+          launchPrivacy,
+        }
+      );
+      return res.json({ success: true });
+    } catch (err) {
+      if (err.code) {
+        return res.json({ 
+          success: false,
+          message: `An error occurred while getting the list of apps in the current catalog: ${err.message}`,
+        });
+      }
+      console.log(err);
+      return res.json({
+        success: false,
+        message: 'An unknown error occurred while installing this app. Please contact an admin.',
+      });
+    }
   });
 
   /**
