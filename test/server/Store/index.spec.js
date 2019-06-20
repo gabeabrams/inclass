@@ -14,15 +14,14 @@ const Store = proxyquire('../../../server/Store', {
 });
 
 describe('server > Store > index', function () {
-  // delay function using promises
+  // delay function using promises, forcing npm test to wait
   async function delay(ms) {
-    // return await for better async stack trace support in case of errors.
     return new Promise((resolve) => { return setTimeout(resolve, ms); });
   }
 
   it('replaces store if reload successful', async function () {
     const expressApp = new ExpressApp();
-    // set the maximum timeout for this test to be 15 seconds
+    // set the maximum timeout for this test to be 45 seconds
     this.timeout(450000);
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -39,11 +38,11 @@ describe('server > Store > index', function () {
 
   it('does not update store if being edited is true', async function () {
     const expressApp = new ExpressApp();
-    // set the maximum timeout for this test to be 15 seconds
+    // set the maximum timeout for this test to be 45 seconds
     this.timeout(45000);
     const store = new Store(expressApp);
     await store._attemptLoad();
-    // this console.log is for reference, do not delete before merging
+    // this console.log is for instruction
     console.log('store finished loading for the first time');
     assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not load store correctly');
     // wait for the store to reload
@@ -60,14 +59,14 @@ describe('server > Store > index', function () {
 
   it('does not replace the store if reload failed', async function () {
     const expressApp = new ExpressApp();
-    // set the maximum timeout for this test to be 15 seconds
+    // set the maximum timeout for this test to be 50 seconds
     this.timeout(50000);
     // delay 5 seconds to delete the beingEdited property from the previous test
     console.log('delete the "beingEdited": true from store metadata now');
     await delay(5000);
     const store = new Store(expressApp);
     await store._attemptLoad();
-    // this console.log is for reference, do not delete before merging
+    // this console.log is for instruction
     console.log('store finished loading for the first time');
     assert.equal(store.storeMetadata.title, 'Apple Appstore', 'did not load store correctly');
     // wait for the store to reload, during this time, break the JSON format

@@ -32,7 +32,7 @@ class Store {
       console.log('store just reloaded');
     };
     // reload the store every 'hotReloadSec' dictated by STORE_CONSTANTS
-    const kill = callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
+    callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
   }
 
   /**
