@@ -21,13 +21,16 @@ describe('server > Store > index', function () {
   }
 
   it.only('replaces store if reload successful', async function () {
+    const expressApp = new ExpressApp();
     // set the maximum timeout for this test to be 40 seconds
-    this.timeout(40000);
+    this.timeout(15000);
     const store = new Store(expressApp);
-    await delay(25000);
-    // check if the newly loaded store is the same as the old one
-    const newStore = new Store(expressApp);
-    assert.deepEqual(store, newStore);
+    await store._attemptLoad();
+    assert.equal(store.storeMetadata.title, 'Harvard Appstore', 'did not load store correctly');
+    await delay(12000);
+    // I will physically change the store title from 'Harvard Appstore' to
+    // 'Tufts Appstore', and assert if the hot reloaded store updated correctly
+    assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
   });
   it('does not replace the store if reload failed', async function () {
 
