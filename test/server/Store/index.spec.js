@@ -17,7 +17,7 @@ describe('server > Store > index', function () {
   // delay function using promises
   async function delay(ms) {
     // return await for better async stack trace support in case of errors.
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => { return setTimeout(resolve, ms); });
   }
 
   it.only('replaces store if reload successful', async function () {
@@ -27,9 +27,10 @@ describe('server > Store > index', function () {
     const store = new Store(expressApp);
     await store._attemptLoad();
     assert.equal(store.storeMetadata.title, 'Harvard Appstore', 'did not load store correctly');
-    await delay(12000);
+    // wait for the store to reload
     // I will physically change the store title from 'Harvard Appstore' to
     // 'Tufts Appstore', and assert if the hot reloaded store updated correctly
+    await delay(12000);
     assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
   });
   it('does not replace the store if reload failed', async function () {
