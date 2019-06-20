@@ -22,7 +22,7 @@ describe('server > Store > index', function () {
 
   it.only('replaces store if reload successful', async function () {
     const expressApp = new ExpressApp();
-    // set the maximum timeout for this test to be 40 seconds
+    // set the maximum timeout for this test to be 15 seconds
     this.timeout(15000);
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -36,8 +36,19 @@ describe('server > Store > index', function () {
   it('does not replace the store if reload failed', async function () {
 
   });
-  it('does not update store if being edited is true', async function () {
-
+  it.only('does not update store if being edited is true', async function () {
+    const expressApp = new ExpressApp();
+    // set the maximum timeout for this test to be 15 seconds
+    this.timeout(15000);
+    const store = new Store(expressApp);
+    await store._attemptLoad();
+    assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not load store correctly');
+    // wait for the store to reload
+    // during this time, I will add beingEdited proterty to true in the store
+    // metadata, change the store title to 'Apple Appstore', however the store
+    // object should not be updated
+    await delay(14000);
+    assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'updated store while store beingEdited is true');
   });
   it('Checks metadata objects untouched when error occurs', async function () {
     const badStore = new Store(badExpressApp);
