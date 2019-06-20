@@ -1,0 +1,17 @@
+{
+  "title": "DCE catalog",
+  "accounts": [
+    123123
+  ],
+  "tagsToShow": [
+    {
+      "tagName": "cost",
+      "color": "blue"
+    },
+    {
+      "tagName": "type",
+      "color": "red"
+    }
+  ],
+  "defaultSupportEmail": "example@harvard.edu"
+}
