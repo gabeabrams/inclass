@@ -26,11 +26,11 @@ describe('server > Store > index', function () {
     this.timeout(450000);
     const store = new Store(expressApp);
     await store._attemptLoad();
-    // this console.log is for reference, do not delete before merging
+    // this console.log is for instructions
     console.log('store finished loading for the first time');
     assert.equal(store.storeMetadata.title, 'Harvard Appstore', 'did not load store correctly');
     // wait for the store to reload
-    // I will physically change the store title from 'Harvard Appstore' to
+    // Physically change the store title from 'Harvard Appstore' to
     // 'Tufts Appstore', and assert if the hot reloaded store updated correctly
     console.log('change the store metadata title from \'Harvard Appstore\' to \'Tufts Appstore\' now');
     await delay(35000);
@@ -50,8 +50,8 @@ describe('server > Store > index', function () {
     // during this time, add beingEdited proterty to true in the store
     // metadata, change the store title to 'Apple Appstore', however the store
     // object should not be updated
-    console.log('change the store metadata title from \'Tufts Appstore\' to \'Apple Appstore\' now');
-    console.log('add "beingEdited": true to store metadata');
+    console.log('1: change the store metadata title from \'Tufts Appstore\' to \'Apple Appstore\' now');
+    console.log('2: add "beingEdited": true to store metadata');
     await delay(35000);
     assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'updated store while store beingEdited is true');
     // after this test passed, delete the beingEdited property, storeMetadata
