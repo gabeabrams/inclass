@@ -131,6 +131,8 @@ module.exports = (expressApp) => {
         xml,
         launchPrivacy,
       } = installData;
+
+      // Installs the app
       req.api.course.addApp(
         {
           courseId,
@@ -145,11 +147,13 @@ module.exports = (expressApp) => {
       return res.json({ success: true });
     } catch (err) {
       if (err.code) {
-        return res.json({ 
+        return res.json({
           success: false,
           message: `An error occurred while getting the list of apps in the current catalog: ${err.message}`,
         });
       }
+      // If error doesn't have code
+      // eslint-disable-next-line no-console
       console.log(err);
       return res.json({
         success: false,
