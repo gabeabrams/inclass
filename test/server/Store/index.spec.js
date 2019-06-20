@@ -72,7 +72,8 @@ describe('server > Store > index', function () {
     // wait for the store to reload, during this time, break the JSON format
     // in medium > gradeup > metadata.json, this causes the reload to fail and
     // should not update the store object
-    console.log('break the medium > gradeup > metadata.json file format by adding a period at the end, change the title in store metadata back to \'Harvard Appstore\'');
+    console.log('1: break the medium > gradeup > metadata.json file format by adding a period at the end');
+    console.log('2: change the title in store metadata back to \'Harvard Appstore\'');
     await delay(35000);
     assert.equal(store.storeMetadata.title, 'Apple Appstore', 'update store while reloading failed');
     console.log('return modified metadata file to correct format now');
