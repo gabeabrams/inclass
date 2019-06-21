@@ -124,7 +124,10 @@ module.exports = (expressApp) => {
       const { courseId } = req.session.launchInfo;
       const installData = store.getInstallData(catalogId, appId);
       if (!installData) {
-        throw new Error('there is trouble retrieving the installation data');
+        return res.json({
+          success: false,
+          message: 'We cannot find this app\'s installation details. Please contact an admin.',
+        })
       }
       const {
         name,
@@ -198,4 +201,6 @@ module.exports = (expressApp) => {
   expressApp.get('/installed-apps', async (req, res) => {
     // TODO: implement
   });
+
+  return store;
 };

@@ -6,13 +6,20 @@ const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
 
-const dummyPath = path.join(__dirname, '../dummy-data/store/medium');
-const Store = proxyquire('../../server/Store', {
-  './STORE_CONSTANTS': {
-    path: dummyPath,
-    '@global': true,
-  },
-});
+const dummyStorePath = path.join(__dirname, '../dummy-data/store/medium');
+
+// init the routes with already loaded store
+const withPathToStore = (expressApp, storePath) => {
+  const routesUninitialized = proxyquire(
+    '../../server/routes',
+    {
+      '../STORE_CONSTANTS': storePath,
+      
+    }
+  );
+  // use the fake store for testing, return the fake Store routes export
+  return routesUninitialized(expressApp);
+};
 
 // this imports routes and replaces all instances of store to our generated one
 const initRoutesWithStore = (expressApp, storeOpts) => {
@@ -249,6 +256,7 @@ describe('server > routes', function () {
       const store = new Store(fakeExpressApp);
       const fakeAPI = new API();
       await store._attemptLoad();
+      initRoutesWithRealStore(fakeExpressApp, store);
       const req = {
         api: fakeAPI,
         params: {
