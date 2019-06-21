@@ -127,7 +127,7 @@ module.exports = (expressApp) => {
         return res.json({
           success: false,
           message: 'We cannot find this app\'s installation details. Please contact an admin.',
-        })
+        });
       }
       const {
         name,
