@@ -131,7 +131,7 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.delete('/uninstall', async (req, res) => {
-    // TODO: implement
+    // Don't throw an error without sending res.json
     // We get the ltiIds out of the request body and these are our apps
     // that we want to uninstall
     // NOTE: to get the list of ltiIds, use: req.body.ltiIds
