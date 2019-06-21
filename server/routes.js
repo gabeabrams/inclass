@@ -123,6 +123,9 @@ module.exports = (expressApp) => {
       const { catalogId } = req.session;
       const { courseId } = req.session.launchInfo;
       const installData = store.getInstallData(catalogId, appId);
+      if (!installData) {
+        throw new Error('there is trouble retrieving the installation data');
+      }
       const {
         name,
         description,

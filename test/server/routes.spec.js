@@ -234,4 +234,10 @@ describe('server > routes', function () {
       assert.equal(dataReturnedToClient.isAdmin, true, 'did not return correct isAdmin object');
     });
   });
+  describe('server > routes /install/:appId', function () {
+    it('throws an error when installData returns null', async function () {
+      const fakeExpressApp = new ExpressApp();
+      
+    });
+  });
 });
