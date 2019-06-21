@@ -1,9 +1,27 @@
 const proxyquire = require('proxyquire');
 const assert = require('assert');
+const path = require('path');
 
 const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
+
+const dummyStorePath = path.join(__dirname, '..', 'dummy-data/store/installable');
+
+// init the routes with already loaded store
+const initRoutesWithPathToStore = (expressApp, storePath) => {
+  const routesUninitialized = proxyquire(
+    '../../server/routes',
+    {
+      '/STORE_CONSTANTS': {
+        path: storePath,
+        '@global': true,
+      },
+    }
+  );
+  // use the fake store for testing, return the fake Store routes export
+  return routesUninitialized(expressApp);
+};
 
 // this imports routes and replaces all instances of store to our generated one
 const initRoutesWithStore = (expressApp, storeOpts) => {
@@ -19,6 +37,37 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
 };
 
 describe('server > routes', function () {
+  describe('server > routes /installed-apps', function () {
+    it.only('does something with installable fake store', async function () {
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+      // get the list of LTI apps from canvas API
+      const ltiApps = await fakeAPI.course.app.list({ courseId: 100 });
+
+      const store = initRoutesWithPathToStore(
+        fakeExpressApp,
+        dummyStorePath
+      );
+      await store._attemptLoad();
+      // fake req, res objects
+      const req = {
+        session: {
+          launchInfo: {
+            courseId: 100,
+          },
+          catalogId: 'dce',
+        },
+        api: fakeAPI,
+      };
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+      await fakeExpressApp.simulateRequest('/installed-apps', req, res);
+    });
+  });
   describe('server > routes /store', async function () {
     it('Gets store metadata and sends back the metadata in json object', async function () {
       // We make a fake express app using the dummy ExpressApp we made
