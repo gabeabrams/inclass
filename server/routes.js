@@ -131,14 +131,37 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.delete('/uninstall', async (req, res) => {
+    if (!req.api || !req.session.launchInfo) {
+      // error
+    }
     // Don't throw an error without sending res.json
     // We get the ltiIds out of the request body and these are our apps
     // that we want to uninstall
     // NOTE: to get the list of ltiIds, use: req.body.ltiIds
-
+    const { ltiIds } = req.body.ltiIds;
+    const { courseId } = req.session.launchInfo;
     // go through the list of apps to delete
+    ltiIds.forEach((ltiAppId) => {
+      try {
+        req.course.app.remove(courseId, ltiAppId);
+      } catch (err) {
+        if (err.code) {
+          console.log(err);
+        }
+        return res.json({
+          success: false,
+          message: err.code
+            ? `An unkown error occurred while attempting to uninstall an app: ${err.message}`
+            : 'An unknown error occurred while attemping to uninstall an app. Please contact an admin.',
+        });
+      }
+    });
+    // All apps were deleted without an error occurring
+    return res.json({
+      success: true,
+    });
 
-    // for each app, use await req.course.app.remove({...}) to uninstall each app
+    // for each app, use await req.course.app.remove({...}) to uninstall
     // return res.json with { success: true/false, [message]: if not success}
     // if err has an err.code, use err.message, otherwise use default
   });
