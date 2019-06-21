@@ -152,6 +152,23 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/installed-apps', async (req, res) => {
-    // TODO: implement
+    const currentCatalog = store.getCatalog(req.session.catalogId);
+
+    // if no catalog returned, throw an error
+    if (!currentCatalog || currentCatalog === null) {
+      throw new Error('We could not get your list of currently installed apps because your session has expired. Please re-launch from Canvas. If this issue continues to occur, please contact an admin.');
+    }
+    try {
+      const { courseId } = req.session.launchInfo;
+      // get a list of apps under the courseId
+      const ltiApps = await req.api.course.app.list({ courseId });
+      console.log(ltiApps);
+      console.log(currentCatalog);
+      return res.json({
+        success: true,
+      });
+    } catch (err) {
+      throw new Error('Please re-launch this app from Canvas to continue. If this continues to occur, please contact an admin');
+    }
   });
 };
