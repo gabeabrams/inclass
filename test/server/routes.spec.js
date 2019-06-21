@@ -1,9 +1,18 @@
 const proxyquire = require('proxyquire');
 const assert = require('assert');
+const path = require('path');
 
 const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
+
+const dummyPath = path.join(__dirname, '../dummy-data/store/medium');
+const Store = proxyquire('../../server/Store', {
+  './STORE_CONSTANTS': {
+    path: dummyPath,
+    '@global': true,
+  },
+});
 
 // this imports routes and replaces all instances of store to our generated one
 const initRoutesWithStore = (expressApp, storeOpts) => {
@@ -234,10 +243,32 @@ describe('server > routes', function () {
       assert.equal(dataReturnedToClient.isAdmin, true, 'did not return correct isAdmin object');
     });
   });
-  describe('server > routes /install/:appId', function () {
+  describe.only('server > routes /install/:appId', function () {
     it('throws an error when installData returns null', async function () {
       const fakeExpressApp = new ExpressApp();
-      
+      const store = new Store(fakeExpressApp);
+      const fakeAPI = new API();
+      await store._attemptLoad();
+      const req = {
+        api: fakeAPI,
+        params: {
+          appId: 'fakeapp',
+        },
+        session: {
+          launchInfo: {
+            courseId: 102,
+          },
+          catalogId: 'fakecourse',
+        },
+      };
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+      await fakeExpressApp.simulateRequest('/install/:appId', req, res);
+      assert(!dataReturnedToClient.success, 'returned success when it should fail');
     });
   });
 });
