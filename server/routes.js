@@ -132,8 +132,15 @@ module.exports = (expressApp) => {
    */
   expressApp.delete('/uninstall', async (req, res) => {
     // TODO: implement
-
+    // We get the ltiIds out of the request body and these are our apps
+    // that we want to uninstall
     // NOTE: to get the list of ltiIds, use: req.body.ltiIds
+
+    // go through the list of apps to delete
+
+    // for each app, use await req.course.app.remove({...}) to uninstall each app
+    // return res.json with { success: true/false, [message]: if not success}
+    // if err has an err.code, use err.message, otherwise use default
   });
 
   /**
@@ -154,4 +161,6 @@ module.exports = (expressApp) => {
   expressApp.get('/installed-apps', async (req, res) => {
     // TODO: implement
   });
+
+  return store;
 };
