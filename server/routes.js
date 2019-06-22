@@ -132,7 +132,7 @@ module.exports = (expressApp) => {
    */
   expressApp.delete('/uninstall', async (req, res) => {
     let courseId;
-    // Try to get courseId from the request, if it's not there, send an error
+    // Try to get courseId from the request, if it's not there, return an error
     try {
       ({ courseId } = req.session.launchInfo);
     } catch (err) {
@@ -141,12 +141,9 @@ module.exports = (expressApp) => {
         message: 'We could not uninstall this app because we could not determine your launch course. Please contact an admin.',
       });
     }
-    // Don't throw an error without sending res.json
     // We get the ltiIds out of the request body and these are our apps
     // that we want to uninstall
-    // NOTE: to get the list of ltiIds, use: req.body.ltiIds
     const { ltiIds } = req.body.ltiIds;
-    const { courseId } = req.session.launchInfo;
     // go through the list of apps to delete
     ltiIds.forEach((ltiAppId) => {
       try {
