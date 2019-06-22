@@ -17,9 +17,9 @@ describe('server > Store > index', function () {
     return new Promise((resolve) => { return setTimeout(resolve, ms); });
   }
 
-  it.only('replaces store if reload successful', async function () {
+  it('replaces store if reload successful', async function () {
     const expressApp = new ExpressApp();
-    // set the maximum timeout for this test to be 15 seconds
+    // set the maximum timeout for this test according to store reloading time
     this.timeout(reloadSec * 1000 + 5000);
     // copy the store into testStore
     const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
@@ -53,25 +53,44 @@ describe('server > Store > index', function () {
     await delay(200);
   });
 
-  it.skip('does not update store if being edited is true', async function () {
+  it.only('does not update store if being edited is true', async function () {
     const expressApp = new ExpressApp();
-    // set the maximum timeout for this test to be 45 seconds
-    this.timeout(45000);
-    const store = new Store(expressApp);
-    await store._attemptLoad();
-    // this console.log is for instruction
-    console.log('store finished loading for the first time');
-    assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not load store correctly');
+    // set the maximum timeout for this test according to store reloading time
+    this.timeout(reloadSec * 1000 + 5000);
+    // copy the store into testStore
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const testStorePath = path.join(dummyPath, '..', 'medium-store-test-for-hotReload');
+    copydir.sync(dummyPath, testStorePath, {
+      utimes: true, // keep add time and modify time
+      mode: true, // keep file mode
+      cover: true, // cover file when exists, default is true
+    });
+    // load the test store
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: testStorePath,
+        '@global': true,
+      },
+    });
+    const testStore = new Store(expressApp);
+    await testStore._attemptLoad();
+    // check if store is loaded correctly
+    assert.equal(testStore.storeMetadata.title, 'Harvard Appstore', 'did not load store correctly');
+
+    // read the testStore metadata file in using fs.readFileSync
+    let fileContent = fs.readFileSync(path.join(testStorePath, 'metadata.json'), 'utf-8');
+    fileContent = fileContent.replace('Harvard', 'Tufts');
+    fileContent = JSON.parse(fileContent);
+    // add the beingEdited property to true in store metadata
+    fileContent.beingEdited = true;
+    fs.writeFileSync(path.join(testStorePath, 'metadata.json'), JSON.stringify(fileContent));
     // wait for the store to reload
-    // during this time, add beingEdited proterty to true in the store
-    // metadata, change the store title to 'Apple Appstore', however the store
-    // object should not be updated
-    console.log('1: change the store metadata title from \'Tufts Appstore\' to \'Apple Appstore\' now');
-    console.log('2: add "beingEdited": true to store metadata');
-    await delay(35000);
-    assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'updated store while store beingEdited is true');
-    // after this test passed, delete the beingEdited property, storeMetadata
-    // title should be 'Apple Appstore' for the upcoming test
+    await delay(reloadSec * 1000 + 1000);
+    // check that the store does not update
+    assert.equal(testStore.storeMetadata.title, 'Harvard Appstore', 'updated store while store beingEdited is true');
+    // remove the testing store folder, making each test independent
+    rimraf(testStorePath, () => {});
+    await delay(200);
   });
 
   it.skip('does not replace the store if reload failed', async function () {
