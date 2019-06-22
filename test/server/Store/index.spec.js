@@ -50,7 +50,7 @@ describe('server > Store > index', function () {
     assert.equal(testStore.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
     // remove the testing store folder, making each test independent
     rimraf(testStorePath, () => {});
-    await delay(20000);
+    await delay(200);
   });
 
   it.skip('does not update store if being edited is true', async function () {
