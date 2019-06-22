@@ -134,7 +134,15 @@ describe('server > routes', function () {
   });
 
   describe('server > routes /uninstall', function () {
+    it('Gives an error if there is no courseId in the launch info', async function () {
 
+    });
+    it('Returns an error message if any of the apps cannot be uninstalled', async function () {
+
+    });
+    it('Returns success: true if all of the apps in the list are uninstalled', async function () {
+
+    });
   });
 
   describe('server > routes /catalog', function () {
