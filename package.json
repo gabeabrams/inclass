@@ -39,6 +39,7 @@
 		"fs": "0.0.1-security"
 	},
 	"devDependencies": {
+		"copy-dir": "^1.1.0",
 		"eslint": "^5.16.0",
 		"eslint-config-airbnb": "^17.1.0",
 		"eslint-config-react-app": "^4.0.1",
