@@ -53,7 +53,7 @@ describe('server > Store > index', function () {
     await delay(200);
   });
 
-  it.only('does not update store if being edited is true', async function () {
+  it('does not update store if being edited is true', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test according to store reloading time
     this.timeout(reloadSec * 1000 + 5000);
@@ -93,29 +93,49 @@ describe('server > Store > index', function () {
     await delay(200);
   });
 
-  it.skip('does not replace the store if reload failed', async function () {
+  it.only('does not replace the store if reload failed', async function () {
     const expressApp = new ExpressApp();
-    // set the maximum timeout for this test to be 50 seconds
-    this.timeout(50000);
-    // delay 5 seconds to delete the beingEdited property from the previous test
-    console.log('delete the "beingEdited": true from store metadata now');
-    await delay(5000);
-    const store = new Store(expressApp);
-    await store._attemptLoad();
-    // this console.log is for instruction
-    console.log('store finished loading for the first time');
-    assert.equal(store.storeMetadata.title, 'Apple Appstore', 'did not load store correctly');
-    // wait for the store to reload, during this time, break the JSON format
-    // in medium > gradeup > metadata.json, this causes the reload to fail and
-    // should not update the store object
-    console.log('1: break the medium > gradeup > metadata.json file format by adding a period at the end');
-    console.log('2: change the title in store metadata back to \'Harvard Appstore\'');
-    await delay(35000);
-    assert.equal(store.storeMetadata.title, 'Apple Appstore', 'update store while reloading failed');
-    console.log('return modified metadata file to correct format now');
-    // return the modified metadata file medium > gradeup > metadata.json to
-    // correct format so other test can resume
-    await delay(8000);
+    // set the maximum timeout for this test according to store reloading time
+    this.timeout(reloadSec * 1000 + 5000);
+    // copy the store into testStore
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const testStorePath = path.join(dummyPath, '..', 'medium-store-test-for-hotReload');
+    copydir.sync(dummyPath, testStorePath, {
+      utimes: true, // keep add time and modify time
+      mode: true, // keep file mode
+      cover: true, // cover file when exists, default is true
+    });
+    // load the test store
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: testStorePath,
+        '@global': true,
+      },
+    });
+    const testStore = new Store(expressApp);
+    await testStore._attemptLoad();
+    // check if store is loaded correctly
+    assert.equal(testStore.storeMetadata.title, 'Harvard Appstore', 'did not load store correctly');
+
+    // read the testStore metadata file and change its title
+    const storeMetadata = path.join(testStorePath, 'metadata.json');
+    let storeMetadataContent = fs.readFileSync(storeMetadata, 'utf-8');
+    storeMetadataContent = storeMetadataContent.replace('Harvard', 'Tufts');
+    fs.writeFileSync(storeMetadata, storeMetadataContent);
+
+    // read the testStore dce, gradeup metadata file and break its format
+    const metadataFile = path.join(testStorePath, 'dce/gradeup/metadata.json');
+    let metadataContent = fs.readFileSync(metadataFile, 'utf-8');
+    // make the json format invalid, store should not update
+    metadataContent += '.';
+    fs.writeFileSync(metadataFile, metadataContent);
+
+    // wait for the store to reload
+    await delay(reloadSec * 1000 + 1000);
+    assert.equal(testStore.storeMetadata.title, 'Harvard Appstore', 'update store while reloading failed');
+    // remove the testing store folder, making each test independent
+    rimraf(testStorePath, () => {});
+    await delay(200);
   });
 
   it('Checks metadata objects untouched when error occurs', async function () {
