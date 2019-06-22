@@ -5,8 +5,10 @@ const proxyquire = require('proxyquire');
 const path = require('path');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
 const API = require('../../dummy-objects/API');
+const STORE_CONSTANTS = require('../../../server/Store/STORE_CONSTANTS');
 
 const badExpressApp = 'Not Real';
+const reloadSec = STORE_CONSTANTS.hotReloadSecs;
 
 describe('server > Store > index', function () {
   // delay function using promises, forcing npm test to wait
@@ -17,7 +19,7 @@ describe('server > Store > index', function () {
   it.only('replaces store if reload successful', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test to be 15 seconds
-    this.timeout(15000);
+    this.timeout(reloadSec * 1000 + 5000);
     // copy the store into testStore
     const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
     const testStorePath = path.join(dummyPath, '..', 'medium-store-test-for-hotReload');
@@ -41,7 +43,8 @@ describe('server > Store > index', function () {
     // read the testStore metadata file in using fs.readFileSync
     let fileContent = fs.readFileSync(path.join(testStorePath, 'metadata.json'), 'utf-8');
     fileContent = fileContent.replace('Harvard', 'Tufts');
-    await delay(35000);
+    fs.writeFileSync(path.join(testStorePath, 'metadata.json'), fileContent);
+    await delay(reloadSec * 1000 + 1000);
     assert.equal(testStore.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
   });
 
