@@ -6,5 +6,5 @@ const path = require('path');
  */
 module.exports = {
   path: path.join(__dirname, '../../store'),
-  hotReloadSecs: 30,
+  hotReloadSecs: 10,
 };

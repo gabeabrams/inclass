@@ -7,13 +7,6 @@ const ExpressApp = require('../../dummy-objects/ExpressApp');
 const API = require('../../dummy-objects/API');
 
 const badExpressApp = 'Not Real';
-const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
-const Store = proxyquire('../../../server/Store', {
-  './STORE_CONSTANTS': {
-    path: dummyPath,
-    '@global': true,
-  },
-});
 
 describe('server > Store > index', function () {
   // delay function using promises, forcing npm test to wait
@@ -23,31 +16,36 @@ describe('server > Store > index', function () {
 
   it.only('replaces store if reload successful', async function () {
     const expressApp = new ExpressApp();
-    // set the maximum timeout for this test to be 45 seconds
-    // this.timeout(450000);
-    const store = new Store(expressApp);
-    await store._attemptLoad();
-
-    assert.equal(store.storeMetadata.title, 'Harvard Appstore', 'did not load store correctly');
-    // copy the test store
+    // set the maximum timeout for this test to be 15 seconds
+    this.timeout(15000);
+    // copy the store into testStore
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
     const testStorePath = path.join(dummyPath, '..', 'medium-store-test-for-hotReload');
     copydir.sync(dummyPath, testStorePath, {
       utimes: true, // keep add time and modify time
       mode: true, // keep file mode
       cover: true, // cover file when exists, default is true
     });
-    // read the store metadata file in using fs.readFileSync
+    // load the test store
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: testStorePath,
+        '@global': true,
+      },
+    });
+    const testStore = new Store(expressApp);
+    await testStore._attemptLoad();
+    // check if store is loaded correctly
+    assert.equal(testStore.storeMetadata.title, 'Harvard Appstore', 'did not load store correctly');
+
+    // read the testStore metadata file in using fs.readFileSync
     let fileContent = fs.readFileSync(path.join(testStorePath, 'metadata.json'), 'utf-8');
     fileContent = fileContent.replace('Harvard', 'Tufts');
-    // // wait for the store to reload
-    // // Physically change the store title from 'Harvard Appstore' to
-    // // 'Tufts Appstore', and assert if the hot reloaded store updated correctly
-    // console.log('change the store metadata title from \'Harvard Appstore\' to \'Tufts Appstore\' now');
-    // await delay(35000);
-    // assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
+    await delay(35000);
+    assert.equal(testStore.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
   });
 
-  it('does not update store if being edited is true', async function () {
+  it.skip('does not update store if being edited is true', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test to be 45 seconds
     this.timeout(45000);
@@ -68,7 +66,7 @@ describe('server > Store > index', function () {
     // title should be 'Apple Appstore' for the upcoming test
   });
 
-  it('does not replace the store if reload failed', async function () {
+  it.skip('does not replace the store if reload failed', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test to be 50 seconds
     this.timeout(50000);
@@ -94,6 +92,13 @@ describe('server > Store > index', function () {
   });
 
   it('Checks metadata objects untouched when error occurs', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
     const badStore = new Store(badExpressApp);
     const successful = await badStore._attemptLoad();
 
@@ -110,6 +115,13 @@ describe('server > Store > index', function () {
   });
 
   it('Checks metadata objects are filled', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -131,6 +143,13 @@ describe('server > Store > index', function () {
   });
 
   it('serves apps icons and store logo properly', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -145,6 +164,13 @@ describe('server > Store > index', function () {
   });
 
   it('Checks getCatalogAndPermissions returns expected item', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -159,6 +185,13 @@ describe('server > Store > index', function () {
   });
 
   it('Checks getInstallData returns expected item', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -176,6 +209,13 @@ describe('server > Store > index', function () {
   });
 
   it('Checks getInstallData returns null when there is no installdata for a catalog or app', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -184,6 +224,13 @@ describe('server > Store > index', function () {
   });
 
   it('Checks getStoreMetadata returns expected item', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
@@ -193,6 +240,13 @@ describe('server > Store > index', function () {
   });
 
   it('Deletes installXML and installationCredentials from app metadata', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/medium');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
     const expressApp = new ExpressApp();
     const store = new Store(expressApp);
     await store._attemptLoad();
