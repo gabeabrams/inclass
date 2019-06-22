@@ -44,8 +44,10 @@ describe('server > Store > index', function () {
     let fileContent = fs.readFileSync(path.join(testStorePath, 'metadata.json'), 'utf-8');
     fileContent = fileContent.replace('Harvard', 'Tufts');
     fs.writeFileSync(path.join(testStorePath, 'metadata.json'), fileContent);
+    // wait for store to reload
     await delay(reloadSec * 1000 + 1000);
     assert.equal(testStore.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
+
   });
 
   it.skip('does not update store if being edited is true', async function () {
