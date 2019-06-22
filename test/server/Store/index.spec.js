@@ -1,6 +1,7 @@
 const assert = require('assert');
 const copydir = require('copy-dir');
 const fs = require('fs');
+const rimraf = require('rimraf');
 const proxyquire = require('proxyquire');
 const path = require('path');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
@@ -47,7 +48,9 @@ describe('server > Store > index', function () {
     // wait for store to reload
     await delay(reloadSec * 1000 + 1000);
     assert.equal(testStore.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
-
+    // remove the testing store folder, making each test independent
+    rimraf(testStorePath, () => {});
+    await delay(20000);
   });
 
   it.skip('does not update store if being edited is true', async function () {

@@ -29,7 +29,6 @@ class Store {
     // reloading Store
     const hotReload = () => {
       this._attemptLoad();
-      console.log('store just reloaded');
     };
     // reload the store every 'hotReloadSec' dictated by STORE_CONSTANTS
     callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);

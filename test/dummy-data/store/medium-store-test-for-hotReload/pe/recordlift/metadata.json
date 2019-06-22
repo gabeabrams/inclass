@@ -1,8 +1,0 @@
-{
-    "extends": {
-        "catalogId": "pe",
-        "appId": "progress"
-    },
-    "title": "Record Lift App",
-    "subtitle": "An app that allows people record the exercises they do"
-}
