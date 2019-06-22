@@ -133,6 +133,10 @@ describe('server > routes', function () {
     });
   });
 
+  describe('server > routes /uninstall', function () {
+
+  });
+
   describe('server > routes /catalog', function () {
     it('throws an error if API is missing', async function () {
       const fakeExpressApp = new ExpressApp();
