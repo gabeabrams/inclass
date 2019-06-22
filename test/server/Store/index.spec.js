@@ -93,7 +93,7 @@ describe('server > Store > index', function () {
     await delay(200);
   });
 
-  it.only('does not replace the store if reload failed', async function () {
+  it('does not replace the store if reload failed', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test according to store reloading time
     this.timeout(reloadSec * 1000 + 5000);
