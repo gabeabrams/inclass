@@ -1,0 +1,15 @@
+{
+    "title": "SEAS Catalog",
+    "accounts": [26, 30, 51],
+    "tagsToShow": [
+      {
+        "tagName": "cost",
+        "color": "blue"
+      },
+      {
+        "tagName": "type",
+        "color": "red"
+      }
+    ],
+    "defaultSupportEmail": "example@harvard.edu"
+}

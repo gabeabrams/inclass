@@ -1,4 +1,6 @@
 const assert = require('assert');
+const copydir = require('copy-dir');
+const fs = require('fs');
 const proxyquire = require('proxyquire');
 const path = require('path');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
@@ -19,21 +21,30 @@ describe('server > Store > index', function () {
     return new Promise((resolve) => { return setTimeout(resolve, ms); });
   }
 
-  it('replaces store if reload successful', async function () {
+  it.only('replaces store if reload successful', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test to be 45 seconds
-    this.timeout(450000);
+    // this.timeout(450000);
     const store = new Store(expressApp);
     await store._attemptLoad();
-    // this console.log is for instructions
-    console.log('store finished loading for the first time');
+
     assert.equal(store.storeMetadata.title, 'Harvard Appstore', 'did not load store correctly');
-    // wait for the store to reload
-    // Physically change the store title from 'Harvard Appstore' to
-    // 'Tufts Appstore', and assert if the hot reloaded store updated correctly
-    console.log('change the store metadata title from \'Harvard Appstore\' to \'Tufts Appstore\' now');
-    await delay(35000);
-    assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
+    // copy the test store
+    const testStorePath = path.join(dummyPath, '..', 'medium-store-test-for-hotReload');
+    copydir.sync(dummyPath, testStorePath, {
+      utimes: true, // keep add time and modify time
+      mode: true, // keep file mode
+      cover: true, // cover file when exists, default is true
+    });
+    // read the store metadata file in using fs.readFileSync
+    let fileContent = fs.readFileSync(path.join(testStorePath, 'metadata.json'), 'utf-8');
+    fileContent = fileContent.replace('Harvard', 'Tufts');
+    // // wait for the store to reload
+    // // Physically change the store title from 'Harvard Appstore' to
+    // // 'Tufts Appstore', and assert if the hot reloaded store updated correctly
+    // console.log('change the store metadata title from \'Harvard Appstore\' to \'Tufts Appstore\' now');
+    // await delay(35000);
+    // assert.equal(store.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
   });
 
   it('does not update store if being edited is true', async function () {
