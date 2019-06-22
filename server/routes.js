@@ -152,7 +152,9 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/installed-apps', async (req, res) => {
+    console.log('here');
     const currentCatalog = store.getCatalog(req.session.catalogId);
+    console.log(currentCatalog);
 
     // if no catalog returned, throw an error
     if (!currentCatalog || currentCatalog === null) {
@@ -171,4 +173,6 @@ module.exports = (expressApp) => {
       throw new Error('Please re-launch this app from Canvas to continue. If this continues to occur, please contact an admin');
     }
   });
+
+  return store;
 };

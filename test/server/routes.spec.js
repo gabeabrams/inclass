@@ -6,20 +6,17 @@ const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
 
-const dummyPath = path.join(__dirname, '..', 'dummy-data/store/installable');
-const Store = proxyquire('../../server/Store', {
-  './STORE_CONSTANTS': {
-    path: dummyPath,
-    '@global': true,
-  },
-});
+const dummyStorePath = path.join(__dirname, '..', 'dummy-data/store/installable');
 
 // init the routes with already loaded store
-const initRoutesWithRealStore = (expressApp, store) => {
+const initRoutesWithPathToStore = (expressApp, storePath) => {
   const routesUninitialized = proxyquire(
     '../../server/routes',
     {
-      './Store': store,
+      '/STORE_CONSTANTS': {
+        path: storePath,
+        '@global': true,
+      },
     }
   );
   // use the fake store for testing, return the fake Store routes export
@@ -46,18 +43,13 @@ describe('server > routes', function () {
       const fakeAPI = new API();
       // get the list of LTI apps from canvas API
       const ltiApps = await fakeAPI.course.app.list({ courseId: 100 });
-      // create store that loads information from the installable test store
-      const store = new Store(fakeExpressApp);
-      await store._attemptLoad();
 
-      initRoutesWithStore(
+      const store = initRoutesWithPathToStore(
         fakeExpressApp,
-        {
-          storeMetadata: {
-            title: 'Harvard Store',
-          },
-        }
+        dummyStorePath
       );
+      await store._attemptLoad();
+      console.log(store);
       // fake req, res objects
       const req = {
         session: {
@@ -74,7 +66,7 @@ describe('server > routes', function () {
           dataReturnedToClient = data;
         },
       };
-      await fakeExpressApp.simulateRequest('/installed-apps', req, res);
+      // await fakeExpressApp.simulateRequest('/installed-apps', req, res);
     });
 
     describe('server > routes /store', async function () {
