@@ -139,7 +139,7 @@ module.exports = (expressApp) => {
       } = installData;
 
       // Installs the app
-      req.api.course.addApp(
+      await req.api.course.app.add(
         {
           courseId,
           name,
