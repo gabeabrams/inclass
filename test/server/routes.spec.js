@@ -297,32 +297,54 @@ describe('server > routes', function () {
       );
     });
 
-    // it('throws an error when installData returns null', async function () {
-    //   const fakeExpressApp = new ExpressApp();
-    //   const store = new Store(fakeExpressApp);
-    //   const fakeAPI = new API();
-    //   await store._attemptLoad();
-    //   initRoutesWithRealStore(fakeExpressApp, store);
-    //   const req = {
-    //     api: fakeAPI,
-    //     params: {
-    //       appId: 'fakeapp',
-    //     },
-    //     session: {
-    //       launchInfo: {
-    //         courseId: 102,
-    //       },
-    //       catalogId: 'fakecourse',
-    //     },
-    //   };
-    //   let dataReturnedToClient;
-    //   const res = {
-    //     json: (data) => {
-    //       dataReturnedToClient = data;
-    //     },
-    //   };
-    //   await fakeExpressApp.simulateRequest('/install/:appId', req, res);
-    //   assert(!dataReturnedToClient.success, 'returned success when it should fail');
-    // });
+    it('throws an error when installData returns null', async function () {
+      // Create a fake express app and api
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+
+      // init installable store
+      initRoutesWithInstallableStore(fakeExpressApp);
+
+      // Create a request object
+      const req = {
+        api: fakeAPI,
+        params: {
+          appId: 'fakeApp',
+        },
+        session: {
+          launchInfo: {
+            courseId: 54,
+          },
+          catalogId: 'fakeCatalog',
+          save: (callback) => { callback(); },
+        },
+      };
+
+      // create a fake response object
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+
+      // Simulate a request to the /install/:appId path
+      // Asking to install the "notinstalled" app (the only app that hasn't been
+      // installed yet)
+      await fakeExpressApp.simulateRequest('/install/:appId', req, res);
+
+      // Analyze the response sent to the user
+      // > Make sure a response was sent
+      assert(dataReturnedToClient !== undefined, 'No request sent to user');
+      // > Make sure the response is correct
+      assert.deepEqual(
+        dataReturnedToClient,
+        {
+          success: false,
+          message: 'We cannot find this app\'s installation details. Please contact an admin.',
+        },
+        'Response should have been a success message'
+      );
+    });
   });
 });
