@@ -20,21 +20,6 @@ const initRoutesWithInstallableStore = (expressApp) => {
   return routesUninitialized(expressApp);
 };
 
-const dummyStorePath = path.join(__dirname, '../dummy-data/store/medium');
-
-// init the routes with already loaded store
-const withPathToStore = (expressApp, storePath) => {
-  const routesUninitialized = proxyquire(
-    '../../server/routes',
-    {
-      '../STORE_CONSTANTS': storePath,
-      
-    }
-  );
-  // use the fake store for testing, return the fake Store routes export
-  return routesUninitialized(expressApp);
-};
-
 // this imports routes and replaces all instances of store to our generated one
 const initRoutesWithStore = (expressApp, storeOpts) => {
   // generate fake Store and replace all instances of Store in routes.js
