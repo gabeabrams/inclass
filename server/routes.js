@@ -134,7 +134,15 @@ module.exports = (expressApp) => {
     let courseId;
     // Try to get courseId from the request, if it's not there, return an error
     try {
+      // Make sure launchInfo exists
       ({ courseId } = req.session.launchInfo);
+      // We have to check if courseId is undefined
+      if (courseId === undefined) {
+        return res.json({
+          success: false,
+          message: 'We could not uninstall this app because we could not determine your launch course. Please contact an admin.',
+        });
+      }
     } catch (err) {
       return res.json({
         success: false,
