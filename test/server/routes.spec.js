@@ -249,7 +249,10 @@ describe('server > routes', function () {
       assert.equal(dataReturnedToClient.isAdmin, true, 'did not return correct isAdmin object');
     });
   });
-  describe.only('server > routes /install/:appId', function () {
+  describe.only('server > routes /install', function () {
+    it ('successfully installs an app', async function () {
+
+    });
     it('throws an error when installData returns null', async function () {
       const fakeExpressApp = new ExpressApp();
       const store = new Store(fakeExpressApp);
