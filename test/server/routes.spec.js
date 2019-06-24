@@ -148,19 +148,26 @@ describe('server > routes', function () {
   });
 
   describe.only('server > routes /uninstall', function () {
-    it.only('Gives an error if there is no courseId in the launch info', async function () {
-      // Make fake req and res objects
+    it('Gives an error if there is no courseId in the launch info', async function () {
+      // Make fake express app and fake api to pass in
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+
+      // initialize the installable store
+      initRoutesWithInstallableStore(fakeExpressApp);
+
+      // Create fake request and response objects
       const req = {
-        ltiIds: [
-          430,
-          628,
-          100,
-        ],
+        api: fakeAPI,
+        body: {
+          ltiIds: [94385],
+        },
         session: {
           launchInfo: {
-            // no courseId object
+            // No courseId
           },
           catalogId: 'dce',
+          save: (callback) => { callback(); },
         },
       };
       let payload;
@@ -169,21 +176,52 @@ describe('server > routes', function () {
           payload = data;
         },
       };
-      // Make fake express app and fake store to pass in
-      const fakeExpressApp = new ExpressApp();
-      const store = initRoutesWithPathToStore(fakeExpressApp, dummyStorePath);
-      // Wait for store to load
-      await store._attemptLoad();
 
       await fakeExpressApp.simulateRequest('/uninstall', req, res);
 
-      assert.equal(payload.success, false);
+      console.log('response is ', payload);
+
+      assert.equal(payload.success, false, 'Response success should be false');
     });
-    it('Returns an error message if any of the apps cannot be uninstalled', async function () {
+    it.skip('Returns an error message if any of the apps cannot be uninstalled', async function () {
 
     });
-    it('Returns success: true if all of the apps in the list are uninstalled', async function () {
+    it('Successfully uninstalls an app or list of apps', async function () {
+      // Create fake express app and api
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
 
+      // initialize the installable store
+      initRoutesWithInstallableStore(fakeExpressApp);
+
+      // Create fake request and response objects
+      const req = {
+        api: fakeAPI,
+        body: {
+          ltiIds: [94385],
+        },
+        session: {
+          launchInfo: {
+            courseId: 200,
+          },
+          catalogId: 'dce',
+          save: (callback) => { callback(); },
+        },
+      };
+
+      let payload;
+      const res = {
+        json: (data) => {
+          payload = data;
+        },
+      };
+
+      // Simulate request to DELETE route /uninstall
+      await fakeExpressApp.simulateRequest('/uninstall', req, res);
+
+      // Make sure response is correct
+      assert(payload.success, 'Response does not have success attribute');
+      assert.equal(payload.success, true, 'Success attribute should equal true');
     });
   });
 
