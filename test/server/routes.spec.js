@@ -1,3 +1,4 @@
+const InstallableStore = require('../dummy-objects/InstallableStore');
 const proxyquire = require('proxyquire');
 const assert = require('assert');
 const path = require('path');
@@ -7,6 +8,19 @@ const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
 
 const dummyStorePath = path.join(__dirname, '..', 'dummy-data/store/installable');
+
+// this creates an installable store
+const initRoutesWithInstallableStore = (expressApp) => {
+  // generate fake Store and replace all instances of Store in routes.js
+  const routesUninitialized = proxyquire(
+    '../../server/routes',
+    {
+      './Store': InstallableStore,
+    }
+  );
+  // use the fake store for testing, return the fake Store routes export
+  return routesUninitialized(expressApp);
+};
 
 // init the routes with already loaded store
 const initRoutesWithPathToStore = (expressApp, storePath) => {
