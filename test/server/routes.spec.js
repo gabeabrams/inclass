@@ -38,7 +38,7 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
 
 describe('server > routes', function () {
   describe('server > routes /installed-apps', function () {
-    it.only('does something with installable fake store', async function () {
+    it('does something with installable fake store', async function () {
       const fakeExpressApp = new ExpressApp();
       const fakeAPI = new API();
       // get the list of LTI apps from canvas API
@@ -133,9 +133,37 @@ describe('server > routes', function () {
     });
   });
 
-  describe('server > routes /uninstall', function () {
-    it('Gives an error if there is no courseId in the launch info', async function () {
+  describe.only('server > routes /uninstall', function () {
+    it.only('Gives an error if there is no courseId in the launch info', async function () {
+      // Make fake req and res objects
+      const req = {
+        ltiIds: [
+          430,
+          628,
+          100,
+        ],
+        session: {
+          launchInfo: {
+            // no courseId object
+          },
+          catalogId: 'dce',
+        },
+      };
+      let payload;
+      const res = {
+        json: (data) => {
+          payload = data;
+        },
+      };
+      // Make fake express app and fake store to pass in
+      const fakeExpressApp = new ExpressApp();
+      const store = initRoutesWithPathToStore(fakeExpressApp, dummyStorePath);
+      // Wait for store to load
+      await store._attemptLoad();
 
+      await fakeExpressApp.simulateRequest('/uninstall', req, res);
+
+      assert.equal(payload.success, false);
     });
     it('Returns an error message if any of the apps cannot be uninstalled', async function () {
 
