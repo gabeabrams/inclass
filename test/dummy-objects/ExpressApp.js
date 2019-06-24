@@ -53,7 +53,6 @@ class ExpressApp {
    * @param {object} res - the response object to pass to the handler
    */
   async simulateRequest(path, req, res) {
-    console.log(this.handlers, path);
     await this.handlers[path](req, res);
   }
 }
