@@ -250,35 +250,79 @@ describe('server > routes', function () {
     });
   });
   describe.only('server > routes /install', function () {
-    it ('successfully installs an app', async function () {
-
-    });
-    it('throws an error when installData returns null', async function () {
+    it('successfully installs an app', async function () {
+      // Create a fake express app and API
       const fakeExpressApp = new ExpressApp();
-      const store = new Store(fakeExpressApp);
       const fakeAPI = new API();
-      await store._attemptLoad();
-      initRoutesWithRealStore(fakeExpressApp, store);
+
+      // Init installable store
+      initRoutesWithInstallableStore(fakeExpressApp);
+
+      // Creates a request object
       const req = {
         api: fakeAPI,
         params: {
-          appId: 'fakeapp',
+          appId: 'notinstalled',
         },
         session: {
           launchInfo: {
-            courseId: 102,
+            courseId: 54,
           },
-          catalogId: 'fakecourse',
+          catalogId: 'dce',
+          save: (callback) => { callback(); },
         },
       };
+      // Creates a fake response object
       let dataReturnedToClient;
       const res = {
         json: (data) => {
           dataReturnedToClient = data;
         },
       };
-      await fakeExpressApp.simulateRequest('/install/:appId', req, res);
-      assert(!dataReturnedToClient.success, 'returned success when it should fail');
+
+      /*
+       * Simulate request to /install/:appId path
+       * Asking to install the "notinstalled" app
+       */
+      await fakeExpressApp.simulateRequest('install/:appId', req, res);
+
+      // Makes sure response was sent to user
+      assert(dataReturnedToClient !== undefined, 'No request sent to user');
+
+      // Makes sure response was correct
+      assert.deepEqual(
+        dataReturnedToClient,
+        { success: true },
+        'Response should have been a success message'
+      );
     });
+
+    // it('throws an error when installData returns null', async function () {
+    //   const fakeExpressApp = new ExpressApp();
+    //   const store = new Store(fakeExpressApp);
+    //   const fakeAPI = new API();
+    //   await store._attemptLoad();
+    //   initRoutesWithRealStore(fakeExpressApp, store);
+    //   const req = {
+    //     api: fakeAPI,
+    //     params: {
+    //       appId: 'fakeapp',
+    //     },
+    //     session: {
+    //       launchInfo: {
+    //         courseId: 102,
+    //       },
+    //       catalogId: 'fakecourse',
+    //     },
+    //   };
+    //   let dataReturnedToClient;
+    //   const res = {
+    //     json: (data) => {
+    //       dataReturnedToClient = data;
+    //     },
+    //   };
+    //   await fakeExpressApp.simulateRequest('/install/:appId', req, res);
+    //   assert(!dataReturnedToClient.success, 'returned success when it should fail');
+    // });
   });
 });
