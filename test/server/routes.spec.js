@@ -251,8 +251,36 @@ describe('server > routes', function () {
       assert(!payload.success, 'Success attribute should be false');
       assert.equal(payload.message, 'We could not uninstall this app because we could not determine your launch course. Please contact an admin.', 'Incorrect error message');
     });
-    it.skip('Returns an error message if any of the apps cannot be uninstalled', async function () {
+    it('Returns an error message if any of the apps cannot be uninstalled', async function () {
+      // Make fake express app and fake api to pass in
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
 
+      // initialize the installable store
+      initRoutesWithInstallableStore(fakeExpressApp);
+
+      // Create fake request and response objects
+      const req = {
+        api: fakeAPI,
+        body: {
+          ltiIds: [7328, 3489, 3279],
+        },
+        session: {
+          launchInfo: {
+            courseId: 73429,
+          },
+          catalogId: 'dce',
+          save: (callback) => { callback(); },
+        },
+      };
+      let payload;
+      const res = {
+        json: (data) => {
+          payload = data;
+        },
+      };
+
+      await fakeExpressApp.simulateRequest('/uninstall', req, res);
     });
   });
 
