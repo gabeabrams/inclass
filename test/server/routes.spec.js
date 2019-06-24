@@ -250,15 +250,15 @@ describe('server > routes', function () {
     });
   });
   describe.only('server > routes /install', function () {
-    it('successfully installs an app', async function () {
-      // Create a fake express app and API
+    it('Successfully installs an app', async function () {
+      // Create a fake express app and api
       const fakeExpressApp = new ExpressApp();
       const fakeAPI = new API();
 
-      // Init installable store
+      // init installable store
       initRoutesWithInstallableStore(fakeExpressApp);
 
-      // Creates a request object
+      // Create a request object
       const req = {
         api: fakeAPI,
         params: {
@@ -272,7 +272,8 @@ describe('server > routes', function () {
           save: (callback) => { callback(); },
         },
       };
-      // Creates a fake response object
+
+      // create a fake response object
       let dataReturnedToClient;
       const res = {
         json: (data) => {
@@ -280,16 +281,15 @@ describe('server > routes', function () {
         },
       };
 
-      /*
-       * Simulate request to /install/:appId path
-       * Asking to install the "notinstalled" app
-       */
-      await fakeExpressApp.simulateRequest('install/:appId', req, res);
+      // Simulate a request to the /install/:appId path
+      // Asking to install the "notinstalled" app (the only app that hasn't been
+      // installed yet)
+      await fakeExpressApp.simulateRequest('/install/:appId', req, res);
 
-      // Makes sure response was sent to user
+      // Analyze the response sent to the user
+      // > Make sure a response was sent
       assert(dataReturnedToClient !== undefined, 'No request sent to user');
-
-      // Makes sure response was correct
+      // > Make sure the response is correct
       assert.deepEqual(
         dataReturnedToClient,
         { success: true },
