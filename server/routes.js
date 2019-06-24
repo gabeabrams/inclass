@@ -143,7 +143,7 @@ module.exports = (expressApp) => {
     }
     // We get the ltiIds out of the request body and these are our apps
     // that we want to uninstall
-    const { ltiIds } = req.body.ltiIds;
+    const { ltiIds } = req.body;
     // go through the list of apps to delete
     ltiIds.forEach((ltiAppId) => {
       try {
