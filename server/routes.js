@@ -156,15 +156,17 @@ module.exports = (expressApp) => {
     const currentCatalog = store.getCatalog(req.session.catalogId);
     // if no catalog returned, throw an error
     if (!currentCatalog || currentCatalog === null) {
-      throw new Error('We could not get your list of currently installed apps because your session has expired. Please re-launch from Canvas. If this issue continues to occur, please contact an admin.');
+      return res.json({
+        success: false,
+        message: 'We could not get your list of currently installed apps because your session has expired. Please re-launch from Canvas. If this issue continues to occur, please contact an admin.',
+      })
     }
     try {
       const { courseId } = req.session.launchInfo;
       // get a list of apps under the courseId
       const ltiApps = await req.api.course.app.list({ courseId });
+      // initiate object to return
       const matchingApps = [];
-      // console.log('ltiapps are ', ltiApps);
-      // console.log('catalogApps are ', currentCatalog.apps);
       Object.keys(currentCatalog.apps).forEach((catalogAppId) => {
         const catalogApp = currentCatalog.apps[catalogAppId];
         const { key, xml } = store.getInstallData(
@@ -184,17 +186,21 @@ module.exports = (expressApp) => {
             matchingApp.appId = catalogAppId;
           }
         });
-        if (matchingApp !== {}) {
+        // if matchingApp is not empty
+        if (Object.keys(matchingApp).length !== 0) {
           matchingApps.push(matchingApp);
         }
         matchingApp = {};
       });
-      console.log(matchingApps);
       return res.json({
         success: true,
+        apps: matchingApps,
       });
     } catch (err) {
-      throw new Error('Please re-launch this app from Canvas to continue. If this continues to occur, please contact an admin');
+      return res.json({
+        success: false,
+        message: 'Please re-launch this app from Canvas to continue. If this continues to occur, please contact an admin',
+      });
     }
   });
 };
