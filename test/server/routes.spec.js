@@ -5,18 +5,17 @@ const path = require('path');
 const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
+const InstallableStore = require('../dummy-objects/InstallableStore');
 
 const dummyStorePath = path.join(__dirname, '..', 'dummy-data/store/installable');
 
-// init the routes with already loaded store
-const initRoutesWithPathToStore = (expressApp, storePath) => {
+// this creates an installable store
+const initRoutesWithInstallableStore = (expressApp) => {
+  // generate fake Store and replace all instances of Store in routes.js
   const routesUninitialized = proxyquire(
     '../../server/routes',
     {
-      '/STORE_CONSTANTS': {
-        path: storePath,
-        '@global': true,
-      },
+      './Store': InstallableStore,
     }
   );
   // use the fake store for testing, return the fake Store routes export
@@ -41,24 +40,18 @@ describe('server > routes', function () {
     it.only('does something with installable fake store', async function () {
       const fakeExpressApp = new ExpressApp();
       const fakeAPI = new API();
-      // get the list of LTI apps from canvas API
-      const ltiApps = await fakeAPI.course.app.list({ courseId: 100 });
 
-      const store = initRoutesWithPathToStore(
-        fakeExpressApp,
-        dummyStorePath
-      );
-      await store._attemptLoad();
-      console.log(store);
+      initRoutesWithInstallableStore(fakeExpressApp);
       // fake req, res objects
       const req = {
+        api: fakeAPI,
         session: {
           launchInfo: {
             courseId: 100,
           },
           catalogId: 'dce',
+          save: (callback) => { callback(); },
         },
-        api: fakeAPI,
       };
       let dataReturnedToClient;
       const res = {
@@ -66,7 +59,8 @@ describe('server > routes', function () {
           dataReturnedToClient = data;
         },
       };
-      // await fakeExpressApp.simulateRequest('/installed-apps', req, res);
+      console.log(dataReturnedToClient);
+      await fakeExpressApp.simulateRequest('/installed-apps', req, res);
     });
 
     describe('server > routes /store', async function () {
