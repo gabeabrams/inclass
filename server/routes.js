@@ -162,8 +162,34 @@ module.exports = (expressApp) => {
       const { courseId } = req.session.launchInfo;
       // get a list of apps under the courseId
       const ltiApps = await req.api.course.app.list({ courseId });
-      console.log('ltiapps are ', ltiApps);
-      console.log('currentCatalogs are ', currentCatalog);
+      const matchingApps = [];
+      // console.log('ltiapps are ', ltiApps);
+      // console.log('catalogApps are ', currentCatalog.apps);
+      Object.keys(currentCatalog.apps).forEach((catalogAppId) => {
+        const catalogApp = currentCatalog.apps[catalogAppId];
+        const { key, xml } = store.getInstallData(
+          req.session.catalogId,
+          catalogAppId
+        );
+        let matchingApp = {};
+        ltiApps.forEach((ltiApp) => {
+          if (ltiApp.privacy_level === catalogApp.launchPrivacy
+              && ltiApp.consumer_key === key
+              && ltiApp.name === catalogApp.title
+              && xml.includes(ltiApp.url)) {
+            if (!matchingApp.ltiIds) {
+              matchingApp.ltiIds = [];
+            }
+            matchingApp.ltiIds.push(ltiApp.id);
+            matchingApp.appId = catalogAppId;
+          }
+        });
+        if (matchingApp !== {}) {
+          matchingApps.push(matchingApp);
+        }
+        matchingApp = {};
+      });
+      console.log(matchingApps);
       return res.json({
         success: true,
       });

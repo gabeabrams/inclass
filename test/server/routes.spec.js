@@ -59,7 +59,6 @@ describe('server > routes', function () {
           dataReturnedToClient = data;
         },
       };
-      console.log(dataReturnedToClient);
       await fakeExpressApp.simulateRequest('/installed-apps', req, res);
     });
 
