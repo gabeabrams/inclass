@@ -9,6 +9,7 @@
 		"build": "cd ./client;npm install;npm run build",
 		"dev:canvas": "node ./node_modules/caccl/canvas/startPartialSimulation",
 		"dev:server": "export DEV=true;npm start",
+		"dev:server-installable": "export STORE_PATH=/test/dummy-data/store/installable;export DEV=true;npm run dev:server",
 		"dev:client": "export DEV=true;cd client;npm start",
 		"selenium": "node ./node_modules/dce-selenium/run"
 	},
