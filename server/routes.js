@@ -159,7 +159,7 @@ module.exports = (expressApp) => {
       return res.json({
         success: false,
         message: 'We could not get your list of currently installed apps because your session has expired. Please re-launch from Canvas. If this issue continues to occur, please contact an admin.',
-      })
+      });
     }
     try {
       const { courseId } = req.session.launchInfo;
@@ -167,6 +167,7 @@ module.exports = (expressApp) => {
       const ltiApps = await req.api.course.app.list({ courseId });
       // initiate object to return
       const matchingApps = [];
+      // find matches between catalogApps and LTI Apps
       Object.keys(currentCatalog.apps).forEach((catalogAppId) => {
         const catalogApp = currentCatalog.apps[catalogAppId];
         const { key, xml } = store.getInstallData(
