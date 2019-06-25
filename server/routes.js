@@ -154,6 +154,7 @@ module.exports = (expressApp) => {
   expressApp.get('/installed-apps', async (req, res) => {
     // the initRoutesWithInstallableStore function replaces this with fake store
     const currentCatalog = store.getCatalog(req.session.catalogId);
+    console.log(currentCatalog.apps);
     // if no catalog returned, throw an error
     if (!currentCatalog || currentCatalog === null) {
       return res.json({

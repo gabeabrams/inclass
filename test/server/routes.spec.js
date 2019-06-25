@@ -1,13 +1,9 @@
 const proxyquire = require('proxyquire');
 const assert = require('assert');
-const path = require('path');
-
 const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
 const InstallableStore = require('../dummy-objects/InstallableStore');
-
-const dummyStorePath = path.join(__dirname, '..', 'dummy-data/store/installable');
 
 // this creates an installable store
 const initRoutesWithInstallableStore = (expressApp) => {
@@ -37,10 +33,10 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
 
 describe('server > routes', function () {
   describe('server > routes /installed-apps', function () {
-    it.only('does something with installable fake store', async function () {
+    it.only('return matching apps and success if exists', async function () {
       const fakeExpressApp = new ExpressApp();
       const fakeAPI = new API();
-
+      // replaces the store in routes with installable fake store
       initRoutesWithInstallableStore(fakeExpressApp);
       // fake req, res objects
       const req = {
@@ -60,6 +56,24 @@ describe('server > routes', function () {
         },
       };
       await fakeExpressApp.simulateRequest('/installed-apps', req, res);
+      const expectedMatching = [
+        {
+          ltiIds: [46841],
+          appId: 'gradeup',
+        },
+        {
+          ltiIds: [46842],
+          appId: 'swipein',
+        },
+      ];
+      assert.equal(dataReturnedToClient.success, true, 'failed when should return matching');
+      assert.deepEqual(dataReturnedToClient.apps, expectedMatching, 'did not return correct form of matching array');
+    });
+
+    it('returns array of ltiAppIds if multiple matches', async function () {
+      // read in appsinCourse, add another app that matches with swipein with differnent id
+
+
     });
 
     describe('server > routes /store', async function () {
