@@ -167,7 +167,7 @@ module.exports = (expressApp) => {
         return res.json({
           success: false,
           message: err.code
-            ? `An unkown error occurred while attempting to uninstall an app: ${err.message}`
+            ? `An error occurred while attempting to uninstall an app: ${err.message}`
             : 'An unknown error occurred while attemping to uninstall an app. Please contact an admin.',
         });
       }
