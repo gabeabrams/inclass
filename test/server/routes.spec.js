@@ -33,7 +33,7 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
 
 describe('server > routes', function () {
   describe('server > routes /installed-apps', function () {
-    it.only('return matching apps and success if exists', async function () {
+    it('return matching apps and success if exists', async function () {
       const fakeExpressApp = new ExpressApp();
       const fakeAPI = new API();
       // replaces the store in routes with installable fake store
