@@ -331,6 +331,16 @@ describe('server > routes', function () {
       };
 
       await fakeExpressApp.simulateRequest('/uninstall', req, res);
+
+      assert.equal(
+        payload.success,
+        false,
+        'Response success should be false'
+      );
+      assert(
+        payload.message.includes('error occurred while attempting to uninstall an app'),
+        'Message is incorrect'
+      );
     });
   });
 
