@@ -175,7 +175,6 @@ describe('server > routes', function () {
       await fakeExpressApp.simulateRequest('/uninstall', req, res);
 
       // Make sure response is correct
-      assert(payload.success, 'Response does not have success attribute');
       assert.equal(
         payload.success,
         true,
@@ -217,7 +216,6 @@ describe('server > routes', function () {
       await fakeExpressApp.simulateRequest('/uninstall', req, res);
 
       // Make sure response is correct
-      assert(payload.success, 'Response does not have success attribute');
       assert.equal(
         payload.success,
         true,
