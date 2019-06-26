@@ -1,4 +1,3 @@
-const InstallableStore = require('../dummy-objects/InstallableStore');
 const proxyquire = require('proxyquire');
 const assert = require('assert');
 const path = require('path');
@@ -7,7 +6,12 @@ const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
 
+const InstallableStore = require('../dummy-objects/InstallableStore');
+
 const dummyStorePath = path.join(__dirname, '..', 'dummy-data/store/installable');
+
+// Import fake installed apps for testing
+const appsInCourse = require('../dummy-objects/API/appsInCourse');
 
 // this creates an installable store
 const initRoutesWithInstallableStore = (expressApp) => {
@@ -180,7 +184,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [94385],
+          ltiIds: [appsInCourse[0].id],
         },
         session: {
           launchInfo: {
@@ -221,7 +225,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [94385],
+          ltiIds: [appsInCourse[0].id],
         },
         session: {
           launchInfo: {
@@ -263,7 +267,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [24836],
+          ltiIds: [appsInCourse[0].id],
         },
         session: {
           // no launchInfo
@@ -299,7 +303,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [7328, 3489, 3279],
+          ltiIds: [6739458760345],
         },
         session: {
           launchInfo: {

@@ -153,9 +153,12 @@ module.exports = (expressApp) => {
     // that we want to uninstall
     const { ltiIds } = req.body;
     // go through the list of apps to delete
-    ltiIds.forEach((ltiAppId) => {
+    for (let i = 0; i < ltiIds.length; i++) {
       try {
-        req.course.app.remove(courseId, ltiAppId);
+        await req.api.course.app.remove({
+          courseId,
+          appId: ltiIds[i],
+        });
       } catch (err) {
         if (err.code) {
           console.log(err);
@@ -167,7 +170,7 @@ module.exports = (expressApp) => {
             : 'An unknown error occurred while attemping to uninstall an app. Please contact an admin.',
         });
       }
-    });
+    }
     // All apps were deleted without an error occurring
     return res.json({
       success: true,
