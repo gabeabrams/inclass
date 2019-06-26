@@ -4,7 +4,7 @@
 	"description": "An edtech app store for Canvas, created by and designed for education-focused faculty and staff",
 	"main": "index.js",
 	"scripts": {
-		"test": "mocha --exit --recursive --reporter spec",
+		"test": "mocha './test/{,!(selenium)/**}/*.spec.js' --exit --recursive --reporter spec",
 		"start": "node index.js",
 		"build": "cd ./client;npm install;npm run build",
 		"dev:canvas": "node ./node_modules/caccl/canvas/startPartialSimulation",
