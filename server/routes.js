@@ -160,7 +160,8 @@ module.exports = (expressApp) => {
           appId: ltiIds[i],
         });
       } catch (err) {
-        if (err.code) {
+        if (!err.code) {
+          // eslint-disable-next-line no-console
           console.log(err);
         }
         return res.json({
@@ -175,10 +176,6 @@ module.exports = (expressApp) => {
     return res.json({
       success: true,
     });
-
-    // for each app, use await req.course.app.remove({...}) to uninstall
-    // return res.json with { success: true/false, [message]: if not success}
-    // if err has an err.code, use err.message, otherwise use default
   });
 
   /**
