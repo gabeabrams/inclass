@@ -10,6 +10,8 @@ const serveScreenshots = require('./helpers/serveScreenshots');
 const serveIcon = require('./helpers/serveIcon');
 const serveStoreLogo = require('./helpers/serveStoreLogo');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
+const callOnSchedule = require('./helpers/callOnSchedule');
+const STORE_CONSTANTS = require('./STORE_CONSTANTS');
 
 class Store {
   constructor(expressApp) {
@@ -24,6 +26,12 @@ class Store {
 
     // Perform first load attempt
     this._attemptLoad();
+    // reloading Store
+    const hotReload = () => {
+      this._attemptLoad();
+    };
+    // reload the store every 'hotReloadSec' dictated by STORE_CONSTANTS
+    callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
   }
 
   /**

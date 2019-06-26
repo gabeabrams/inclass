@@ -18,4 +18,5 @@ if (process.env.STORE_PATH) {
  */
 module.exports = {
   path: storePath,
+  hotReloadSecs: 5,
 };

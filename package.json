@@ -41,6 +41,7 @@
 		"fs": "0.0.1-security"
 	},
 	"devDependencies": {
+		"copy-dir": "^1.1.0",
 		"dce-selenium": "^1.0.35",
 		"eslint": "^5.16.0",
 		"eslint-config-airbnb": "^17.1.0",
@@ -50,6 +51,7 @@
 		"eslint-plugin-react": "^7.13.0",
 		"mocha": "^6.1.4",
 		"proxyquire": "^2.1.0",
+		"rimraf": "^2.6.3",
 		"sinon": "^7.3.2"
 	}
 }
