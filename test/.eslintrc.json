@@ -4,6 +4,11 @@
   },
   "rules": {
     "prefer-arrow-callback": "off",
-    "func-names": ["error", "never"]
+    "func-names": ["error","never"]
+  },
+  "globals": {
+    "itS": false,
+    "describeS": false,
+    "driver": false
   }
 }

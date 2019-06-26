@@ -4,6 +4,20 @@ const assert = require('assert');
 const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
 const genStore = require('../dummy-objects/genStore');
+const InstallableStore = require('../dummy-objects/InstallableStore');
+
+// this creates an installable store
+const initRoutesWithInstallableStore = (expressApp) => {
+  // generate fake Store and replace all instances of Store in routes.js
+  const routesUninitialized = proxyquire(
+    '../../server/routes',
+    {
+      './Store': InstallableStore,
+    }
+  );
+  // use the fake store for testing, return the fake Store routes export
+  return routesUninitialized(expressApp);
+};
 
 // this imports routes and replaces all instances of store to our generated one
 const initRoutesWithStore = (expressApp, storeOpts) => {

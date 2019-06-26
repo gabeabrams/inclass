@@ -243,7 +243,7 @@ describe('server > Store > index', function () {
     const myInstallData = store.getInstallData('dce', 'gradeup');
     const expectedData = {
       name: 'GradeUp',
-      description: 'longer version of the subtitle',
+      description: 'easy grade uploader',
       key: 'consumer key is here',
       secret: 'this is the consumer\'s secret',
       xml: '<?xml version = "1.0"?>\n<contact-info>\n   <name>Tanmay Patil</name>\n   <company>TutorialsPoint</company>\n   <phone>(011) 123-4567</phone>\n</contact-info>',

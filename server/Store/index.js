@@ -190,11 +190,11 @@ class Store {
     } = this.installData[catalogId][appId];
 
     const appData = this.catalogIdToCatalogMetadata[catalogId].apps[appId];
-    const { title, description, launchPrivacy } = appData;
+    const { title, subtitle, launchPrivacy } = appData;
     const appInstallData = {
-      description,
       launchPrivacy,
       name: title,
+      description: subtitle,
       key: installationCredentials.consumer_key,
       secret: installationCredentials.consumer_secret,
       xml: installXML,
