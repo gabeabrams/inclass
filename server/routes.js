@@ -131,9 +131,51 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.delete('/uninstall', async (req, res) => {
-    // TODO: implement
-
-    // NOTE: to get the list of ltiIds, use: req.body.ltiIds
+    let courseId;
+    // Try to get courseId from the request, if it's not there, return an error
+    try {
+      // Make sure launchInfo exists
+      ({ courseId } = req.session.launchInfo);
+      // We have to check if courseId is undefined
+      if (courseId === undefined) {
+        return res.json({
+          success: false,
+          message: 'We could not uninstall this app because we could not determine your launch course. Please contact an admin.',
+        });
+      }
+    } catch (err) {
+      return res.json({
+        success: false,
+        message: 'We could not uninstall this app because we could not determine your launch course. Please contact an admin.',
+      });
+    }
+    // We get the ltiIds out of the request body and these are our apps
+    // that we want to uninstall
+    const ltiIds = req.body.ltiIds || [];
+    // go through the list of apps to delete
+    for (let i = 0; i < ltiIds.length; i++) {
+      try {
+        await req.api.course.app.remove({
+          courseId,
+          appId: ltiIds[i],
+        });
+      } catch (err) {
+        if (!err.code) {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        }
+        return res.json({
+          success: false,
+          message: err.code
+            ? `An error occurred while attempting to uninstall an app: ${err.message}`
+            : 'An unknown error occurred while attemping to uninstall an app. Please contact an admin.',
+        });
+      }
+    }
+    // All apps were deleted without an error occurring
+    return res.json({
+      success: true,
+    });
   });
 
   /**
@@ -154,4 +196,6 @@ module.exports = (expressApp) => {
   expressApp.get('/installed-apps', async (req, res) => {
     // TODO: implement
   });
+
+  return store;
 };
