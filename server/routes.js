@@ -123,6 +123,9 @@ module.exports = (expressApp) => {
       const { catalogId } = req.session;
       const { courseId } = req.session.launchInfo;
       const installData = store.getInstallData(catalogId, appId);
+
+      // If getInstallData returns null
+      // return success is false and error message
       if (!installData) {
         return res.json({
           success: false,
@@ -152,6 +155,8 @@ module.exports = (expressApp) => {
       );
       return res.json({ success: true });
     } catch (err) {
+      // If error has code then return success is false
+      // And what the error message is
       if (err.code) {
         return res.json({
           success: false,
