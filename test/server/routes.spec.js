@@ -329,8 +329,7 @@ describe('server > routes', function () {
       };
 
       // Simulate a request to the /install/:appId path
-      // Asking to install the "notinstalled" app (the only app that hasn't been
-      // installed yet)
+      // Asking to install the "fakeApp" app (an app that does not exist)
       await fakeExpressApp.simulateRequest('/install/:appId', req, res);
 
       // Analyze the response sent to the user
@@ -379,8 +378,7 @@ describe('server > routes', function () {
       };
 
       // Simulate a request to the /install/:appId path
-      // Asking to install the "notinstalled" app (the only app that hasn't been
-      // installed yet)
+      // Asking to install the "gradeup" app (an already installed app)
       await fakeExpressApp.simulateRequest('/install/:appId', req, res);
 
       // Analyze the response sent to the user
