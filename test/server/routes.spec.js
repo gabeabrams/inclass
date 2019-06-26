@@ -1,6 +1,5 @@
 const proxyquire = require('proxyquire');
 const assert = require('assert');
-const path = require('path');
 
 const ExpressApp = require('../dummy-objects/ExpressApp');
 const API = require('../dummy-objects/API');
