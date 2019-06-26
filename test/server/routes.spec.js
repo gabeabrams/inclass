@@ -55,37 +55,6 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
 };
 
 describe('server > routes', function () {
-  describe('server > routes /installed-apps', function () {
-    it('does something with installable fake store', async function () {
-      const fakeExpressApp = new ExpressApp();
-      const fakeAPI = new API();
-      // get the list of LTI apps from canvas API
-      const ltiApps = await fakeAPI.course.app.list({ courseId: 100 });
-
-      const store = initRoutesWithPathToStore(
-        fakeExpressApp,
-        dummyStorePath
-      );
-      await store._attemptLoad();
-      // fake req, res objects
-      const req = {
-        session: {
-          launchInfo: {
-            courseId: 100,
-          },
-          catalogId: 'dce',
-        },
-        api: fakeAPI,
-      };
-      let dataReturnedToClient;
-      const res = {
-        json: (data) => {
-          dataReturnedToClient = data;
-        },
-      };
-      await fakeExpressApp.simulateRequest('/installed-apps', req, res);
-    });
-  });
   describe('server > routes /store', async function () {
     it('Gets store metadata and sends back the metadata in json object', async function () {
       // We make a fake express app using the dummy ExpressApp we made
