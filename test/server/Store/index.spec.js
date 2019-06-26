@@ -1,7 +1,7 @@
 const assert = require('assert');
 const copydir = require('copy-dir');
 const fs = require('fs');
-const rimraf = require('rimraf');
+const rimraf = require('rimraf').sync;
 const proxyquire = require('proxyquire');
 const path = require('path');
 const ExpressApp = require('../../dummy-objects/ExpressApp');
@@ -49,8 +49,7 @@ describe('server > Store > index', function () {
     await delay(reloadSec * 1000 + 1000);
     assert.equal(testStore.storeMetadata.title, 'Tufts Appstore', 'did not replace store with successfully reloaded store');
     // remove the testing store folder, making each test independent
-    rimraf(testStorePath, () => {});
-    await delay(200);
+    rimraf(testStorePath);
   });
 
   it('does not update store if being edited is true', async function () {
@@ -89,8 +88,7 @@ describe('server > Store > index', function () {
     // check that the store does not update
     assert.equal(testStore.storeMetadata.title, 'Harvard Appstore', 'updated store while store beingEdited is true');
     // remove the testing store folder, making each test independent
-    rimraf(testStorePath, () => {});
-    await delay(200);
+    rimraf(testStorePath);
   });
 
   it('does not replace the store if reload failed', async function () {
@@ -134,8 +132,7 @@ describe('server > Store > index', function () {
     await delay(reloadSec * 1000 + 1000);
     assert.equal(testStore.storeMetadata.title, 'Harvard Appstore', 'update store while reloading failed');
     // remove the testing store folder, making each test independent
-    rimraf(testStorePath, () => {});
-    await delay(200);
+    rimraf(testStorePath);
   });
 
   it('Checks metadata objects untouched when error occurs', async function () {
