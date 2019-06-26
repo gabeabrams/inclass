@@ -20,25 +20,10 @@ const initRoutesWithInstallableStore = (expressApp) => {
   return routesUninitialized(expressApp);
 };
 
-const InstallableStore = require('../dummy-objects/InstallableStore');
-
 const dummyStorePath = path.join(__dirname, '..', 'dummy-data/store/installable');
 
 // Import fake installed apps for testing
 const appsInCourse = require('../dummy-objects/API/appsInCourse');
-
-// this creates an installable store
-const initRoutesWithInstallableStore = (expressApp) => {
-  // generate fake Store and replace all instances of Store in routes.js
-  const routesUninitialized = proxyquire(
-    '../../server/routes',
-    {
-      './Store': InstallableStore,
-    }
-  );
-  // use the fake store for testing, return the fake Store routes export
-  return routesUninitialized(expressApp);
-};
 
 // init the routes with already loaded store
 const initRoutesWithPathToStore = (expressApp, storePath) => {
