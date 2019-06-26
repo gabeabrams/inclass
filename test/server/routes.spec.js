@@ -70,12 +70,6 @@ describe('server > routes', function () {
       assert.deepEqual(dataReturnedToClient.apps, expectedMatching, 'did not return correct form of matching array');
     });
 
-    it('returns array of ltiAppIds if multiple matches', async function () {
-      // read in appsinCourse, add another app that matches with swipein with differnent id
-
-
-    });
-
     describe('server > routes /store', async function () {
       it('Gets store metadata and sends back the metadata in json object', async function () {
       // We make a fake express app using the dummy ExpressApp we made
