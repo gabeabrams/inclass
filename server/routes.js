@@ -30,7 +30,7 @@ module.exports = (expressApp) => {
         store: storeMetadata,
       });
     } catch (err) {
-      if (!err.code) {
+      if (!err.code && !process.env.SILENT) {
         console.log(err);
       }
       return res.json({
@@ -100,8 +100,10 @@ module.exports = (expressApp) => {
         });
       }
       // if error does not have code, log the error into console
-      // eslint-disable-next-line no-console
-      console.log(err);
+      if (!process.env.SILENT) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
       return res.json({
         success: false,
         message: 'An unknown error occurred while getting the list of apps in the current catalog. Please contact an admin.',
@@ -160,7 +162,7 @@ module.exports = (expressApp) => {
           appId: ltiIds[i],
         });
       } catch (err) {
-        if (!err.code) {
+        if (!err.code && !process.env.SILENT) {
           // eslint-disable-next-line no-console
           console.log(err);
         }

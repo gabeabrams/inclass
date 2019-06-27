@@ -126,8 +126,10 @@ class Store {
       this.installData = installData;
       return { success: true };
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(`An error occurred while attempting to load store information: ${error.message}`);
+      if (!process.env.SILENT) {
+        // eslint-disable-next-line no-console
+        console.log(`An error occurred while attempting to load store information: ${error.message}`);
+      }
       return { success: false, message: error.message };
     }
   }
