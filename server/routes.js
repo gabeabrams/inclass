@@ -176,10 +176,12 @@ module.exports = (expressApp) => {
         );
         let matchingApp = {};
         ltiApps.forEach((ltiApp) => {
-          if (ltiApp.privacy_level === catalogApp.launchPrivacy
-              && ltiApp.consumer_key === key
-              && ltiApp.name === catalogApp.title
-              && xml.includes(ltiApp.url)) {
+          if (
+            ltiApp.privacy_level === catalogApp.launchPrivacy
+            && ltiApp.consumer_key === key
+            && ltiApp.name === catalogApp.title
+            && xml.includes(ltiApp.url)
+          ) {
             if (!matchingApp.ltiIds) {
               matchingApp.ltiIds = [];
             }
