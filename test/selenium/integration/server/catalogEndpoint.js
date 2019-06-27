@@ -33,5 +33,20 @@ describeS('Server', function () {
     ];
     assert.deepEqual(catalog.tagsToShow, expectedTagsToShow, 'tagsToShow data did not match');
     assert.equal(catalog.defaultSupportEmail, 'example@harvard.edu', 'defaultSupportEmail did not match');
+    // spot check individual apps
+    const { gradeup, swipein, notinstalled } = catalog.apps;
+    
+    // check gradeup
+    assert.equal(gradeup.title, 'GradeUp', 'gradeUp app title did not match');
+    assert.equal(gradeup.subtitle, 'GradeUp is a great tool', 'gradeUp app subtitle did not match');
+    assert.deepEqual(gradeup.creator, ['dce'], 'gradeUp creator data did not match');
+    // defaults to public if not included in metadata
+    assert.equal(gradeup.launchPrivacy, 'public', 'gradeUp launchPrivacy did not match');
+    assert.equal(gradeup.supportEmail, 'tuftsSupport@tufts.edu', 'gradeUp supportEmail did not match');
+
+    // check swipein
+    assert.equal(swipein.title, 'SwipeIn', 'swipein app title did not match');
+    assert.equal(swipein.subtitle, 'SwipeIn is a great tool', 'swipein app subtitle did not match');
+    assert.deepEqual(swipein.creator, ['dce'], 'swipein creator data did not match');
   });
 });
