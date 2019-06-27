@@ -54,6 +54,45 @@ const initRoutesWithStore = (expressApp, storeOpts) => {
 };
 
 describe('server > routes', function () {
+  describe('server > routes /installed-apps', function () {
+    it('return matching apps and success if exists', async function () {
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+      // replaces the store in routes with installable fake store
+      initRoutesWithInstallableStore(fakeExpressApp);
+      // fake req, res objects
+      const req = {
+        api: fakeAPI,
+        session: {
+          launchInfo: {
+            courseId: 100,
+          },
+          catalogId: 'dce',
+          save: (callback) => { callback(); },
+        },
+      };
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+      await fakeExpressApp.simulateRequest('/installed-apps', req, res);
+      const expectedMatching = [
+        {
+          ltiIds: [46841],
+          appId: 'gradeup',
+        },
+        {
+          ltiIds: [46842],
+          appId: 'swipein',
+        },
+      ];
+      assert.equal(dataReturnedToClient.success, true, 'failed when should return matching');
+      assert.deepEqual(dataReturnedToClient.apps, expectedMatching, 'did not return correct form of matching array');
+    });
+  });
+
   describe('server > routes /store', async function () {
     it('Gets store metadata and sends back the metadata in json object', async function () {
       // We make a fake express app using the dummy ExpressApp we made
