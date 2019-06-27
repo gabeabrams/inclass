@@ -10,6 +10,8 @@ const serveScreenshots = require('./helpers/serveScreenshots');
 const serveIcon = require('./helpers/serveIcon');
 const serveStoreLogo = require('./helpers/serveStoreLogo');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
+const callOnSchedule = require('./helpers/callOnSchedule');
+const STORE_CONSTANTS = require('./STORE_CONSTANTS');
 
 class Store {
   constructor(expressApp) {
@@ -24,6 +26,12 @@ class Store {
 
     // Perform first load attempt
     this._attemptLoad();
+    // reloading Store
+    const hotReload = () => {
+      this._attemptLoad();
+    };
+    // reload the store every 'hotReloadSec' dictated by STORE_CONSTANTS
+    callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
   }
 
   /**
@@ -182,11 +190,11 @@ class Store {
     } = this.installData[catalogId][appId];
 
     const appData = this.catalogIdToCatalogMetadata[catalogId].apps[appId];
-    const { title, description, launchPrivacy } = appData;
+    const { title, subtitle, launchPrivacy } = appData;
     const appInstallData = {
-      description,
       launchPrivacy,
       name: title,
+      description: subtitle,
       key: installationCredentials.consumer_key,
       secret: installationCredentials.consumer_secret,
       xml: installXML,

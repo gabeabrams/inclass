@@ -1,0 +1,2 @@
+# Ignore the duplicate test store for hot reloading test
+medium-store-test-for-hotReload/
