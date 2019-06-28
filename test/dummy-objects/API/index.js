@@ -102,14 +102,15 @@ const courseOperations = {
         version: '1.1',
       };
     },
-    remove: async (id) => {
+    remove: async (opts) => {
+      const { courseId, appId } = opts;
       for (let i = 0; i < appsInCourse.length; i++) {
-        if (appsInCourse[i].id === id) {
+        if (appsInCourse[i].id === appId) {
           return appsInCourse[i];
         }
       }
       const err = new Error();
-      err.message = `While attempting to remove an LTI app from a course, we ran into an error: The endpoint https://canvas.harvard.edu/api/v1/courses/53450/external_tools/${id} does not exist: Canvas responded with a 404 message. Please check your endpoint path.`;
+      err.message = `While attempting to remove an LTI app from a course, we ran into an error: The endpoint https://canvas.harvard.edu/api/v1/courses/${courseId}/external_tools/${appId} does not exist: Canvas responded with a 404 message. Please check your endpoint path.`;
       err.name = 'CACCLError';
       err.code = 'CAPI15';
       err.isCACCLError = true;

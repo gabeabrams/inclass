@@ -30,7 +30,7 @@ module.exports = (expressApp) => {
         store: storeMetadata,
       });
     } catch (err) {
-      if (!err.code) {
+      if (!err.code && !process.env.SILENT) {
         console.log(err);
       }
       return res.json({
@@ -100,8 +100,10 @@ module.exports = (expressApp) => {
         });
       }
       // if error does not have code, log the error into console
-      // eslint-disable-next-line no-console
-      console.log(err);
+      if (!process.env.SILENT) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
       return res.json({
         success: false,
         message: 'An unknown error occurred while getting the list of apps in the current catalog. Please contact an admin.',
@@ -201,9 +203,51 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.delete('/uninstall', async (req, res) => {
-    // TODO: implement
-
-    // NOTE: to get the list of ltiIds, use: req.body.ltiIds
+    let courseId;
+    // Try to get courseId from the request, if it's not there, return an error
+    try {
+      // Make sure launchInfo exists
+      ({ courseId } = req.session.launchInfo);
+      // We have to check if courseId is undefined
+      if (courseId === undefined) {
+        return res.json({
+          success: false,
+          message: 'We could not uninstall this app because we could not determine your launch course. Please contact an admin.',
+        });
+      }
+    } catch (err) {
+      return res.json({
+        success: false,
+        message: 'We could not uninstall this app because we could not determine your launch course. Please contact an admin.',
+      });
+    }
+    // We get the ltiIds out of the request body and these are our apps
+    // that we want to uninstall
+    const ltiIds = req.body.ltiIds || [];
+    // go through the list of apps to delete
+    for (let i = 0; i < ltiIds.length; i++) {
+      try {
+        await req.api.course.app.remove({
+          courseId,
+          appId: ltiIds[i],
+        });
+      } catch (err) {
+        if (!err.code && !process.env.SILENT) {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        }
+        return res.json({
+          success: false,
+          message: err.code
+            ? `An error occurred while attempting to uninstall an app: ${err.message}`
+            : 'An unknown error occurred while attemping to uninstall an app. Please contact an admin.',
+        });
+      }
+    }
+    // All apps were deleted without an error occurring
+    return res.json({
+      success: true,
+    });
   });
 
   /**
@@ -222,7 +266,59 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/installed-apps', async (req, res) => {
-    // TODO: implement
+    // the initRoutesWithInstallableStore function replaces this with fake store
+    const currentCatalog = store.getCatalog(req.session.catalogId);
+    // if no catalog returned, throw an error
+    if (!currentCatalog || currentCatalog === null) {
+      return res.json({
+        success: false,
+        message: 'We could not get your list of currently installed apps because your session has expired. Please re-launch from Canvas. If this issue continues to occur, please contact an admin.',
+      });
+    }
+    try {
+      const { courseId } = req.session.launchInfo;
+      // get a list of apps under the courseId
+      const ltiApps = await req.api.course.app.list({ courseId });
+      // initiate object to return
+      const matchingApps = [];
+      // find matches between catalogApps and LTI Apps
+      Object.keys(currentCatalog.apps).forEach((catalogAppId) => {
+        const catalogApp = currentCatalog.apps[catalogAppId];
+        const { key, xml } = store.getInstallData(
+          req.session.catalogId,
+          catalogAppId
+        );
+        let matchingApp = {};
+        ltiApps.forEach((ltiApp) => {
+          if (
+            ltiApp.privacy_level === catalogApp.launchPrivacy
+            && ltiApp.consumer_key === key
+            && ltiApp.name === catalogApp.title
+            && xml.includes(ltiApp.url)
+          ) {
+            if (!matchingApp.ltiIds) {
+              matchingApp.ltiIds = [];
+            }
+            matchingApp.ltiIds.push(ltiApp.id);
+            matchingApp.appId = catalogAppId;
+          }
+        });
+        // if matchingApp is not empty
+        if (Object.keys(matchingApp).length !== 0) {
+          matchingApps.push(matchingApp);
+        }
+        matchingApp = {};
+      });
+      return res.json({
+        success: true,
+        apps: matchingApps,
+      });
+    } catch (err) {
+      return res.json({
+        success: false,
+        message: 'Please re-launch this app from Canvas to continue. If this continues to occur, please contact an admin',
+      });
+    }
   });
 
   return store;

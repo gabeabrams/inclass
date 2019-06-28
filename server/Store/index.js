@@ -10,6 +10,8 @@ const serveScreenshots = require('./helpers/serveScreenshots');
 const serveIcon = require('./helpers/serveIcon');
 const serveStoreLogo = require('./helpers/serveStoreLogo');
 const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
+const callOnSchedule = require('./helpers/callOnSchedule');
+const STORE_CONSTANTS = require('./STORE_CONSTANTS');
 
 class Store {
   constructor(expressApp) {
@@ -24,6 +26,12 @@ class Store {
 
     // Perform first load attempt
     this._attemptLoad();
+    // reloading Store
+    const hotReload = () => {
+      this._attemptLoad();
+    };
+    // reload the store every 'hotReloadSec' dictated by STORE_CONSTANTS
+    callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
   }
 
   /**
@@ -118,8 +126,10 @@ class Store {
       this.installData = installData;
       return { success: true };
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(`An error occurred while attempting to load store information: ${error.message}`);
+      if (!process.env.SILENT) {
+        // eslint-disable-next-line no-console
+        console.log(`An error occurred while attempting to load store information: ${error.message}`);
+      }
       return { success: false, message: error.message };
     }
   }
