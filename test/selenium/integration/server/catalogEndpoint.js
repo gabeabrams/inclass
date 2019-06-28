@@ -4,21 +4,24 @@ const assert = require('assert');
 const { courseId } = require('../../../../config/devEnvironment');
 
 describeS('Server', function () {
-  itS.only('Responds with Catalog', async function (driver) {
-    // https://localhost/catalog
+  itS('Responds with Catalog', async function (driver) {
     await driver.visit(`https://localhost:8088/courses/${courseId}`);
     // Click "Simulate Launch"
-    await driver.click('.launch-button');
-    // Click "Authorize"
-    // await driver.click('.authorize-button');
+    // Catch the error firefox throws when visiting localhost
+    try {
+      await driver.click('.launch-button');
+    } catch (err) {
+      driver.log(err);
+    }
     // Wait 2s
-    await driver.wait(2000);
+    await driver.wait(1500);
     // Visit https://localhost/catalog
     await driver.visit('https://localhost/catalog');
+    // to ensure the raw data tab in firefox load before we get data from it
+    await driver.wait(1000);
     // Get json from page
     const { catalog } = await driver.getJSON();
-    // Test the json to see if it matches data in
-    //   /test/dummy-data/store/installable
+    // Test the json to see if it matches data in installable store
     assert.equal(catalog.title, 'DCE catalog', 'title data did not match');
     assert.deepEqual(catalog.accounts, [1176], 'accounts data did not match');
     const expectedTagsToShow = [
