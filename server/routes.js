@@ -120,7 +120,77 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.post('/install/:appId', async (req, res) => {
-    // TODO: implement
+    try {
+      const { appId } = req.params;
+      const { catalogId } = req.session;
+      const installData = store.getInstallData(catalogId, appId);
+
+      let courseId;
+      // Try to get courseId from the request, if it's absent, return an error
+      try {
+        // Make sure launchInfo exists
+        ({ courseId } = req.session.launchInfo);
+        // We have to check if courseId is undefined
+        if (courseId === undefined) {
+          return res.json({
+            success: false,
+            message: 'We could not install this app because we could not determine your launch course. Please contact an admin.',
+          });
+        }
+      } catch (err) {
+        return res.json({
+          success: false,
+          message: 'We could not install this app because we could not determine your launch course. Please contact an admin.',
+        });
+      }
+
+      // If getInstallData returns null
+      // return success is false and error message
+      if (!installData) {
+        return res.json({
+          success: false,
+          message: 'We cannot find this app\'s installation details. Please contact an admin.',
+        });
+      }
+      const {
+        name,
+        description,
+        key,
+        secret,
+        xml,
+        launchPrivacy,
+      } = installData;
+
+      // Installs the app
+      await req.api.course.app.add({
+        courseId,
+        name,
+        key,
+        secret,
+        xml,
+        description,
+        launchPrivacy,
+      });
+      return res.json({ success: true });
+    } catch (err) {
+      // If error has code then return success is false
+      // And what the error message is
+      if (err.code) {
+        return res.json({
+          success: false,
+          message: `An error occurred while getting the list of apps in the current catalog: ${err.message}`,
+        });
+      }
+      // If error doesn't have code
+      if (!process.env.SILENT) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+      return res.json({
+        success: false,
+        message: 'An unknown error occurred while installing this app. Please contact an admin.',
+      });
+    }
   });
 
   /**

@@ -532,4 +532,147 @@ describe('server > routes', function () {
       assert.equal(dataReturnedToClient.isAdmin, true, 'did not return correct isAdmin object');
     });
   });
+  describe('server > routes /install', function () {
+    it('Successfully installs an app', async function () {
+      // Create a fake express app and api
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+
+      // init installable store
+      initRoutesWithInstallableStore(fakeExpressApp);
+
+      // Create a request object
+      const req = {
+        api: fakeAPI,
+        params: {
+          appId: 'notinstalled',
+        },
+        session: {
+          launchInfo: {
+            courseId: 54,
+          },
+          catalogId: 'dce',
+          save: (callback) => { callback(); },
+        },
+      };
+
+      // create a fake response object
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+
+      // Simulate a request to the /install/:appId path
+      // Asking to install the "notinstalled" app (the only app that hasn't been
+      // installed yet)
+      await fakeExpressApp.simulateRequest('/install/:appId', req, res);
+
+      // Analyze the response sent to the user
+      // > Make sure a response was sent
+      assert(dataReturnedToClient !== undefined, 'No request sent to user');
+      // > Make sure the response is correct
+      assert.deepEqual(
+        dataReturnedToClient,
+        { success: true },
+        'Response should have been a success message'
+      );
+    });
+
+    it('throws an error when installData returns null', async function () {
+      // Create a fake express app and api
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+
+      // init installable store
+      initRoutesWithInstallableStore(fakeExpressApp);
+
+      // Create a request object
+      const req = {
+        api: fakeAPI,
+        params: {
+          appId: 'fakeApp',
+        },
+        session: {
+          launchInfo: {
+            courseId: 54,
+          },
+          catalogId: 'fakeCatalog',
+          save: (callback) => { callback(); },
+        },
+      };
+
+      // create a fake response object
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+
+      // Simulate a request to the /install/:appId path
+      // Asking to install the "fakeApp" app (an app that does not exist)
+      await fakeExpressApp.simulateRequest('/install/:appId', req, res);
+
+      // Analyze the response sent to the user
+      // > Make sure a response was sent
+      assert(dataReturnedToClient !== undefined, 'No request sent to user');
+      // > Make sure the response is correct
+      assert.deepEqual(
+        dataReturnedToClient,
+        {
+          success: false,
+          message: 'We cannot find this app\'s installation details. Please contact an admin.',
+        },
+        'Response should have been a success message'
+      );
+    });
+
+    it('Successfully installs an already installed app', async function () {
+      // Create a fake express app and api
+      const fakeExpressApp = new ExpressApp();
+      const fakeAPI = new API();
+
+      // init installable store
+      initRoutesWithInstallableStore(fakeExpressApp);
+
+      // Create a request object
+      const req = {
+        api: fakeAPI,
+        params: {
+          appId: 'gradeup',
+        },
+        session: {
+          launchInfo: {
+            courseId: 54,
+          },
+          catalogId: 'dce',
+          save: (callback) => { callback(); },
+        },
+      };
+
+      // create a fake response object
+      let dataReturnedToClient;
+      const res = {
+        json: (data) => {
+          dataReturnedToClient = data;
+        },
+      };
+
+      // Simulate a request to the /install/:appId path
+      // Asking to install the "gradeup" app (an already installed app)
+      await fakeExpressApp.simulateRequest('/install/:appId', req, res);
+
+      // Analyze the response sent to the user
+      // > Make sure a response was sent
+      assert(dataReturnedToClient !== undefined, 'No request sent to user');
+      // > Make sure the response is correct
+      assert.deepEqual(
+        dataReturnedToClient,
+        { success: true },
+        'Response should have been a success message'
+      );
+    });
+  });
 });
