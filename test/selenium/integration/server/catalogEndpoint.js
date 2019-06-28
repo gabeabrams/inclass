@@ -13,11 +13,11 @@ describeS('Server', function () {
     } catch (err) {
       driver.log(err);
     }
-    // Wait 2s
+    // Wait to ensure server is loaded
     await driver.wait(1500);
     // Visit https://localhost/catalog
     await driver.visit('https://localhost/catalog');
-    // to ensure the raw data tab in firefox load before we get data from it
+    // wait to ensure the raw data tab in firefox load
     await driver.wait(1000);
     // Get json from page
     const { catalog } = await driver.getJSON();
