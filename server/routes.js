@@ -180,8 +180,10 @@ module.exports = (expressApp) => {
         });
       }
       // If error doesn't have code
-      // eslint-disable-next-line no-console
-      console.log(err);
+      if (!process.env.SILENT) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
       return res.json({
         success: false,
         message: 'An unknown error occurred while installing this app. Please contact an admin.',
