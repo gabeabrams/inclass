@@ -31,7 +31,7 @@ describeS('Server', function () {
         color: 'red',
       },
     ];
-    assert.deepEqual(catalog.tagsToShaow, expectedTagsToShow, 'tagsToShow data did not match');
+    assert.deepEqual(catalog.tagsToShow, expectedTagsToShow, 'tagsToShow data did not match');
     assert.equal(catalog.defaultSupportEmail, 'example@harvard.edu', 'defaultSupportEmail did not match');
     // spot check individual apps
     const { gradeup, swipein, notinstalled } = catalog.apps;
@@ -44,11 +44,18 @@ describeS('Server', function () {
     assert.equal(gradeup.launchPrivacy, 'public', 'gradeUp launchPrivacy did not match');
     assert.equal(gradeup.supportEmail, 'tuftsSupport@tufts.edu', 'gradeUp supportEmail did not match');
 
-    // // check swipein
-    // assert.equal(swipein.title, 'SwipeIn', 'swipein app title did not match');
-    // assert.equal(swipein.subtitle, 'SwipeIn is a great tool', 'swipein app subtitle did not match');
-    // assert.deepEqual(swipein.creator, ['dce'], 'swipein creator data did not match');
-    // assert.equal(swipein.launchPrivacy, 'anonymous', 'swipein launchPrivary did not match');
-    // assert.equal(swipein.supportEmail, 'example@harvard.edu', 'swipeIn supportEmail field did not match');
+    // check swipein
+    assert.equal(swipein.title, 'SwipeIn', 'swipein app title did not match');
+    assert.equal(swipein.subtitle, 'SwipeIn is a great tool', 'swipein app subtitle did not match');
+    assert.deepEqual(swipein.creator, ['dce'], 'swipein creator data did not match');
+    assert.equal(swipein.launchPrivacy, 'anonymous', 'swipein launchPrivary did not match');
+    assert.equal(swipein.supportEmail, 'example@harvard.edu', 'swipeIn supportEmail field did not match');
+
+    // check notinstalled
+    assert.equal(notinstalled.title, 'NotInstalled', 'notinstalled app title did not match');
+    assert.equal(notinstalled.subtitle, 'NotInstalled is an awful tool', 'notinstalled app subtitle did not match');
+    assert.deepEqual(notinstalled.creator, ['dce'], 'notinstalled creator data did not match');
+    assert.equal(notinstalled.launchPrivacy, 'anonymous', 'notinstalled launchPrivary did not match');
+    assert.equal(notinstalled.supportEmail, 'example@harvard.edu', 'notinstalled supportEmail field did not match');
   });
 });
