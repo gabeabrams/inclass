@@ -121,8 +121,26 @@ module.exports = (expressApp) => {
     try {
       const { appId } = req.params;
       const { catalogId } = req.session;
-      const { courseId } = req.session.launchInfo;
       const installData = store.getInstallData(catalogId, appId);
+
+      let courseId;
+      // Try to get courseId from the request, if it's absent, return an error
+      try {
+        // Make sure launchInfo exists
+        ({ courseId } = req.session.launchInfo);
+        // We have to check if courseId is undefined
+        if (courseId === undefined) {
+          return res.json({
+            success: false,
+            message: 'We could not install this app because we could not determine your launch course. Please contact an admin.',
+          });
+        }
+      } catch (err) {
+        return res.json({
+          success: false,
+          message: 'We could not install this app because we could not determine your launch course. Please contact an admin.',
+        });
+      }
 
       // If getInstallData returns null
       // return success is false and error message
@@ -142,17 +160,15 @@ module.exports = (expressApp) => {
       } = installData;
 
       // Installs the app
-      await req.api.course.app.add(
-        {
-          courseId,
-          name,
-          key,
-          secret,
-          xml,
-          description,
-          launchPrivacy,
-        }
-      );
+      await req.api.course.app.add({
+        courseId,
+        name,
+        key,
+        secret,
+        xml,
+        description,
+        launchPrivacy,
+      });
       return res.json({ success: true });
     } catch (err) {
       // If error has code then return success is false
