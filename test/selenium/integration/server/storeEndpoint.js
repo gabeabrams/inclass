@@ -15,7 +15,7 @@ describeS('Server', function () {
     // Visit https://localhost/store
     await driver.visit('https://localhost/store');
     // Get the json
-    assert
+    const { success, store } = await driver.getJSON();
     // Test the json
   });
 });
