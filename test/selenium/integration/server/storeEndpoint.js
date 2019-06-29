@@ -17,5 +17,6 @@ describeS('Server', function () {
     // Get the json
     const { success, store } = await driver.getJSON();
     // Test the json
+    assert.equal(success, true, 'Success object should be true');
   });
 });
