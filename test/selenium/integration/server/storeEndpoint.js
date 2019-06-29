@@ -10,10 +10,11 @@ describeS('Server', function () {
     // Click "Authorize"
     await driver.click('#authorize-button');
     // Wait 2s
-
+    await driver.wait(2000);
     // Visit https://localhost/store
     await driver.visit('https://localhost/store');
     // Get the json
+
     // Test the json
   });
 });
