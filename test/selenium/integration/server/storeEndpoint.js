@@ -8,9 +8,11 @@ describeS('Server', function () {
     // Click "Simulate Launch"
     await driver.click('#launch-button');
     // Click "Authorize"
-
+    await driver.click('#authorize-button');
     // Wait 2s
+
     // Visit https://localhost/store
+    
     // Get the json
     // Test the json
   });
