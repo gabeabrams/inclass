@@ -4,7 +4,7 @@ const assert = require('assert');
 const { courseId } = require('../../../../config/devEnvironment');
 
 describeS('Server', function () {
-  itS.only('Checks app icons are loaded', async function (driver) {
+  itS('Checks app icons are loaded', async function (driver) {
     await driver.visit(`https://localhost:8088/courses/${courseId}`);
     // Click "Simulate Launch"
     // Catch the error firefox throws when visiting localhost
