@@ -12,10 +12,12 @@ describeS.only('Server', function () {
     } catch (err) {
       driver.log(err);
     }
-    await driver.wait(10000);
-    // await driver.waitForElementVisible('.content');
     // Click "Authorize"
-    await driver.click('.authorize-button');
+    try {
+      await driver.click('.authorize-button');
+    } catch (err) {
+      driver.log(err);
+    }
     // Wait 2s
     await driver.wait(2000);
     // Visit https://localhost/store
