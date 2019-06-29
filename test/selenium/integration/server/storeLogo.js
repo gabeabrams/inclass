@@ -20,6 +20,6 @@ describeS('Server', function () {
     // get the source of the page
     const source = await driver.getSource();
     // check that the source contains an image tag for store logo
-    assert(source.includes('<img'));
+    assert(source.includes('<img'), 'store logo is not correctly served');
   });
 });
