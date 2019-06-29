@@ -3,13 +3,18 @@ const assert = require('assert');
 
 const { courseId } = require('../../../../config/devEnvironment');
 
-describeS('Server', function () {
+describeS.only('Server', function () {
   itS('Responds with Store Metadata', async function (driver) {
     await driver.visit(`https://localhost:8088/courses/${courseId}`);
     // Click "Simulate Launch"
-    await driver.click('#launch-button');
+    try {
+      await driver.click('.launch-button');
+    } catch (err) {
+      driver.log(err);
+    }
+    // await driver.waitForElementVisible('.content');
     // Click "Authorize"
-    await driver.click('#authorize-button');
+    await driver.click('.authorize-button');
     // Wait 2s
     await driver.wait(2000);
     // Visit https://localhost/store
