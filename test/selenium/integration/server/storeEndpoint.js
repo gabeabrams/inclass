@@ -12,6 +12,7 @@ describeS.only('Server', function () {
     } catch (err) {
       driver.log(err);
     }
+    await driver.wait(10000);
     // await driver.waitForElementVisible('.content');
     // Click "Authorize"
     await driver.click('.authorize-button');
@@ -23,5 +24,7 @@ describeS.only('Server', function () {
     const { success, store } = await driver.getJSON();
     // Test the json
     assert.equal(success, true, 'Success object should be true');
+
+    assert.equal(store.title, 'Harvard Appstore', 'Store title is not correct');
   });
 });
