@@ -22,6 +22,8 @@ describeS.only('Server', function () {
     await driver.wait(2000);
     // Visit https://localhost/store
     await driver.visit('https://localhost/store');
+    // Wait for raw data tab in firefox
+    await driver.wait(1000);
     // Get the json
     const { success, store } = await driver.getJSON();
     // Test the json
