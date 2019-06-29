@@ -1,4 +1,5 @@
 require('dce-selenium');
+const assert = require('assert');
 
 const { courseId } = require('../../../../config/devEnvironment');
 
@@ -14,7 +15,7 @@ describeS('Server', function () {
     // Visit https://localhost/store
     await driver.visit('https://localhost/store');
     // Get the json
-
+    assert
     // Test the json
   });
 });
