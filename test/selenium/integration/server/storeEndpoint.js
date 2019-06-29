@@ -12,7 +12,7 @@ describeS('Server', function () {
     // Wait 2s
 
     // Visit https://localhost/store
-    
+    await driver.visit('https://localhost/store');
     // Get the json
     // Test the json
   });
