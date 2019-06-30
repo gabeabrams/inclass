@@ -13,6 +13,12 @@ describeS('Server', function () {
     } catch (err) {
       driver.log(err);
     }
+    // catch the error safari throws when trying to locate authorize button
+    try {
+      await driver.click('.authorize-button');
+    } catch (err) {
+      driver.log(err);
+    }
     // Wait to ensure server is loaded
     await driver.wait(1500);
     // Visit https://localhost/public/logo
