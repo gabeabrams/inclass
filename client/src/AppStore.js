@@ -4,8 +4,21 @@ import initCACCL from 'caccl/client/cached';
 // Import React
 import React, { Component } from 'react';
 
+// Import other components
+import Header from './Header';
+import Body from './Body';
+
+// Import body types
+import BODY_TYPE from './Body/BODY_TYPE';
+
+// Import css
+import './AppStore.css';
+
 // Initialize caccl
-const { api, getStatus } = initCACCL();
+const {
+  getStatus,
+  sendRequest,
+} = initCACCL();
 
 class AppStore extends Component {
   /**
@@ -16,7 +29,41 @@ class AppStore extends Component {
 
     // Set up state
     this.state = {
-      message: 'Loading! Just a moment...',
+      // Loading message (null if not loading)
+      loadingMessage: 'Loading! Just a moment...',
+      // Fatal error message (null if no fatal error)
+      fatalErrorMessage: null,
+      // Store title
+      storeTitle: null,
+      // Store host
+      storeHost: null,
+      // Catalog title
+      catalogTitle: null,
+      // isAdmin (true if user is an admin)
+      isAdmin: false,
+      // Tags
+      tags: {},
+      // True if the filter drawer is open
+      filterDrawerOpen: false,
+      // Search query (the string in the search box)
+      searchQuery: '',
+      // The full list of apps (unfiltered)
+      allApps: [],
+      // The type of the current page body to show (see BODY_TYPE above)
+      currentBodyType: BODY_TYPE.APP_PAGE,
+      // Current app
+      currentSpecificApp: null,
+      // Support modal status
+      supportModalStatus: {
+        open: false,
+        email: '',
+        subject: '',
+      },
+      // Status of the installOrUninstall modal
+      installOrUninstallModalStatus: {
+        open: false,
+        installing: false,
+      },
     };
   }
 
@@ -24,7 +71,7 @@ class AppStore extends Component {
    * Called when the component mounted, pulls state and user profile from server
    */
   async componentDidMount() {
-    // Load status
+    /* ---------------------- Load Server State --------------------- */
     try {
       // Get status from server
       const status = await getStatus();
@@ -32,34 +79,95 @@ class AppStore extends Component {
       // > AppStore wasn't launched via Canvas
       if (!status.launched) {
         return this.setState({
-          message: 'Please launch this app from Canvas.',
+          loadingMessage: null,
+          fatalErrorMessage: 'Please launch this app from Canvas.',
         });
       }
 
       // > AppStore is not authorized
       if (!status.authorized) {
         return this.setState({
-          message: 'We don\'t have access to Canvas. Please re-launch the app.',
+          loadingMessage: null,
+          fatalErrorMessage: 'We don\'t have access to Canvas. Please re-launch the app.',
         });
       }
     } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
       return this.setState({
-        message: `Error while requesting state from server: ${err.message}`,
+        loadingMessage: null,
+        fatalErrorMessage: 'We couldn\'t contact the app store server. Please make sure your internet connection is stable. If this issue continues to occur, contact an admin.',
       });
     }
 
-    // Load profile information
+    /* ------------------------ Load Metadata ----------------------- */
     try {
-      // Get profile from Canvas via api
-      const profile = await api.user.self.getProfile();
+      const [storeRes, catalogRes] = await Promise.all([
+        sendRequest({ path: '/store' }),
+        sendRequest({ path: '/catalog' }),
+      ]);
 
-      // Update state
-      return this.setState({
-        message: `Hi ${profile.name}! Your CACCL app is ready!`,
+      // Process store metadata
+      if (!storeRes.body.success) {
+        return this.setState({
+          loadingMessage: null,
+          fatalErrorMessage: `We couldn't get info on the current app store due to an error: ${storeRes.body.message}`,
+        });
+      }
+      const storeMetadata = storeRes.body.store;
+      const storeHost = storeRes.body.host;
+
+      // Process catalog metadata
+      if (!catalogRes.body.success) {
+        return this.setState({
+          loadingMessage: null,
+          fatalErrorMessage: `We couldn't get info on the app catalog for your course due to an error: ${catalogRes.body.message}`,
+        });
+      }
+      const { catalog, isAdmin } = catalogRes.body;
+
+      // Post-process store metadata, catalog, and add to state
+      // > Tags
+      const tags = {};
+      catalog.tagsToShow.forEach((tag) => {
+        // Extract basic tag information
+        const { tagName, color } = tag;
+
+        // Get tag values
+        const allValues = new Set();
+        Object.values(catalog.apps).forEach((app) => {
+          (app.tags[tagName] || []).forEach((value) => {
+            allValues.add(value);
+          });
+        });
+
+        // Turn tag values into an isChecked mapping
+        const tagValues = {};
+        allValues.forEach((value) => {
+          tagValues[value] = false; // Everything starts unchecked
+        });
+
+        // Save tag object
+        tags[tagName] = {
+          color,
+          tagValues,
+        };
+      });
+
+      this.setState({
+        storeHost,
+        isAdmin,
+        tags,
+        loadingMessage: null,
+        storeTitle: storeMetadata.title,
+        catalogTitle: catalog.title,
       });
     } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
       return this.setState({
-        message: `Error while requesting user profile: ${err.message}`,
+        loadingMessage: null,
+        fatalErrorMessage: 'We couldn\'t contact the app store server. Please make sure your internet connection is stable. If this issue continues to occur, contact an admin.',
       });
     }
   }
@@ -69,13 +177,48 @@ class AppStore extends Component {
    */
   render() {
     // Deconstruct the state
-    const { message } = this.state;
+    const {
+      storeHost,
+      currentBodyType,
+      loadingMessage,
+      fatalErrorMessage,
+    } = this.state;
+
+    // Show loading message
+    if (loadingMessage) {
+      return (
+        <div className="alert alert-info m-5 text-center">
+          <h3>Loading...</h3>
+          {loadingMessage}
+        </div>
+      );
+    }
+
+    // Show fatal error
+    if (fatalErrorMessage) {
+      return (
+        <div className="alert alert-warning m-5 text-center">
+          <h3>Oops! An error occurred</h3>
+          {fatalErrorMessage}
+        </div>
+      );
+    }
 
     // Render the component
     return (
-      <h4>
-        {message}
-      </h4>
+      <div>
+        <div className="appstore-header-container">
+          <Header
+            storeHost={storeHost}
+          />
+        </div>
+        <div className="appstore-body-container">
+          <Body
+            storeHost={storeHost}
+            currentBodyType={currentBodyType}
+          />
+        </div>
+      </div>
     );
   }
 }

@@ -1,0 +1,42 @@
+/* The container for the header */
+.appstore-header-container {
+  /* Don't scroll with page: */
+  position: fixed;
+
+  /* Take up exactly 100px vertically */
+  display: inline-block;
+  height: 100px;
+  width: 100%;
+
+  /* Position at top of screen */
+  top: 0;
+
+  /* Position above the body */
+  z-index: 1;
+
+  /* Add very small shadow below the header */
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+
+  /* Don't allow text selection */
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Chrome and Opera */
+}
+
+/* The container for the body */
+.appstore-body-container {
+  /* Put 10px around the content */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  /* Add an extra 100px to the top so the header doesn't obscure the content */
+  padding-top: 110px;
+
+  /* Take up the whole screen */
+  height: 100vh;
+}

@@ -9,16 +9,18 @@ class AppListStatusBar extends Component {
 
   render() {
     // Message: 26 apps match your search
-    const appCount;
+    const { appCount } = this.props;
 
     return (
-      
+      <div className="alert alert-warning">
+        No status bar
+      </div>
     );
   }
 }
 
 AppListStatusBar.propTypes = {
-  appCount,
+  appCount: PropTypes.number,
 };
 
 AppListStatusBar.defaultProps = {
