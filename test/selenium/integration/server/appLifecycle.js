@@ -1,38 +1,13 @@
 require('dce-selenium');
 const assert = require('assert');
 
-const { courseId } = require('../../../../config/devEnvironment');
-
 describeS('Server', function () {
-  itS.only('Successfully Completes App Lifecycle', async function (driver) {
-    await driver.visit(`https://localhost:8088/courses/${courseId}`);
-    // Clicks "Simulate Launch"
-    try {
-      await driver.click('.launch-button');
-    } catch (err) {
-      driver.log(err);
-    }
-    // Clicks "Authorize"
-    try {
-      await driver.click('.authorize-button');
-    } catch (err) {
-      driver.log(err);
-    }
-    // Waits 2s for server to finish loading
-    await driver.wait(2000);
-    // Visit https://localhost/catalog
-    await driver.visit('https://localhost/catalog');
+  itS('Successfully Completes App Lifecycle', async function (driver) {
+    await driver.launchAppStore();
     // wait for data in firefox to load
     await driver.wait(1000);
 
-    // TODO: Delete this later
-    await driver.visit('https://localhost/installed-apps');
-    await driver.wait(1000);
-    await driver.pause();
-    const testJSON = await driver.getJSON();
-    assert(testJSON.success, 'success is not true for JSON data');
-
-    // Installs an app (Note: safari can't do this?)
+    // Installs an app
     await driver.post('https://localhost/install/gradeup');
     // Wait for JSON data in firefox from installing an app
     await driver.wait(1000);
@@ -43,7 +18,6 @@ describeS('Server', function () {
     await driver.visit('https://localhost/installed-apps');
     // Wait for JSON data in firefox from installing an app
     await driver.wait(1000);
-    await driver.pause();
     // get the json and make sure success is true
     const jsonInstalledApps = await driver.getJSON();
     assert(jsonInstalledApps.success, 'success is not true for JSON data');
@@ -65,12 +39,11 @@ describeS('Server', function () {
     //   page and make sure the app is gone
     await driver.visit('https://localhost/installed-apps');
     await driver.wait(1000);
-    await driver.pause();
     const jsonNewInstalledApps = await driver.getJSON();
     assert(jsonNewInstalledApps.success, 'success is not true for JSON data');
-    // const newApps = jsonNewInstalledApps.apps;
-    // newApps.forEach((app) => {
-    //   // assert(app.appId !== 'notinstalled', 'Did not delete app');
-    // });
+    const newApps = jsonNewInstalledApps.apps;
+    newApps.forEach((app) => {
+      assert(app.appId !== 'gradeup', 'Did not delete app');
+    });
   });
 });
