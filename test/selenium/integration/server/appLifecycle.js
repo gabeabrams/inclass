@@ -24,8 +24,16 @@ describeS('Server', function () {
     await driver.visit('https://localhost/catalog');
     // wait for data in firefox to load
     await driver.wait(1000);
+
+    // TODO: Delete this later
+    await driver.visit('https://localhost/installed-apps');
+    await driver.wait(1000);
+    await driver.pause();
+    const testJSON = await driver.getJSON();
+    assert(testJSON.success, 'success is not true for JSON data');
+
     // Installs an app (Note: safari can't do this?)
-    await driver.post(`https://localhost/install/notinstalled`);
+    await driver.post('https://localhost/install/gradeup');
     // Wait for JSON data in firefox from installing an app
     await driver.wait(1000);
     // Gets the JSON and makes sure success is true
@@ -35,6 +43,7 @@ describeS('Server', function () {
     await driver.visit('https://localhost/installed-apps');
     // Wait for JSON data in firefox from installing an app
     await driver.wait(1000);
+    await driver.pause();
     // get the json and make sure success is true
     const jsonInstalledApps = await driver.getJSON();
     assert(jsonInstalledApps.success, 'success is not true for JSON data');
@@ -42,19 +51,24 @@ describeS('Server', function () {
     // remember the ltiIds for the app you just installed
     let toUninstall;
     apps.forEach((app) => {
-      if (app.appId === 'notinstalled') {
+      if (app.appId === 'gradeup') {
         toUninstall = app.ltiIds;
       }
     });
     // Uninstall the app by using: driver.delete with 'https://localhost/uninstall'
     //   and include a body with ltiIds: [30578, 30894]
+    // (NOTE: Cannot get uninstall?) Problem with uninstalling the app
     await driver.delete('https://localhost/uninstall', toUninstall);
     // Check that the app was uninstalled: driver.visit the '/installed-apps'
     //   page and make sure the app is gone
-
-    // Example:
-    // await driver.post('https://localhost/install/gradeup');
-    // const json = await driver.getJSON();
-    // assert(json.success)
+    await driver.visit('https://localhost/installed-apps');
+    await driver.wait(1000);
+    await driver.pause();
+    const jsonNewInstalledApps = await driver.getJSON();
+    assert(jsonNewInstalledApps.success, 'success is not true for JSON data');
+    // const newApps = jsonNewInstalledApps.apps;
+    // newApps.forEach((app) => {
+    //   // assert(app.appId !== 'notinstalled', 'Did not delete app');
+    // });
   });
 });

@@ -203,6 +203,7 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.delete('/uninstall', async (req, res) => {
+    console.log(req.body, req.session, !!req.api);
     let courseId;
     // Try to get courseId from the request, if it's not there, return an error
     try {
