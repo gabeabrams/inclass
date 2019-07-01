@@ -25,12 +25,15 @@ module.exports = (expressApp) => {
           message: 'Store metadata is not ready. If this error continues after a few minutes, please contact an admin.',
         });
       }
+
       return res.json({
         success: true,
         store: storeMetadata,
+        host: req.hostname,
       });
     } catch (err) {
       if (!err.code && !process.env.SILENT) {
+        // eslint-disable-next-line no-console
         console.log(err);
       }
       return res.json({
@@ -58,7 +61,10 @@ module.exports = (expressApp) => {
   expressApp.get('/catalog', async (req, res) => {
     // respond with an error if req.api or req.session.launchInfo does not exist
     if (!req.api || !req.session.launchInfo) {
-      throw new Error('We could not load your customized list of apps because we couldn\'t connect to Canvas and process your launch info. Please re-launch. If this error occurs again, contact an admin.');
+      return res.json({
+        success: false,
+        message: 'We couldn\'t load your list of apps because we could not connect to Canvas. Please re-launch the app store from Canvsa. If this error continues to occur, contact an admin.',
+      });
     }
     try {
       const {
@@ -93,6 +99,12 @@ module.exports = (expressApp) => {
         success: true,
       });
     } catch (err) {
+      if (err.message === 'There is no catalog for this course') {
+        return res.json({
+          success: false,
+          message: 'Unfortunately, your course is not yet supported by the app store: there is no app catalog associated with your course.',
+        });
+      }
       if (err.code) {
         return res.json({
           success: false,
