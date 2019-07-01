@@ -2,5 +2,8 @@
     "title": "NotInstalled",
     "subtitle": "NotInstalled is an awful tool",
     "creator": "dce",
-    "launchPrivacy": "anonymous"
+    "launchPrivacy": "anonymous",
+    "tags": {
+      "cost": "expensive"
+    }
 }

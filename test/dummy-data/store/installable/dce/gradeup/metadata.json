@@ -1,5 +1,9 @@
 {
     "title": "GradeUp",
     "subtitle": "GradeUp is a great tool",
-    "creator": "dce"
+    "creator": "dce",
+    "tags": {
+      "cost": "free",
+      "type": "grading"
+    }
 }
