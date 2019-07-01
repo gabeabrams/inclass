@@ -407,14 +407,15 @@ describe('server > routes', function () {
           dataReturnedToClient = data;
         },
       };
-      let error;
-      try {
-        await fakeExpressApp.simulateRequest('/catalog', req, res);
-      } catch (err) {
-        error = err;
-      }
-      assert(error, 'catalog route did not throw an error with incomplete launch information');
-      assert(!dataReturnedToClient, 'falsely returned data when should throw error');
+      await fakeExpressApp.simulateRequest('/catalog', req, res);
+
+      assert(dataReturnedToClient, 'No response sent to user');
+      assert(!dataReturnedToClient.success, 'Success should have been false');
+      assert(dataReturnedToClient.message, 'No message sent to user');
+      assert(
+        dataReturnedToClient.message.includes('We couldn\'t load your list of apps because we could not connect to Canvas.'),
+        'Incorrect message sent to user'
+      );
     });
 
     it('throws an error if launchInfo is in wrong format', async function () {
@@ -442,14 +443,15 @@ describe('server > routes', function () {
           dataReturnedToClient = data;
         },
       };
-      let error;
-      try {
-        await fakeExpressApp.simulateRequest('/catalog', req, res);
-      } catch (err) {
-        error = err;
-      }
-      assert(error, 'catalog route did not throw an error with incorrect launchInformation format');
-      assert(!dataReturnedToClient, 'falsely returned data when should throw error');
+      await fakeExpressApp.simulateRequest('/catalog', req, res);
+
+      assert(dataReturnedToClient, 'No response sent to user');
+      assert(!dataReturnedToClient.success, 'Success should have been false');
+      assert(dataReturnedToClient.message, 'No message sent to user');
+      assert(
+        dataReturnedToClient.message.includes('We couldn\'t load your list of apps because we could not connect to Canvas.'),
+        'Incorrect message sent to user'
+      );
     });
 
     it('throws an error if getCatalogAndPermissions failed', async function () {

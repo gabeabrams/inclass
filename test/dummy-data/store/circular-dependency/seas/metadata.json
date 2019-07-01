@@ -3,11 +3,11 @@
     "accounts": [26, 30],
     "tagsToShow": [
       {
-        "tagName": "cost",
+        "name": "cost",
         "color": "blue"
       },
       {
-        "tagName": "type",
+        "name": "type",
         "color": "red"
       }
     ],

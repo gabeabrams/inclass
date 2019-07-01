@@ -5,11 +5,11 @@
     ],
     "tagsToShow": [
       {
-        "tagName": "cost",
+        "name": "cost",
         "color": "blue"
       },
       {
-        "tagName": "type",
+        "name": "type",
         "color": "red"
       }
     ],
