@@ -8,7 +8,7 @@ describeS('Server', function () {
     await driver.visit(`https://localhost:8088/courses/${courseId}`);
     // Clicks "Simulate Launch"
     try {
-      await driver.click('#launch-button');
+      await driver.click('.launch-button');
     } catch (err) {
       driver.log(err);
     }
@@ -22,18 +22,27 @@ describeS('Server', function () {
     await driver.wait(2000);
     // Visit https://localhost/catalog
     await driver.visit('https://localhost/catalog');
-    // Installs an app
-    await driver.post('https://localhost/install/uninstalled');
+    // wait for data in firefox to load
+    await driver.wait(1000);
+    // Installs an app (Note: safari can't do this?)
+    await driver.post('https://localhost/install/notinstalled');
+    // Wait for JSON data in firefox from installing an app
+    await driver.wait(1000);
     // Gets the JSON and makes sure success is true
     const json = await driver.getJSON();
-    assert(json.success);
-    // Check if the app is installed: driver.visit the '/installed-apps' page
+    assert(json.success, 'success is not true for JSON data');
+    // // Check if the app is installed: driver.visit the '/installed-apps' page
     await driver.visit('https://localhost/installed-apps');
+    // Wait for JSON data in firefox from installing an app
+    await driver.wait(1000);
+    await driver.pause();
     // get the json and make sure success is true
     const jsonInstalledApps = await driver.getJSON();
-    assert(jsonInstalledApps.success);
-    // remember the ltiIds for the app you just installed
-    const ltiIds = ;
+    assert(jsonInstalledApps.success, 'success is not true for JSON data');
+    const { apps } = jsonInstalledApps;
+    
+    // // remember the ltiIds for the app you just installed
+    // const ltiIds = ;
     // Uninstall the app by using: driver.delete with 'https://localhost/uninstall'
     //   and include a body with ltiIds: [30578, 30894]
     // Check that the app was uninstalled: driver.visit the '/installed-apps'
