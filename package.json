@@ -42,7 +42,7 @@
 	},
 	"devDependencies": {
 		"copy-dir": "^1.1.0",
-		"dce-selenium": "^1.0.37",
+		"dce-selenium": "^1.0.39",
 		"eslint": "^5.16.0",
 		"eslint-config-airbnb": "^17.1.0",
 		"eslint-config-react-app": "^4.0.1",
