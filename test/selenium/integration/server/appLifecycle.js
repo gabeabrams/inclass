@@ -49,16 +49,18 @@ describeS('Server', function () {
     assert(jsonInstalledApps.success, 'success is not true for JSON data');
     const { apps } = jsonInstalledApps;
     // remember the ltiIds for the app you just installed
-    let toUninstall;
-    apps.forEach((app) => {
+    const body = {};
+    for (let i = 0; i < apps.length; i++) {
+      const app = apps[i];
       if (app.appId === 'gradeup') {
-        toUninstall = app.ltiIds;
+        body.ltiIds = JSON.stringify(app.ltiIds);
+        break;
       }
-    });
+    }
     // Uninstall the app by using: driver.delete with 'https://localhost/uninstall'
     //   and include a body with ltiIds: [30578, 30894]
     // (NOTE: Cannot get uninstall?) Problem with uninstalling the app
-    await driver.delete('https://localhost/uninstall', toUninstall);
+    await driver.post('https://localhost/uninstall', body);
     // Check that the app was uninstalled: driver.visit the '/installed-apps'
     //   page and make sure the app is gone
     await driver.visit('https://localhost/installed-apps');
