@@ -58,6 +58,9 @@ class Store {
       // Serves logoFullPath using serveStoreLogo function
       serveStoreLogo(logoFullPath, this.expressApp);
 
+      // delete logoFullPath after serving
+      delete storeMetadata.logoFullPath;
+
       // Post-process the catalogs
       const catalogs = {};
       Object.keys(myStore.catalogs).forEach((catalogId) => {
