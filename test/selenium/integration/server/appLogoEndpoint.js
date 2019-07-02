@@ -2,29 +2,8 @@ require('dce-selenium');
 const assert = require('assert');
 
 describeS('Server', function () {
-  itS.only('Checks app icons are loaded', async function (driver) {
+  itS('Checks app icons are loaded', async function (driver) {
     await driver.launchAppStore();
-    // await driver.visit(`https://localhost:8088/courses/${courseId}`);
-    // // Click "Simulate Launch"
-    // // Catch the error firefox throws when visiting localhost
-    // try {
-    //   await driver.click('.launch-button');
-    // } catch (err) {
-    //   driver.log(err);
-    // }
-    // // catch the error safari throws when trying to locate authorize button
-    // try {
-    //   await driver.click('.authorize-button');
-    // } catch (err) {
-    //   driver.log(err);
-    // }
-    // // Wait to ensure server is loaded
-    // await driver.wait(1500);
-    // Visit https://localhost/catalog
-    await driver.visit('https://localhost/catalog');
-    // wait to ensure the raw data tab in firefox load
-    await driver.wait(1000);
-    // Get json from page
     const { catalog } = await driver.getJSON();
     const appIds = Object.keys(catalog.apps);
     let source;
