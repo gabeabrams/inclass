@@ -128,6 +128,12 @@ class Store {
             app: apps[appId],
           });
           // delete the icon fullPath if it exists
+          try {
+            delete apps[appId].icon.fullPath;
+          } catch (err) {
+            const errMessage = `We ran into an issue deleting icon fullPath for the app ${appId} in catalog ${catalogId}`;
+            throw new Error(errMessage);
+          }
           // save updated catalog to catalogIdToCatalogMetadata
           catalogIdToCatalogMetadata[catalogId] = newCatalog;
         });
