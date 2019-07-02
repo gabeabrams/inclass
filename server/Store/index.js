@@ -116,6 +116,10 @@ class Store {
             appId,
             app: apps[appId],
           });
+          // delete the screenshots fullPath if it exists
+          if (apps[appId].screenshots) {
+            delete apps[appId].screenshots.fullPath;
+          }
           // Update opts object after serveScreenshots
           apps[appId] = serveIcon({
             expressApp: this.expressApp,
@@ -123,6 +127,7 @@ class Store {
             appId,
             app: apps[appId],
           });
+          // delete the icon fullPath if it exists
           // save updated catalog to catalogIdToCatalogMetadata
           catalogIdToCatalogMetadata[catalogId] = newCatalog;
         });
