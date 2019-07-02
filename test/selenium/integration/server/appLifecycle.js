@@ -27,7 +27,6 @@ describeS('Server', function () {
     }
     // Uninstall the app by using: driver.delete with 'https://localhost/uninstall'
     //   and include a body with ltiIds: [30578, 30894]
-    // (NOTE: Cannot get uninstall?) Problem with uninstalling the app
     await driver.post('https://localhost/uninstall', body);
     // Check that the app was uninstalled: driver.visit the '/installed-apps'
     //   page and make sure the app is gone
