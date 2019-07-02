@@ -214,7 +214,7 @@ module.exports = (expressApp) => {
    *   message: <error message if success is false>,
    * }
    */
-  expressApp.delete('/uninstall', async (req, res) => {
+  expressApp.post('/uninstall', async (req, res) => {
     let courseId;
     // Try to get courseId from the request, if it's not there, return an error
     try {
@@ -235,7 +235,18 @@ module.exports = (expressApp) => {
     }
     // We get the ltiIds out of the request body and these are our apps
     // that we want to uninstall
-    const ltiIds = req.body.ltiIds || [];
+    let ltiIds;
+    try {
+      ltiIds = JSON.parse(req.body.ltiIds);
+      if (!Array.isArray(ltiIds)) {
+        ltiIds = [ltiIds];
+      }
+    } catch (err) {
+      return res.json({
+        success: false,
+        message: 'We could not uninstall this app because we couldn\'t understand the request from the client. Please contact an admin.',
+      });
+    }
     // go through the list of apps to delete
     for (let i = 0; i < ltiIds.length; i++) {
       try {

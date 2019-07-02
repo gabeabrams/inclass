@@ -191,7 +191,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [appsInCourse[0].id],
+          ltiIds: JSON.stringify([appsInCourse[0].id]),
         },
         session: {
           launchInfo: {
@@ -232,7 +232,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [appsInCourse[0].id, appsInCourse[1].id],
+          ltiIds: JSON.stringify([appsInCourse[0].id, appsInCourse[1].id]),
         },
         session: {
           launchInfo: {
@@ -254,9 +254,8 @@ describe('server > routes', function () {
       await fakeExpressApp.simulateRequest('/uninstall', req, res);
 
       // Make sure response is correct
-      assert.equal(
+      assert(
         payload.success,
-        true,
         'Success attribute should equal true'
       );
     });
@@ -273,7 +272,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [appsInCourse[0].id],
+          ltiIds: JSON.stringify([appsInCourse[0].id]),
         },
         session: {
           launchInfo: {
@@ -315,7 +314,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [appsInCourse[0].id],
+          ltiIds: JSON.stringify([appsInCourse[0].id]),
         },
         session: {
           // no launchInfo
@@ -351,7 +350,7 @@ describe('server > routes', function () {
       const req = {
         api: fakeAPI,
         body: {
-          ltiIds: [6739458760345],
+          ltiIds: JSON.stringify([6739458760345]),
         },
         session: {
           launchInfo: {
@@ -369,10 +368,8 @@ describe('server > routes', function () {
       };
 
       await fakeExpressApp.simulateRequest('/uninstall', req, res);
-
-      assert.equal(
-        payload.success,
-        false,
+      assert(
+        !payload.success,
         'Response success should be false'
       );
       assert(
