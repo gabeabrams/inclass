@@ -226,8 +226,14 @@ module.exports = (expressApp) => {
     let ltiIds;
     try {
       ltiIds = JSON.parse(req.body.ltiIds);
+      if (!Array.isArray(ltiIds)) {
+        ltiIds = [ltiIds];
+      }
     } catch (err) {
-      ltiIds = [];
+      return res.json({
+        success: false,
+        message: 'We could not uninstall this app because we couldn\'t understand the request from the client. Please contact an admin.',
+      });
     }
     // go through the list of apps to delete
     for (let i = 0; i < ltiIds.length; i++) {

@@ -369,10 +369,8 @@ describe('server > routes', function () {
       };
 
       await fakeExpressApp.simulateRequest('/uninstall', req, res);
-
-      assert.equal(
-        payload.success,
-        false,
+      assert(
+        !payload.success,
         'Response success should be false'
       );
       assert(
