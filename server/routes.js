@@ -25,12 +25,15 @@ module.exports = (expressApp) => {
           message: 'Store metadata is not ready. If this error continues after a few minutes, please contact an admin.',
         });
       }
+
       return res.json({
         success: true,
         store: storeMetadata,
+        host: req.hostname,
       });
     } catch (err) {
-      if (!err.code) {
+      if (!err.code && !process.env.SILENT) {
+        // eslint-disable-next-line no-console
         console.log(err);
       }
       return res.json({
@@ -58,7 +61,10 @@ module.exports = (expressApp) => {
   expressApp.get('/catalog', async (req, res) => {
     // respond with an error if req.api or req.session.launchInfo does not exist
     if (!req.api || !req.session.launchInfo) {
-      throw new Error('We could not load your customized list of apps because we couldn\'t connect to Canvas and process your launch info. Please re-launch. If this error occurs again, contact an admin.');
+      return res.json({
+        success: false,
+        message: 'We couldn\'t load your list of apps because we could not connect to Canvas. Please re-launch the app store from Canvsa. If this error continues to occur, contact an admin.',
+      });
     }
     try {
       const {
@@ -93,6 +99,12 @@ module.exports = (expressApp) => {
         success: true,
       });
     } catch (err) {
+      if (err.message === 'There is no catalog for this course') {
+        return res.json({
+          success: false,
+          message: 'Unfortunately, your course is not yet supported by the app store: there is no app catalog associated with your course.',
+        });
+      }
       if (err.code) {
         return res.json({
           success: false,
@@ -100,8 +112,10 @@ module.exports = (expressApp) => {
         });
       }
       // if error does not have code, log the error into console
-      // eslint-disable-next-line no-console
-      console.log(err);
+      if (!process.env.SILENT) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
       return res.json({
         success: false,
         message: 'An unknown error occurred while getting the list of apps in the current catalog. Please contact an admin.',
@@ -118,7 +132,77 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.post('/install/:appId', async (req, res) => {
-    // TODO: implement
+    try {
+      const { appId } = req.params;
+      const { catalogId } = req.session;
+      const installData = store.getInstallData(catalogId, appId);
+
+      let courseId;
+      // Try to get courseId from the request, if it's absent, return an error
+      try {
+        // Make sure launchInfo exists
+        ({ courseId } = req.session.launchInfo);
+        // We have to check if courseId is undefined
+        if (courseId === undefined) {
+          return res.json({
+            success: false,
+            message: 'We could not install this app because we could not determine your launch course. Please contact an admin.',
+          });
+        }
+      } catch (err) {
+        return res.json({
+          success: false,
+          message: 'We could not install this app because we could not determine your launch course. Please contact an admin.',
+        });
+      }
+
+      // If getInstallData returns null
+      // return success is false and error message
+      if (!installData) {
+        return res.json({
+          success: false,
+          message: 'We cannot find this app\'s installation details. Please contact an admin.',
+        });
+      }
+      const {
+        name,
+        description,
+        key,
+        secret,
+        xml,
+        launchPrivacy,
+      } = installData;
+
+      // Installs the app
+      await req.api.course.app.add({
+        courseId,
+        name,
+        key,
+        secret,
+        xml,
+        description,
+        launchPrivacy,
+      });
+      return res.json({ success: true });
+    } catch (err) {
+      // If error has code then return success is false
+      // And what the error message is
+      if (err.code) {
+        return res.json({
+          success: false,
+          message: `An error occurred while getting the list of apps in the current catalog: ${err.message}`,
+        });
+      }
+      // If error doesn't have code
+      if (!process.env.SILENT) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+      return res.json({
+        success: false,
+        message: 'An unknown error occurred while installing this app. Please contact an admin.',
+      });
+    }
   });
 
   /**
@@ -160,7 +244,7 @@ module.exports = (expressApp) => {
           appId: ltiIds[i],
         });
       } catch (err) {
-        if (!err.code) {
+        if (!err.code && !process.env.SILENT) {
           // eslint-disable-next-line no-console
           console.log(err);
         }
@@ -194,7 +278,59 @@ module.exports = (expressApp) => {
    * }
    */
   expressApp.get('/installed-apps', async (req, res) => {
-    // TODO: implement
+    // the initRoutesWithInstallableStore function replaces this with fake store
+    const currentCatalog = store.getCatalog(req.session.catalogId);
+    // if no catalog returned, throw an error
+    if (!currentCatalog || currentCatalog === null) {
+      return res.json({
+        success: false,
+        message: 'We could not get your list of currently installed apps because your session has expired. Please re-launch from Canvas. If this issue continues to occur, please contact an admin.',
+      });
+    }
+    try {
+      const { courseId } = req.session.launchInfo;
+      // get a list of apps under the courseId
+      const ltiApps = await req.api.course.app.list({ courseId });
+      // initiate object to return
+      const matchingApps = [];
+      // find matches between catalogApps and LTI Apps
+      Object.keys(currentCatalog.apps).forEach((catalogAppId) => {
+        const catalogApp = currentCatalog.apps[catalogAppId];
+        const { key, xml } = store.getInstallData(
+          req.session.catalogId,
+          catalogAppId
+        );
+        let matchingApp = {};
+        ltiApps.forEach((ltiApp) => {
+          if (
+            ltiApp.privacy_level === catalogApp.launchPrivacy
+            && ltiApp.consumer_key === key
+            && ltiApp.name === catalogApp.title
+            && xml.includes(ltiApp.url)
+          ) {
+            if (!matchingApp.ltiIds) {
+              matchingApp.ltiIds = [];
+            }
+            matchingApp.ltiIds.push(ltiApp.id);
+            matchingApp.appId = catalogAppId;
+          }
+        });
+        // if matchingApp is not empty
+        if (Object.keys(matchingApp).length !== 0) {
+          matchingApps.push(matchingApp);
+        }
+        matchingApp = {};
+      });
+      return res.json({
+        success: true,
+        apps: matchingApps,
+      });
+    } catch (err) {
+      return res.json({
+        success: false,
+        message: 'Please re-launch this app from Canvas to continue. If this continues to occur, please contact an admin',
+      });
+    }
   });
 
   return store;

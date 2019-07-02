@@ -23,7 +23,8 @@ const COLORS = [
  */
 module.exports = (catalog) => {
   // We want to get the apps and tagsToShow out of the catalog
-  let { apps, tagsToShow } = catalog;
+  const { apps } = catalog;
+  let { tagsToShow } = catalog;
 
   // Set color index to start at 0
   let nextColorIndex = 0;
@@ -40,7 +41,8 @@ module.exports = (catalog) => {
     // Make a Set that we're going to use to collect all of the names we
     // need to add to the tagsToShow object
     const namesForCatalog = new Set();
-    apps.forEach((app) => {
+    Object.keys(apps).forEach((appId) => {
+      const app = apps[appId];
       // For each app, we want to look at its list of tags (if it has any) and
       // add them to our set of tagNames
       if (app.tags) {
@@ -48,9 +50,6 @@ module.exports = (catalog) => {
           // Add name to the set
           namesForCatalog.add(name);
         });
-      } else {
-        // If app doesn't have a tags object, add it because we'll need it later
-        apps[app].tags = {};
       }
     });
 
@@ -66,9 +65,18 @@ module.exports = (catalog) => {
     });
   }
 
+  // If app doesn't have a tags object, add it as an empty object
+  Object.keys(apps).forEach((appId) => {
+    if (!apps[appId].tags) {
+      apps[appId].tags = {};
+    }
+  });
+
   // Now that we have apps and tagsToShow, make sure tag data is correct
   // If tag doesn't have a color, give it one
-  tagsToShow.forEach((tag, i) => {
+  tagsToShow.forEach((originalTag, i) => {
+    const tag = originalTag;
+
     // If a tag doesn't have a name, throw an error
     if (!tag.name) {
       // Throw an error
@@ -83,13 +91,15 @@ module.exports = (catalog) => {
 
     // Increment through each app and make sure that each one has this name,
     // if not then add it as 'other/uncategorized'
-    apps.forEach((app, j) => {
+    Object.keys(apps).forEach((appId) => {
+      const app = apps[appId];
       // If the app doesn't have this name, we add it to the tags object
       // as 'other/uncategorized'
       if (!app.tags[tag.name] || app.tags[tag.name].length === 0) {
-        app.tags[tag.name] = ['other/uncategorized'];
+        const newApp = app;
+        newApp.tags[tag.name] = ['other/uncategorized'];
+        apps[appId] = newApp;
       }
-      apps[j] = app;
     });
 
     tagsToShow[i] = tag;

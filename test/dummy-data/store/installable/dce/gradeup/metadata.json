@@ -3,4 +3,9 @@
     "subtitle": "GradeUp is a great tool",
     "creator": "dce",
     "supportEmail": "tuftsSupport@tufts.edu"
+    "tags": {
+      "cost": "free",
+      "type": "grading"
+    }
+
 }
