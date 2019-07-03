@@ -1,9 +1,11 @@
+/*Footer needs to always show on the screen*/
 .footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: blue;
+    background-color: gray;
+    height: 200px;
     color: white;
     text-align: center;
 }
