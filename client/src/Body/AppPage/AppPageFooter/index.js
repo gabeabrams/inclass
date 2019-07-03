@@ -10,7 +10,7 @@ import SupportButton from './SupportButton';
 class AppPageFooter extends Component {
   render() {
     return (
-      <div className="footer">
+      <div className="apppagefooter">
         No footer yet
       </div>
     );
