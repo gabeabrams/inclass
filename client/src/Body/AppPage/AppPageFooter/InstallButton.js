@@ -7,7 +7,13 @@ class InstallButton extends Component {
     const { onClicked } = this.props;
     return (
       // message: Install
-      <button type="button" className="btn btn-default" onClick={onClicked}>Install</button>
+      <button
+        type="button"
+        className="btn btn-success btn-lg"
+        onClick={onClicked}
+      >
+      Install
+      </button>
     );
   }
 }

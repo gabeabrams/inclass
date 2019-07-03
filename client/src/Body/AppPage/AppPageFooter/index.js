@@ -10,8 +10,15 @@ import SupportButton from './SupportButton';
 class AppPageFooter extends Component {
   render() {
     return (
-      <div className="apppagefooter">
-        No footer yet
+      // Flexbox container for the entire footer with two buttons
+      <div className="apppagefooter-background">
+        <div className="apppagefooter-button">
+          <SupportButton />
+        </div>
+        <div className="apppagefooter-button">
+          <InstallButton />
+        </div>
+
       </div>
     );
   }

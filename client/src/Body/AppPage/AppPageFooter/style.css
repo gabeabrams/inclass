@@ -1,11 +1,22 @@
 /*Footer needs to always show on the screen*/
-.apppagefooter {
+.apppagefooter-background {
+    display: flex;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     background-color: gray;
-    height: 200px;
+    height: 100px;
     color: white;
     text-align: center;
+
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    padding: 30px;
+}
+
+.apppagefooter-button {
+    display: flex;
+    padding: 5px;
 }
