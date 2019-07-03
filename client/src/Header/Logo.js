@@ -4,18 +4,20 @@ import React, { Component } from 'react';
 // Import PropTypes package
 import PropTypes from 'prop-types';
 
+// Import css
+import './Logo.css';
+
 class Logo extends Component {
   render() {
     // Deconstruct props
     const {
       url,
     } = this.props;
+
     return (
-      <span
-        style={{
-          height: '120px',
-        }}
-      />
+      <span>
+
+      </span>
     );
   }
 }
