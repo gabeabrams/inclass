@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 class Logo extends Component {
   render() {
     return (
-      <span>
-        No logo yet
-      </span>
+      <span
+        style={{
+          height: '120px',
+        }}
+      />
     );
   }
 }
@@ -16,6 +18,8 @@ Logo.propTypes = {
 };
 
 Logo.defaultProps = {
+  // TODO: pick default url
+  url: '',
 };
 
 export default Logo;
