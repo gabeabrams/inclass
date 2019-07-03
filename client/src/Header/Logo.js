@@ -16,7 +16,11 @@ class Logo extends Component {
 
     return (
       <span>
-
+        <img
+          className="logo"
+          source={url}
+          alt="App Store logo"
+        />
       </span>
     );
   }
