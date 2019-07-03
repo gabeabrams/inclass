@@ -21,12 +21,8 @@ class Logo extends Component {
 }
 
 Logo.propTypes = {
-  url: PropTypes.string,
+  url: PropTypes.string.isRequired,
 };
 
-Logo.defaultProps = {
-  // TODO: pick default url
-  url: '',
-};
 
 export default Logo;
