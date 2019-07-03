@@ -142,15 +142,15 @@ class AppStore extends Component {
         });
 
         // Turn tag values into an isChecked mapping
-        const tagValues = {};
+        const values = {};
         allValues.forEach((value) => {
-          tagValues[value] = false; // Everything starts unchecked
+          values[value] = false; // Everything starts unchecked
         });
 
         // Save tag object
         tags[name] = {
           color,
-          tagValues,
+          values,
         };
       });
 
@@ -205,6 +205,7 @@ class AppStore extends Component {
     }
 
     // Render the component
+    console.log(this.state);
     return (
       <div>
         <div className="appstore-header-container">
