@@ -5,6 +5,7 @@ class InstallButton extends Component {
   render() {
     return (
       // message: Install
+      <button type="button" class="btn btn-default" onClick={this.props.handleClick}>Install</button>
     );
   }
 }
