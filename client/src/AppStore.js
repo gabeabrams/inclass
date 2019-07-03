@@ -131,26 +131,26 @@ class AppStore extends Component {
       const tags = {};
       catalog.tagsToShow.forEach((tag) => {
         // Extract basic tag information
-        const { tagName, color } = tag;
+        const { name, color } = tag;
 
         // Get tag values
         const allValues = new Set();
         Object.values(catalog.apps).forEach((app) => {
-          (app.tags[tagName] || []).forEach((value) => {
+          (app.tags[name] || []).forEach((value) => {
             allValues.add(value);
           });
         });
 
         // Turn tag values into an isChecked mapping
-        const tagValues = {};
+        const values = {};
         allValues.forEach((value) => {
-          tagValues[value] = false; // Everything starts unchecked
+          values[value] = false; // Everything starts unchecked
         });
 
         // Save tag object
-        tags[tagName] = {
+        tags[name] = {
           color,
-          tagValues,
+          values,
         };
       });
 
@@ -205,6 +205,7 @@ class AppStore extends Component {
     }
 
     // Render the component
+    console.log(this.state);
     return (
       <div>
         <div className="appstore-header-container">
