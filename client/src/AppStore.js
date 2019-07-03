@@ -161,6 +161,7 @@ class AppStore extends Component {
         loadingMessage: null,
         storeTitle: storeMetadata.title,
         catalogTitle: catalog.title,
+        allApps: catalog.apps,
       });
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -205,10 +206,10 @@ class AppStore extends Component {
     }
 
     // Render the component
-    console.log(this.state);
     return (
       <div>
         <div className="appstore-header-container">
+
           <Header
             storeHost={storeHost}
           />

@@ -1,0 +1,2 @@
+// props:
+// - screenshot: { title, url }
