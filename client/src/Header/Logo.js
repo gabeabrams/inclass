@@ -12,6 +12,7 @@ class Logo extends Component {
 }
 
 Logo.propTypes = {
+  url: PropTypes.string,
 };
 
 Logo.defaultProps = {
