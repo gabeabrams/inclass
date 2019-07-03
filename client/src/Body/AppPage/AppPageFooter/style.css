@@ -6,17 +6,17 @@
     bottom: 0;
     width: 100%;
     background-color: gray;
-    height: 100px;
+    height: 70px;
     color: white;
     text-align: center;
 
     justify-content: flex-end;
     align-items: center;
     flex: 1;
-    padding: 30px;
+    padding: 5px;
 }
 
 .apppagefooter-button {
     display: flex;
-    padding: 5px;
+    padding: 2px;
 }
