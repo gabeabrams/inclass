@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class InstallButton extends Component {
+class UninstallButton extends Component {
   render() {
+    // Deconstruct props
+    const { onClicked } = this.props;
     return (
-      // message: Install
-      <button type="button" class="btn btn-default" onClick={this.props.handleClick}>Install</button>
+      <button type="button" className="btn btn-default" onClick={onClicked}>Uninstall</button>
     );
   }
 }
 
-InstallButton.propTypes = {
-  onClicked: // function,
+UninstallButton.propTypes = {
+  onClicked: PropTypes.func.isRequired,
 };
 
-export default InstallButton;
+export default UninstallButton;
