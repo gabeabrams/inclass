@@ -4,14 +4,12 @@ import PropTypes from 'prop-types';
 class UninstallButton extends Component {
   render() {
     // Deconstruct props
-    const { onClicked } = this.props;
+    const { handleClick } = this.props;
     return (
       <button
         type="button"
         className="btn btn-success btn-lg"
-        onClick={(e) => {
-          this.handleClick(e);
-        }}
+        onClick={handleClick}
       >
         Uninstall
       </button>
@@ -20,7 +18,7 @@ class UninstallButton extends Component {
 }
 
 UninstallButton.propTypes = {
-  onClicked: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default UninstallButton;

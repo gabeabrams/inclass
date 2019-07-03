@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 class SupportButton extends Component {
   render() {
     // Deconstruct props
-    const { onClicked } = this.props;
+    const { handleClick } = this.props;
     return (
       // message: Install
       <button
         type="button"
         className="btn btn-light btn-lg"
-        onClick={onClicked}
+        onClick={handleClick}
       >
       Get Support
       </button>
@@ -19,7 +19,7 @@ class SupportButton extends Component {
 }
 
 SupportButton.propTypes = {
-  onClicked: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default SupportButton;
