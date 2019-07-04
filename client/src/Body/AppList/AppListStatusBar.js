@@ -5,12 +5,21 @@ class AppListStatusBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: (
-        props.appCount === 0
-          ? 'There are no matching apps. Please broaden your search criteria'
-          : `${props.appCount} apps match your search`
-      ),
+      message: '',
     };
+  }
+
+  async componentDidMount() {
+    // destructure props
+    const { appCount } = this.props;
+    const newMessage = (
+      appCount === 0
+        ? 'There are no matching apps. Please broaden your search criteria'
+        : `${appCount} apps match your search`
+    );
+    this.setState({
+      message: newMessage,
+    });
   }
 
   render() {
