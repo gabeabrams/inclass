@@ -6,7 +6,7 @@ import TabBox from './TabBox';
 
 class AppPageContent extends Component {
   render() {
-    return ();
+    return (null);
   }
 }
 

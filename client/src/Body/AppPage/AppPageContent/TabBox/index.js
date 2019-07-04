@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Screenshots from './Screenshots';
 class TabBox extends Component {
   render() {
-    return ();
+    return (null);
   }
 }
 

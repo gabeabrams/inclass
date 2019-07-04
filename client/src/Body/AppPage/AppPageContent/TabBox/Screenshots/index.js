@@ -12,18 +12,14 @@ import Screenshot from './Screenshot';
 class Screenshots extends Component {
   render() {
     getScreenshots = () => {
-      const { screenshots } = this.props.app;
-      screenshots.forEach( (screenshot) => {
+      const { app } = this.props;
+      const { screenshots } = app;
+      screenshots.forEach((screenshot) => {
         const { title, filename } = screenshot;
-              <div> 
-                <Screenshot src={filename} {title} />
-              </div>
       });
-    }
+    };
     return (
-      <div>
-          
-      </div>
+      <div />
     );
   }
 }
