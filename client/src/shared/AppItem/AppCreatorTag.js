@@ -15,6 +15,10 @@ class AppCreatorTag extends Component {
       this.setState({
         message: `By ${creator[0]}`,
       });
+    } else if (creator.length === 2) {
+      this.setState({
+        message: `By ${creator[0]} and ${creator[1]}`,
+      });
     } else {
       let newMessage = `By ${creator[0]}`;
       for (let i = 1; i < creator.length; i++) {
