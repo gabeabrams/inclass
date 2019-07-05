@@ -15,13 +15,13 @@ class Logo extends Component {
     } = this.props;
 
     return (
-      <span>
+      <div className="logo-container">
         <img
-          className="logo"
-          source={url}
-          alt="App Store logo"
+          className="logo-image"
+          src={url}
+          alt="App Store Logo"
         />
-      </span>
+      </div>
     );
   }
 }
