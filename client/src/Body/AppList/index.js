@@ -8,10 +8,11 @@ import AppIcon from '../../shared/AppItem/AppIcon';
 import AppTitle from '../../shared/AppItem/AppTitle';
 import AppSubtitle from '../../shared/AppItem/AppSubtitle';
 import AppTag from '../../shared/AppItem/AppTags/AppTag';
+import AppTags from '../../shared/AppItem/AppTags';
 
 class AppList extends Component {
   render() {
-    const tags = {
+    const fakeTags = {
       cost: ['expensive'],
       type: ['grading', 'attendance'],
     };
@@ -23,6 +24,7 @@ class AppList extends Component {
         <AppTitle title="hello" />
         <AppSubtitle subtitle="nah" />
         <AppTag tagKey="hello" tagValue="world" />
+        <AppTags tags={fakeTags} />
       </div>
     );
   }
