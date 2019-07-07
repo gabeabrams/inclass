@@ -11,6 +11,10 @@ import AppTag from '../../shared/AppItem/AppTags/AppTag';
 
 class AppList extends Component {
   render() {
+    const tags = {
+      cost: ['expensive'],
+      type: ['grading', 'attendance'],
+    };
     return (
       <div>
         <AppListStatusBar appCount={12} />
