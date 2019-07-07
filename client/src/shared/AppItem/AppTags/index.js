@@ -5,9 +5,9 @@ class AppTags extends Component {
   render() {
     // deconstruct props
     const { tags } = this.props;
+    console.log(tags);
     return (
       <div className="alert alert-warning">
-        {tags}
       </div>
     );
   }
