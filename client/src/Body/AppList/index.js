@@ -7,6 +7,7 @@ import AppCreatorTag from '../../shared/AppItem/AppCreatorTag';
 import AppIcon from '../../shared/AppItem/AppIcon';
 import AppTitle from '../../shared/AppItem/AppTitle';
 import AppSubtitle from '../../shared/AppItem/AppSubtitle';
+import AppTag from '../../shared/AppItem/AppTags/AppTag';
 
 class AppList extends Component {
   render() {
@@ -17,6 +18,7 @@ class AppList extends Component {
         <AppIcon iconURL="https://localhost/public/dce/gradeup/icon" />
         <AppTitle title="hello" />
         <AppSubtitle subtitle="nah" />
+        <AppTag tagKey="hello" tagValue="world" />
       </div>
     );
   }
