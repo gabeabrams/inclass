@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './AppCreatorTag.css';
 
 class AppCreatorTag extends Component {
   constructor(props) {
@@ -37,9 +38,9 @@ class AppCreatorTag extends Component {
   render() {
     const { message } = this.state;
     return (
-      <div className="alert alert-warning">
+      <span className="creator-label">
         {message}
-      </div>
+      </span>
     );
   }
 }
