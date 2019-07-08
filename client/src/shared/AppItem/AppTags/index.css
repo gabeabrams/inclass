@@ -1,0 +1,4 @@
+.tagsList {
+  display: flex;
+  flex-direction: row;
+}

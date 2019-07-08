@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import AppTag from './AppTag';
+import './index.css';
 
 class AppTags extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class AppTags extends Component {
       );
     });
     return (
-      <div className="alert alert-warning">
+      <div className="tagsList">
         {tagsList}
       </div>
     );
