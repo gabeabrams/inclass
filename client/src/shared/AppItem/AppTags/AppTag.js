@@ -7,7 +7,7 @@ class AppTag extends Component {
     const { tagKey, tagValue } = this.props;
     return (
       <div className="alert alert-warning">
-        <h1>{'key is ' + tagKey + ' value is ' + tagValue}</h1>
+        <p>{'key is ' + tagKey + ' value is ' + tagValue}</p>
       </div>
     );
   }

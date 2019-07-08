@@ -1,13 +1,41 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import AppTag from './AppTag';
+
 class AppTags extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tagsArray: [],
+    };
+  }
+
+  async componentDidMount() {
     // deconstruct props
     const { tags } = this.props;
-    console.log(tags);
+    // construct tagsArray state
+    const newTagsArray = [];
+    Object.keys(tags).forEach((tagName) => {
+      tags[tagName].forEach((tagValue) => {
+        newTagsArray.push([tagName, tagValue]);
+      });
+    });
+    this.setState({
+      tagsArray: newTagsArray,
+    });
+  }
+
+  render() {
+    const { tagsArray } = this.state;
+    const tagsList = tagsArray.map((tagPair) => {
+      return (
+        <AppTag tagKey={tagPair[0]} tagValue={tagPair[1]} />
+      );
+    });
     return (
       <div className="alert alert-warning">
+        {tagsList}
       </div>
     );
   }
