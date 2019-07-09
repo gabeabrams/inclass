@@ -17,7 +17,7 @@ class StoreTitle extends Component {
   }
 }
 
-StoreTitle.PropTypes = {
+StoreTitle.propTypes = {
   storeTitle: PropTypes.string.isRequired,
 };
 
