@@ -8,14 +8,14 @@ class AppList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listOfAppOpts: [],
+      listOfApps: [],
     };
   }
 
   async componentDidMount() {
     const { apps } = this.props;
     let opts = {};
-    const newListOfAppOpts = [];
+    const newListOfApps = [];
     Object.keys(apps).forEach((appId) => {
       opts = {
         creator: apps[appId].creator,
@@ -25,24 +25,19 @@ class AppList extends Component {
         subtitle: apps[appId].subtitle,
         tags: apps[appId].tags,
       };
-      newListOfAppOpts.push(opts);
+      newListOfApps.push(<AppItem opts={opts} />);
     });
     this.setState({
-      listOfAppOpts: newListOfAppOpts,
+      listOfApps: newListOfApps,
     });
   }
 
   render() {
     // fake opts object to pass in
-    const { listOfAppOpts } = this.state;
-    const appsToRender = listOfAppOpts.map((opts) => {
-      return (
-        <AppItem opts={opts} />
-      );
-    });
+    const { listOfApps } = this.state;
     return (
       <div>
-        {appsToRender}
+        {listOfApps}
       </div>
     );
   }
