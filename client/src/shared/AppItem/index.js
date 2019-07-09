@@ -33,16 +33,15 @@ class AppItem extends Component {
   }
 }
 
-// AppItem.propTypes = {
-//   appCount: PropTypes.number.isRequired,
-//   creator: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   iconURL: PropTypes.string.isRequired,
-//   title: PropTypes.string.isRequired,
-//   subtitle: PropTypes.string.isRequired,
-//   tags: PropTypes.objectOf(PropTypes.array).isRequired,
-// };
 AppItem.propTypes = {
-  opts: PropTypes.any.isRequired,
+  opts: PropTypes.shape({
+    appCount: PropTypes.number,
+    creator: PropTypes.arrayOf(PropTypes.string),
+    iconURL: PropTypes.string,
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    tags: PropTypes.objectOf(PropTypes.array),
+  }).isRequired,
 };
 
 export default AppItem;
