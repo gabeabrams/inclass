@@ -12,7 +12,6 @@ class Body extends Component {
   render() {
     // Deconstruct props
     const { currentBodyType, storeHost, apps } = this.props;
-    console.log('apps are ', apps);
 
     // Show the app page
     if (currentBodyType === BODY_TYPE.APP_PAGE) {
