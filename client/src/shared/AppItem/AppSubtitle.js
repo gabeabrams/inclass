@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './AppSubtitle.css';
 
 class AppSubtitle extends Component {
   render() {
     // deconstruct props
     const { subtitle } = this.props;
     return (
-      <div className="alert alert-warning">
+      <div className="app-subtitle">
         {subtitle}
       </div>
     );
