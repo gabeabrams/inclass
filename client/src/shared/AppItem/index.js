@@ -12,12 +12,12 @@ import AppTags from './AppTags';
 class AppItem extends Component {
   render() {
     const {
-      appCount,
-      creator,
-      iconURL,
-      title,
-      subtitle,
-      tags,
+      opts: { appCount },
+      opts: { creator },
+      opts: { iconURL },
+      opts: { title },
+      opts: { subtitle },
+      opts: { tags },
     } = this.props;
 
     return (
@@ -33,13 +33,16 @@ class AppItem extends Component {
   }
 }
 
+// AppItem.propTypes = {
+//   appCount: PropTypes.number.isRequired,
+//   creator: PropTypes.arrayOf(PropTypes.string).isRequired,
+//   iconURL: PropTypes.string.isRequired,
+//   title: PropTypes.string.isRequired,
+//   subtitle: PropTypes.string.isRequired,
+//   tags: PropTypes.objectOf(PropTypes.array).isRequired,
+// };
 AppItem.propTypes = {
-  appCount: PropTypes.number.isRequired,
-  creator: PropTypes.arrayOf(PropTypes.string).isRequired,
-  iconURL: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  tags: PropTypes.objectOf(PropTypes.array).isRequired,
+  opts: PropTypes.any.isRequired,
 };
 
 export default AppItem;
