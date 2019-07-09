@@ -5,24 +5,51 @@ import PropTypes from 'prop-types';
 import AppItem from '../../shared/AppItem';
 
 class AppList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listOfAppOpts: [],
+    };
+  }
+
+  async componentDidMount() {
+    const { apps } = this.props;
+    let opts = {};
+    const newListOfAppOpts = [];
+    Object.keys(apps).forEach((appId) => {
+      opts = {
+        creator: apps[appId].creator,
+        // iconURL does not exist in the original appStore, Change this!!!!
+        iconURL: `https://localhost${apps[appId].icon.url}`,
+        title: apps[appId].title,
+        subtitle: apps[appId].subtitle,
+        tags: apps[appId].tags,
+      };
+      newListOfAppOpts.push(opts);
+    });
+    this.setState({
+      listOfAppOpts: newListOfAppOpts,
+    });
+  }
+
   render() {
     // fake opts object to pass in
-    const opts = {
-      creator: ['DCE', 'SEAS'],
-      iconURL: 'https://localhost/public/dce/gradeup/icon',
-      title: 'SwipeIn',
-      subtitle: 'Quickly track attendance and/or assign people to tables/groups in the classroom via ID swipe or scan',
-      tags: {
-        cost: ['expensive'],
-        type: ['grading', 'attendance'],
-      },
-    };
+    const { listOfAppOpts } = this.state;
+    const appsToRender = listOfAppOpts.map((opts) => {
+      return (
+        <AppItem opts={opts} />
+      );
+    });
     return (
       <div>
-        <AppItem opts={opts} />
+        {appsToRender}
       </div>
     );
   }
 }
+
+AppList.propTypes = {
+  apps: PropTypes.any.isRequired,
+};
 
 export default AppList;
