@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Import other components
-import AppListStatusBar from '../../Body/AppList/AppListStatusBar';
 import AppCreatorTag from './AppCreatorTag';
 import AppIcon from './AppIcon';
 import AppTitle from './AppTitle';
