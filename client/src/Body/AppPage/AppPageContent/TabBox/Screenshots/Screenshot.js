@@ -1,5 +1,6 @@
 // props:
 // - screenshot: { title, url }
+// Pass in a screenshot instead
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -7,7 +8,8 @@ import PropTypes from 'prop-types';
 class Screenshot extends Component {
   render() {
     // Deconstruct props
-    const { title, url } = this.props;
+    const { screenshot } = this.props;
+    const { title, url } = screenshot;
     return (
       <div className="card">
         <img className="card-img-top" src={url} alt="Screenshot" />
@@ -20,8 +22,10 @@ class Screenshot extends Component {
 }
 
 Screenshot.propTypes = {
-  title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  screenshot: PropTypes.shape({
+    title: PropTypes.string,
+    url: PropTypes.string,
+  }).isRequired,
 };
 
 export default Screenshot;

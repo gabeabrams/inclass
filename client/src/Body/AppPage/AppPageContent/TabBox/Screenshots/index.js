@@ -8,18 +8,20 @@ import PropTypes from 'prop-types';
 // Questions to answer: How to get the app to show the screenshots of?
 import Screenshot from './Screenshot';
 
-
 class Screenshots extends Component {
+  getScreenshots = (toRender) => {
+    const { app } = this.props;
+    const { screenshots } = app;
+    screenshots.forEach((screenshot) => {
+      toRender.push(<Screenshot screenshot/>);
+    });
+    return toRender;
+  }
   render() {
-    getScreenshots = () => {
-      const { app } = this.props;
-      const { screenshots } = app;
-      screenshots.forEach((screenshot) => {
-        const { title, filename } = screenshot;
-      });
-    };
+    // get screenshots from the app
+    let toRender = [];
     return (
-      <div />
+      this.getScreenshots(toRender)
     );
   }
 }
