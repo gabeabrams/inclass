@@ -11,8 +11,8 @@ import AppTags from './AppTags';
 
 class AppItem extends Component {
   render() {
+    // deconstruct props object
     const {
-      opts: { appCount },
       opts: { creator },
       opts: { iconURL },
       opts: { title },
@@ -22,7 +22,6 @@ class AppItem extends Component {
 
     return (
       <div>
-        <AppListStatusBar appCount={appCount} />
         <AppCreatorTag creator={creator} />
         <AppIcon iconURL={iconURL} />
         <AppTitle title={title} />
@@ -35,7 +34,6 @@ class AppItem extends Component {
 
 AppItem.propTypes = {
   opts: PropTypes.shape({
-    appCount: PropTypes.number,
     creator: PropTypes.arrayOf(PropTypes.string),
     iconURL: PropTypes.string,
     title: PropTypes.string,
