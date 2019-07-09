@@ -10,8 +10,8 @@ class AppList extends Component {
     const opts = {
       creator: ['DCE', 'SEAS'],
       iconURL: 'https://localhost/public/dce/gradeup/icon',
-      title: 'hello',
-      subtitle: 'world',
+      title: 'SwipeIn',
+      subtitle: 'Quickly track attendance and/or assign people to tables/groups in the classroom via ID swipe or scan',
       tags: {
         cost: ['expensive'],
         type: ['grading', 'attendance'],

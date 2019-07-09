@@ -1,5 +1,5 @@
 .singleTag {
-  margin: 2px;
+  margin: 4px;
 }
 .key-label {
   background-color: #2196F3;
@@ -10,6 +10,8 @@
   padding-bottom: 2px;
   font-weight: bold;
   color: white;
+  font-size: 20px;
+  margin-right: 0.5px;
 } 
 .value-label {
   background-color: #f44336;
@@ -20,4 +22,6 @@
   padding-bottom: 2px;
   font-weight: bold;
   color: white;
+  font-size: 20px;
+  margin-left: 0.5px;
 } 

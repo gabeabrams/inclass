@@ -8,6 +8,7 @@ import AppIcon from './AppIcon';
 import AppTitle from './AppTitle';
 import AppSubtitle from './AppSubtitle';
 import AppTags from './AppTags';
+import './index.css';
 
 class AppItem extends Component {
   render() {
@@ -21,12 +22,16 @@ class AppItem extends Component {
     } = this.props;
 
     return (
-      <div>
-        <AppCreatorTag creator={creator} />
+      <div className="app-item-container">
         <AppIcon iconURL={iconURL} />
-        <AppTitle title={title} />
-        <AppSubtitle subtitle={subtitle} />
-        <AppTags tags={tags} />
+        <div className="right-container">
+          <div className="title-and-creator-container">
+            <AppTitle title={title} />
+            <AppCreatorTag creator={creator} />
+          </div>
+          <AppSubtitle subtitle={subtitle} />
+          <AppTags tags={tags} />
+        </div>
       </div>
     );
   }
