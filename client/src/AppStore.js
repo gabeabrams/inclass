@@ -210,7 +210,6 @@ class AppStore extends Component {
 
     const { allApps } = this.state;
     const { gradeup } = allApps;
-    console.log('Gradeup: ', gradeup);
     return (
       <div>
         <div className="appstore-header-container">

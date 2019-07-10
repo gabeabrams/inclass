@@ -12,15 +12,17 @@ class Screenshot extends Component {
   render() {
     // Deconstruct props
     const { screenshot } = this.props;
-    console.log('Screenshot in Screenshot.js', screenshot);
     const { title, url } = screenshot;
     return (
-      <div className="card">
-        <img className="card-img-top" src={url} alt={title} />
-        <div className="card-body">
-          <p className="card-text">{title}</p>
+      <div className="card-deck">
+        <div className="card border-dark mb-3">
+          <img className="card-img-top" src={url} alt={title} />
+          <div className="card-body">
+            <h5 className="card-title border-dark mb-3">{title}</h5>
+          </div>
         </div>
       </div>
+
     );
   }
 }

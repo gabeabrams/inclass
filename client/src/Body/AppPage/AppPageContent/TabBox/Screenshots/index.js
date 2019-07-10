@@ -22,7 +22,6 @@ class Screenshots extends Component {
     // get screenshots from the app
     let toRender = [];
     toRender = this.getScreenshots(toRender);
-    console.log('toRender', toRender);
     return (
       toRender
     );
