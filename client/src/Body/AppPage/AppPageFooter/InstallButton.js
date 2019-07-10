@@ -9,6 +9,7 @@ class InstallButton extends Component {
       // message: Install
       <button
         type="button"
+        id="install-button"
         className="btn btn-success btn-lg"
         onClick={handleClick}
       >

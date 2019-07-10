@@ -6,9 +6,10 @@ class SupportButton extends Component {
     // Deconstruct props
     const { handleClick } = this.props;
     return (
-      // message: Install
+      // message: Support
       <button
         type="button"
+        id="support-button"
         className="btn btn-light btn-lg"
         onClick={handleClick}
       >

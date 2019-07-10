@@ -13,7 +13,6 @@ class Screenshots extends Component {
     const { app } = this.props;
     const { screenshots } = app;
     screenshots.forEach((screenshot) => {
-      const { url, title } = screenshot
       toRender.push(<Screenshot screenshot={screenshot}/>);
     });
     return toRender;
@@ -28,9 +27,15 @@ class Screenshots extends Component {
   }
 }
 Screenshots.propTypes = {
+  // The app whose screenshots we want
   app: PropTypes.shape({
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
+    // Array of screenshots in the app
+    screenshots: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string,
+        url: PropTypes.string
+      })
+    )
   }).isRequired,
 };
 

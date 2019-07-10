@@ -8,6 +8,7 @@ class UninstallButton extends Component {
     return (
       <button
         type="button"
+        id="uninstall-button"
         className="btn btn-success btn-lg"
         onClick={handleClick}
       >
