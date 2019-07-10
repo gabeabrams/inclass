@@ -28,6 +28,7 @@ module.exports = (opts) => {
     app.screenshots = app.screenshots.map((screenshot) => {
       const screenshotWithURL = screenshot;
       const { fullPath, filename } = screenshotWithURL;
+      console.log(fullPath);
       try {
         /**
          * Serves screenshot.fullPath to

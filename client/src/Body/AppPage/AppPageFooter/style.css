@@ -1,13 +1,13 @@
 /*Footer needs to always show on the screen*/
-.apppagefooter-background {
+.apppagefooter-container {
     display: flex;
-
+    font-size: 100px;
     /* Footer takes up bottom of the page */
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 70px;
+    height: 100px;
 
     /* Colors footer background gray */
     background-color: gray;
@@ -21,5 +21,6 @@
 
 .apppagefooter-button {
     display: flex;
+    font-size: 100px !important; 
     padding: 2px;
 }

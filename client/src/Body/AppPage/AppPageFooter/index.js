@@ -18,7 +18,7 @@ class AppPageFooter extends Component {
   render() {
     return (
       // Flexbox container for the entire footer with two buttons
-      <div className="apppagefooter-background">
+      <div className="apppagefooter-container">
         <div className="apppagefooter-button">
           <SupportButton handleClick={this.clickedSupport} />
         </div>

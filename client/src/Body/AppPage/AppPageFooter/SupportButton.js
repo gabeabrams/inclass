@@ -6,20 +6,24 @@ class SupportButton extends Component {
     // Deconstruct props
     const { handleClick } = this.props;
     return (
-      // message: Support
+      // message: Get Support
       <button
         type="button"
         id="support-button"
+        style={{
+          fontSize: '25px',
+        }}
         className="btn btn-light btn-lg"
         onClick={handleClick}
       >
-      Get Support
+        Get Support
       </button>
     );
   }
 }
 
 SupportButton.propTypes = {
+  // Function used when support button is clicked
   handleClick: PropTypes.func.isRequired,
 };
 
