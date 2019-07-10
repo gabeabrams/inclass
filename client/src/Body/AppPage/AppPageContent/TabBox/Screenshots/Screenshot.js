@@ -3,16 +3,20 @@
 // Pass in a screenshot instead
 
 import React, { Component } from 'react';
+
+import './Screenshot.css';
+
 import PropTypes from 'prop-types';
 
 class Screenshot extends Component {
   render() {
     // Deconstruct props
     const { screenshot } = this.props;
+    console.log('Screenshot in Screenshot.js', screenshot);
     const { title, url } = screenshot;
     return (
       <div className="card">
-        <img className="card-img-top" src={url} alt="Screenshot" />
+        <img className="card-img-top" src={url} alt={title} />
         <div className="card-body">
           <p className="card-text">{title}</p>
         </div>

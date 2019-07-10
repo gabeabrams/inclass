@@ -13,20 +13,26 @@ class Screenshots extends Component {
     const { app } = this.props;
     const { screenshots } = app;
     screenshots.forEach((screenshot) => {
-      toRender.push(<Screenshot screenshot/>);
+      const { url, title } = screenshot
+      toRender.push(<Screenshot screenshot={screenshot}/>);
     });
     return toRender;
   }
   render() {
     // get screenshots from the app
     let toRender = [];
+    toRender = this.getScreenshots(toRender);
+    console.log('toRender', toRender);
     return (
-      this.getScreenshots(toRender)
+      toRender
     );
   }
 }
 Screenshots.propTypes = {
-  app: PropTypes.node.isRequired,
+  app: PropTypes.shape({
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+  }).isRequired,
 };
 
 export default Screenshots;
