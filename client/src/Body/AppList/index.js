@@ -5,46 +5,30 @@ import PropTypes from 'prop-types';
 import AppItem from '../../shared/AppItem';
 
 class AppList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listOfApps: [],
-    };
-  }
-
-  async componentDidMount() {
+  render() {
     const { apps } = this.props;
-    let opts = {};
-    const newListOfApps = [];
-    Object.keys(apps).forEach((appId) => {
-      opts = {
+    const appElements = Object.keys(apps).map((appId) => {
+      const opts = {
         creator: apps[appId].creator,
-        // iconURL does not exist in the original appStore, Change this!!!!
+        // Pass in from parent!!
         iconURL: `https://localhost${apps[appId].icon.url}`,
         title: apps[appId].title,
         subtitle: apps[appId].subtitle,
         tags: apps[appId].tags,
       };
-      newListOfApps.push(<AppItem opts={opts} />);
+      return (<AppItem opts={opts} />);
     });
-    this.setState({
-      listOfApps: newListOfApps,
-    });
-  }
-
-  render() {
-    // fake opts object to pass in
-    const { listOfApps } = this.state;
     return (
       <div>
-        {listOfApps}
+        {appElements}
       </div>
     );
   }
 }
 
 AppList.propTypes = {
-  apps: PropTypes.any.isRequired,
+  // The apps we need to display
+  apps: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default AppList;

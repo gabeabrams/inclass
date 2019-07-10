@@ -12,6 +12,7 @@ class Body extends Component {
   render() {
     // Deconstruct props
     const { currentBodyType, storeHost, apps } = this.props;
+    console.log(apps);
 
     // Show the app page
     if (currentBodyType === BODY_TYPE.APP_PAGE) {
@@ -37,7 +38,7 @@ Body.propTypes = {
   // The hostname of the store
   storeHost: PropTypes.string.isRequired,
   // The apps we need to display
-  apps: PropTypes.any.isRequired,
+  apps: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default Body;
