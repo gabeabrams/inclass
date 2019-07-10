@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 
 // Import other components
 import Logo from './Logo';
-import TitleBar from './TitleBar/index';
+import TitleBar from './TitleBar';
 
 class Header extends Component {
   render() {
     // Deconstruct props
-    const { storeHost } = this.props;
+    const {
+      storeHost,
+      storeTitle,
+      catalogTitle,
+    } = this.props;
 
     return (
       <div
@@ -18,6 +22,9 @@ class Header extends Component {
         }}
       >
         <TitleBar
+          storeTitle={storeTitle}
+          catalogTitle={catalogTitle}
+        />
         <Logo url={`https://${storeHost}/public/logo`} />
       </div>
     );
@@ -27,6 +34,8 @@ class Header extends Component {
 Header.propTypes = {
   // The hostname of the store
   storeHost: PropTypes.string.isRequired,
+  storeTitle: PropTypes.string.isRequired,
+  catalogTitle: PropTypes.string.isRequired,
 };
 
 export default Header;
