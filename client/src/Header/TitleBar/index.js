@@ -20,8 +20,8 @@ class TitleBar extends Component {
       <div
         className=titlebar
       >
-        <StoreTitle storeTitle=storeTitle>
-        <CatalogTitle catalogTitle=catalogTitle>
+        <StoreTitle storeTitle={storeTitle}>
+        <CatalogTitle catalogTitle={catalogTitle}>
       </div>
 
     );
