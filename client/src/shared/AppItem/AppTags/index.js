@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import AppTag from './AppTag';
-import './index.css';
+import './style.css';
 
 class AppTags extends Component {
   constructor(props) {

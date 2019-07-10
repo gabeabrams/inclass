@@ -7,7 +7,7 @@ import AppIcon from './AppIcon';
 import AppTitle from './AppTitle';
 import AppSubtitle from './AppSubtitle';
 import AppTags from './AppTags';
-import './index.css';
+import './style.css';
 
 class AppItem extends Component {
   render() {
