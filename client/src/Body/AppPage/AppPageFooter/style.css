@@ -1,15 +1,18 @@
 /*Footer needs to always show on the screen*/
 .apppagefooter-background {
     display: flex;
+
+    /* Footer takes up bottom of the page */
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: gray;
     height: 70px;
-    color: white;
-    text-align: center;
 
+    /* Colors footer background gray */
+    background-color: gray;
+    
+    /* Aligns elements in the footer */
     justify-content: flex-end;
     align-items: center;
     flex: 1;
