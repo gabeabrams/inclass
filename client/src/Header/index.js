@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 // Import other components
 import Logo from './Logo';
+import TitleBar from './TitleBar/index';
 
 class Header extends Component {
   render() {
@@ -16,6 +17,7 @@ class Header extends Component {
           padding: '10px',
         }}
       >
+        <TitleBar
         <Logo url={`https://${storeHost}/public/logo`} />
       </div>
     );
