@@ -1,5 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+
+# Ignore test files
+/src/_isolator_generated_files
+/src/config-overrides.js
+
 # dependencies
 /node_modules
 /.pnp
