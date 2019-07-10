@@ -212,6 +212,8 @@ class AppStore extends Component {
 
           <Header
             storeHost={storeHost}
+            storeTitle={storeTitle}
+            catalogTitle={catalogTitle}
           />
         </div>
         <div className="appstore-body-container">
