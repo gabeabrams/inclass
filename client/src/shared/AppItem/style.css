@@ -7,6 +7,7 @@
   margin: 8px;
 }
 
+/* contains app title, subtitle, creator, and tags */
 .right-container {
   display: flex;
   flex-direction: column;
@@ -14,6 +15,7 @@
   flex-basis: 100%;
 }
 
+/* contains app title and creator */
 .title-and-creator-container {
   display: flex;
   flex-direction: row;
