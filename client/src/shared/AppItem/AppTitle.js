@@ -14,6 +14,7 @@ class AppTitle extends Component {
   }
 }
 AppTitle.propTypes = {
+  // the title of the app
   title: PropTypes.string.isRequired,
 };
 export default AppTitle;

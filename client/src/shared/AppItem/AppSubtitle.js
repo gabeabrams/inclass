@@ -14,6 +14,7 @@ class AppSubtitle extends Component {
   }
 }
 AppSubtitle.propTypes = {
+  // a short description of the app
   subtitle: PropTypes.string.isRequired,
 };
 export default AppSubtitle;

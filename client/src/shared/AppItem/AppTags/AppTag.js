@@ -15,7 +15,9 @@ class AppTag extends Component {
   }
 }
 AppTag.propTypes = {
+  // the tag name
   tagKey: PropTypes.string.isRequired,
+  // the tag value
   tagValue: PropTypes.string.isRequired,
 };
 export default AppTag;

@@ -46,6 +46,7 @@ class AppCreatorTag extends Component {
 }
 
 AppCreatorTag.propTypes = {
+  // array of strings that are the creators for the app
   creator: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

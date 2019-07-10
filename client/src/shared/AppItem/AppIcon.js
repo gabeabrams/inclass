@@ -12,6 +12,7 @@ class AppIcon extends Component {
   }
 }
 AppIcon.propTypes = {
+  // the url to the served icon
   iconURL: PropTypes.string.isRequired,
 };
 export default AppIcon;

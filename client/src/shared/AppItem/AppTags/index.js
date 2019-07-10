@@ -42,6 +42,7 @@ class AppTags extends Component {
   }
 }
 AppTags.propTypes = {
+  // consists of tagName => tagValue mapping
   tags: PropTypes.objectOf(PropTypes.array).isRequired,
 };
 export default AppTags;

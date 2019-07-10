@@ -37,6 +37,7 @@ class AppItem extends Component {
 }
 
 AppItem.propTypes = {
+  // opts object contains values for creator, url, title, subtitle, and tags
   opts: PropTypes.shape({
     creator: PropTypes.arrayOf(PropTypes.string),
     iconURL: PropTypes.string,
