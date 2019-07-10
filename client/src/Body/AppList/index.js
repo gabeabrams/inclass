@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import path from 'path';
 
 // Import other components
 import AppItem from '../../shared/AppItem';
@@ -9,12 +10,11 @@ import './style.css';
 
 class AppList extends Component {
   render() {
-    const { apps } = this.props;
+    const { storeHost, apps } = this.props;
     const appElements = Object.keys(apps).map((appId) => {
       const opts = {
         creator: apps[appId].creator,
-        // Pass in from parent!!
-        iconURL: `https://localhost${apps[appId].icon.url}`,
+        iconURL: `https://${path.join(storeHost, apps[appId].icon.url)}`,
         title: apps[appId].title,
         subtitle: apps[appId].subtitle,
         tags: apps[appId].tags,
@@ -31,6 +31,8 @@ class AppList extends Component {
 }
 
 AppList.propTypes = {
+  // The hostname of the store
+  storeHost: PropTypes.string.isRequired,
   // The apps we need to display
   apps: PropTypes.objectOf(PropTypes.object).isRequired,
 };

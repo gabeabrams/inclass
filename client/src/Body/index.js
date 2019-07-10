@@ -27,7 +27,7 @@ class Body extends Component {
 
     // Assume showing the app list
     return (
-      <AppList apps={apps} />
+      <AppList storeHost={storeHost} apps={apps} />
     );
   }
 }
