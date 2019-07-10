@@ -18,12 +18,11 @@ class TitleBar extends Component {
 
     return (
       <div
-        className=titlebar
+        className={titlebar}
       >
         <StoreTitle storeTitle={storeTitle}>
         <CatalogTitle catalogTitle={catalogTitle}>
       </div>
-
     );
   }
 }
