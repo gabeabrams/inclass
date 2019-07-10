@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './AppListStatusBar.css';
+
 class AppListStatusBar extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ class AppListStatusBar extends Component {
     // deconstruct state
     const { message } = this.state;
     return (
-      <div className="alert alert-warning">
+      <div className="status-bar-container">
         {message}
       </div>
     );

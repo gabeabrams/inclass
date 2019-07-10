@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 // Import other components
 import AppItem from '../../shared/AppItem';
+import AppListStatusBar from './AppListStatusBar';
+
+import './style.css';
 
 class AppList extends Component {
   render() {
@@ -19,7 +22,8 @@ class AppList extends Component {
       return (<AppItem opts={opts} />);
     });
     return (
-      <div>
+      <div className="app-list-container">
+        <AppListStatusBar appCount={Object.keys(apps).length} />
         {appElements}
       </div>
     );
