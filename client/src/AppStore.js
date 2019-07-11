@@ -179,6 +179,8 @@ class AppStore extends Component {
   render() {
     // Deconstruct the state
     const {
+      allApps,
+      tags,
       storeHost,
       currentBodyType,
       loadingMessage,
@@ -218,6 +220,8 @@ class AppStore extends Component {
         </div>
         <div className="appstore-body-container">
           <Body
+            apps={allApps}
+            tags={tags}
             storeHost={storeHost}
             currentBodyType={currentBodyType}
             apps={allApps}

@@ -1,36 +1,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import path from 'path';
+
 // Import other components
 import AppCreatorTag from './AppCreatorTag';
 import AppIcon from './AppIcon';
 import AppTitle from './AppTitle';
 import AppSubtitle from './AppSubtitle';
 import AppTags from './AppTags';
+
 import './style.css';
 
 class AppItem extends Component {
   render() {
     // deconstruct props object
     const {
-      opts: { creator },
-      opts: { iconURL },
-      opts: { title },
-      opts: { subtitle },
-      opts: { tags },
-      opts: { tagColors },
+      app,
+      tagColors,
+      storeHost,
     } = this.props;
 
+    // Deconstruc the app
+    const {
+      title,
+      subtitle,
+      creator,
+      tags,
+      icon,
+    } = app;
+    const iconURL = `https://${path.join(storeHost, icon.url)}`;
+
     return (
-      <div className="app-item-container">
-        <AppIcon iconURL={iconURL} />
-        <div className="right-container">
-          <div className="title-and-creator-container">
-            <AppTitle title={title} />
-            <AppCreatorTag creator={creator} />
+      <div className="alert alert-secondary pr-3 pl-3 pt-2 pb-2">
+        <div className="appitem-container">
+          <AppIcon iconURL={iconURL} />
+          <div className="right-container">
+            <div className="title-and-creator-container">
+              <AppTitle title={title} />
+              <AppCreatorTag creator={creator} />
+            </div>
+            <AppSubtitle subtitle={subtitle} />
+            <AppTags tags={tags} tagColors={tagColors} />
           </div>
-          <AppSubtitle subtitle={subtitle} />
-          <AppTags tags={tags} tagColors={tagColors} />
         </div>
       </div>
     );
@@ -38,15 +50,12 @@ class AppItem extends Component {
 }
 
 AppItem.propTypes = {
-  // opts object contains values for creator, url, title, subtitle, and tags
-  opts: PropTypes.shape({
-    creator: PropTypes.arrayOf(PropTypes.string),
-    iconURL: PropTypes.string,
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    tags: PropTypes.objectOf(PropTypes.array),
-    tagColors: PropTypes.objectOf(PropTypes.object),
-  }).isRequired,
+  // the app to show
+  app: PropTypes.objectOf(PropTypes.any).isRequired,
+  // the tagColors
+  tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
+  // the hostname of the store server
+  storeHost: PropTypes.string.isRequired,
 };
 
 export default AppItem;

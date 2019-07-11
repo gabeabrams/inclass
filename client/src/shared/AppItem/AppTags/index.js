@@ -39,7 +39,7 @@ class AppTags extends Component {
       );
     });
     return (
-      <div className="tagsList">
+      <div className="apptags-tags-list">
         {tagsList}
       </div>
     );
