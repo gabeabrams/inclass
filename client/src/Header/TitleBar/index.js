@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 // Import other components
 import StoreTitle from './StoreTitle';
-import CatalogTitle from './CatalogTitle';
 
 // Import stylesheet
 import './style.css';
@@ -13,15 +12,13 @@ class TitleBar extends Component {
     // Deconstruct any props needed by titlebar or its children
     const {
       storeTitle,
-      catalogTitle,
     } = this.props;
 
     return (
       <div
-        className={titlebar}
+        className="titlebar"
       >
-        <StoreTitle storeTitle={storeTitle}>
-        <CatalogTitle catalogTitle={catalogTitle}>
+        <StoreTitle storeTitle={storeTitle} />
       </div>
     );
   }
@@ -29,5 +26,6 @@ class TitleBar extends Component {
 
 TitleBar.propTypes = {
   storeTitle: PropTypes.string.isRequired,
-  catalogTitle: PropTypes.string.isRequired,
 }
+
+export default TitleBar;
