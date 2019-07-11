@@ -14,12 +14,12 @@ class AppTags extends Component {
 
   async componentDidMount() {
     // deconstruct props
-    const { tags } = this.props;
+    const { tags, tagColors } = this.props;
     // construct tagsArray state
     const newTagsArray = [];
     Object.keys(tags).forEach((tagName) => {
       tags[tagName].forEach((tagValue) => {
-        newTagsArray.push([tagName, tagValue]);
+        newTagsArray.push([tagName, tagValue, tagColors[tagName].color]);
       });
     });
     this.setState({
@@ -31,7 +31,11 @@ class AppTags extends Component {
     const { tagsArray } = this.state;
     const tagsList = tagsArray.map((tagPair) => {
       return (
-        <AppTag tagKey={tagPair[0]} tagValue={tagPair[1]} />
+        <AppTag
+          tagKey={tagPair[0]}
+          tagValue={tagPair[1]}
+          tagColor={tagPair[2]}
+        />
       );
     });
     return (
@@ -44,5 +48,7 @@ class AppTags extends Component {
 AppTags.propTypes = {
   // consists of tagName => tagValue mapping
   tags: PropTypes.objectOf(PropTypes.array).isRequired,
+  // color of the tag
+  tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 export default AppTags;

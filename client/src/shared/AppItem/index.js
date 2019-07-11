@@ -18,6 +18,7 @@ class AppItem extends Component {
       opts: { title },
       opts: { subtitle },
       opts: { tags },
+      opts: { tagColors },
     } = this.props;
 
     return (
@@ -29,7 +30,7 @@ class AppItem extends Component {
             <AppCreatorTag creator={creator} />
           </div>
           <AppSubtitle subtitle={subtitle} />
-          <AppTags tags={tags} />
+          <AppTags tags={tags} tagColors={tagColors} />
         </div>
       </div>
     );
@@ -44,6 +45,7 @@ AppItem.propTypes = {
     title: PropTypes.string,
     subtitle: PropTypes.string,
     tags: PropTypes.objectOf(PropTypes.array),
+    tagColors: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
 };
 
