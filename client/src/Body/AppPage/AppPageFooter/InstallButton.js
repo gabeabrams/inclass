@@ -10,6 +10,9 @@ class InstallButton extends Component {
       <button
         type="button"
         id="install-button"
+        style={{
+          fontSize: '25px',
+        }}
         className="btn btn-success btn-lg"
         onClick={onClick}
       >
