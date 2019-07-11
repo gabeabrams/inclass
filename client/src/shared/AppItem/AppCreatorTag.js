@@ -14,14 +14,14 @@ class AppCreatorTag extends Component {
     const { creator } = this.props;
     if (creator.length === 1) {
       this.setState({
-        message: `By ${creator[0]}`,
+        message: `by ${creator[0]}`,
       });
     } else if (creator.length === 2) {
       this.setState({
-        message: `By ${creator[0]} and ${creator[1]}`,
+        message: `by ${creator[0]} and ${creator[1]}`,
       });
     } else {
-      let newMessage = `By ${creator[0]}`;
+      let newMessage = `by ${creator[0]}`;
       for (let i = 1; i < creator.length; i++) {
         newMessage = newMessage.concat(
           (i === creator.length - 1)
