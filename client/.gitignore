@@ -2,8 +2,8 @@
 
 
 # Ignore test files
-/src/_isolator_generated_files
-/src/config-overrides.js
+/src/_isolator_generated_files_
+/config-overrides.js
 
 # dependencies
 /node_modules
