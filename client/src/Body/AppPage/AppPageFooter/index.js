@@ -20,12 +20,11 @@ class AppPageFooter extends Component {
       // Flexbox container for the entire footer with two buttons
       <div className="apppagefooter-container">
         <div className="apppagefooter-button">
-          <SupportButton onClick={this.clickedSupport} />
-        </div>
-        <div className="apppagefooter-button">
           <InstallButton onClick={this.clickedInstall} />
         </div>
-
+        <div className="apppagefooter-button">
+          <SupportButton onClick={this.clickedSupport} />
+        </div>
       </div>
     );
   }

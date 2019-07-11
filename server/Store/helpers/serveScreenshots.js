@@ -34,13 +34,15 @@ module.exports = (opts) => {
          * /public/<catalogId>/<appId>/screenshots/<filename>
          * Will throw 404 if file doesn't exist (fallthrough)
          */
-        expressApp.use(webPath,
-          express.static(fullPath, { fallthrough: false }));
+        expressApp.use(path.join(webPath, filename),
+          express.static(fullPath));
       } catch (error) {
-        const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
-        throw new Error(errMessage);
+        // console.log('ERROR: ', error);
+        // const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
+        // throw new Error(errMessage);
       }
       screenshotWithURL.url = path.join(webPath, filename);
+      console.log('screenshotWithURL: ', screenshotWithURL, 'fullPath: ', fullPath, 'filename: ', filename);
       return screenshotWithURL;
     });
   }
