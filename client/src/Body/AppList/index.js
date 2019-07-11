@@ -10,7 +10,7 @@ import './style.css';
 
 class AppList extends Component {
   render() {
-    const { storeHost, apps } = this.props;
+    const { storeHost, apps, tagColors } = this.props;
     const appElements = Object.keys(apps).map((appId) => {
       const opts = {
         creator: apps[appId].creator,
@@ -18,6 +18,7 @@ class AppList extends Component {
         title: apps[appId].title,
         subtitle: apps[appId].subtitle,
         tags: apps[appId].tags,
+        tagColors,
       };
       return (<AppItem opts={opts} />);
     });
@@ -35,6 +36,8 @@ AppList.propTypes = {
   storeHost: PropTypes.string.isRequired,
   // The apps we need to display
   apps: PropTypes.objectOf(PropTypes.object).isRequired,
+  // The tags color information for the app
+  tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default AppList;
