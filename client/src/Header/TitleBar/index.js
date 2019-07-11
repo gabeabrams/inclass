@@ -18,8 +18,14 @@ class TitleBar extends Component {
       <div
         className="titlebar-container"
       >
-        <StoreTitle storeTitle={storeTitle} />
-        <div>Fake Div</div>
+        <div className="row">
+          <div className="col bg-danger">
+            <StoreTitle storeTitle={storeTitle} />
+          </div>
+          <div className="col bg-warning">
+            <div>Fake Div</div>
+          </div>
+        </div>
       </div>
     );
   }
