@@ -29,8 +29,8 @@ class AppPageContent extends Component {
     // TODO: show the current tab box (screenshots, guides, or info)
     // TODO: pass this.tabChanged to the tab bar so it can call it when a new tab is selected
     return (
-      <div>
-        <TabBox app={app} />
+      <div className="appPageContent-container">
+        <Screenshots app={app} />
       </div>
     );
   }
