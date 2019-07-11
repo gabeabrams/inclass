@@ -183,6 +183,8 @@ class AppStore extends Component {
       currentBodyType,
       loadingMessage,
       fatalErrorMessage,
+      allApps,
+      tags,
     } = this.state;
 
     // Show loading message
@@ -218,6 +220,8 @@ class AppStore extends Component {
           <Body
             storeHost={storeHost}
             currentBodyType={currentBodyType}
+            apps={allApps}
+            tags={tags}
           />
         </div>
       </div>
