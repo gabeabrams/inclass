@@ -7,7 +7,7 @@ class AppIcon extends Component {
     // deconstruct props
     const { iconURL } = this.props;
     return (
-      <img className="app-icon" src={iconURL} alt="app icon" />
+      <img className="app-icon mr-3" src={iconURL} alt="app icon" />
     );
   }
 }

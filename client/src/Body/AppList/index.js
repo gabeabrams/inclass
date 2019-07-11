@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import path from 'path';
 
 // Import other components
 import AppItem from '../../shared/AppItem';
@@ -12,15 +11,13 @@ class AppList extends Component {
   render() {
     const { storeHost, apps, tagColors } = this.props;
     const appElements = Object.keys(apps).map((appId) => {
-      const opts = {
-        creator: apps[appId].creator,
-        iconURL: `https://${path.join(storeHost, apps[appId].icon.url)}`,
-        title: apps[appId].title,
-        subtitle: apps[appId].subtitle,
-        tags: apps[appId].tags,
-        tagColors,
-      };
-      return (<AppItem opts={opts} />);
+      return (
+        <AppItem
+          app={apps[appId]}
+          tagColors={tagColors}
+          storeHost={storeHost}
+        />
+      );
     });
     return (
       <div className="app-list-container">

@@ -1,25 +1,14 @@
-.singleTag {
-  margin: 4px;
+.apptag-single-tag {
+  font-size: 18px;
+  margin-right: 5px;
 }
-.key-label {
-  border-radius: 5px 0px 0px 5px;
-  padding-left: 3px; 
-  padding-right: 3px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-  margin-right: 0.5px;
-} 
-.value-label {
-  border-radius: 0px 5px 5px 0px;
-  padding-left: 3px; 
-  padding-right: 3px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-  margin-left: 0.5px;
-} 
+
+.apptag-left-side {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.apptag-right-side {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}

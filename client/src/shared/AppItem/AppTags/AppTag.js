@@ -7,23 +7,23 @@ class AppTag extends Component {
     // deconstruct props
     const { tagKey, tagValue, tagColor } = this.props;
     return (
-      <div className="singleTag">
+      <div className="apptag-single-tag text-light">
         <span
-          className="key-label"
-          style={{ backgroundColor: tagColor }}
+          className="badge apptag-left-side"
+          style={{
+            backgroundColor: tagColor,
+          }}
         >
           {tagKey}
         </span>
-        <span
-          className="value-label"
-          style={{ backgroundColor: '#535252' }}
-        >
+        <span className="badge apptag-right-side bg-secondary">
           {tagValue}
         </span>
       </div>
     );
   }
 }
+
 AppTag.propTypes = {
   // the tag name
   tagKey: PropTypes.string.isRequired,
