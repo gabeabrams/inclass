@@ -15,16 +15,12 @@ class TitleBar extends Component {
     } = this.props;
 
     return (
-      <div
-        className="titlebar-container"
-      >
-        <div className="row">
-          <div className="col bg-danger">
-            <StoreTitle storeTitle={storeTitle} />
-          </div>
-          <div className="col bg-warning">
-            <div>Fake Div</div>
-          </div>
+      <div className="titlebar-container row">
+        <div className="col text-right">
+          <StoreTitle storeTitle={storeTitle} />
+        </div>
+        <div className="col text-left">
+          Fake Div
         </div>
       </div>
     );
@@ -33,6 +29,6 @@ class TitleBar extends Component {
 
 TitleBar.propTypes = {
   storeTitle: PropTypes.string.isRequired,
-}
+};
 
 export default TitleBar;
