@@ -1,9 +1,13 @@
+/* Styling for logo container */
 .logo-container {
   display: flex;
+
+  /* Aligns container contents in the center */
   justify-content: center;
   align-self: center;
 }
 
+/* Styling for logo image */
 .logo-image {
   height: 120px;
 }
