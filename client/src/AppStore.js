@@ -180,6 +180,8 @@ class AppStore extends Component {
     // Deconstruct the state
     const {
       storeHost,
+      storeTitle,
+      catalogTitle,
       currentBodyType,
       loadingMessage,
       fatalErrorMessage,
