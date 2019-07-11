@@ -13,9 +13,7 @@ class Screenshot extends Component {
     // Deconstruct props
     const { screenshot } = this.props;
     const { title, url } = screenshot;
-    console.log('Real URL: ', url);
     const fakeURL = `https://localhost${url}`;
-    console.log('FakeURL: ', fakeURL);
     return (
       <div className="card-deck">
         <div className="card border-dark mb-3">

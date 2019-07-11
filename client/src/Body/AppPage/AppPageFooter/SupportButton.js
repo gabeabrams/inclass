@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class SupportButton extends Component {
   render() {
     // Deconstruct props
-    const { handleClick } = this.props;
+    const { onClick } = this.props;
     return (
       // message: Get Support
       <button
@@ -14,7 +14,7 @@ class SupportButton extends Component {
           fontSize: '25px',
         }}
         className="btn btn-light btn-lg"
-        onClick={handleClick}
+        onClick={onClick}
       >
         Get Support
       </button>
@@ -24,7 +24,7 @@ class SupportButton extends Component {
 
 SupportButton.propTypes = {
   // Function used when support button is clicked
-  handleClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default SupportButton;
