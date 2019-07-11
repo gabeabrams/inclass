@@ -27,6 +27,7 @@ class Logo extends Component {
 }
 
 Logo.propTypes = {
+  // The url of the logo for the AppStore
   url: PropTypes.string.isRequired,
 };
 
