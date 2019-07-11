@@ -17,15 +17,12 @@ class Header extends Component {
     return (
       <div
         className="bg-info w-100 h-100"
-        style={{
-          padding: '10px',
-        }}
       >
+        <Logo url={`https://${storeHost}/public/logo`} />
         <TitleBar
           storeTitle="Harvard"
           catalogTitle="Catalog"
         />
-        <Logo url={`https://${storeHost}/public/logo`} />
       </div>
     );
   }
