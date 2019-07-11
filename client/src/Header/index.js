@@ -15,13 +15,11 @@ class Header extends Component {
     } = this.props;
 
     return (
-      <div
-        className="bg-info w-100 h-100"
-      >
+      <div>
         <Logo url={`https://${storeHost}/public/logo`} />
         <TitleBar
-          storeTitle="Harvard"
-          catalogTitle="Catalog"
+          storeTitle={storeTitle}
+          catalogTitle={catalogTitle}
         />
       </div>
     );
