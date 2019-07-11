@@ -1,11 +1,10 @@
 /* Style for titlebar container in header */
 .titlebar-container {
-  display: flex;
-
   /* Keep children separated evenly */
-  justify-content: space-between;
+  position: absolute;
+  top: 0;
 
   /* Dimensions */
   height: 50px;
-  padding: 10px;
+  width: 100%;
 }
