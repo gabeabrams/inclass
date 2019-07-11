@@ -8,3 +8,16 @@
   height: 50px;
   width: 100%;
 }
+
+/* Style for the left titlebar component */
+.titlebar-left {
+  padding-right: 65px;
+  text-align: right;
+}
+
+/* Stye for the right titlebar component */
+.titlebar-right {
+  padding-right: 0;
+  padding-left: 65px;
+  text-align: left;
+}
