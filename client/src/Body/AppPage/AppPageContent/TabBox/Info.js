@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 class Info extends Component {
   render() {
     return (
-      'This is a placeholder for the Info page'
+      <p>This is a placeholder for the Info page</p>
     );
   }
 }
