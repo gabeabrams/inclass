@@ -22,8 +22,8 @@ class Header extends Component {
         }}
       >
         <TitleBar
-          storeTitle={storeTitle}
-          catalogTitle={catalogTitle}
+          storeTitle="Harvard"
+          catalogTitle="Catalog"
         />
         <Logo url={`https://${storeHost}/public/logo`} />
       </div>
