@@ -16,9 +16,10 @@ class TitleBar extends Component {
 
     return (
       <div
-        className="titlebar"
+        className="titlebar-container"
       >
         <StoreTitle storeTitle={storeTitle} />
+        <div>Fake Div</div>
       </div>
     );
   }
