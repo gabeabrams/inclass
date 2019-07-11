@@ -11,7 +11,8 @@ import BODY_TYPE from './BODY_TYPE';
 class Body extends Component {
   render() {
     // Deconstruct props
-    const { currentBodyType, storeHost } = this.props;
+    const { currentBodyType, storeHost, appList } = this.props;
+    const { gradeup } = appList;
 
     // Show the app page
     if (currentBodyType === BODY_TYPE.APP_PAGE) {
@@ -19,6 +20,7 @@ class Body extends Component {
         <div className="h-100 overflow-hidden">
           <AppPage
             storeHost={storeHost}
+            app={gradeup}
           />
         </div>
       );
@@ -38,6 +40,8 @@ Body.propTypes = {
   currentBodyType: PropTypes.string.isRequired,
   // The hostname of the store
   storeHost: PropTypes.string.isRequired,
+  // List of apps to display
+  appList: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default Body;

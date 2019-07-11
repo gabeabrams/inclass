@@ -209,7 +209,6 @@ class AppStore extends Component {
     // Render the component
 
     const { allApps } = this.state;
-    const { gradeup } = allApps;
     return (
       <div>
         <div className="appstore-header-container">
@@ -222,8 +221,8 @@ class AppStore extends Component {
           <Body
             storeHost={storeHost}
             currentBodyType={currentBodyType}
+            appList={allApps}
           />
-          <Screenshots app={gradeup} />
         </div>
       </div>
     );

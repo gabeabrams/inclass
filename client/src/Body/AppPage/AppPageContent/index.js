@@ -6,8 +6,26 @@ import TabBox from './TabBox';
 
 class AppPageContent extends Component {
   render() {
-    return (null);
+    const { app } = this.props;
+    return (
+      <div>
+        <TabBox app={app} />
+      </div>
+    );
   }
 }
+
+AppPageContent.propTypes = {
+  // The app to display
+  app: PropTypes.shape({
+    // Array of screenshots in the app (Note: what is currently needed)
+    screenshots: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string,
+        url: PropTypes.string,
+      })
+    ),
+  }).isRequired,
+};
 
 export default AppPageContent;
