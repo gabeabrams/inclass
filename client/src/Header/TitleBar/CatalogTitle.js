@@ -10,7 +10,8 @@ class CatalogTitle extends Component {
 
     return (
       <div>
-        { catalogTitle }
+        <b>{ catalogTitle }</b>
+        {' Catalog'}
       </div>
     );
   }
