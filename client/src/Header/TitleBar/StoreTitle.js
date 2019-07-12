@@ -10,10 +10,8 @@ class StoreTitle extends Component {
 
     return (
       <div>
-        <div>
-          <b>{ storeTitle }</b>
-          {' App Store'}
-        </div>
+        <b>{ storeTitle }</b>
+        {' App Store'}
       </div>
     );
   }
