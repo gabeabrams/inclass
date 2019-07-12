@@ -9,12 +9,11 @@ class StoreTitle extends Component {
     } = this.props;
 
     return (
-      <div
-        style={{
-          height: '50px',
-        }}
-      >
-        { storeTitle }
+      <div>
+        <div>
+          <b>{ storeTitle }</b>
+          {' App Store'}
+        </div>
       </div>
     );
   }
