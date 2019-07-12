@@ -11,13 +11,14 @@
 
 /* Style for the left titlebar component */
 .titlebar-left {
-  padding-right: 65px;
+  /* Keep text away from center of page for logo */
+  margin-right: 65px;
   text-align: right;
 }
 
 /* Stye for the right titlebar component */
 .titlebar-right {
-  padding-right: 0;
-  padding-left: 65px;
+  /* Keep text away from center of page for logo */
+  margin-left: 65px;
   text-align: left;
 }
