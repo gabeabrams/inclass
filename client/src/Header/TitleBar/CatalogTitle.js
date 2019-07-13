@@ -12,9 +12,10 @@ class CatalogTitle extends Component {
     } = this.props;
 
     return (
-      <div className="catalogtitle">
-        <b>{ catalogTitle }</b>
-        {' Catalog'}
+      <div className="catalogtitle-container row no-gutters">
+        {/* Used col-{breakpoint}-auto to make column fit to content */}
+        <div className="col-{breakpoint}-auto"><b>{ catalogTitle }</b></div>
+        <div className="catalogtitle-catalogtext d-none d-sm-block col">Catalog</div>
       </div>
     );
   }
