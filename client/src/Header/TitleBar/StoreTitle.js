@@ -12,9 +12,9 @@ class StoreTitle extends Component {
     } = this.props;
 
     return (
-      <div className="storetitle">
-        <b>{ storeTitle }</b>
-        {' App Store'}
+      <div className="storetitle-container row no-gutters">
+        <div className="col"><b>{ storeTitle }</b></div>
+        <div className="storetitle-storetext d-none d-sm-block col-{breakpoint}-auto">App Store</div>
       </div>
     );
   }
