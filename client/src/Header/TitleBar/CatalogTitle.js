@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// Import css
+import './CatalogTitle.css';
+
 class CatalogTitle extends Component {
   render() {
     // Deconstruct props
@@ -9,7 +12,7 @@ class CatalogTitle extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="catalogtitle">
         <b>{ catalogTitle }</b>
         {' Catalog'}
       </div>
