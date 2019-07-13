@@ -3,3 +3,8 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.catalogtitle-catalogtext {
+  /* Add padding so words space nicely */
+  margin-left: 5px;
+}
