@@ -7,6 +7,9 @@
   /* Dimensions */
   height: 50px;
   width: 100%;
+
+  /* Align children along center of cross-axis */
+  align-items: center;
 }
 
 /* Style for the left titlebar component */
