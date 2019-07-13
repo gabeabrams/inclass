@@ -12,7 +12,7 @@ class StoreTitle extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="storetitle">
         <b>{ storeTitle }</b>
         {' App Store'}
       </div>
