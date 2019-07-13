@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// Import css
+import './StoreTitle.css';
+
 class StoreTitle extends Component {
   render() {
     // Deconstruct props
