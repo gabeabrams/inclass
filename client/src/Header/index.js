@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Import other components
 import Logo from './Logo';
 import TitleBar from './TitleBar';
+import FilterAndSearchBar from './FilterAndSearchBar';
 
 class Header extends Component {
   render() {
@@ -21,6 +22,7 @@ class Header extends Component {
           storeTitle={storeTitle}
           catalogTitle={catalogTitle}
         />
+        <FilterAndSearchBar />
       </div>
     );
   }
