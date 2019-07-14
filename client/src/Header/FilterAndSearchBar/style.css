@@ -1,0 +1,16 @@
+.filterandsearchbar-container {
+  /* Set positioning for container in header */
+  position: absolute;
+  top: 50px;
+
+  /* Set background color and border */
+  background-color: #808080;
+  border-top: 1px solid black;
+
+  /* Dimensions */
+  height: 50px;
+  width: 100%;
+
+  /* Align children along cross-axis */
+  align-items: center;
+}
