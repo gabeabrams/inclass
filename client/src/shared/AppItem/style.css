@@ -16,6 +16,8 @@
 .appitem-title-and-creator-container {
   display: flex;
   flex-direction: row;
+  
+  /* make title and creator on opposite sides, same horizotal level */
   justify-content: space-between;
   align-items: center;
 }

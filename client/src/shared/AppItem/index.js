@@ -21,7 +21,7 @@ class AppItem extends Component {
       storeHost,
     } = this.props;
 
-    // Deconstruc the app
+    // Deconstruct the app
     const {
       title,
       subtitle,
@@ -35,8 +35,8 @@ class AppItem extends Component {
       <div className="alert alert-secondary pr-3 pl-3 pt-2 pb-2">
         <div className="appitem-container">
           <AppIcon iconURL={iconURL} />
-          <div className="right-container">
-            <div className="title-and-creator-container">
+          <div className="appitem-right-container">
+            <div className="appitem-title-and-creator-container">
               <AppTitle title={title} />
               <AppCreatorTag creator={creator} />
             </div>
