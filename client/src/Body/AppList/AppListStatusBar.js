@@ -28,7 +28,7 @@ class AppListStatusBar extends Component {
     // deconstruct state
     const { message } = this.state;
     return (
-      <div className="status-bar-container">
+      <div className="app-list-status-bar-container">
         {message}
       </div>
     );

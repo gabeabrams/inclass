@@ -8,7 +8,7 @@ class AppTitle extends Component {
     const { title } = this.props;
     return (
       <div className="app-title">
-        {title}
+        <h3>{title}</h3>
       </div>
     );
   }

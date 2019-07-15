@@ -8,7 +8,7 @@ class AppSubtitle extends Component {
     const { subtitle } = this.props;
     return (
       <div className="app-subtitle">
-        {subtitle}
+        <p className="lead mb-0">{subtitle}</p>
       </div>
     );
   }

@@ -38,7 +38,7 @@ class AppCreatorTag extends Component {
   render() {
     const { message } = this.state;
     return (
-      <span className="creator-label">
+      <span className="app-creator-tag-label">
         {message}
       </span>
     );
