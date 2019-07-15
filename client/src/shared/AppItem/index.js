@@ -19,6 +19,7 @@ class AppItem extends Component {
       app,
       tagColors,
       storeHost,
+      dark,
     } = this.props;
 
     // Deconstruct the app
@@ -30,15 +31,20 @@ class AppItem extends Component {
       icon,
     } = app;
     const iconURL = `https://${path.join(storeHost, icon.url)}`;
-
+    const className = (
+      dark
+        ? 'alert alert-secondary text-dark pr-3 pl-3 pt-2 pb-2'
+        : 'alert alert-light text-dark pr-3 pl-3 pt-2 pb-2'
+    );
     return (
-      <div className="alert alert-secondary pr-3 pl-3 pt-2 pb-2">
+      <div className={className}>
         <div className="appitem-container">
           <AppIcon iconURL={iconURL} />
           <div className="appitem-right-container">
             <div className="appitem-title-and-creator-container">
               <AppTitle title={title} />
-              <AppCreatorTag creator={creator} />
+              {/* if class is dark, creator is light. and vice versa */}
+              <AppCreatorTag creator={creator} dark={dark ? undefined : true} />
             </div>
             <AppSubtitle subtitle={subtitle} />
             <AppTags tags={tags} tagColors={tagColors} />
@@ -56,6 +62,12 @@ AppItem.propTypes = {
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
   // the hostname of the store server
   storeHost: PropTypes.string.isRequired,
+  // whether the app is shown as dark background
+  dark: PropTypes.bool,
+};
+
+AppItem.defaultProps = {
+  dark: false,
 };
 
 export default AppItem;

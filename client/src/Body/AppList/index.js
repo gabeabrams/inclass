@@ -16,6 +16,7 @@ class AppList extends Component {
           app={apps[appId]}
           tagColors={tagColors}
           storeHost={storeHost}
+          dark
         />
       );
     });

@@ -37,8 +37,14 @@ class AppCreatorTag extends Component {
 
   render() {
     const { message } = this.state;
+    const { dark } = this.props;
+    const className = (
+      dark
+        ? 'badge bg-secondary text-dark p-2'
+        : 'badge badge-light text-dark p-2'
+    );
     return (
-      <span className="app-creator-tag-label">
+      <span className={className}>
         {message}
       </span>
     );
@@ -48,6 +54,12 @@ class AppCreatorTag extends Component {
 AppCreatorTag.propTypes = {
   // array of strings that are the creators for the app
   creator: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // whether the background is dark or light
+  dark: PropTypes.bool,
+};
+
+AppCreatorTag.defaultProps = {
+  dark: undefined,
 };
 
 export default AppCreatorTag;
