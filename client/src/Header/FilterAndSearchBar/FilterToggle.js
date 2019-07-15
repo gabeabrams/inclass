@@ -9,7 +9,7 @@ class FilterToggle extends Component {
     return (
       <div className="filtertoggle-container row no-gutters">
         <div className="filtertoggle-filter col">Filters</div>
-        <div className="filtertoggle-tags col">& Tags</div>
+        <div className="filtertoggle-tags d-none d-sm-block col-{breakpoint}-auto">& Tags</div>
       </div>
     );
   }
