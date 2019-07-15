@@ -14,8 +14,9 @@ class FilterAndSearchBar extends Component {
 
     return (
       <div className="filterandsearchbar-container row no-gutters">
-        <div className="col filterandsearchbar-filterbutton" >
-          <FilterToggle
+        <div className="col filterandsearchbar-filterbutton">
+          <FilterToggle />
+        </div>
         <div className="col filterandsearchbar-searchbox" />
       </div>
     );
