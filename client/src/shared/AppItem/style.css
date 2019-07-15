@@ -5,7 +5,7 @@
 }
 
 /* contains app title, subtitle, creator, and tags */
-.right-container {
+.appitem-right-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -13,7 +13,7 @@
 }
 
 /* contains app title and creator */
-.title-and-creator-container {
+.appitem-title-and-creator-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
