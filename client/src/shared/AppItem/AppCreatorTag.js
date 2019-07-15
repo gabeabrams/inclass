@@ -44,7 +44,7 @@ class AppCreatorTag extends Component {
         : 'badge badge-light text-dark p-2'
     );
     return (
-      <span className={className}>
+      <span className={className} id="appcreatortag-box">
         {message}
       </span>
     );
