@@ -1,6 +1,7 @@
 .apptag-single-tag {
   font-size: 18px;
   margin-right: 5px;
+  white-space: nowrap;
 }
 
 .apptag-left-side {
