@@ -45,7 +45,10 @@ class AppItem extends Component {
               <AppTitle title={title} />
               {/* if class is dark, creator is light. and vice versa */}
               <div className="d-none d-sm-block">
-                <AppCreatorTag creator={creator} dark={dark ? undefined : true} />
+                <AppCreatorTag
+                  creator={creator}
+                  dark={dark ? undefined : true}
+                />
               </div>
             </div>
             <AppSubtitle subtitle={subtitle} />
