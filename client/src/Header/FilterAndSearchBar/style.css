@@ -14,3 +14,11 @@
   /* Align children along cross-axis */
   align-items: center;
 }
+
+.filterandsearchbar-filterbutton {
+  margin-right: 65px;
+}
+
+.filterandsearchbar-searchbox {
+  margin-left: 65px;
+}
