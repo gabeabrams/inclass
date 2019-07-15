@@ -17,8 +17,6 @@ class Body extends Component {
       apps,
       tags,
     } = this.props;
-    console.log(apps);
-    console.log(tags);
 
     // Show the app page
     if (currentBodyType === BODY_TYPE.APP_PAGE) {

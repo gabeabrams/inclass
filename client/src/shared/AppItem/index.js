@@ -67,7 +67,7 @@ AppItem.propTypes = {
 };
 
 AppItem.defaultProps = {
-  dark: false,
+  dark: undefined,
 };
 
 export default AppItem;
