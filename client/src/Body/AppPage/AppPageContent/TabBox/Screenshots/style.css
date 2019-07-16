@@ -1,3 +1,4 @@
+/* Styling for area around the screenshots */
 .screenshots-container {
     display: flex;
     flex-flow: wrap;
@@ -9,7 +10,7 @@
     overflow: auto;
 }
 .screenshots-elem {
-    display: flex;
+    flex-grow: 10;
     flex: 1;
     width: 100%;
     max-width: 40rem;

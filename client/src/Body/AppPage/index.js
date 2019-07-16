@@ -9,9 +9,14 @@ class AppPage extends Component {
   render() {
     const { app } = this.props;
     return (
-      <div>
-        <AppPageContent app={app} />
-        <AppPageFooter />
+      <div className="appPage-container">
+        <div className="appPage-content">
+          <AppPageContent app={app} />
+        </div>
+        <div className="appPage-footer">
+         <AppPageFooter />
+        </div>
+        
       </div>
     );
   }

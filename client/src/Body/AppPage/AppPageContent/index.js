@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 // Import other components
 import Screenshots from './TabBox/Screenshots';
+import Guides from './TabBox/Guides';
+import Info from './TabBox/Info';
 
 // Names of tabs
 import TAB_NAMES from './TAB_NAMES';
+import TabBar from './TabBar';
 
 class AppPageContent extends Component {
   constructor(props) {
@@ -30,6 +33,7 @@ class AppPageContent extends Component {
     // TODO: pass this.tabChanged to the tab bar so it can call it when a new tab is selected
     return (
       <div className="appPageContent-container">
+        <TabBar />
         <Screenshots app={app} />
       </div>
     );
