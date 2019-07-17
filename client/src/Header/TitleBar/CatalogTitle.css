@@ -1,10 +1,6 @@
+/* TODO: describe what the class is for */
 .catalogtitle-container {
   /* Simple padding to center text nicely */
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.catalogtitle-catalogtext {
-  /* Add padding so words space nicely */
-  margin-left: 5px;
 }
