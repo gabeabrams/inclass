@@ -1,12 +1,12 @@
 .appPage-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
-
 .appPage-content {
-    flex-grow: 1;
+  flex: 1 1 auto;
+  overflow: scroll;
 }
 .appPage-footer {
-    
+  flex: 0 0 auto;
 }

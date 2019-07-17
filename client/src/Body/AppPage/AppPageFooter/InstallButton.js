@@ -13,7 +13,7 @@ class InstallButton extends Component {
         style={{
           fontSize: '25px',
         }}
-        className="btn btn-warning btn-lg font-weight-bold pl-4 pr-4"
+        className="btn btn-warning btn-lg font-weight-bold pl-4 pr-4 mr-1"
         onClick={onClick}
       >
         Install

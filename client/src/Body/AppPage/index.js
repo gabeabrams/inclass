@@ -14,9 +14,8 @@ class AppPage extends Component {
           <AppPageContent app={app} />
         </div>
         <div className="appPage-footer">
-         <AppPageFooter />
+          <AppPageFooter />
         </div>
-        
       </div>
     );
   }
