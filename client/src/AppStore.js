@@ -181,6 +181,8 @@ class AppStore extends Component {
     const {
       supportModalStatus,
       storeHost,
+      storeTitle,
+      catalogTitle,
       currentBodyType,
       loadingMessage,
       fatalErrorMessage,
@@ -223,6 +225,8 @@ class AppStore extends Component {
         <div className="appstore-header-container">
           <Header
             storeHost={storeHost}
+            storeTitle={storeTitle}
+            catalogTitle={catalogTitle}
           />
         </div>
         <div className="appstore-body-container">
