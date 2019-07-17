@@ -1,0 +1,9 @@
+/* Styling for the entire footer */
+.apppagefooter-container {
+  /* Colors footer background gray */
+  background-color: gray;
+
+  /* Aligns elements in the footer */
+  text-align: right;
+  padding: 15px;
+}

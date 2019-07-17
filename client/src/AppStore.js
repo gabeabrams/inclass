@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 // Import other components
 import Header from './Header';
 import Body from './Body';
+import Screenshots from './Body/AppPage/AppPageContent/TabBox/Screenshots'
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -220,6 +221,8 @@ class AppStore extends Component {
     }
 
     // Render the component
+
+    const { allApps } = this.state;
     return (
       <div>
         <div className="appstore-header-container">
@@ -233,6 +236,7 @@ class AppStore extends Component {
           <Body
             storeHost={storeHost}
             currentBodyType={currentBodyType}
+            appList={allApps}
           />
         </div>
         {supportModelElement}
