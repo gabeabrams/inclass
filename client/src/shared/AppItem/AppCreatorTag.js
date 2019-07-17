@@ -5,47 +5,42 @@ import './AppCreatorTag.css';
 class AppCreatorTag extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      message: '',
-    };
-  }
 
-  async componentDidMount() {
     // construct the message depending on the number of creator
     const { creator } = this.props;
+    let message;
     if (creator.length === 1) {
-      this.setState({
-        message: `by ${creator[0]}`,
-      });
+      message = `by ${creator[0]}`;
     } else if (creator.length === 2) {
-      this.setState({
-        message: `by ${creator[0]} and ${creator[1]}`,
-      });
+      message = `by ${creator[0]} and ${creator[1]}`;
     } else {
       let newMessage = `by ${creator[0]}`;
       for (let i = 1; i < creator.length; i++) {
-        newMessage = newMessage.concat(
+        newMessage += (
           (i === creator.length - 1)
             ? `, and ${creator[i]}`
             : `, ${creator[i]}`
         );
       }
-      this.setState({
-        message: newMessage,
-      });
+      message = newMessage;
     }
+
+    this.state = {
+      // TODO: add comment
+      message,
+    };
   }
 
   render() {
+    // Deconstruct state
     const { message } = this.state;
+
+    // Deconstruct props
     const { dark } = this.props;
-    const className = (
-      dark
-        ? 'badge bg-secondary text-dark p-2'
-        : 'badge badge-light text-dark p-2'
-    );
+
+    const className = `badge ${dark ? 'bg-secondary' : 'badge-light'} text-dark p-2 appcreatortag-box`;
     return (
-      <span className={className} id="appcreatortag-box">
+      <span className={className}>
         {message}
       </span>
     );

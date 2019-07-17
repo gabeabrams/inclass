@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import './AppSubtitle.css';
 
 class AppSubtitle extends Component {
@@ -8,7 +9,9 @@ class AppSubtitle extends Component {
     const { subtitle } = this.props;
     return (
       <div className="app-subtitle">
-        <p className="lead mb-0">{subtitle}</p>
+        <p className="lead mb-0">
+          {subtitle}
+        </p>
       </div>
     );
   }

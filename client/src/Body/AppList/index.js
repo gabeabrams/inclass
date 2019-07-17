@@ -9,7 +9,12 @@ import './style.css';
 
 class AppList extends Component {
   render() {
-    const { storeHost, apps, tagColors } = this.props;
+    const {
+      storeHost,
+      apps,
+      tagColors,
+    } = this.props;
+
     // map each app to AppItem element to render
     const appElements = Object.keys(apps).map((appId) => {
       return (
@@ -21,6 +26,7 @@ class AppList extends Component {
         />
       );
     });
+
     return (
       <div className="app-list-container">
         <AppListStatusBar appCount={Object.keys(apps).length} />

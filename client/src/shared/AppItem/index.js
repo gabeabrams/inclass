@@ -10,6 +10,7 @@ import AppTitle from './AppTitle';
 import AppSubtitle from './AppSubtitle';
 import AppTags from './AppTags';
 
+// Import stylesheet
 import './style.css';
 
 class AppItem extends Component {
@@ -30,16 +31,15 @@ class AppItem extends Component {
       tags,
       icon,
     } = app;
+
     const iconURL = `https://${path.join(storeHost, icon.url)}`;
-    const className = (
-      dark
-        ? 'alert alert-secondary text-dark pr-3 pl-3 pt-2 pb-2'
-        : 'alert alert-light text-dark pr-3 pl-3 pt-2 pb-2'
-    );
+    const className = `alert alert-${dark ? 'secondary' : 'light'} text-dark pr-3 pl-3 pt-2 pb-2`;
+
+    // TODO: add some comments in the jsx
     return (
       <div className={className}>
         <div className="appitem-container">
-          <AppIcon iconURL={iconURL} />
+          <AppIcon appTitle={title} iconURL={iconURL} />
           <div className="appitem-right-container">
             <div className="appitem-title-and-creator-container">
               <AppTitle title={title} />
@@ -74,7 +74,8 @@ AppItem.propTypes = {
 };
 
 AppItem.defaultProps = {
-  dark: undefined,
+  // TODO: comment to explain default
+  dark: false,
 };
 
 export default AppItem;
