@@ -26,7 +26,7 @@ class AppCreatorTag extends Component {
     }
 
     this.state = {
-      // TODO: add comment
+      // the message to display in the creator box
       message,
     };
   }

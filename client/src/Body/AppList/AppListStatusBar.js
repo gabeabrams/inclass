@@ -33,12 +33,12 @@ class AppListStatusBar extends Component {
 }
 
 AppListStatusBar.propTypes = {
-  // TODO: comment
+  // determines the number of apps we display in the message
   appCount: PropTypes.number,
 };
 
 AppListStatusBar.defaultProps = {
-  // TODO: comment
+  // default is no apps matching
   appCount: 0,
 };
 

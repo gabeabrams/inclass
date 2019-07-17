@@ -35,16 +35,19 @@ class AppItem extends Component {
     const iconURL = `https://${path.join(storeHost, icon.url)}`;
     const className = `alert alert-${dark ? 'secondary' : 'light'} text-dark pr-3 pl-3 pt-2 pb-2`;
 
-    // TODO: add some comments in the jsx
     return (
       <div className={className}>
+        {/* contains the whole appItem */}
         <div className="appitem-container">
           <AppIcon appTitle={title} iconURL={iconURL} />
+          {/* contains app title, subtitle, creator, and tags */}
           <div className="appitem-right-container">
+            {/* contains app title and creator */}
             <div className="appitem-title-and-creator-container">
               <AppTitle title={title} />
               {/* if class is dark, creator is light. and vice versa */}
               <div className="d-none d-sm-block">
+                {/* if app item is dark, creator is light. and vice versa */}
                 <AppCreatorTag
                   creator={creator}
                   dark={dark ? undefined : true}
@@ -74,7 +77,7 @@ AppItem.propTypes = {
 };
 
 AppItem.defaultProps = {
-  // TODO: comment to explain default
+  // default is to render the appItem in a light theme
   dark: false,
 };
 

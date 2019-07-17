@@ -7,28 +7,31 @@ import './style.css';
 class AppTags extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      tagsArray: [],
-    };
-  }
 
-  async componentDidMount() {
     // deconstruct props
     const { tags, tagColors } = this.props;
+
     // construct tagsArray state
     const newTagsArray = [];
+
+    // put array of options to pass into each tagItem into an array
     Object.keys(tags).forEach((tagName) => {
       tags[tagName].forEach((tagValue) => {
         newTagsArray.push([tagName, tagValue, tagColors[tagName].color]);
       });
     });
-    this.setState({
+
+    this.state = {
+      // array of arrays that holds value for tagName, tagValue, and tagColor
       tagsArray: newTagsArray,
-    });
+    };
   }
 
   render() {
+    // deconstruct the state
     const { tagsArray } = this.state;
+
+    // map each array elem into AppTag element
     const tagsList = tagsArray.map((tagPair) => {
       return (
         <AppTag
@@ -45,10 +48,12 @@ class AppTags extends Component {
     );
   }
 }
+
 AppTags.propTypes = {
   // consists of tagName => tagValue mapping
   tags: PropTypes.objectOf(PropTypes.array).isRequired,
   // color of the tag
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
 };
+
 export default AppTags;
