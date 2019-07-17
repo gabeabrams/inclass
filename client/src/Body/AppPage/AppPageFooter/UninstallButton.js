@@ -12,7 +12,7 @@ class UninstallButton extends Component {
         style={{
           fontSize: '25px',
         }}
-        className="btn btn-success btn-lg"
+        className="btn btn-danger btn-lg font-weight-bold ml-1"
         onClick={onClick}
       >
         Uninstall
@@ -22,6 +22,7 @@ class UninstallButton extends Component {
 }
 
 UninstallButton.propTypes = {
+  // TODO: add comment
   onClick: PropTypes.func.isRequired,
 };
 

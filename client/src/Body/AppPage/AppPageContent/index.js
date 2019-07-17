@@ -21,15 +21,16 @@ class AppPageContent extends Component {
     this.tabChanged = this.tabChanged.bind(this);
   }
 
-  tabChanged = (newTabName) => {
+  tabChanged(newTabName) {
     this.setState({
       currentTab: newTabName,
     });
   }
+
   render() {
     const { app } = this.props;
     const { currentTab } = this.state;
-    
+
     // if (currentTab === "info") {
     //   return (
     //     <div className="appPageContent-container">
@@ -45,16 +46,20 @@ class AppPageContent extends Component {
     //     </div>
     //   )
     // } else {
-      return (
-        <div className="appPageContent-container">
-          <TabBar onClick={() => this.tabChanged(TAB_NAMES.SCREENSHOTS)} screenshotsActive={true} guidesActive={false} infoActive={false} />
-          <Screenshots app={app} />
-        </div>
-      );
+    return (
+      <div className="appPageContent-container">
+        <TabBar
+          onClick={() => {
+            this.tabChanged(TAB_NAMES.SCREENSHOTS);
+          }}
+          screenshotsActive
+        />
+        <Screenshots app={app} />
+      </div>
+    );
     // }
     // TODO: show the current tab box (screenshots, guides, or info)
     // TODO: pass this.tabChanged to the tab bar so it can call it when a new tab is selected
-    
   }
 }
 

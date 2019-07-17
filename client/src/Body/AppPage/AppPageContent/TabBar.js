@@ -1,3 +1,4 @@
+// TODO: remove instruction comments
 // props:
 // - app (the app to show the screenshots of)
 
@@ -5,6 +6,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Import other components
+// TODO: remove instruction comments
 // Questions to answer: How to get the app to show the screenshots of?
 
 class TabBar extends Component {
@@ -18,6 +20,7 @@ class TabBar extends Component {
     } = this.props;
     return (
       <ul className="nav nav-tabs">
+        {/* TODO: add comments to jsx */}
         <li className="nav-item">
           <a href="#screenshots" className={`nav-link${screenshotsActive ? ' active' : ''}`} onClick={onClick}>Screenshots</a>
         </li>
@@ -33,14 +36,16 @@ class TabBar extends Component {
 }
 
 TabBar.propTypes = {
+  // TODO: add descriptions for each prop
+  // TODO: use TAB_NAMES as a value for an 'activeTab' prop instead of booleans
   onClick: PropTypes.func.isRequired,
   screenshotsActive: PropTypes.bool,
   guidesActive: PropTypes.bool,
   infoActive: PropTypes.bool,
-
 };
 
 TabBar.defaultProps = {
+  // TODO: add comments explaining each default
   screenshotsActive: true,
   guidesActive: false,
   infoActive: false,

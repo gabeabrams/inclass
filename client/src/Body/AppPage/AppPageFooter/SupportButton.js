@@ -13,7 +13,7 @@ class SupportButton extends Component {
         style={{
           fontSize: '25px',
         }}
-        className="btn btn-light btn-lg"
+        className="btn btn-light btn-lg ml-1"
         onClick={onClick}
       >
         Get Support
