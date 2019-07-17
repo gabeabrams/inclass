@@ -9,7 +9,7 @@ import './Logo.css';
 
 class Logo extends Component {
   render() {
-    // Deconstruct props
+    // The url for the logo image
     const {
       url,
     } = this.props;

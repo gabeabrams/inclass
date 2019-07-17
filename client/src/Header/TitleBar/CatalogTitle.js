@@ -8,6 +8,7 @@ class CatalogTitle extends Component {
   render() {
     // Deconstruct props
     const {
+      // The title of the catalog
       catalogTitle,
     } = this.props;
 
@@ -22,6 +23,7 @@ class CatalogTitle extends Component {
 }
 
 CatalogTitle.propTypes = {
+  // catalogTitle is a string and is required
   catalogTitle: PropTypes.string.isRequired,
 };
 

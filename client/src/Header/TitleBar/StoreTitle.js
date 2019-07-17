@@ -6,13 +6,15 @@ import './StoreTitle.css';
 
 class StoreTitle extends Component {
   render() {
-    // Deconstruct props
     const {
+      // The title of the store
       storeTitle,
     } = this.props;
 
     return (
       <div className="storetitle-container row no-gutters">
+        {/* Use bootstrap row for titlebar, and columns
+          for store and catalog titles */}
         <div className="col"><b>{ storeTitle }</b></div>
         <div className="storetitle-storetext d-none d-sm-block col-{breakpoint}-auto">App Store</div>
       </div>
@@ -21,6 +23,7 @@ class StoreTitle extends Component {
 }
 
 StoreTitle.propTypes = {
+  // storeTitle prop must be a string and is required
   storeTitle: PropTypes.string.isRequired,
 };
 
