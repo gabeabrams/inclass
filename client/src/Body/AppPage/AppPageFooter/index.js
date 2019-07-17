@@ -17,7 +17,9 @@ class AppPageFooter extends Component {
       appInstalled,
     } = this.props;
 
-    // TODO: document this process:
+    // Initializes either Uninstall or Install button
+    //  depending if app is installed
+    // Leaves the uninitialized button as undefined
     let installButtonElem;
     let uninstallButtonElem;
     if (appInstalled) {
@@ -44,14 +46,18 @@ class AppPageFooter extends Component {
 }
 
 AppPageFooter.propTypes = {
-  // TODO: add comments
+  // Function that occurs when install button clicked
   onInstallClicked: PropTypes.func.isRequired,
+  // Function that occurs when uninstalled button clicked
   onUninstallClicked: PropTypes.func.isRequired,
+  // Function that occurs when support button clicked
   onSupportClicked: PropTypes.func.isRequired,
+  // Boolean for if app is installed yet
   appInstalled: PropTypes.bool,
 };
 
 AppPageFooter.defaultProps = {
+  // App is automatically not installed
   appInstalled: false,
 };
 

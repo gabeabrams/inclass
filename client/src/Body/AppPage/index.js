@@ -7,6 +7,7 @@ import AppPageContent from './AppPageContent';
 
 class AppPage extends Component {
   render() {
+    // Deconstruct props
     const { app } = this.props;
     return (
       <div className="appPage-container">
@@ -24,7 +25,7 @@ class AppPage extends Component {
 AppPage.propTypes = {
   // The app to display
   app: PropTypes.shape({
-    // Array of screenshots in the app (Note: what is currently needed)
+    // Array of screenshots in the app
     screenshots: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string,
