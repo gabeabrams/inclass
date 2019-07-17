@@ -11,6 +11,7 @@ class AppCreatorTag extends Component {
   }
 
   async componentDidMount() {
+    // construct the message depending on the number of creator
     const { creator } = this.props;
     if (creator.length === 1) {
       this.setState({
@@ -59,6 +60,7 @@ AppCreatorTag.propTypes = {
 };
 
 AppCreatorTag.defaultProps = {
+  // if not passed in, assume to render the appItem light
   dark: undefined,
 };
 
