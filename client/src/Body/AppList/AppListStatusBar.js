@@ -17,6 +17,7 @@ class AppListStatusBar extends Component {
     );
 
     this.state = {
+      // the message to display on the status bar
       message,
     };
   }
