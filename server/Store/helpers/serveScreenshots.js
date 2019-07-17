@@ -37,12 +37,10 @@ module.exports = (opts) => {
         expressApp.use(path.join(webPath, filename),
           express.static(fullPath));
       } catch (error) {
-        // console.log('ERROR: ', error);
-        // const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
-        // throw new Error(errMessage);
+        const errMessage = `The app ${appId} in catalog ${catalogId} listed a screenshot with filename ${filename}, but that file does not exist`;
+        throw new Error(errMessage);
       }
       screenshotWithURL.url = path.join(webPath, filename);
-      console.log('screenshotWithURL: ', screenshotWithURL, 'fullPath: ', fullPath, 'filename: ', filename);
       return screenshotWithURL;
     });
   }

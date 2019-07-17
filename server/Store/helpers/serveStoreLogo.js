@@ -22,6 +22,4 @@ module.exports = (logoFullPath, expressApp) => {
     const errMessage = 'We ran into an issue preparing the logo for the store';
     throw new Error(errMessage);
   }
-
-  console.log('logoFUllPath: ', logoFullPath);
 };
