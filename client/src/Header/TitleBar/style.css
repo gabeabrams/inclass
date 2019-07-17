@@ -1,0 +1,30 @@
+/* Style for titlebar container in header */
+.titlebar-container {
+  /* Keep children separated evenly */
+  position: absolute;
+  top: 0;
+
+  /* Dimensions */
+  height: 50px;
+  width: 100%;
+
+  /* Align children along center of cross-axis */
+  align-items: center;
+
+  /* Set font-size */
+  font-size: 20px;
+}
+
+/* Style for the left titlebar component */
+.titlebar-left {
+  /* Keep text away from center of page for logo */
+  margin-right: 65px;
+  text-align: right;
+}
+
+/* Stye for the right titlebar component */
+.titlebar-right {
+  /* Keep text away from center of page for logo */
+  margin-left: 65px;
+  text-align: left;
+}

@@ -180,7 +180,10 @@ class AppStore extends Component {
   render() {
     // Deconstruct the state
     const {
+      supportModalStatus,
       storeHost,
+      storeTitle,
+      catalogTitle,
       currentBodyType,
       loadingMessage,
       fatalErrorMessage,
@@ -206,15 +209,27 @@ class AppStore extends Component {
       );
     }
 
+    // Create supportModelElement if open
+    let supportModelElement;
+    if (supportModalStatus.open) {
+      const { email, subject } = supportModalStatus;
+      supportModelElement = (
+        <span email={email} subject={subject} onClose={() => {}}>
+          No Support Modal Yet!
+        </span>
+      );
+    }
+
     // Render the component
 
     const { allApps } = this.state;
     return (
       <div>
         <div className="appstore-header-container">
-
           <Header
             storeHost={storeHost}
+            storeTitle={storeTitle}
+            catalogTitle={catalogTitle}
           />
         </div>
         <div className="appstore-body-container">
@@ -224,6 +239,7 @@ class AppStore extends Component {
             appList={allApps}
           />
         </div>
+        {supportModelElement}
       </div>
     );
   }
