@@ -32,10 +32,8 @@ class AppPageFooter extends Component {
       );
     }
 
-
-    // TODO: show the uninstall button if the app is installed
     return (
-      // Flexbox container for the entire footer with two buttons
+      // Shows support button and either install or uninstall button
       <div className="apppagefooter-container">
         {installButtonElem}
         {uninstallButtonElem}

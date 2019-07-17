@@ -1,13 +1,10 @@
-// props:
-// - app (the app to show the screenshots of)
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// Import stylesheet
 import './style.css';
 
 // Import other components
-// Questions to answer: How to get the app to show the screenshots of?
 import Screenshot from './Screenshot';
 
 class Screenshots extends Component {
@@ -19,6 +16,7 @@ class Screenshots extends Component {
     screenshots.forEach((screenshot) => {
       toRender.push(<div className="screenshots-elem"><Screenshot screenshot={screenshot} /></div>);
     });
+
     return (
       <div className="screenshots-container">
         {toRender}
@@ -26,6 +24,7 @@ class Screenshots extends Component {
     );
   }
 }
+
 Screenshots.propTypes = {
   // The app whose screenshots we want
   app: PropTypes.shape({
