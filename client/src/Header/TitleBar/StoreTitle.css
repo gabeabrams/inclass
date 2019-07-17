@@ -3,13 +3,3 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
-/* Formatting for inserted store title ex. 'Harvard' */
-.storetitle-title {
-  text-align: right;
-}
-
-.storetitle-storetext {
-  /* Add padding so words space nicely */
-  margin-left: 5px;
-}

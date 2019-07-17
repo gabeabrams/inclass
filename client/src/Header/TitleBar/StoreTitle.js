@@ -12,11 +12,13 @@ class StoreTitle extends Component {
     } = this.props;
 
     return (
-      <div className="storetitle-container row no-gutters">
-        {/* Use bootstrap row for titlebar, and columns
-          for store and catalog titles */}
-        <div className="col"><b>{ storeTitle }</b></div>
-        <div className="storetitle-storetext d-none d-sm-block col-{breakpoint}-auto">App Store</div>
+      <div className="storetitle-container">
+        <span className="font-weight-bold">
+          {storeTitle}
+        </span>
+        <span className="ml-1 d-none d-sm-inline">
+          App Store
+        </span>
       </div>
     );
   }
