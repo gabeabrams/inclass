@@ -9,16 +9,23 @@ import PropTypes from 'prop-types';
 
 class TabBar extends Component {
   render() {
+    // Deconstruct props
+    const {
+      onClick,
+      screenshotsActive,
+      guidesActive,
+      infoActive,
+    } = this.props;
     return (
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <a href="#screenshots" className="nav-link active">Screenshots</a>
+          <a href="#screenshots" className={`nav-link${screenshotsActive ? ' active' : ''}`} onClick={onClick}>Screenshots</a>
         </li>
         <li className="nav-item">
-          <a href="#guides" className="nav-link">Guides</a>
+          <a href="#guides" className={`nav-link${guidesActive ? ' active' : ''}`} onClick={onClick}>Guides</a>
         </li>
         <li className="nav-item">
-          <a href="#info" className="nav-link">Info</a>
+          <a href="#info" className={`nav-link${infoActive ? ' active' : ''}`} onClick={onClick}>Info</a>
         </li>
       </ul>
     );
@@ -26,7 +33,17 @@ class TabBar extends Component {
 }
 
 TabBar.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  screenshotsActive: PropTypes.bool,
+  guidesActive: PropTypes.bool,
+  infoActive: PropTypes.bool,
 
+};
+
+TabBar.defaultProps = {
+  screenshotsActive: true,
+  guidesActive: false,
+  infoActive: false,
 };
 
 export default TabBar;
