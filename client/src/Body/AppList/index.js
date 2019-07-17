@@ -10,6 +10,7 @@ import './style.css';
 class AppList extends Component {
   render() {
     const { storeHost, apps, tagColors } = this.props;
+    // map each app to AppItem element to render
     const appElements = Object.keys(apps).map((appId) => {
       return (
         <AppItem
