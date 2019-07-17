@@ -179,6 +179,7 @@ class AppStore extends Component {
   render() {
     // Deconstruct the state
     const {
+      supportModalStatus,
       storeHost,
       storeTitle,
       catalogTitle,
@@ -207,11 +208,21 @@ class AppStore extends Component {
       );
     }
 
+    // Create supportModelElement if open
+    let supportModelElement;
+    if (supportModalStatus.open) {
+      const { email, subject } = supportModalStatus;
+      supportModelElement = (
+        <span email={email} subject={subject} onClose={() => {}}>
+          No Support Modal Yet!
+        </span>
+      );
+    }
+
     // Render the component
     return (
       <div>
         <div className="appstore-header-container">
-
           <Header
             storeHost={storeHost}
             storeTitle={storeTitle}
@@ -224,6 +235,7 @@ class AppStore extends Component {
             currentBodyType={currentBodyType}
           />
         </div>
+        {supportModelElement}
       </div>
     );
   }
