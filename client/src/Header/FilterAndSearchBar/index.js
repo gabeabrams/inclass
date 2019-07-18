@@ -13,7 +13,7 @@ class FilterAndSearchBar extends Component {
     // Deconstruct what we'll need from Header
 
     return (
-      <div className="filterandsearchbar-container row no-gutters">
+      <div className="filterandsearchbar-container bg-secondary row no-gutters">
         <div className="col filterandsearchbar-filterbutton">
           <FilterToggle />
         </div>
