@@ -187,6 +187,7 @@ class AppStore extends Component {
       storeTitle,
       catalogTitle,
       currentBodyType,
+      currentSpecificApp,
       loadingMessage,
       fatalErrorMessage,
     } = this.state;
@@ -223,8 +224,6 @@ class AppStore extends Component {
     }
 
     // Render the component
-
-    const { allApps } = this.state;
     return (
       <div>
         <div className="appstore-header-container">
@@ -240,6 +239,7 @@ class AppStore extends Component {
             tags={tags}
             storeHost={storeHost}
             currentBodyType={currentBodyType}
+            currentSpecificApp={currentSpecificApp}
             appList={allApps}
           />
         </div>
