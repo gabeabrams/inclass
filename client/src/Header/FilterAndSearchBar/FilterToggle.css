@@ -1,13 +1,20 @@
+/* The container for the FilterToggle component */
 .filtertoggle-container {
+  /* Using flex to keep children on center axis */
+  display: flex;
+
   /* Dimensions */
-  height: 50px;
+  height: 30px;
   width: 100%;
 
   /* Text formatting */
   font-size: 20px;
-  text-align: right;
+
+  /* Align children along center and to the right */
+  align-items: center;
+  justify-content: flex-end;
 
   /* Padding and margin for alignment */
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
