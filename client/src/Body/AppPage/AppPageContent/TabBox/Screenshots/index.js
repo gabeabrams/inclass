@@ -9,11 +9,12 @@ import Screenshot from './Screenshot';
 
 class Screenshots extends Component {
   render() {
+    // Deconstruct props
     const { app } = this.props;
     const { screenshots } = app;
     // get screenshots from the app
     const toRender = screenshots.map((screenshot) => {
-      return (<div className="screenshots-elem"><Screenshot screenshot={screenshot} /></div>);
+      return (<div className="screenshots-elem p-3 mw-20"><Screenshot screenshot={screenshot} /></div>);
     });
 
     return (

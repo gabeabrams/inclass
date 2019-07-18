@@ -5,16 +5,15 @@
   flex-direction: column;
 
   /* app page takes up height of parent*/
-  height: 100%;
+  height: 100vh;
 }
 
 /* Styling for the app page's main content */
 .appPage-content {
   /* Sets flex-grow, flex-shrink, flex-basis */
-  flex: 1 1 auto;
-
-  /* Scrolls when screen is smaller than content */
-  overflow: auto;
+  flex: 1 0 auto;
+  /* Scrolls when contents don't fit screen*/
+  overflow-y: scroll;
 }
 
 /* Styling for the app page footer*/

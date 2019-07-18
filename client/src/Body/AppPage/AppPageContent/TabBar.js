@@ -20,7 +20,7 @@ class TabBar extends Component {
     } = this.props;
     return (
       <ul className="nav nav-tabs">
-        {/* TODO: add comments to jsx */}
+        {/* TODO: add comments to jsx and add padding between tab and box */}
         <li className="nav-item">
           <a href="#screenshots" className={`nav-link${screenshotsActive ? ' active' : ''}`} onClick={onClick}>Screenshots</a>
         </li>
