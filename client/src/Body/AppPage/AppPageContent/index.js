@@ -15,51 +15,38 @@ class AppPageContent extends Component {
     super(props);
 
     this.state = {
+      // the tab that is displayed
       currentTab: TAB_NAMES.SCREENSHOTS,
     };
 
     this.tabChanged = this.tabChanged.bind(this);
   }
 
+  // Changes the current tab to what is passed in
   tabChanged(newTabName) {
     this.setState({
       currentTab: newTabName,
     });
   }
 
+
   render() {
     const { app } = this.props;
     const { currentTab } = this.state;
-
-    // if (currentTab === "info") {
-    //   return (
-    //     <div className="appPageContent-container">
-    //       <TabBar onClick={() => this.tabChanged("info")} screenshotsActive={false} guidesActive={false} infoActive={true} />
-    //       <Info />
-    //     </div>
-    //   )
-    // } else if (currentTab === "guides") {
-    //   return (
-    //     <div className="appPageContent-container">
-    //       <TabBar onClick={() => this.tabChanged(TAB_NAMES.GUIDES)} screenshotsActive={false} guidesActive={true} infoActive={false}/>
-    //       <Guides />
-    //     </div>
-    //   )
-    // } else {
+    let toDisplay;
+    if (currentTab === TAB_NAMES.INFO) {
+      toDisplay = <Info />;
+    } else if (currentTab === TAB_NAMES.GUIDES) {
+      toDisplay = <Guides />;
+    } else {
+      toDisplay = <Screenshots app={app} />;
+    }
     return (
       <div className="appPageContent-container">
-        <TabBar
-          onClick={() => {
-            this.tabChanged(TAB_NAMES.SCREENSHOTS);
-          }}
-          screenshotsActive
-        />
-        <Screenshots app={app} />
+        <TabBar activeTab={currentTab} onClick={this.tabChanged} />
+        {toDisplay}
       </div>
     );
-    // }
-    // TODO: show the current tab box (screenshots, guides, or info)
-    // TODO: pass this.tabChanged to the tab bar so it can call it when a new tab is selected
   }
 }
 

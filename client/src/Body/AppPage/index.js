@@ -43,7 +43,6 @@ class AppPage extends Component {
           <AppPageContent app={app} />
         </div>
         <div className="appPage-footer">
-          {/* TODO: Pass in the functions for the AppPageFooter */}
           <AppPageFooter
             appInstalled={appInstalled}
             onInstallClicked={this.onInstallClicked}
