@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 // Import other components
 import Header from './Header';
 import Body from './Body';
+import Screenshots from './Body/AppPage/AppPageContent/TabBox/Screenshots'
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -181,7 +182,10 @@ class AppStore extends Component {
     const {
       allApps,
       tags,
+      supportModalStatus,
       storeHost,
+      storeTitle,
+      catalogTitle,
       currentBodyType,
       loadingMessage,
       fatalErrorMessage,
@@ -207,13 +211,27 @@ class AppStore extends Component {
       );
     }
 
+    // Create supportModelElement if open
+    let supportModelElement;
+    if (supportModalStatus.open) {
+      const { email, subject } = supportModalStatus;
+      supportModelElement = (
+        <span email={email} subject={subject} onClose={() => {}}>
+          No Support Modal Yet!
+        </span>
+      );
+    }
+
     // Render the component
+
+    const { allApps } = this.state;
     return (
       <div>
         <div className="appstore-header-container">
-
           <Header
             storeHost={storeHost}
+            storeTitle={storeTitle}
+            catalogTitle={catalogTitle}
           />
         </div>
         <div className="appstore-body-container">
@@ -222,8 +240,10 @@ class AppStore extends Component {
             tags={tags}
             storeHost={storeHost}
             currentBodyType={currentBodyType}
+            appList={allApps}
           />
         </div>
+        {supportModelElement}
       </div>
     );
   }

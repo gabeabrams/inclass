@@ -1,0 +1,24 @@
+/* Styling for the entire AppPage */
+.appPage-container {
+  /* appPage uses flexbox and makes elements align in a column*/
+  display: flex;
+  flex-direction: column;
+
+  /* app page takes up height of parent*/
+  height: 100%;
+}
+
+/* Styling for the app page's main content */
+.appPage-content {
+  /* Sets flex-grow, flex-shrink, flex-basis */
+  flex: 1 1 auto;
+
+  /* Scrolls when screen is smaller than content */
+  overflow: auto;
+}
+
+/* Styling for the app page footer*/
+.appPage-footer {
+  /* Sets flex-grow, flex-shrink, flex-basis */
+  flex: 0 0 auto;
+}

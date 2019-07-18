@@ -1,0 +1,22 @@
+/* Styling for logo container */
+.logo-container {
+  display: inline-block;
+
+  /* Aligns container contents in the center and top of screen*/
+  position: relative;
+  top: 0;
+  left: calc(50% - 60px);
+  text-align: center;
+
+  /* Dimensions */
+  height: 0;
+  width: 120px;
+
+  /* Make sure logo is always the top component */
+  z-index: 1000;
+}
+
+/* Styling for logo image */
+.logo-image {
+  height: 120px;
+}

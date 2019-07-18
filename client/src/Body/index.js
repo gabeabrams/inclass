@@ -21,9 +21,10 @@ class Body extends Component {
     // Show the app page
     if (currentBodyType === BODY_TYPE.APP_PAGE) {
       return (
-        <div className="h-100 overflow-hidden">
+        <div className="h-100">
           <AppPage
             storeHost={storeHost}
+            app={gradeup}
           />
         </div>
       );
