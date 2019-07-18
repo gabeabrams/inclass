@@ -11,8 +11,12 @@ import BODY_TYPE from './BODY_TYPE';
 class Body extends Component {
   render() {
     // Deconstruct props
-    const { currentBodyType, storeHost, appList } = this.props;
-    const { gradeup } = appList;
+    const {
+      currentBodyType,
+      storeHost,
+      apps,
+      tags,
+    } = this.props;
 
     // Show the app page
     if (currentBodyType === BODY_TYPE.APP_PAGE) {
@@ -30,6 +34,8 @@ class Body extends Component {
     return (
       <AppList
         storeHost={storeHost}
+        apps={apps}
+        tagColors={tags}
       />
     );
   }
@@ -40,8 +46,10 @@ Body.propTypes = {
   currentBodyType: PropTypes.string.isRequired,
   // The hostname of the store
   storeHost: PropTypes.string.isRequired,
-  // List of apps to display
-  appList: PropTypes.objectOf(PropTypes.object).isRequired,
+  // The apps we need to display
+  apps: PropTypes.objectOf(PropTypes.object).isRequired,
+  // The tags information for the app
+  tags: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default Body;

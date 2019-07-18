@@ -51,7 +51,7 @@ class AppStore extends Component {
       // The full list of apps (unfiltered)
       allApps: [],
       // The type of the current page body to show (see BODY_TYPE above)
-      currentBodyType: BODY_TYPE.APP_PAGE,
+      currentBodyType: BODY_TYPE.APP_LIST,
       // Current app
       currentSpecificApp: null,
       // Support modal status
@@ -180,6 +180,8 @@ class AppStore extends Component {
   render() {
     // Deconstruct the state
     const {
+      allApps,
+      tags,
       supportModalStatus,
       storeHost,
       storeTitle,
@@ -234,6 +236,8 @@ class AppStore extends Component {
         </div>
         <div className="appstore-body-container">
           <Body
+            apps={allApps}
+            tags={tags}
             storeHost={storeHost}
             currentBodyType={currentBodyType}
             appList={allApps}
