@@ -185,6 +185,7 @@ class AppStore extends Component {
       currentBodyType,
       loadingMessage,
       fatalErrorMessage,
+      filterDrawerOpen,
     } = this.state;
 
     // Show loading message
@@ -216,6 +217,7 @@ class AppStore extends Component {
             storeHost={storeHost}
             storeTitle={storeTitle}
             catalogTitle={catalogTitle}
+            filterDrawerOpen={filterDrawerOpen}
           />
         </div>
         <div className="appstore-body-container">

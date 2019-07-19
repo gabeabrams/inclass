@@ -13,6 +13,7 @@ class Header extends Component {
       storeHost,
       storeTitle,
       catalogTitle,
+      filterDrawerOpen,
     } = this.props;
 
     return (
@@ -22,7 +23,9 @@ class Header extends Component {
           storeTitle={storeTitle}
           catalogTitle={catalogTitle}
         />
-        <FilterAndSearchBar />
+        <FilterAndSearchBar
+          filterDrawerOpen={filterDrawerOpen}
+        />
       </div>
     );
   }
