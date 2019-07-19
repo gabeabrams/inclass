@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 // Import other components
 import AppItem from '../../shared/AppItem';
 import AppListStatusBar from './AppListStatusBar';
-import EmailAddress from '../../shared/EmailForm/EmailAddress';
-import EmailSubject from '../../shared/EmailForm/EmailSubject';
+import EmailForm from '../../shared/EmailForm';
 
 import './style.css';
 
@@ -33,8 +32,7 @@ class AppList extends Component {
       <div className="app-list-container">
         <AppListStatusBar appCount={Object.keys(apps).length} />
         {appElements}
-        <EmailAddress address="lshhenry98@gmail.com" subject="This is a test for the subject display" />
-        <EmailSubject subject="This is a test for the subject display" />
+        <EmailForm address="lshhenry98@gmail.com" subject="this is a test subject" />
       </div>
     );
   }
