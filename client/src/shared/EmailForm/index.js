@@ -13,7 +13,7 @@ class EmailForm extends Component {
     const { address, subject } = this.props;
 
     return (
-      <div>
+      <div className="emailform-container d-flex flex-column">
         <EmailAddress address={address} subject={subject} />
         <EmailSubject subject={subject} />
       </div>
