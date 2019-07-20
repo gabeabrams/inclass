@@ -8,6 +8,18 @@ import EmailSubject from './EmailSubject';
 import './style.css';
 
 class EmailForm extends Component {
+  constructor(props) {
+    super(props);
+    // deconstruct props
+    const { address, subject } = this.props;
+    this.state = {
+      // the address to send the email to
+      address,
+      // the subject of the email
+      subject,
+    }
+  }
+
   render() {
     // deconstruct props
     const { address, subject } = this.props;
@@ -22,10 +34,10 @@ class EmailForm extends Component {
 }
 
 EmailForm.propTypes = {
-    // the email address to send to
-    address: PropTypes.string.isRequired,
-    // the subject of the email
-    subject: PropTypes.string.isRequired,
+  // the email address to send to
+  address: PropTypes.string.isRequired,
+  // the subject of the email
+  subject: PropTypes.string.isRequired,
 };
 
 export default EmailForm;
