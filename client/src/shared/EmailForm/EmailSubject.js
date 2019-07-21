@@ -7,27 +7,27 @@ class EmailSubject extends Component {
   constructor(props) {
     super(props);
 
-    // deconstruct the props
-    const { subject } = this.props;
+    // // deconstruct the props
+    // const { subject } = this.props;
 
-    this.state = {
-      // the current content inside the subject input
-      currentSubject: subject,
-    };
-    // make sure 'this' binding is unchanged when calling onInputChange
-    this.onInputChange = this.onInputChange.bind(this);
+    // this.state = {
+    //   // the current content inside the subject input
+    //   currentSubject: subject,
+    // };
+    // // make sure 'this' binding is unchanged when calling onInputChange
+    // this.onInputChange = this.onInputChange.bind(this);
   }
 
-  // reset the state as user input changes, rerenders the page
-  onInputChange(event) {
-    this.setState({
-      currentSubject: event.target.value,
-    });
-  }
+  // // reset the state as user input changes, rerenders the page
+  // onInputChange(event) {
+  //   this.setState({
+  //     currentSubject: event.target.value,
+  //   });
+  // }
 
   render() {
     // deconstruct the state
-    const { currentSubject } = this.state;
+    const { subject, onInputChange } = this.props;
     return (
       <div className="input-group mb-3 bg-info p-2 rounded">
         <div className="input-group-prepend">
@@ -38,11 +38,11 @@ class EmailSubject extends Component {
           type="text"
           className="form-control rounded text-truncate"
           aria-describedby="basic-addon3"
-          value={currentSubject}
-          onChange={this.onInputChange}
+          value={subject}
+          onChange={onInputChange}
         />
         <div className="input-group-append" id="button-addon4">
-          <CopyButton text={currentSubject} />
+          <CopyButton text={subject} />
         </div>
       </div>
     );
@@ -52,6 +52,8 @@ class EmailSubject extends Component {
 EmailSubject.propTypes = {
   // the subject of the email
   subject: PropTypes.string.isRequired,
+  // onInputChange function that modifies the address in parent component
+  onInputChange: PropTypes.func.isRequired,
 };
 
 export default EmailSubject;
