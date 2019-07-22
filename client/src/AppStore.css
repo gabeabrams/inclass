@@ -30,8 +30,6 @@
 
 /* The container for the body */
 .appstore-body-container {
-  /* Put 10px around the content */
-  padding-bottom: 10px;
   /* Add an extra 100px to the top so the header doesn't obscure the content */
   padding-top: 110px;
 

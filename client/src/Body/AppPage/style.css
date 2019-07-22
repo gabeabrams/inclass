@@ -5,7 +5,7 @@
   flex-direction: column;
 
   /* app page takes up height of parent*/
-  height: 100vh;
+  height: 100%;
 }
 
 /* Styling for the app page's main content */
@@ -14,10 +14,21 @@
   flex: 1 0 auto;
   /* Scrolls when contents don't fit screen*/
   overflow-y: scroll;
+
+  margin-bottom: 100px;
+  min-height: 100px;
 }
 
 /* Styling for the app page footer*/
 .appPage-footer {
   /* Sets flex-grow, flex-shrink, flex-basis */
   flex: 0 0 auto;
+
+  /* Makes footer sticky, at the bottom, and fills width of page */
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+
+  /* Footer is the top content */
+  z-index: 1;
 }

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import AppPageFooter from './AppPageFooter';
 import AppPageContent from './AppPageContent';
 
+import './style.css';
+
 // Note: this is a temporary function
 const onSupportClicked = () => {
   console.log('clicked support button');
