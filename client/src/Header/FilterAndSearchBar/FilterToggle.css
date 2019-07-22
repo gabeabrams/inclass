@@ -18,3 +18,8 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.fa-caret-right, .fa-caret-down {
+  font-size: 35px;
+  color: white;
+}
