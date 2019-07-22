@@ -13,6 +13,7 @@ class FilterAndSearchBar extends Component {
     // Deconstruct what we'll need from Header
     const {
       filterDrawerOpen,
+      searchQuery,
     } = this.props;
 
     return (
@@ -20,7 +21,9 @@ class FilterAndSearchBar extends Component {
         <div className="col filterandsearchbar-filterbutton">
           <FilterToggle filterDrawerOpen={filterDrawerOpen} />
         </div>
-        <div className="col filterandsearchbar-searchbox" />
+        <div className="col filterandsearchbar-searchbox">
+          <SearchField searchQuery={searchQuery} />
+        </div>
       </div>
     );
   }
@@ -28,12 +31,9 @@ class FilterAndSearchBar extends Component {
 
 FilterAndSearchBar.propTypes = {
   // Whether the filterDrawer should be open or not
-  filterDrawerOpen: PropTypes.bool,
-};
-
-FilterAndSearchBar.defaultProps = {
-  // By default, filter drawer is closed
-  filterDrawerOpen: false,
+  filterDrawerOpen: PropTypes.bool.isRequired,
+  // The text query in the search box
+  searchQuery: PropTypes.string.isRequired,
 };
 
 export default FilterAndSearchBar;
