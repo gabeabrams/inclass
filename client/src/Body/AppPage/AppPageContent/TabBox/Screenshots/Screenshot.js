@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 class Screenshot extends Component {
   render() {
     // Deconstruct props
-    const { screenshot } = this.props;
+    const { screenshot, storeHost } = this.props;
     const { title, url } = screenshot;
 
     // Current URL for testing purposes
-    const fakeURL = `https://localhost${url}`;
+    const fakeURL = `${storeHost}${url}`;
     return (
       // Screenshot is displayed with a header and the image
       <div className="card border-dark mb-3">
@@ -29,6 +29,9 @@ Screenshot.propTypes = {
     // URL to grab the screenshot
     url: PropTypes.string,
   }).isRequired,
+
+  // Host for the URL
+  storeHost: PropTypes.string.isRequired,
 };
 
 export default Screenshot;

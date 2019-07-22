@@ -11,10 +11,10 @@ class Screenshots extends Component {
   render() {
     // get screenshots from the app
     const toRender = [];
-    const { app } = this.props;
+    const { app, storeHost } = this.props;
     const { screenshots } = app;
     screenshots.forEach((screenshot) => {
-      toRender.push(<div className="screenshots-elem"><Screenshot screenshot={screenshot} /></div>);
+      toRender.push(<div className="screenshots-elem"><Screenshot screenshot={screenshot} storeHost={storeHost} /></div>);
     });
 
     return (
@@ -36,6 +36,9 @@ Screenshots.propTypes = {
       })
     ),
   }).isRequired,
+
+  // Host for the URL
+  storeHost: PropTypes.string.isRequired,
 };
 
 export default Screenshots;

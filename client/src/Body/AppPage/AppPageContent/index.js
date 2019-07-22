@@ -28,7 +28,7 @@ class AppPageContent extends Component {
   }
 
   render() {
-    const { app } = this.props;
+    const { app, storeHost } = this.props;
     const { currentTab } = this.state;
 
     // if (currentTab === "info") {
@@ -54,7 +54,7 @@ class AppPageContent extends Component {
           }}
           screenshotsActive
         />
-        <Screenshots app={app} />
+        <Screenshots app={app} storeHost={storeHost} />
       </div>
     );
     // }
@@ -74,6 +74,9 @@ AppPageContent.propTypes = {
       })
     ),
   }).isRequired,
+
+  // The host for the URL
+  storeHost: PropTypes.string.isRequired,
 };
 
 export default AppPageContent;

@@ -8,11 +8,11 @@ import AppPageContent from './AppPageContent';
 class AppPage extends Component {
   render() {
     // Deconstruct props
-    const { app } = this.props;
+    const { app, storeHost } = this.props;
     return (
       <div className="appPage-container">
         <div className="appPage-content">
-          <AppPageContent app={app} />
+          <AppPageContent app={app} storeHost={storeHost} />
         </div>
         <div className="appPage-footer">
           {/* TODO: Pass in the functions for the AppPageFooter */}
@@ -34,6 +34,9 @@ AppPage.propTypes = {
       })
     ),
   }).isRequired,
+
+  // The host for the URL
+  storeHost: PropTypes.string.isRequired,
 };
 
 export default AppPage;
