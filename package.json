@@ -36,6 +36,7 @@
 	"homepage": "https://github.com/gabeabrams/inclass#readme",
 	"dependencies": {
 		"caccl": "^1.0.83",
+		"dce-enzyme": "^1.0.2",
 		"express": "^4.17.1",
 		"fast-clone": "^1.5.13",
 		"fs": "0.0.1-security"
