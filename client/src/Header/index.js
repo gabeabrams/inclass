@@ -26,7 +26,7 @@ class Header extends Component {
         />
         <FilterAndSearchBar
           filterDrawerOpen={filterDrawerOpen}
-
+          searchQuery={searchQuery}
         />
       </div>
     );
@@ -36,9 +36,13 @@ class Header extends Component {
 Header.propTypes = {
   // The hostname of the store
   storeHost: PropTypes.string.isRequired,
+  // The title of the store
   storeTitle: PropTypes.string.isRequired,
+  // The title of the catalog
   catalogTitle: PropTypes.string.isRequired,
+  // Bool for whether the filter drawer is open
   filterDrawerOpen: PropTypes.bool.isRequired,
+  // Query entered into the search bar
   searchQuery: PropTypes.string.isRequired,
 };
 
