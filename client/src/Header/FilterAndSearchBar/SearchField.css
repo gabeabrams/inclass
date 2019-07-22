@@ -1,3 +1,7 @@
 .searchfield-container {
   width: 200px;
 }
+
+.fa-search {
+  color: rgb(89, 98, 106);
+}

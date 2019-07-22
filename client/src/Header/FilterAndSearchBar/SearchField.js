@@ -18,7 +18,7 @@ class SearchField extends Component {
         <div className="input-group">
           <div className="input-group-prepend">
             <button className="btn input-group-text" type="button">
-              <FontAwesomeIcon icon={faSearch} color="Gray" />
+              <FontAwesomeIcon icon={faSearch} />
             </button>
           </div>
           <input
