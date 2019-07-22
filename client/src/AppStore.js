@@ -46,7 +46,7 @@ class AppStore extends Component {
       // True if the filter drawer is open
       filterDrawerOpen: false,
       // Search query (the string in the search box)
-      searchQuery: '',
+      searchQuery: 'Search',
       // The full list of apps (unfiltered)
       allApps: [],
       // The type of the current page body to show (see BODY_TYPE above)
@@ -186,6 +186,7 @@ class AppStore extends Component {
       loadingMessage,
       fatalErrorMessage,
       filterDrawerOpen,
+      searchQuery,
     } = this.state;
 
     // Show loading message
@@ -218,6 +219,7 @@ class AppStore extends Component {
             storeTitle={storeTitle}
             catalogTitle={catalogTitle}
             filterDrawerOpen={filterDrawerOpen}
+            searchQuery={searchQuery}
           />
         </div>
         <div className="appstore-body-container">
