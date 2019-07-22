@@ -14,7 +14,8 @@ describe('client > StoreTitle', () => {
       />
     );
 
-    await assert(driver.elementExists('.storetitle-container'));
-    await assert(driver.elementExists('.font-weight-bold'));
+    await assert(driver.elementExists('.storetitle-container'), 'Missing StoreTitle container');
+    await assert(driver.elementExists('.font-weight-bold'), 'Missing span for storeTitle');
+    await assert(driver.elementExists('.ml-1.d-none.d-sm-inline'), 'Missing span for \'App Store\' Text');
   });
 });
