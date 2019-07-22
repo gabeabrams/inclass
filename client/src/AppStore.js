@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 // Import other components
 import Header from './Header';
 import Body from './Body';
-import Screenshots from './Body/AppPage/AppPageContent/TabBox/Screenshots'
+import Screenshots from './Body/AppPage/AppPageContent/TabBox/Screenshots';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -51,7 +51,7 @@ class AppStore extends Component {
       // The full list of apps (unfiltered)
       allApps: [],
       // The type of the current page body to show (see BODY_TYPE above)
-      currentBodyType: BODY_TYPE.APP_LIST,
+      currentBodyType: BODY_TYPE.APP_PAGE,
       // Current app
       currentSpecificApp: null,
       // Support modal status
