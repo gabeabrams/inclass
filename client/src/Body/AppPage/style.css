@@ -15,7 +15,7 @@
   /* Scrolls when contents don't fit screen*/
   overflow-y: scroll;
 
-  margin-bottom: 100px;
+  padding-bottom: 85px;
   min-height: 100px;
 }
 
