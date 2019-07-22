@@ -4,8 +4,8 @@ import assert from 'assert';
 
 import UninstallButton from './UninstallButton';
 
-describe('client > YourComponent', () => {
-  it('Does a thing', async () => {
+describe('client > src > Body > App Page > AppPageFooter > InstallButton', () => {
+  it('Handles a click', async () => {
     let clicked;
     const driver = new Driver(
       <UninstallButton

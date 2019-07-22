@@ -4,7 +4,7 @@ import assert from 'assert';
 
 import SupportButton from './SupportButton';
 
-describe('client > YourComponent', () => {
+describe('client > src > Body > App Page > AppPageFooter > InstallButton', () => {
   it('Handles a click', async () => {
     let clicked;
     const driver = new Driver(

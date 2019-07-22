@@ -4,9 +4,9 @@ import assert from 'assert';
 
 import InstallButton from './InstallButton';
 
-describe('client > YourComponent', () => {
-  it('Does a thing', async () => {
-    let clicked;
+describe('client > src > Body > App Page > AppPageFooter > InstallButton', () => {
+  it('Handles a click', async () => {
+    let clicked = false;
     const driver = new Driver(
       <InstallButton
         title="Install Button"
