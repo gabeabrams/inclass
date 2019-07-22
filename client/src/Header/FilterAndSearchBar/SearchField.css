@@ -1,7 +1,10 @@
+/* Styling for the SearchField container */
 .searchfield-container {
+  /* Dimensions */
   width: 200px;
 }
 
+/* Styling for the Font Awesome search icon */
 .fa-search {
   color: rgb(89, 98, 106);
 }
