@@ -11,6 +11,7 @@ import './FilterToggle.css';
 
 class FilterToggle extends Component {
   render() {
+    // Deconstruct props
     const {
       filterDrawerOpen,
     } = this.props;
@@ -26,6 +27,10 @@ class FilterToggle extends Component {
         <FontAwesomeIcon icon={faCaretDown} size="2x" className="ml-3" />
       );
     }
+
+    // Turn into a button
+    // Write style class to remove all the button properties
+    // Write function in AppStore.js to pass down (eventually)
 
     return (
       <div className="filtertoggle-container">
