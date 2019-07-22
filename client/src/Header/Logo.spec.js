@@ -15,5 +15,6 @@ describe('client > Logo', () => {
     );
 
     await assert(driver.elementExists('.logo-container'));
+    await assert(driver.elementExists('.logo-image'));
   });
 });
