@@ -22,13 +22,13 @@ class TabBar extends Component {
       <ul className="nav nav-tabs">
         {/* TODO: add comments to jsx */}
         <li className="nav-item">
-          <a href="#screenshots" className={`nav-link${screenshotsActive ? ' active' : ''}`} onClick={onClick}>Screenshots</a>
+          <a href="#screenshots" id="screenshots-tab" className={`nav-link${screenshotsActive ? ' active' : ''}`} onClick={onClick}>Screenshots</a>
         </li>
         <li className="nav-item">
-          <a href="#guides" className={`nav-link${guidesActive ? ' active' : ''}`} onClick={onClick}>Guides</a>
+          <a href="#guides" id="guides-tab" className={`nav-link${guidesActive ? ' active' : ''}`} onClick={onClick}>Guides</a>
         </li>
         <li className="nav-item">
-          <a href="#info" className={`nav-link${infoActive ? ' active' : ''}`} onClick={onClick}>Info</a>
+          <a href="#info" id="info-tab" className={`nav-link${infoActive ? ' active' : ''}`} onClick={onClick}>Info</a>
         </li>
       </ul>
     );
