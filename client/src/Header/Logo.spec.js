@@ -14,7 +14,7 @@ describe('client > Logo', () => {
       />
     );
 
-    await assert(driver.elementExists('.logo-container'));
-    await assert(driver.elementExists('.logo-image'));
+    await assert(driver.elementExists('.logo-container'), 'Logo container not rendering');
+    await assert(driver.elementExists('.logo-image'), 'Logo image not rendering');
   });
 });
