@@ -14,8 +14,21 @@ class SearchField extends Component {
     } = this.props;
 
     return (
-      <div>
-        <input className="form-control" type="text" placeholder="Search" aria-label="Search" />
+      <div className="searchfield-container">
+        <div className="input-group">
+          <div className="input-group-prepend">
+            <button className="btn input-group-text" type="button">
+              <FontAwesomeIcon icon={faSearch} color="Gray" />
+            </button>
+          </div>
+          <input
+            type="text"
+            className="form-control"
+            placeholder={searchQuery}
+            aria-label="Search"
+            aria-describedby="basic-addon1"
+          />
+        </div>
       </div>
     );
   }
