@@ -51,7 +51,7 @@ class AppStore extends Component {
       // The full list of apps (unfiltered)
       allApps: [],
       // The type of the current page body to show (see BODY_TYPE above)
-      currentBodyType: BODY_TYPE.APP_LIST,
+      currentBodyType: BODY_TYPE.APP_PAGE,
       // Current app
       currentSpecificApp: null,
       // Support modal status
@@ -163,6 +163,7 @@ class AppStore extends Component {
         storeTitle: storeMetadata.title,
         catalogTitle: catalog.title,
         allApps: catalog.apps,
+        currentSpecificApp: catalog.apps.gradeup,
       });
     } catch (err) {
       // eslint-disable-next-line no-console

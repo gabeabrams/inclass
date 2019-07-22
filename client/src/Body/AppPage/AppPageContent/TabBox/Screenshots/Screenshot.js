@@ -6,9 +6,8 @@ class Screenshot extends Component {
     // Deconstruct props
     const { screenshot, storeHost } = this.props;
     const { title, url } = screenshot;
-
     // Current URL for testing purposes
-    const fakeURL = `${storeHost}${url}`;
+    const fakeURL = `https://${storeHost}${url}`;
     return (
       // Screenshot is displayed with a header and the image
       <div className="card border-dark mb-3">
