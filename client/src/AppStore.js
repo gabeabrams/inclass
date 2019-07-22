@@ -46,7 +46,7 @@ class AppStore extends Component {
       // True if the filter drawer is open
       filterDrawerOpen: false,
       // Search query (the string in the search box)
-      searchQuery: 'Search',
+      searchQuery: '',
       // The full list of apps (unfiltered)
       allApps: [],
       // The type of the current page body to show (see BODY_TYPE above)
