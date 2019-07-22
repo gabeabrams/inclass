@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 // Import other components
 import Header from './Header';
 import Body from './Body';
-import Screenshots from './Body/AppPage/AppPageContent/TabBox/Screenshots';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -163,6 +162,7 @@ class AppStore extends Component {
         storeTitle: storeMetadata.title,
         catalogTitle: catalog.title,
         allApps: catalog.apps,
+        currentSpecificApp: catalog.apps.gradeup,
       });
     } catch (err) {
       // eslint-disable-next-line no-console
