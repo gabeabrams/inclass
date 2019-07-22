@@ -16,7 +16,7 @@ describe('client > YourComponent', () => {
       />
     );
 
-    await driver.click('install-button');
+    driver.click('#install-button');
     assert(clicked, 'Button did not handle the click');
   });
 });

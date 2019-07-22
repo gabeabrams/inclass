@@ -16,7 +16,7 @@ describe('client > YourComponent', () => {
       />
     );
 
-    await driver.click('uninstall-button');
+    driver.click('#uninstall-button');
     assert(clicked, 'Button did not handle the click');
   });
 });

@@ -16,7 +16,7 @@ describe('client > YourComponent', () => {
       />
     );
 
-    await driver.click('support-button');
+    driver.click('#support-button');
     assert(clicked, 'Button did not handle the click');
   });
 });
