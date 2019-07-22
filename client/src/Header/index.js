@@ -14,6 +14,7 @@ class Header extends Component {
       storeTitle,
       catalogTitle,
       filterDrawerOpen,
+      searchQuery,
     } = this.props;
 
     return (
@@ -25,6 +26,7 @@ class Header extends Component {
         />
         <FilterAndSearchBar
           filterDrawerOpen={filterDrawerOpen}
+
         />
       </div>
     );
@@ -36,6 +38,8 @@ Header.propTypes = {
   storeHost: PropTypes.string.isRequired,
   storeTitle: PropTypes.string.isRequired,
   catalogTitle: PropTypes.string.isRequired,
+  filterDrawerOpen: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string.isRequired,
 };
 
 export default Header;
