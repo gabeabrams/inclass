@@ -8,7 +8,7 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
   it('Handles a click on screenshots tab', async () => {
     let clicked = false;
     const driver = new Driver(
-      <TabBar
+      <TabBar />
     );
   });
 
