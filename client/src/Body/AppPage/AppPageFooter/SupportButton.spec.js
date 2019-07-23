@@ -6,7 +6,10 @@ import SupportButton from './SupportButton';
 
 describe('client > src > Body > App Page > AppPageFooter > InstallButton', () => {
   it('Handles a click', async () => {
-    let clicked;
+    // keep track of button clicks
+    let clicked = false;
+
+    // initializes the driver with the support button
     const driver = new Driver(
       <SupportButton
         title="Support Button"
@@ -16,7 +19,9 @@ describe('client > src > Body > App Page > AppPageFooter > InstallButton', () =>
       />
     );
 
+    // simulates a click
     driver.click('#support-button');
+    // checks that the button is clicked
     assert(clicked, 'Button did not handle the click');
   });
 });

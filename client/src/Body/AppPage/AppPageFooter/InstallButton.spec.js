@@ -6,7 +6,10 @@ import InstallButton from './InstallButton';
 
 describe('client > src > Body > App Page > AppPageFooter > InstallButton', () => {
   it('Handles a click', async () => {
+    // keep track of button clicks
     let clicked = false;
+
+    // initializes the driver with the install button
     const driver = new Driver(
       <InstallButton
         title="Install Button"
@@ -16,7 +19,9 @@ describe('client > src > Body > App Page > AppPageFooter > InstallButton', () =>
       />
     );
 
+    // simulate a click
     driver.click('#install-button');
+    // makes sure button is clicked
     assert(clicked, 'Button did not handle the click');
   });
 });
