@@ -217,9 +217,9 @@ class AppStore extends Component {
     if (supportModalStatus.open) {
       console.log('support modal status: ', supportModalStatus.open);
       const { email, subject } = supportModalStatus;
-      supportModelElement = (
-        <Modal />
-      );
+      // supportModelElement = (
+      //   <Modal />
+      // );
     }
 
     // Render the component
