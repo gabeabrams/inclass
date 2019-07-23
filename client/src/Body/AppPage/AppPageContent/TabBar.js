@@ -13,13 +13,13 @@ class TabBar extends Component {
     return (
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <a href="#screenshots" className={`nav-link${(currentTab === TAB_NAMES.SCREENSHOTS) ? ' active' : ''}`} onClick={() => { onClick(TAB_NAMES.SCREENSHOTS); }}>Screenshots</a>
+          <a href="#screenshots" id="screenshots" className={`nav-link${(currentTab === TAB_NAMES.SCREENSHOTS) ? ' active' : ''}`} onClick={() => { onClick(TAB_NAMES.SCREENSHOTS); }}>Screenshots</a>
         </li>
         <li className="nav-item">
-          <a href="#guides" className={`nav-link${(currentTab === TAB_NAMES.GUIDES) ? ' active' : ''}`} onClick={() => { onClick(TAB_NAMES.GUIDES); }}>Guides</a>
+          <a href="#guides" id="guides" className={`nav-link${(currentTab === TAB_NAMES.GUIDES) ? ' active' : ''}`} onClick={() => { onClick(TAB_NAMES.GUIDES); }}>Guides</a>
         </li>
         <li className="nav-item">
-          <a href="#info" className={`nav-link${(currentTab === TAB_NAMES.INFO) ? ' active' : ''}`} onClick={() => { onClick(TAB_NAMES.INFO); }}>Info</a>
+          <a href="#info" id="info" className={`nav-link${(currentTab === TAB_NAMES.INFO) ? ' active' : ''}`} onClick={() => { onClick(TAB_NAMES.INFO); }}>Info</a>
         </li>
       </ul>
     );
