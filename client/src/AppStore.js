@@ -7,7 +7,10 @@ import React, { Component } from 'react';
 // Import other components
 import Header from './Header';
 import Body from './Body';
+<<<<<<< HEAD
 import SupportModal from './Modal/SupportModal';
+=======
+>>>>>>> 99d98dd967a69b0b3e1a098144ebf2ffe8a6710e
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
