@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './EmailAddress.css';
-
 class EmailAddress extends Component {
   render() {
     // deconstruct props

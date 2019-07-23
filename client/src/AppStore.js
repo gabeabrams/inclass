@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 // Import other components
 import Header from './Header';
 import Body from './Body';
-import Modal from './Modal';
+import SupportModal from './Modal/SupportModal';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -215,11 +215,11 @@ class AppStore extends Component {
     // Create supportModelElement if open
     let supportModelElement;
     if (supportModalStatus.open) {
-      console.log('support modal status: ', supportModalStatus.open);
       const { email, subject } = supportModalStatus;
-      // supportModelElement = (
-      //   <Modal />
-      // );
+      // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
+      supportModelElement = (
+        <SupportModal address="lshhenry98@gmail.com" subject="this is a test subject" />
+      );
     }
 
     // Render the component
