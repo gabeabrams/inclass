@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 // Import other components
 import Header from './Header';
 import Body from './Body';
-import Screenshots from './Body/AppPage/AppPageContent/TabBox/Screenshots'
+import Modal from './Modal';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -56,7 +56,7 @@ class AppStore extends Component {
       currentSpecificApp: null,
       // Support modal status
       supportModalStatus: {
-        open: false,
+        open: true,
         email: '',
         subject: '',
       },
@@ -215,11 +215,10 @@ class AppStore extends Component {
     // Create supportModelElement if open
     let supportModelElement;
     if (supportModalStatus.open) {
+      console.log('support modal status: ', supportModalStatus.open);
       const { email, subject } = supportModalStatus;
       supportModelElement = (
-        <span email={email} subject={subject} onClose={() => {}}>
-          No Support Modal Yet!
-        </span>
+        <Modal />
       );
     }
 
