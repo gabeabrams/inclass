@@ -12,7 +12,7 @@ class EmailAddress extends Component {
           <span className="input-group-text bg-info border-0 font-weight-bold text-white rounded" id="basic-addon3">Send to: </span>
         </div>
         <alert
-          className="alert alert-light form-control rounded text-truncate aligh-baseline p-1 pl-2"
+          className="alert alert-light form-control rounded text-truncate aligh-baseline p-1"
         >
           <a target="_blank" rel="noopener noreferrer" href={`mailto:${address}?subject=${encodeURIComponent(subject)}`}>
             {address}
