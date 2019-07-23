@@ -9,7 +9,7 @@ describe('client > src > shared > AppSubtitle', () => {
     const driver = new Driver(
       <AppSubtitle appSubtitle="Harvard Icon" />
     );
-    // check if app creator tag is rendered on page
+    // check if app subtitle is rendered on page
     assert(driver.elementExists('.app-subtitle'), 'did not render correctly');
   });
 });
