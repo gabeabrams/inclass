@@ -12,4 +12,12 @@ describe('client > src > shared > AppCreatorTag', () => {
     // check if app creator tag is rendered on page
     assert(driver.elementExists('.appcreatortag-box'), 'did not render correctly');
   });
+
+  it('Displays the AppCreatorTag with light background when dark not passed in', () => {
+    const driver = new Driver(
+      <AppCreatorTag creator="hello" />
+    );
+    // check if app creator tag is rendered on page
+    assert(driver.elementExists('.badge-light'), 'did not render correctly');
+  });
 });
