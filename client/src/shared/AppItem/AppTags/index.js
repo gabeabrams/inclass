@@ -10,8 +10,6 @@ class AppTags extends Component {
 
     // deconstruct props
     const { tags, tagColors } = this.props;
-    console.log('tags is ', tags);
-    console.log('tagColors is ', tagColors);
 
     // construct tagsArray state
     const newTagsArray = [];
