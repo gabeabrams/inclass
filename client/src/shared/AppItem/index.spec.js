@@ -40,19 +40,24 @@ describe('client > src > shared > AppItem', () => {
       />
     );
     // displays the app title
+    assert(driver.elementExists('.app-title'), 'did not render app title');
     const appTitle = driver.getText('.app-title');
     assert.equal(appTitle, fakeApp.title, 'app title did not render correctly');
     // displays the app subtitle
+    assert(driver.elementExists('.app-subtitle'), 'did not render app subtitle');
     const appSubtitle = driver.getText('.app-subtitle');
     assert.equal(appSubtitle, fakeApp.subtitle, 'app subtitle did not render correctly');
     // displays the app tags
+    assert(driver.elementExists('.apptags-tags-list'), 'did not render app tags');
     const appTagsHTML = driver.getHTML('.apptags-tags-list');
     const tagsCount = (appTagsHTML.match(/apptag-single-tag/g) || []).length;
     assert.equal(tagsCount, 2, 'app tags did not render correctly');
     // displays the app icon
+    assert(driver.elementExists('.app-icon'), 'did not render app icon');
     const appIconHTML = driver.getHTML('.app-icon');
     assert(appIconHTML.includes('<img'), 'app icon did not render correctly');
     // displays the app creator tag
+    assert(driver.elementExists('.appcreatortag-box'), 'did not render app creator tag');
     const appCreatorTag = driver.getText('.appcreatortag-box');
     assert.equal(appCreatorTag, 'by dce', 'app creator tag did not render correctly');
   });
