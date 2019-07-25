@@ -9,12 +9,21 @@ class EmailAddress extends Component {
     return (
       <div className="input-group mb-1 bg-info p-2 rounded">
         <div className="input-group-prepend">
-          <span className="input-group-text bg-info border-0 font-weight-bold text-white rounded" id="basic-addon3">Send to: </span>
+          <span
+            className="input-group-text bg-info border-0 font-weight-bold text-white rounded"
+            id="basic-addon3"
+          >
+              Send to:
+          </span>
         </div>
         <div
           className="alert alert-light form-control rounded text-truncate aligh-baseline p-1"
         >
-          <a target="_blank" rel="noopener noreferrer" href={`mailto:${address}?subject=${encodeURIComponent(subject)}`}>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`mailto:${address}?subject=${encodeURIComponent(subject)}`}
+          >
             {address}
           </a>
         </div>

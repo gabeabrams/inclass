@@ -11,7 +11,12 @@ class EmailSubject extends Component {
     return (
       <div className="input-group mb-3 bg-info p-2 rounded">
         <div className="input-group-prepend">
-          <span className="input-group-text bg-info border-0 font-weight-bold text-white rounded" id="basic-addon3">Subject: </span>
+          <span
+            className="input-group-text bg-info border-0 font-weight-bold text-white rounded"
+            id="basic-addon3"
+          >
+            Subject:
+          </span>
         </div>
         <input
           type="text"
