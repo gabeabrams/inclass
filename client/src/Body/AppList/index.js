@@ -32,7 +32,6 @@ class AppList extends Component {
       <div className="app-list-container">
         <AppListStatusBar appCount={Object.keys(apps).length} />
         {appElements}
-        <EmailForm subject="test subject" address="lshhenry98@gmail.com" />
       </div>
     );
   }
