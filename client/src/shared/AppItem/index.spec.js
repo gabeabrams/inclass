@@ -11,7 +11,6 @@ describe('client > src > shared > AppItem', () => {
     subtitle: 'greade up is a great tool',
     creator: ['dce'],
     icon: {
-      fullPath: '/Users/shihanli/Desktop/inclass/test/dummy-data/store/installable/dce/gradeup/icon.png',
       url: '/public/dce/gradeup/icon',
     },
     supportEmail: 'example@harvard.edu',
