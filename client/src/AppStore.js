@@ -67,6 +67,7 @@ class AppStore extends Component {
         installing: false,
       },
     };
+    this.onSupportModalClose = this.onSupportModalClose.bind(this);
   }
 
   /**
@@ -175,6 +176,17 @@ class AppStore extends Component {
     }
   }
 
+  onSupportModalClose() {
+    const newsupportModalStatus = {
+      open: false,
+      email: '',
+      subject: '',
+    };
+    this.setState({
+      supportModalStatus: newsupportModalStatus,
+    });
+  }
+
   /**
    * Render the AppStore
    */
@@ -219,7 +231,11 @@ class AppStore extends Component {
       const { email, subject } = supportModalStatus;
       // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
       supportModelElement = (
-        <SupportModal address="lshhenry98@gmail.com" subject="this is a test subject" />
+        <SupportModal
+          address="lshhenry98@gmail.com"
+          subject="this is a test subject"
+          onClose={(this.onSupportModalClose)}
+        />
       );
     }
 
