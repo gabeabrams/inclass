@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // Import other components
 import AppItem from '../../shared/AppItem';
 import AppListStatusBar from './AppListStatusBar';
-import EmailForm from '../../shared/EmailForm';
 
 import './style.css';
 
