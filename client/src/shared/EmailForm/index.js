@@ -18,9 +18,7 @@ class EmailForm extends Component {
       // the subject of the email
       subject,
     };
-    // make sure 'this' binding is unchanged when calling onInputChange
-    this.onAddressInputChange = this.onAddressInputChange.bind(this);
-    this.onSubjectInputChange = this.onSubjectInputChange.bind(this);
+    // make sure 'this' binding is unchanged when calling onClick
     this.onClick = this.onClick.bind(this);
   }
 
@@ -28,20 +26,6 @@ class EmailForm extends Component {
     const { address, subject } = this.state;
     const send = `mailto:${address}?subject=${encodeURIComponent(subject)}`;
     window.open(`${send}`);
-  }
-
-  // reset the state as user input changes, rerenders the page
-  onAddressInputChange(event) {
-    this.setState({
-      address: event.target.value,
-    });
-  }
-
-  // reset the subject in the state
-  onSubjectInputChange(event) {
-    this.setState({
-      subject: event.target.value,
-    });
   }
 
   render() {
@@ -53,11 +37,9 @@ class EmailForm extends Component {
         <EmailAddress
           address={address}
           subject={subject}
-          onInputChange={this.onAddressInputChange}
         />
         <EmailSubject
           subject={subject}
-          onInputChange={this.onSubjectInputChange}
         />
       </div>
     );

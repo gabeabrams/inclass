@@ -9,7 +9,7 @@ class EmailSubject extends Component {
     const { subject } = this.props;
 
     return (
-      <div className="input-group mb-3 bg-info p-2 rounded readonly">
+      <div className="input-group mb-3 bg-info p-2 rounded">
         <div className="input-group-prepend">
           <span className="input-group-text bg-info border-0 font-weight-bold text-white rounded" id="basic-addon3">Subject: </span>
         </div>
@@ -18,6 +18,7 @@ class EmailSubject extends Component {
           className="form-control rounded text-truncate"
           aria-describedby="basic-addon3"
           value={subject}
+          readOnly
         />
         <div className="input-group-append" id="button-addon4">
           <CopyButton text={subject} />
