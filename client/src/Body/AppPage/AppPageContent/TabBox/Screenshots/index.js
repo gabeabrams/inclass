@@ -13,7 +13,7 @@ class Screenshots extends Component {
     const { app } = this.props;
     const { screenshots } = app;
     const toRender = screenshots.map((screenshot) => {
-      return (<div className="screenshots-elem p-3 mw-20" key={screenshot.title}><Screenshot screenshot={screenshot} /></div>);
+      return (<div className="screenshots-elem p-3 mw-20" key={screenshot.title} id={screenshot.filename}><Screenshot screenshot={screenshot} /></div>);
     });
 
     return (

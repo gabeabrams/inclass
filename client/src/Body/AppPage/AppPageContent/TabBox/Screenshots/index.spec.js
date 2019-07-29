@@ -5,7 +5,7 @@ import assert from 'assert';
 import Screenshots from './index';
 
 describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots', () => {
-  it('Checks screenshot image is there', async () => {
+  it('Checks all screenshots are there', async () => {
     // first fake screenshot
     const screenshotOne = {
       title: 'Manual Seating Dashboard',
@@ -29,7 +29,8 @@ describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots'
       <Screenshots app={app} />
     );
 
-    // checks that the screenshot exists
-    assert(driver.elementExists('.card-img-top'), 'Screenshot is absent');
+    const html = driver.getHTML('.screenshots-container');
+    assert(html.includes('man_dash.png'));
+    assert(html.includes('event_chooser.png'));
   });
 });
