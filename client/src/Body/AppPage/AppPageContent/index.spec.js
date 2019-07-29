@@ -5,7 +5,7 @@ import assert from 'assert';
 import AppPageContent from './index';
 
 describe('client > src > Body > AppPage > AppPageContent', () => {
-  it('Checks Tab Bar exists', async () => {
+  it('Checks tab bar and default content exists', async () => {
     // first fake screenshot
     const screenshotOne = {
       title: 'Manual Seating Dashboard',
@@ -24,12 +24,14 @@ describe('client > src > Body > AppPage > AppPageContent', () => {
       screenshots: [screenshotOne, screenshotTwo],
     };
 
+    // initializes a new driver with AppPageContent
     const driver = new Driver(
       <AppPageContent app={app} />
     );
 
     // Checks that the tab bar exists
     assert(driver.elementExists('.nav'), 'Tab Bar is absent');
+    // Checks the default content exists
     assert(driver.elementExists('.screenshots-container'), 'screenshots is absent');
   });
 });
