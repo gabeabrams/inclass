@@ -27,7 +27,7 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     clicked = false;
     driver.click('#guides');
     assert(clicked, 'Guides tab was not clicked');
-    
+
     // reset clicked to false to test clicking info tab
     clicked = false;
     driver.click('#info');
