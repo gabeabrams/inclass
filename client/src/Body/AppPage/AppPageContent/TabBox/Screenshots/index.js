@@ -10,11 +10,10 @@ import Screenshot from './Screenshot';
 class Screenshots extends Component {
   render() {
     // get screenshots from the app
-    const toRender = [];
     const { app } = this.props;
     const { screenshots } = app;
-    screenshots.forEach((screenshot) => {
-      toRender.push(<div className="screenshots-elem"><Screenshot screenshot={screenshot} /></div>);
+    const toRender = screenshots.map((screenshot) => {
+      return (<div className="screenshots-elem p-3 mw-20" key={screenshot.title}><Screenshot screenshot={screenshot} /></div>);
     });
 
     return (

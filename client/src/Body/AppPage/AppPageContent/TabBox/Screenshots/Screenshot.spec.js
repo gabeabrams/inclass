@@ -4,7 +4,7 @@ import assert from 'assert';
 
 import Screenshot from './Screenshot';
 
-describe('client > src > Body > App Page > AppPageContent > TabBox > Screenshots > Screenshot', () => {
+describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots > Screenshot', () => {
   it('Checks screenshot image is there', async () => {
     // fake screenshot data
     const screenshot = {
