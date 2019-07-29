@@ -4,7 +4,7 @@ import assert from 'assert';
 
 import InstallButton from './InstallButton';
 
-describe('client > src > Body > App Page > AppPageFooter > InstallButton', () => {
+describe('client > src > Body > AppPage > AppPageFooter > InstallButton', () => {
   it('Handles a click', async () => {
     // keep track of button clicks
     let clicked = false;
