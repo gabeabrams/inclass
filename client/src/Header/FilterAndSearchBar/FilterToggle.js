@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
-
+import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretRight, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 // Import css
 import './FilterToggle.css';
