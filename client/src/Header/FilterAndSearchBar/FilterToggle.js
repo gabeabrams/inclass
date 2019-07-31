@@ -36,7 +36,7 @@ class FilterToggle extends Component {
     return (
       <div className="filtertoggle-container">
         <span className="text-white text-nowrap font-weight-bold">Filters</span>
-        <span className="text-white text-nowrap font-weight-bold ml-1">& Tags</span>
+        <span className="text-white text-nowrap font-weight-bold ml-1 d-none d-sm-block">& Tags</span>
         <button
           type="button"
           className="btn btn-inline btn-lg btn-outline-secondary h-100 p-0 "
