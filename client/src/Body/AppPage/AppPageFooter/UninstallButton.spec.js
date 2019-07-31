@@ -18,8 +18,12 @@ describe('client > src > Body > App Page > AppPageFooter > UninstallButton', () 
         }}
       />
     );
-    
-    // TODO: check button is visible and text shows
+
+    // checks button exists
+    assert(driver.elementExists('#uninstall-button'), 'uninstall button absent');
+    // checks that button says "Uninstall"
+    assert.equal(driver.getText('#uninstall-button'), 'Uninstall',
+      'Text on uninstall button does not match expected');
     // make sure button is visible
     assert(driver.elementExists('#uninstall-button'));
     // simulates a click
