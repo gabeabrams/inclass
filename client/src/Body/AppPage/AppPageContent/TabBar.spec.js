@@ -9,28 +9,41 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
   it('Handles clicks on tabs', async () => {
     // keep track of button clicks
     let clicked = false;
+    let mostRecentTabName;
     // initializes driver with a tab bar
     const driver = new Driver(
+      // TODO: have onTabChanged take a param
       <TabBar
-        onClick={() => {
+        onTabChanged={(tabName) => {
           clicked = true;
+          mostRecentTabName = tabName;
         }}
         currentTab={TAB_NAMES.SCREENSHOTS}
       />
     );
 
+    // TODO: test currentTab functionality (check html)
+    // TODO: keep track/check of most recent tab that is clicked
+    // TODO: Add comments
+
     // clicks screenshots tab and checks that it is clicked
     driver.click('#screenshots');
-    assert(clicked, 'Screenshot tab was not clicked');
+    assert(clicked, 'Screenshots tab was not clicked');
+    assert.equal(mostRecentTabName, TAB_NAMES.SCREENSHOTS,
+      'Did not specifically click screenshots');
 
     // reset clicked to false to test clicking guides tab
     clicked = false;
+    mostRecentTabName = null;
     driver.click('#guides');
     assert(clicked, 'Guides tab was not clicked');
+    assert.equal(mostRecentTabName, TAB_NAMES.GUIDES);
 
     // reset clicked to false to test clicking info tab
     clicked = false;
+    mostRecentTabName = null;
     driver.click('#info');
     assert(clicked, 'Info tab was not clicked');
+    assert.equal(mostRecentTabName, TAB_NAMES.INFO);
   });
 });

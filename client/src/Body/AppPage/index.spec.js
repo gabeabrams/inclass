@@ -4,7 +4,7 @@ import assert from 'assert';
 
 import AppPage from './index';
 
-describe('client > src > Body > AppPage > AppPageContent', () => {
+describe('client > src > Body > AppPage', () => {
   it('Checks tab bar and default content exists', async () => {
     // first fake screenshot
     const screenshotOne = {

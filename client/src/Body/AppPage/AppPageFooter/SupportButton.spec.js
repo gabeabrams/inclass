@@ -18,7 +18,8 @@ describe('client > src > Body > App Page > AppPageFooter > InstallButton', () =>
         }}
       />
     );
-
+    
+    // TODO: check button is visible and text shows
     // simulates a click
     driver.click('#support-button');
     // checks that the button is clicked

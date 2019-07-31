@@ -47,7 +47,7 @@ class AppPageContent extends Component {
     }
     return (
       <div className="appPageContent-container">
-        <TabBar currentTab={currentTab} onClick={this.tabChanged} />
+        <TabBar currentTab={currentTab} onTabChanged={this.tabChanged} />
         {toDisplay}
       </div>
     );

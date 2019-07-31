@@ -29,9 +29,13 @@ describe('client > src > Body > AppPage > AppPageContent', () => {
       <AppPageContent app={app} />
     );
 
+    // TODO: If current tab is not screenshots, check that it swaps it out for correct
+    // TODO: i.e. click guides and make sure screenshots absent, and guides visible
+
     // Checks that the tab bar exists
-    assert(driver.elementExists('.nav'), 'Tab Bar is absent');
+    assert(driver.elementExists('.nav'), 'Tab bar is absent');
     // Checks the default content exists
-    assert(driver.elementExists('.screenshots-container'), 'screenshots is absent');
+    assert(driver.elementExists('.screenshots-container'),
+      'screenshots is absent');
   });
 });
