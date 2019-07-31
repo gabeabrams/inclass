@@ -31,8 +31,12 @@ class AppPageContent extends Component {
 
 
   render() {
+    // Deconstruct props
     const { app } = this.props;
+    // Deconstruct state
     const { currentTab } = this.state;
+
+    // Changes display based on tabs
     let toDisplay;
     if (currentTab === TAB_NAMES.INFO) {
       toDisplay = <Info />;

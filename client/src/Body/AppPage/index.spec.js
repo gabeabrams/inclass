@@ -2,10 +2,10 @@ import React from 'react';
 import Driver from 'dce-enzyme';
 import assert from 'assert';
 
-import Screenshots from './index';
+import AppPage from './index';
 
-describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots', () => {
-  it('Checks all screenshots are there', async () => {
+describe('client > src > Body > AppPage > AppPageContent', () => {
+  it('Checks tab bar and default content exists', async () => {
     // first fake screenshot
     const screenshotOne = {
       title: 'Manual Seating Dashboard',
@@ -24,14 +24,14 @@ describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots'
       screenshots: [screenshotOne, screenshotTwo],
     };
 
-    // create new driver with screenshot element
+    // initializes a new driver with AppPageContent
     const driver = new Driver(
-      <Screenshots app={app} />
+      <AppPage app={app} />
     );
-    
-    // Checks that both screenshots exist
-    const html = driver.getHTML('.screenshots-container');
-    assert(html.includes('man_dash.png'));
-    assert(html.includes('event_chooser.png'));
+
+    // Checks that the content exists
+    assert(driver.elementExists('.appPage-content'), 'Main page is absent');
+    // Checks the footer exists
+    assert(driver.elementExists('.appPage-footer'), 'Footer is absent');
   });
 });
