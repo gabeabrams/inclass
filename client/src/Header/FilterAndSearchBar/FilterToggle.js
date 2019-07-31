@@ -37,9 +37,12 @@ class FilterToggle extends Component {
 
     return (
       <div className="filtertoggle-container">
-        <button type="button">
-          <span className="text-white font-weight-bold">Filters</span>
-          <span className="text-white font-weight-bold ml-1">& Tags</span>
+        <span className="text-white text-nowrap font-weight-bold">Filters</span>
+        <span className="text-white text-nowrap font-weight-bold ml-1">& Tags</span>
+        <button
+          type="button"
+          className="btn btn-inline btn-lg btn-outline-secondary h-100 p-0 "
+        >
           {caretElem}
         </button>
       </div>

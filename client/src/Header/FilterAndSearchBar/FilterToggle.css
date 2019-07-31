@@ -4,7 +4,7 @@
   display: flex;
 
   /* Dimensions */
-  height: 30px;
+  height: 100%;
   width: 100%;
 
   /* Text formatting */
@@ -15,11 +15,17 @@
   justify-content: flex-end;
 
   /* Padding and margin for alignment */
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
+/* Styling for Font Awesome icons */
 .fa-caret-right, .fa-caret-down {
   font-size: 35px;
   color: white;
+}
+
+button {
+  display: block;
+  line-height: inherit;
 }
