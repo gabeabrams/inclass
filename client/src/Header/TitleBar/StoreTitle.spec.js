@@ -6,7 +6,7 @@ import assert from 'assert';
 
 import StoreTitle from './StoreTitle';
 
-describe('client > StoreTitle', () => {
+describe('client > src > Header > TitleBar > StoreTitle', () => {
   it('Displays the AppStore Title', async () => {
     const driver = new Driver(
       <StoreTitle
@@ -14,8 +14,11 @@ describe('client > StoreTitle', () => {
       />
     );
 
+    // Make sure that storetitle container is rendered
     await assert(driver.elementExists('.storetitle-container'), 'Missing StoreTitle container');
-    await assert(driver.elementExists('.font-weight-bold'), 'Missing span for storeTitle');
-    await assert(driver.elementExists('.ml-1.d-none.d-sm-inline'), 'Missing span for \'App Store\' Text');
+    // Make sure that storetitle title is rendered
+    await assert(driver.elementExists('.storetitle-title.font-weight-bold'), 'Missing span for storeTitle');
+    // Make sure that storetitle text is rendered
+    await assert(driver.elementExists('.storetitle-text.ml-1.d-none.d-sm-inline'), 'Missing span for \'App Store\' Text');
   });
 });
