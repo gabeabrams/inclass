@@ -15,6 +15,7 @@ class Header extends Component {
       catalogTitle,
       filterDrawerOpen,
       searchQuery,
+      searchChanged,
     } = this.props;
 
     return (
@@ -27,6 +28,7 @@ class Header extends Component {
         <FilterAndSearchBar
           filterDrawerOpen={filterDrawerOpen}
           searchQuery={searchQuery}
+          searchChanged={searchChanged}
         />
       </div>
     );
@@ -44,6 +46,8 @@ Header.propTypes = {
   filterDrawerOpen: PropTypes.bool.isRequired,
   // Query entered into the search bar
   searchQuery: PropTypes.string.isRequired,
+  // Function to update the text in searchfield
+  searchChanged: PropTypes.func.isRequired,
 };
 
 export default Header;
