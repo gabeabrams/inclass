@@ -18,10 +18,10 @@ class FilterAndSearchBar extends Component {
 
     return (
       <div className="filterandsearchbar-container bg-secondary row no-gutters">
-        <div className="col filterandsearchbar-filterbutton">
+        <div className="col filterandsearchbar-filterbutton text-right">
           <FilterToggle filterDrawerOpen={filterDrawerOpen} />
         </div>
-        <div className="col filterandsearchbar-searchbox">
+        <div className="col filterandsearchbar-searchbox text-left">
           <SearchField searchQuery={searchQuery} />
         </div>
       </div>
