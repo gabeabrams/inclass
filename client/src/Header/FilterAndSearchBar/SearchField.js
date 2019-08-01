@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 // Import css
 import './SearchField.css';
@@ -16,8 +16,11 @@ class SearchField extends Component {
     return (
       <div className="searchfield-container">
         <div className="input-group">
-          <div className="input-group-prepend">
-            <button className="btn input-group-text" type="button">
+          <div className="input-group-prepend ">
+            <button
+              className="btn input-group-text d-none d-sm-block ml-2"
+              type="button"
+            >
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </div>
