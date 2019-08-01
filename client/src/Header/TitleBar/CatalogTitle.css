@@ -4,3 +4,13 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+/* Empty class for catalog title, mainly for specific element identification */
+.catlogtitle-title {
+
+}
+
+/* Empty class for catalog text, mainly for specific element identification */
+.catalogtitle-catalogtext {
+
+}
