@@ -65,6 +65,9 @@ class AppStore extends Component {
         installing: false,
       },
     };
+
+    // Bind handler functions
+    this.onSearchChanged = this.onSearchChanged.bind(this);
   }
 
   /**
@@ -174,6 +177,16 @@ class AppStore extends Component {
   }
 
   /**
+   * Function to call when the search bar query is updated
+   * @param {string} newSearchQuery - the updated text in the search bar
+   */
+  onSearchChanged(newSearchQuery) {
+    this.setState({
+      searchQuery: newSearchQuery,
+    });
+  }
+
+  /**
    * Render the AppStore
    */
   render() {
@@ -220,6 +233,7 @@ class AppStore extends Component {
             catalogTitle={catalogTitle}
             filterDrawerOpen={filterDrawerOpen}
             searchQuery={searchQuery}
+            onSearchChanged={this.onSearchChanged}
           />
         </div>
         <div className="appstore-body-container">
