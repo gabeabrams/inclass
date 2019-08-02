@@ -14,6 +14,7 @@ class FilterAndSearchBar extends Component {
     const {
       filterDrawerOpen,
       searchQuery,
+      onSearchChanged,
     } = this.props;
 
     return (
@@ -22,7 +23,10 @@ class FilterAndSearchBar extends Component {
           <FilterToggle filterDrawerOpen={filterDrawerOpen} />
         </div>
         <div className="col filterandsearchbar-searchbox text-left">
-          <SearchField searchQuery={searchQuery} />
+          <SearchField
+            searchQuery={searchQuery}
+            onSearchChanged={onSearchChanged}
+          />
         </div>
       </div>
     );
@@ -34,6 +38,8 @@ FilterAndSearchBar.propTypes = {
   filterDrawerOpen: PropTypes.bool.isRequired,
   // The text query in the search box
   searchQuery: PropTypes.string.isRequired,
+  // The function to update the search query
+  onSearchChanged: PropTypes.func.isRequired,
 };
 
 export default FilterAndSearchBar;
