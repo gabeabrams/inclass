@@ -6,13 +6,12 @@ import TabBar from './TabBar';
 import TAB_NAMES from './TAB_NAMES';
 
 describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
-  it('Handles clicks on tabs', async () => {
+  it('Handles clicks on tabs and checks screenshot tab active', async () => {
     // keep track of button clicks
     let clicked = false;
     let mostRecentTabName;
     // initializes driver with a tab bar
     const driver = new Driver(
-      // TODO: have onTabChanged take a param
       <TabBar
         onTabChanged={(tabName) => {
           clicked = true;
@@ -21,9 +20,6 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
         currentTab={TAB_NAMES.SCREENSHOTS}
       />
     );
-
-    // TODO: test currentTab functionality (check html)
-    // TODO: Add comments
 
     // clicks screenshots tab and checks that it is clicked
     driver.click('#screenshots');
@@ -46,7 +42,37 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     assert.equal(mostRecentTabName, TAB_NAMES.INFO);
 
     // Checks screenshots page is accurate
-    // const att = driver.getHTML('.nav-link active');
-    // console.log('ATT: ', att);
+    const att = driver.getHTML('.active');
+    assert(att.includes('screenshots'), 'not the correct tab (screenshots)');
+  });
+
+  it('Checks guides tab active', async () => {
+    // initializes driver with a tab bar showing Guides
+    const driver = new Driver(
+      <TabBar
+        onTabChanged={() => {
+        }}
+        currentTab={TAB_NAMES.GUIDES}
+      />
+    );
+
+    // Checks guides page is active
+    const att = driver.getHTML('.active');
+    assert(att.includes('guides'), 'not the correct tab (guides)');
+  });
+
+  it('Checks info tab active', async () => {
+    // initializes driver with a tab bar showing Guides
+    const driver = new Driver(
+      <TabBar
+        onTabChanged={() => {
+        }}
+        currentTab={TAB_NAMES.INFO}
+      />
+    );
+
+    // Checks screenshots page is active
+    const att = driver.getHTML('.active');
+    assert(att.includes('info'), 'not the correct tab (info)');
   });
 });
