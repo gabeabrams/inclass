@@ -23,7 +23,7 @@ describe('client > src > Body > App Page > AppPageFooter > SupportButton', () =>
     assert(driver.elementExists('#support-button'), 'Support button absent');
     // checks that button says "Get Support"
     assert.equal(driver.getText('#support-button'), 'Get Support',
-      'Text on button does not match expected');
+      'Text on support button does not match expected');
     // simulates a click
     driver.click('#support-button');
     // checks that the button is clicked

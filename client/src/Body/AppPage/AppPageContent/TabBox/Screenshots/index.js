@@ -7,7 +7,6 @@ import './style.css';
 // Import other components
 import Screenshot from './Screenshot';
 import TabBox from '..';
-// TODO: Add TabBox in to Guides and Info
 class Screenshots extends Component {
   render() {
     // get screenshots from the app

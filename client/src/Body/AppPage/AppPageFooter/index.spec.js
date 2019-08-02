@@ -16,6 +16,7 @@ describe('client > src > Body > AppPage > AppPageFooter', () => {
       />
     );
 
+    // Checks that install and support button exist, but not uninstall button
     assert(driver.elementExists('#install-button'), 'install button does not exist before click');
     assert(!driver.elementExists('#uninstall-button'), 'uninstall button exists when it should not');
     assert(driver.elementExists('#support-button'), 'support button does not exist');
@@ -32,6 +33,7 @@ describe('client > src > Body > AppPage > AppPageFooter', () => {
       />
     );
 
+    // Checks that uninstall and support button exist, but not install button
     assert(!driver.elementExists('#install-button'),
       'install button does not exist before click');
     assert(driver.elementExists('#uninstall-button'),
