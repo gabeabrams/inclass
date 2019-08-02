@@ -23,12 +23,4 @@ describe('client > src > shared > EmailForm > EmailAddress', () => {
     const expectedLink = `mailto:lshhenry98@gmail.com?subject=${encodeURIComponent('this is a test subject')}`;
     assert.equal(link, expectedLink, 'did not generate the correct link based on email and subject passed in');
   });
-
-  // it('Does not allow user to type into address input field', () => {
-  //   const driver = new Driver(
-  //     <AppCreatorTag creator="hello" />
-  //   );
-  //   // check if app creator tag is rendered with light background
-  //   assert(driver.elementExists('.badge-light'), 'did not render correctly');
-  // });
 });
