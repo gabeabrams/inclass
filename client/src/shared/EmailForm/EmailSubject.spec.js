@@ -17,7 +17,7 @@ describe('client > src > shared > EmailForm > EmailSubject', () => {
     assert(inputGroupHTML.includes('<input'), 'did not render input tag');
     assert.equal(driver.getAttributes('.form-control').value, 'this is a test subject', 'input field does not display the correct subject passed in');
     // check if copy button is rendered on page
-    assert.equal(driver.getText('.input-group-append'), 'Copy', 'did not render copy button correctly');
+    assert(driver.elementExists('.btn-clipboard'), 'did not display copy button');
   });
 
   it('Does not allow user to change the subject', async () => {
