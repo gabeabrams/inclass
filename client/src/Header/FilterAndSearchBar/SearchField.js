@@ -11,24 +11,19 @@ class SearchField extends Component {
   render() {
     const {
       searchQuery,
-      searchChanged,
+      onSearchChanged,
     } = this.props;
 
     return (
       <div className="searchfield-container">
         <div className="input-group">
-          <div className="input-group-prepend ">
-            <button
-              className="btn input-group-text d-none d-sm-block ml-2"
-              type="button"
-            >
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          </div>
           <input
             type="text"
             value={searchQuery}
-            onChange={searchChanged}
+            placeholder="Search"
+            onChange={(e) => {
+              onSearchChanged(e.target.value);
+            }}
             className="form-control"
             aria-label="Search"
             aria-describedby="basic-addon1"
@@ -42,7 +37,7 @@ class SearchField extends Component {
 SearchField.propTypes = {
   // The query that is stored in the AppStore state
   searchQuery: PropTypes.string.isRequired,
-  searchChanged: PropTypes.func.isRequired,
+  onSearchChanged: PropTypes.func.isRequired,
 };
 
 export default SearchField;
