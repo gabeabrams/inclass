@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Import other components
 import AppPageFooter from './AppPageFooter';
 import AppPageContent from './AppPageContent';
+import AppItem from '../../shared/AppItem';
 
 import './style.css';
 
@@ -37,10 +38,13 @@ class AppPage extends Component {
 
   render() {
     // Deconstruct props
-    const { app } = this.props;
+    const { app, storeHost, tagColors } = this.props;
     const { appInstalled } = this.state;
     return (
       <div className="appPage-container">
+        <div className="appPage-appitem">
+          <AppItem app={app} storeHost={storeHost} tagColors={tagColors} />
+        </div>
         <div className="appPage-content">
           <AppPageContent app={app} />
         </div>
@@ -68,6 +72,10 @@ AppPage.propTypes = {
       })
     ),
   }).isRequired,
+
+  storeHost: PropTypes.string.isRequired,
+  tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
+
 };
 
 export default AppPage;

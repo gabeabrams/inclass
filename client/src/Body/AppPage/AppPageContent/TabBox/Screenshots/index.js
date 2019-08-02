@@ -12,14 +12,15 @@ class Screenshots extends Component {
     // get screenshots from the app
     const { app } = this.props;
     const { screenshots } = app;
+    let count = 0;
     const toRender = screenshots.map((screenshot) => {
+      count += 1;
       return (
         <div
           className="screenshots-elem p-3 mw-20"
           key={screenshot.title}
-          id={screenshot.filename}
         >
-          <Screenshot screenshot={screenshot} />
+          <Screenshot id={`screenshot-${count}`} screenshot={screenshot} />
         </div>
       );
     });
