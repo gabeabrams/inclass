@@ -7,7 +7,7 @@ class EmailAddress extends Component {
     const { address, subject } = this.props;
 
     return (
-      <div className="input-group mb-1 bg-info p-2 rounded">
+      <div className="email-address-container input-group mb-1 bg-info p-2 rounded">
         <div className="input-group-prepend">
           <span
             className="input-group-text bg-info border-0 font-weight-bold text-white rounded"
