@@ -18,6 +18,8 @@ describe('client > src > Header > TitleBar > CatalogTitle', () => {
     await assert(driver.elementExists('.catalogtitle-container'), 'Missing catalog title container');
     // Make sure that catalog title span is rendered
     await assert(driver.elementExists('.catalogtitle-title'), 'Missing span for catalog title');
+    // Make sure that catalogTitle prop is being used to set the text
+    await assert.equal(driver.getText('.catalogtitle-title'), 'Fake Store Catalog Title', 'Catalog title is not correct');
     // Make sure that span for text is rendered
     await assert(driver.elementExists('.catalogtitle-catalogtext'), 'Missing span for catalog text');
   });
