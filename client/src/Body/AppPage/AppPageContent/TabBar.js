@@ -17,6 +17,7 @@ class TabBar extends Component {
           <a
             href="#screenshots"
             id="screenshots"
+            // shows screenshots if currentTab equals screenshots
             className={
               `nav-link${
                 (currentTab === TAB_NAMES.SCREENSHOTS) ? ' active' : ''
@@ -31,6 +32,7 @@ class TabBar extends Component {
           <a
             href="#guides"
             id="guides"
+            // shows guides if currentTab equals guides
             className={
               `nav-link${
                 (currentTab === TAB_NAMES.GUIDES) ? ' active' : ''
@@ -45,6 +47,7 @@ class TabBar extends Component {
           <a
             href="#info"
             id="info"
+            // shows info if currentTab equals info
             className={`nav-link${
               (currentTab === TAB_NAMES.INFO) ? ' active' : ''
             }`}

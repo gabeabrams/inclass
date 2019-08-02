@@ -18,7 +18,7 @@ describe('client > src > Body > AppPage', () => {
       filename: 'event_chooser.png',
       url: '/public/dce/gradeup/screenshots/event_chooser.png',
     };
-  
+
     // fake tag colors
     const fakeTagColors = {
       cost: {

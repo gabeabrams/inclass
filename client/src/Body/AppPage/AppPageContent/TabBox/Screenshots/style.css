@@ -1,19 +1,18 @@
 /* Styling for area around the screenshots */
 .screenshots-container {
+    /* have screenshots in a flexbox */
     display: flex;
+
+    /* screenshot placement styling */
     flex-flow: wrap;
     justify-content: space-around;
-    align-content: stretch;
     width: device-width;
-    height: 650px;
-    max-width: 100%;
-    overflow: auto;
 }
+
+/* Styling for each screenshot */
 .screenshots-elem {
-    flex-grow: 10;
+    /* styling to let container know when to wrap around */
     flex: 1;
-    width: 100%;
-    max-width: 40rem;
     min-width: 25rem;
-    padding: 3px;
+    max-width: 40rem;
 }

@@ -22,7 +22,7 @@ class UninstallButton extends Component {
 }
 
 UninstallButton.propTypes = {
-  // TODO: add comment
+  // Function that uninstalls the app
   onClick: PropTypes.func.isRequired,
 };
 

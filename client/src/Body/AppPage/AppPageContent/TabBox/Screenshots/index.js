@@ -10,18 +10,20 @@ import TabBox from '..';
 
 class Screenshots extends Component {
   render() {
-    // get screenshots from the app
+    // deconstruct props
     const { app } = this.props;
     const { screenshots } = app;
-    let count = 0;
+    // keeps track of number of screenshots for screenshot id
+    let index = 0;
+    // maps the screenshots with styling
     const toRender = screenshots.map((screenshot) => {
-      count += 1;
+      index += 1;
       return (
         <div key={screenshot.title}>
           <div
             className="screenshots-elem p-3 mw-20"
           >
-            <Screenshot screenshot={screenshot} index={count} />
+            <Screenshot screenshot={screenshot} index={index} />
           </div>
         </div>
       );

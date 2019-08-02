@@ -1,6 +1,5 @@
-/* TODO: add docs */
+/* Style for appPage contents */
 .appPageContent-container {
   display: flex;
   height: 100%;
-  overflow: auto;
 }
