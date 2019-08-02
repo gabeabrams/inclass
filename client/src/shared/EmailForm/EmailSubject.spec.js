@@ -19,4 +19,13 @@ describe('client > src > shared > EmailForm > EmailSubject', () => {
     // check if copy button is rendered on page
     assert.equal(driver.getText('.input-group-append'), 'Copy', 'did not render copy button correctly');
   });
+
+  it('Does not allow user to change the subject', async () => {
+    const driver = new Driver(
+      <EmailSubject subject="this is a test subject" />
+    );
+    // check if user can type into input field and change the subject
+    await driver.typeInto('.form-control', 'hello');
+    assert.equal(driver.getAttributes('.form-control').value, 'this is a test subject', 'input field can be altered by the user');
+  });
 });
