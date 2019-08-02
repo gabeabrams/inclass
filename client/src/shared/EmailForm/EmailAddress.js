@@ -17,9 +17,10 @@ class EmailAddress extends Component {
           </span>
         </div>
         <div
-          className="alert alert-light form-control rounded text-truncate aligh-baseline p-1"
+          className="alert alert-light form-control rounded text-truncate p-1"
         >
           <a
+            className="emailLink"
             target="_blank"
             rel="noopener noreferrer"
             href={`mailto:${address}?subject=${encodeURIComponent(subject)}`}
