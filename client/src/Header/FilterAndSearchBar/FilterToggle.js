@@ -54,15 +54,9 @@ class FilterToggle extends Component {
 
 FilterToggle.propTypes = {
   // Whether the filterDrawer should be open or not
-  filterDrawerOpen: PropTypes.bool,
+  filterDrawerOpen: PropTypes.bool.isRequired,
   // The handler for toggling the filter drawer and setting state
   onFilterToggle: PropTypes.func.isRequired,
 };
-
-FilterToggle.defaultProps = {
-  // By default, filter drawer is closed
-  filterDrawerOpen: false,
-};
-
 
 export default FilterToggle;
