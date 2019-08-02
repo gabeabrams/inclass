@@ -22,12 +22,6 @@ class EmailForm extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick() {
-    const { address, subject } = this.state;
-    const send = `mailto:${address}?subject=${encodeURIComponent(subject)}`;
-    window.open(`${send}`);
-  }
-
   render() {
     // deconstruct props
     const { address, subject } = this.state;
