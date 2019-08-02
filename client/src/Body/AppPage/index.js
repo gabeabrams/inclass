@@ -43,7 +43,11 @@ class AppPage extends Component {
     return (
       <div className="appPage-container">
         <div className="appPage-appitem">
-          <AppItem app={app} storeHost={storeHost} tagColors={tagColors} />
+          <AppItem
+            app={app}
+            storeHost={storeHost}
+            tagColors={tagColors}
+          />
         </div>
         <div className="appPage-content">
           <AppPageContent app={app} />

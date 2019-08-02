@@ -36,7 +36,7 @@ class AppStore extends Component {
       // Store title
       storeTitle: null,
       // Store host
-      storeHost: null,
+      storeHost: 'localhost:3000',
       // Catalog title
       catalogTitle: null,
       // isAdmin (true if user is an admin)

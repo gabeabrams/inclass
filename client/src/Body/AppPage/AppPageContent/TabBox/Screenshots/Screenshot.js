@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Screenshot extends Component {
   render() {
     // Deconstruct props
-    const { screenshot, id } = this.props;
+    const { screenshot, index } = this.props;
     const { title, url } = screenshot;
 
     // Current URL for testing purposes
@@ -15,7 +15,7 @@ class Screenshot extends Component {
         <div className="card-header bg-secondary text-light border-secondary">
           <h5 className="card-title mb-0">{title}</h5>
         </div>
-        <img className="card-img-top" src={fakeURL} id={id} alt={title} />
+        <img className="card-img-top" id={`screenshot-${index}`} src={fakeURL} alt={title} />
       </div>
     );
   }
@@ -29,8 +29,8 @@ Screenshot.propTypes = {
     // URL to grab the screenshot
     url: PropTypes.string,
   }).isRequired,
-
-  id: PropTypes.string.isRequired,
+  // Provide individual id to screenshot
+  index: PropTypes.number.isRequired,
 };
 
 export default Screenshot;

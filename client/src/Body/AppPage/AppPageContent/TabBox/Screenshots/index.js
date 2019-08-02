@@ -7,6 +7,7 @@ import './style.css';
 // Import other components
 import Screenshot from './Screenshot';
 import TabBox from '..';
+
 class Screenshots extends Component {
   render() {
     // get screenshots from the app
@@ -16,11 +17,12 @@ class Screenshots extends Component {
     const toRender = screenshots.map((screenshot) => {
       count += 1;
       return (
-        <div
-          className="screenshots-elem p-3 mw-20"
-          key={screenshot.title}
-        >
-          <Screenshot id={`screenshot-${count}`} screenshot={screenshot} />
+        <div key={screenshot.title}>
+          <div
+            className="screenshots-elem p-3 mw-20"
+          >
+            <Screenshot screenshot={screenshot} index={count} />
+          </div>
         </div>
       );
     });

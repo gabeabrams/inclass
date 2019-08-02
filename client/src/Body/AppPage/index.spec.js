@@ -18,17 +18,44 @@ describe('client > src > Body > AppPage', () => {
       filename: 'event_chooser.png',
       url: '/public/dce/gradeup/screenshots/event_chooser.png',
     };
+  
+    // fake tag colors
+    const fakeTagColors = {
+      cost: {
+        color: 'blue',
+      },
+      type: {
+        color: 'red',
+      },
+    };
 
     // fake app
     const app = {
       screenshots: [screenshotOne, screenshotTwo],
+      title: 'GradeUp',
+      subtitle: 'greade up is a great tool',
+      creator: ['dce'],
+      icon: {
+        url: '/public/dce/gradeup/icon',
+      },
+      supportEmail: 'example@harvard.edu',
+      tags: {
+        cost: ['free'],
+        type: ['grading'],
+      },
     };
 
     // initializes a new driver with AppPageContent
     const driver = new Driver(
-      <AppPage app={app} />
+      <AppPage
+        app={app}
+        storeHost="localhost:3000"
+        tagColors={fakeTagColors}
+      />
     );
 
+    // Checks that the appItem exists
+    assert(driver.elementExists('.appPage-appitem'), 'AppItem is absent');
     // Checks that the content exists
     assert(driver.elementExists('.appPage-content'), 'Main page is absent');
     // Checks the footer exists

@@ -23,7 +23,6 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     );
 
     // TODO: test currentTab functionality (check html)
-    // TODO: keep track/check of most recent tab that is clicked
     // TODO: Add comments
 
     // clicks screenshots tab and checks that it is clicked
@@ -45,5 +44,9 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     driver.click('#info');
     assert(clicked, 'Info tab was not clicked');
     assert.equal(mostRecentTabName, TAB_NAMES.INFO);
+
+    // Checks screenshots page is accurate
+    // const att = driver.getHTML('.nav-link active');
+    // console.log('ATT: ', att);
   });
 });

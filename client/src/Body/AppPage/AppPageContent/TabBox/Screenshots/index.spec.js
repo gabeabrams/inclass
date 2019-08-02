@@ -31,6 +31,12 @@ describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots'
       );
 
       // Checks that both screenshots exist
-      // const att = driver.getAttributes('#screenshot-2');
+      const attOne = driver.getAttributes('#screenshot-1');
+      const srcOne = attOne.src;
+      assert(srcOne.includes('/public/dce/gradeup/screenshots/man_dash.png'));
+
+      const attTwo = driver.getAttributes('#screenshot-2');
+      const srcTwo = attTwo.src;
+      assert(srcTwo.includes('/public/dce/gradeup/screenshots/event_chooser.png'));
     });
   });

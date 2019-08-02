@@ -16,10 +16,10 @@ describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots 
 
       // create new driver with screenshot element
       const driver = new Driver(
-        <Screenshot screenshot={screenshot} />
+        <Screenshot screenshot={screenshot} index={1} />
       );
 
       // checks that the screenshot exists
-      assert(driver.elementExists('.card-img-top'), 'Screenshot is absent');
+      assert(driver.elementExists('#screenshot-1'), 'Screenshot is absent');
     });
   });
