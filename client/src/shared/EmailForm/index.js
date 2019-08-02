@@ -18,8 +18,6 @@ class EmailForm extends Component {
       // the subject of the email
       subject,
     };
-    // make sure 'this' binding is unchanged when calling onClick
-    this.onClick = this.onClick.bind(this);
   }
 
   render() {
