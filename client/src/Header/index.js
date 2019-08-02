@@ -14,6 +14,7 @@ class Header extends Component {
       storeTitle,
       catalogTitle,
       filterDrawerOpen,
+      onFilterToggle,
       searchQuery,
       onSearchChanged,
     } = this.props;
@@ -27,6 +28,7 @@ class Header extends Component {
         />
         <FilterAndSearchBar
           filterDrawerOpen={filterDrawerOpen}
+          onFilterToggle={onFilterToggle}
           searchQuery={searchQuery}
           onSearchChanged={onSearchChanged}
         />
@@ -44,6 +46,8 @@ Header.propTypes = {
   catalogTitle: PropTypes.string.isRequired,
   // Bool for whether the filter drawer is open
   filterDrawerOpen: PropTypes.bool.isRequired,
+  // The handler for toggling the filter drawer and setting state
+  onFilterToggle: PropTypes.func.isRequired,
   // Query entered into the search bar
   searchQuery: PropTypes.string.isRequired,
   // Function to update the text in searchfield

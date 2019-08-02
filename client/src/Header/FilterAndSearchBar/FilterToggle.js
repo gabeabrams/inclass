@@ -12,6 +12,7 @@ class FilterToggle extends Component {
     // Deconstruct props
     const {
       filterDrawerOpen,
+      onFilterToggle,
     } = this.props;
 
     // Create caret icon element
@@ -39,7 +40,10 @@ class FilterToggle extends Component {
         <span className="text-white text-nowrap font-weight-bold ml-1 d-none d-sm-block">& Tags</span>
         <button
           type="button"
-          className="btn btn-inline btn-lg btn-outline-secondary h-100 p-0 "
+          className="btn btn-inline btn-lg btn-outline-secondary h-100 p-0"
+          onClick={() => {
+            onFilterToggle(!filterDrawerOpen);
+          }}
         >
           {caretElem}
         </button>
@@ -51,6 +55,8 @@ class FilterToggle extends Component {
 FilterToggle.propTypes = {
   // Whether the filterDrawer should be open or not
   filterDrawerOpen: PropTypes.bool,
+  // The handler for toggling the filter drawer and setting state
+  onFilterToggle: PropTypes.func.isRequired,
 };
 
 FilterToggle.defaultProps = {

@@ -68,6 +68,7 @@ class AppStore extends Component {
 
     // Bind handler functions
     this.onSearchChanged = this.onSearchChanged.bind(this);
+    this.onFilterToggle = this.onFilterToggle.bind(this);
   }
 
   /**
@@ -187,6 +188,16 @@ class AppStore extends Component {
   }
 
   /**
+   * Function to call when filter drawer is clicked
+   * @param {boolean} newFilterDrawerOpen - the boolean passed from the button
+   */
+  onFilterToggle(newFilterDrawerOpen) {
+    this.setState({
+      filterDrawerOpen: !!newFilterDrawerOpen,
+    });
+  }
+
+  /**
    * Render the AppStore
    */
   render() {
@@ -232,6 +243,7 @@ class AppStore extends Component {
             storeTitle={storeTitle}
             catalogTitle={catalogTitle}
             filterDrawerOpen={filterDrawerOpen}
+            onFilterToggle={this.onFilterToggle}
             searchQuery={searchQuery}
             onSearchChanged={this.onSearchChanged}
           />

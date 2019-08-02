@@ -13,6 +13,7 @@ class FilterAndSearchBar extends Component {
     // Deconstruct what we'll need from Header
     const {
       filterDrawerOpen,
+      onFilterToggle,
       searchQuery,
       onSearchChanged,
     } = this.props;
@@ -20,7 +21,10 @@ class FilterAndSearchBar extends Component {
     return (
       <div className="filterandsearchbar-container bg-secondary row no-gutters">
         <div className="col filterandsearchbar-filterbutton text-right">
-          <FilterToggle filterDrawerOpen={filterDrawerOpen} />
+          <FilterToggle
+            filterDrawerOpen={filterDrawerOpen}
+            onFilterToggle={onFilterToggle}
+          />
         </div>
         <div className="col filterandsearchbar-searchbox text-left">
           <SearchField
@@ -36,6 +40,8 @@ class FilterAndSearchBar extends Component {
 FilterAndSearchBar.propTypes = {
   // Whether the filterDrawer should be open or not
   filterDrawerOpen: PropTypes.bool.isRequired,
+  // The handler for toggling the filter drawer and setting state
+  onFilterToggle: PropTypes.func.isRequired,
   // The text query in the search box
   searchQuery: PropTypes.string.isRequired,
   // The function to update the search query
