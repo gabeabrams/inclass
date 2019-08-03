@@ -8,7 +8,7 @@ class OkayButton extends Component {
     return (
       <button
         type="button"
-        className="btn btn-info okay-button border-0 rounded text-white font-weight-bold ml-2"
+        className="btn btn-info okay-button border-0 rounded text-white font-weight-bold ml-1"
         onClick={onClick}
       >
         {text}

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Modal from '.';
 import EmailForm from '../shared/EmailForm';
 import OkayButton from '../shared/OkayButton';
-import CancelButton from '../shared/CancelButton';
 
 class SupportModal extends Component {
   /**

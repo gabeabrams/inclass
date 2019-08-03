@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Modal from '../../Modal';
+import Modal from '..';
 import OkayButton from '../../shared/OkayButton';
 import CancelButton from '../../shared/CancelButton';
+import MessageBody from './MessageBody';
+
 
 class MessageBefore extends Component {
   /**
@@ -21,7 +23,7 @@ class MessageBefore extends Component {
 
     return (
       <Modal title="Please Read Before Installing:" onClose={onClose} footer={modalFooter}>
-        {messageBefore}
+        <MessageBody messageBody={messageBefore} />
       </Modal>
     );
   }

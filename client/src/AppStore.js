@@ -9,6 +9,7 @@ import Header from './Header';
 import Body from './Body';
 
 import SupportModal from './Modal/SupportModal';
+import MessageBefore from './Modal/InstallOrUninstallModal/MessageBefore';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -231,10 +232,15 @@ class AppStore extends Component {
       const { email, subject } = supportModalStatus;
       // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
       supportModelElement = (
-        <SupportModal
-          address="lshhenry98@gmail.com"
-          subject="this is a test subject"
+        // <SupportModal
+        //   address="lshhenry98@gmail.com"
+        //   subject="this is a test subject"
+        //   onClose={(this.onSupportModalClose)}
+        // />
+        <MessageBefore
+          messageBefore="this is the message to display before installing"
           onClose={(this.onSupportModalClose)}
+          onClick={(this.onSupportModalClose)}
         />
       );
     }
