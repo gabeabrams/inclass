@@ -30,10 +30,7 @@ class FilterToggle extends Component {
       );
     }
 
-    // Turn into a button
-    // Write style class to remove all the button properties
-    // Write function in AppStore.js to pass down (eventually)
-
+    // Return the Filters & Tags text with a caret button
     return (
       <div className="filtertoggle-container">
         <span className="text-white text-nowrap font-weight-bold">Filters</span>

@@ -18,6 +18,7 @@ class FilterAndSearchBar extends Component {
       onSearchChanged,
     } = this.props;
 
+    // Divided into FilterToggle component and SearchField component
     return (
       <div className="filterandsearchbar-container bg-secondary row no-gutters">
         <div className="col filterandsearchbar-filterbutton text-right">

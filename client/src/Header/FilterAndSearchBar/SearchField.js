@@ -14,6 +14,7 @@ class SearchField extends Component {
       onSearchChanged,
     } = this.props;
 
+    // Use input field to type into search
     return (
       <div className="searchfield-container">
         <div className="input-group">
