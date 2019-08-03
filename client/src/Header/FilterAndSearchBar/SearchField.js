@@ -37,6 +37,7 @@ class SearchField extends Component {
 SearchField.propTypes = {
   // The query that is stored in the AppStore state
   searchQuery: PropTypes.string.isRequired,
+  // The function to update the search query in the appstore's state
   onSearchChanged: PropTypes.func.isRequired,
 };
 
