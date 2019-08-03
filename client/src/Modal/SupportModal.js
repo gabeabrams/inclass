@@ -15,7 +15,6 @@ class SupportModal extends Component {
     const { address, subject, onClose } = this.props;
     const okayButton = (
       <div>
-        <CancelButton text="Hello" />
         <OkayButton text="Close" onClick={onClose} />
       </div>
     );
