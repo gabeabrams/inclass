@@ -21,8 +21,7 @@ describe('client > src > Header > FilterAndSearchBar > SearchField', () => {
 
     // Simulate typing
     await driver.typeInto('.form-control', 'hello!');
-
-    // Assert that prop is updated
+    // Assert that prop is updated after typing
     assert.equal(testQuery, 'hello!');
   });
 });
