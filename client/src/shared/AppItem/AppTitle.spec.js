@@ -11,5 +11,6 @@ describe('client > src > shared > AppTitle', () => {
     );
     // check if app title is rendered on page
     assert(driver.elementExists('.app-title'), 'did not render correctly');
+    assert.equal(driver.getText('.app-title'), 'Harvard EdTech GradeUp', 'did not display the correct title text');
   });
 });
