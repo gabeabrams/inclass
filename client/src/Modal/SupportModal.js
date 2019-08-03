@@ -13,14 +13,14 @@ class SupportModal extends Component {
    */
   render() {
     const { address, subject, onClose } = this.props;
-    const okayButton = (
+    const modalFooter = (
       <div>
         <OkayButton text="Close" onClick={onClose} />
       </div>
     );
 
     return (
-      <Modal title="Send an email to get support" onClose={onClose} footer={okayButton}>
+      <Modal title="Send an email to get support" onClose={onClose} footer={modalFooter}>
         <EmailForm address={address} subject={subject} />
       </Modal>
     );
