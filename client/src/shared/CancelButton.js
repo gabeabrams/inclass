@@ -7,7 +7,7 @@ class CancelButton extends Component {
     return (
       <button
         type="button"
-        className="btn btn-secondary"
+        className="btn btn-secondary border-0 cancel-button text-white font-weight-bold ml-2"
         onClick={onClose}
       >
         {text}

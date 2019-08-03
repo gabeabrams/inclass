@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import Modal from '.';
 import EmailForm from '../shared/EmailForm';
+import OkayButton from '../shared/OkayButton';
+import CancelButton from '../shared/CancelButton';
 
 class SupportModal extends Component {
   /**
@@ -11,9 +13,15 @@ class SupportModal extends Component {
    */
   render() {
     const { address, subject, onClose } = this.props;
+    const okayButton = (
+      <div>
+        <CancelButton text="Hello" />
+        <OkayButton text="Close" onClick={onClose} />
+      </div>
+    );
 
     return (
-      <Modal title="Send an email to get support" onClose={onClose}>
+      <Modal title="Send an email to get support" onClose={onClose} footer={okayButton}>
         <EmailForm address={address} subject={subject} />
       </Modal>
     );
