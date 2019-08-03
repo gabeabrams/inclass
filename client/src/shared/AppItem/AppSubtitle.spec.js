@@ -7,9 +7,10 @@ import AppSubtitle from './AppSubtitle';
 describe('client > src > shared > AppSubtitle', () => {
   it('Displays the AppSubtitle', async () => {
     const driver = new Driver(
-      <AppSubtitle appSubtitle="Harvard Icon" />
+      <AppSubtitle subtitle="Harvard Icon" />
     );
     // check if app subtitle is rendered on page
     assert(driver.elementExists('.app-subtitle'), 'did not render correctly');
+    assert.equal(driver.getText('.app-subtitle'), 'Harvard Icon', 'did not display the correct subtitle text');
   });
 });
