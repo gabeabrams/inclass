@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 class CancelButton extends Component {
   render() {
-    const { text, onClose } = this.props;
+    const { text, onClick } = this.props;
     return (
       <button
         type="button"
         className="btn btn-secondary border-0 cancel-button text-white font-weight-bold ml-2"
-        onClick={onClose}
+        onClick={onClick}
       >
         {text}
       </button>
@@ -19,8 +19,8 @@ class CancelButton extends Component {
 CancelButton.propTypes = {
   // the text display on the botton
   text: PropTypes.string.isRequired,
-  // the onclose function to close down the modal
-  onClose: PropTypes.func.isRequired,
+  // the onClick function to close down the modal
+  onClick: PropTypes.func.isRequired,
 };
 
 export default CancelButton;
