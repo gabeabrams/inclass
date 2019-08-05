@@ -4,13 +4,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+
 // Import other components
-// Questions to answer: How to get the app to show the screenshots of?
+import TabBox from '.';
 
 class Guides extends Component {
   render() {
     return (
-      <p>This is a placeholder for the Guides page</p>
+      <TabBox>
+        <p>This is a placeholder for the Guides page</p>
+      </TabBox>
     );
   }
 }

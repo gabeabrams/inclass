@@ -29,6 +29,7 @@ class Body extends Component {
           <AppPage
             storeHost={storeHost}
             app={currentSpecificApp}
+            tagColors={tags}
           />
         </div>
       );

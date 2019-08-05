@@ -6,21 +6,32 @@ import './style.css';
 
 // Import other components
 import Screenshot from './Screenshot';
+import TabBox from '..';
 
 class Screenshots extends Component {
   render() {
-    // get screenshots from the app
-    const toRender = [];
+    // deconstruct props
     const { app } = this.props;
     const { screenshots } = app;
-    screenshots.forEach((screenshot) => {
-      toRender.push(<div className="screenshots-elem"><Screenshot screenshot={screenshot} /></div>);
+    // maps the screenshots with styling
+    const toRender = screenshots.map((screenshot, index) => {
+      return (
+        <div key={screenshot.filename}>
+          <div
+            className="screenshots-elem p-3 mw-20"
+          >
+            <Screenshot screenshot={screenshot} index={index + 1} />
+          </div>
+        </div>
+      );
     });
 
     return (
-      <div className="screenshots-container">
-        {toRender}
-      </div>
+      <TabBox>
+        <div className="screenshots-container">
+          {toRender}
+        </div>
+      </TabBox>
     );
   }
 }
