@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Import other components
+import TagFilter from './TagFilter';
 
 // Import css
 
@@ -12,14 +13,23 @@ class Filters extends Component {
       tags,
     } = this.props;
 
+    const tagElements = Object.keys(tags).map((tagName) => {
+      return (
+        <TagFilter tag={tagName} />
+      );
+    });
+
     return (
-      <div>This is the fake filter drawer</div>
+      <div>
+        {tagElements}
+      </div>
     );
   }
 }
 
 Filters.propTypes = {
-  tags: PropTypes.shape({
-    // TODO: finish
-  }).isRequired,
+  // The tags object for filtering
+  tags: PropTypes.objectOf(PropTypes.object).isRequired,
 };
+
+export default Filters;
