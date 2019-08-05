@@ -11,7 +11,7 @@ import TabBox from '..';
 class Screenshots extends Component {
   render() {
     // deconstruct props
-    const { app } = this.props;
+    const { app, storeHost } = this.props;
     const { screenshots } = app;
     // maps the screenshots with styling
     const toRender = screenshots.map((screenshot, index) => {
@@ -20,7 +20,11 @@ class Screenshots extends Component {
           <div
             className="screenshots-elem p-3 mw-20"
           >
-            <Screenshot screenshot={screenshot} index={index + 1} />
+            <Screenshot
+              screenshot={screenshot}
+              index={index + 1}
+              storeHost={storeHost}
+            />
           </div>
         </div>
       );
@@ -47,6 +51,8 @@ Screenshots.propTypes = {
       })
     ),
   }).isRequired,
+  // Host for the URL
+  storeHost: PropTypes.string.isRequired,
 };
 
 export default Screenshots;

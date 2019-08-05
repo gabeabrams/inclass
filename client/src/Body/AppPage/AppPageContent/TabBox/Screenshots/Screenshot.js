@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 class Screenshot extends Component {
   render() {
     // Deconstruct props
-    const { screenshot, index } = this.props;
+    const { screenshot, storeHost, index } = this.props;
     const { title, url } = screenshot;
 
-    // Current URL for testing purposes
-    const fakeURL = `https://localhost${url}`;
+    // the complete URL for each screenshot
+    const fullURL = `https://${storeHost}${url}`;
     return (
       // Screenshot is displayed with a header and the image
       <div className="card border-dark mb-3">
@@ -18,7 +18,7 @@ class Screenshot extends Component {
         <img
           className="card-img-top"
           id={`screenshot-${index}`}
-          src={fakeURL}
+          src={fullURL}
           alt={title}
         />
       </div>
@@ -34,7 +34,9 @@ Screenshot.propTypes = {
     // URL to grab the screenshot
     url: PropTypes.string.isRequired,
   }).isRequired,
-  // Provide individual id to screenshot
+  // Host for the URL
+  storeHost: PropTypes.string.isRequired,
+  // Provide individual index for id to screenshot
   index: PropTypes.number.isRequired,
 };
 

@@ -32,7 +32,7 @@ class AppPageContent extends Component {
 
   render() {
     // Deconstruct props
-    const { app } = this.props;
+    const { app, storeHost } = this.props;
     // Deconstruct state
     const { currentTab } = this.state;
 
@@ -74,6 +74,9 @@ AppPageContent.propTypes = {
       })
     ),
   }).isRequired,
+
+  // The host for the URL
+  storeHost: PropTypes.string.isRequired,
 };
 
 export default AppPageContent;

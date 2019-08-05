@@ -40,6 +40,7 @@ class AppPage extends Component {
     // Deconstruct props
     const { app, storeHost, tagColors } = this.props;
     const { appInstalled } = this.state;
+
     return (
       <div className="appPage-container">
         <div className="appPage-appitem">
@@ -50,7 +51,7 @@ class AppPage extends Component {
           />
         </div>
         <div className="appPage-content">
-          <AppPageContent app={app} />
+          <AppPageContent app={app} storeHost={storeHost} />
         </div>
         <div className="appPage-footer">
           <AppPageFooter
@@ -76,7 +77,7 @@ AppPage.propTypes = {
       })
     ),
   }).isRequired,
-  // The host URL
+  // The host for the URL
   storeHost: PropTypes.string.isRequired,
   // Object with the colors for each tag
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
