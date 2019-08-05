@@ -7,7 +7,12 @@ import AppTag from './AppTag';
 describe('client > src > shared > AppItem > AppTag', () => {
   it('Displays the AppTag', async () => {
     const driver = new Driver(
-      <AppTag tagKey="fakeKey" tagValue="fakeValue" tagColor="red" tagUniqueKey="hello=>world" />
+      <AppTag
+        tagKey="fakeKey"
+        tagValue="fakeValue"
+        tagColor="red"
+        tagUniqueKey="hello=>world"
+      />
     );
     // check if app tag is rendered on page
     assert(driver.elementExists('.apptag-left-side'), 'did not render left side of tag correctly');
