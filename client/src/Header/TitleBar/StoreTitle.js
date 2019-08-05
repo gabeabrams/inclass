@@ -13,10 +13,10 @@ class StoreTitle extends Component {
 
     return (
       <div className="storetitle-container">
-        <span className="font-weight-bold">
+        <span className="storetitle-title font-weight-bold">
           {storeTitle}
         </span>
-        <span className="ml-1 d-none d-sm-inline">
+        <span className="storetitle-text ml-1 d-none d-sm-inline">
           App Store
         </span>
       </div>

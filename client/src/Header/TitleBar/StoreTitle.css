@@ -3,3 +3,13 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+/* Empty class for store title, mainly for specific element identification */
+.storetitle-title {
+
+}
+
+/* Empty class for store text, mainly for specific element identification */
+.storetitle-text {
+
+}
