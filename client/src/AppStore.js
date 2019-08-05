@@ -211,6 +211,7 @@ class AppStore extends Component {
       fatalErrorMessage,
       filterDrawerOpen,
       searchQuery,
+      tags
     } = this.state;
 
     // Show loading message
@@ -246,6 +247,7 @@ class AppStore extends Component {
             onFilterToggle={this.onFilterToggle}
             searchQuery={searchQuery}
             onSearchChanged={this.onSearchChanged}
+            tags={tags}
           />
         </div>
         <div className="appstore-body-container">

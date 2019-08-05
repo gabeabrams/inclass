@@ -17,6 +17,7 @@ class Header extends Component {
       onFilterToggle,
       searchQuery,
       onSearchChanged,
+      tags,
     } = this.props;
 
     return (

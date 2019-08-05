@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Import other components
 import FilterToggle from './FilterToggle';
 import SearchField from './SearchField';
+import Filters from './Filters';
 
 // Import css
 import './style.css';
@@ -16,6 +17,7 @@ class FilterAndSearchBar extends Component {
       onFilterToggle,
       searchQuery,
       onSearchChanged,
+      tags,
     } = this.props;
 
     // Divided into FilterToggle component and SearchField component
