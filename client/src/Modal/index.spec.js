@@ -9,6 +9,7 @@ describe.only('client > src > Modal', () => {
   it('Displays the Modal', async () => {
     // Create testing button to pass in as children
     let clicked = false;
+    let onCloseClicked = false;
     const testButton = (
       <OkayButton
         text="Okay"
@@ -18,7 +19,7 @@ describe.only('client > src > Modal', () => {
     const driver = new Driver(
       <Modal
         title="testTitle"
-        onClose={() => {}}
+        onClose={() => { onCloseClicked = true; }}
       >
         {testButton}
       </Modal>
@@ -32,5 +33,9 @@ describe.only('client > src > Modal', () => {
     assert(driver.elementExists('.okay-button'), 'children is not rendered');
     await driver.click('.okay-button');
     assert(clicked, 'children did not function as expected');
+    // test click button that handles modal closing
+    assert(driver.elementExists('.close'), 'close button is not rendered');
+    await driver.click('.close');
+    assert(onCloseClicked, 'did not handle modal closing correctly');
   });
 });

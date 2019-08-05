@@ -4,7 +4,7 @@ import assert from 'assert';
 
 import MessageBody from './MessageBody';
 
-describe('client > src > Modal > InstallOrUninstallModa > MessageBody', () => {
+describe('client > src > Modal > InstallOrUninstallModal > MessageBody', () => {
   it('Displays the body', async () => {
     const driver = new Driver(
       <MessageBody messageBody="Please install with caution" />

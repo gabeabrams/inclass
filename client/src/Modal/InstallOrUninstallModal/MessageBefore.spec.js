@@ -4,7 +4,7 @@ import assert from 'assert';
 
 import MessageBefore from './MessageBefore';
 
-describe('client > src > Modal > InstallOrUninstallModa > MessageBefore', () => {
+describe('client > src > Modal > InstallOrUninstallModal > MessageBefore', () => {
   it('Displays the Modal', () => {
     const driver = new Driver(
       <MessageBefore
