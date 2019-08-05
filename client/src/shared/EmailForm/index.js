@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import EmailAddress from './EmailAddress';
 import EmailSubject from './EmailSubject';
 
-import './style.css';
-
 class EmailForm extends Component {
   constructor(props) {
     super(props);
