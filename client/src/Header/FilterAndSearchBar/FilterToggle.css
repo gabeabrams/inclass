@@ -25,7 +25,16 @@
   color: white;
 }
 
-button {
-  display: block;
-  line-height: inherit;
+/* Keep button hidden behind header */
+.btn {
+  height: 45px;
+}
+
+/* Container to keep caret button fixed width and centered*/
+.button-container {
+  /* Keep button centered */
+  display: flex;
+  align-self: center;
+
+  width: 10px;
 }
