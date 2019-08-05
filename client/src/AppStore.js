@@ -65,6 +65,9 @@ class AppStore extends Component {
         installing: false,
       },
     };
+
+    // Bind handlers
+    this.onAppSelected = this.onAppSelected.bind(this);
   }
 
   /**
@@ -175,6 +178,18 @@ class AppStore extends Component {
   }
 
   /**
+   * Handles when an app is clicked in the list
+   * @param {string} appId - the id of the app that was clicked
+   */
+  onAppSelected(appId) {
+    const { allApps } = this.state;
+
+    this.setState({
+      currentSpecificApp: allApps[appId],
+    });
+  }
+
+  /**
    * Render the AppStore
    */
   render() {
@@ -241,6 +256,7 @@ class AppStore extends Component {
             currentBodyType={currentBodyType}
             currentSpecificApp={currentSpecificApp}
             appList={allApps}
+            onAppSelected={this.onAppSelected}
           />
         </div>
         {supportModelElement}
