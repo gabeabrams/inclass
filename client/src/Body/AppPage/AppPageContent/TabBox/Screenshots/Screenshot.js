@@ -25,9 +25,9 @@ Screenshot.propTypes = {
   // The screenshot to display
   screenshot: PropTypes.shape({
     // The header for the screenshot
-    title: PropTypes.string,
+    title: PropTypes.string.isRequired,
     // URL to grab the screenshot
-    url: PropTypes.string,
+    url: PropTypes.string.isRequired,
   }).isRequired,
   // Provide individual id to screenshot
   index: PropTypes.number.isRequired,

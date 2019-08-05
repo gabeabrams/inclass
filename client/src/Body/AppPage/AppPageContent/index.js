@@ -46,7 +46,7 @@ class AppPageContent extends Component {
       toDisplay = <Screenshots app={app} />;
     }
     return (
-      <div className="appPageContent-container">
+      <div className="appPageContent-container p-2">
         <TabBar
           currentTab={currentTab}
           onTabChanged={this.tabChanged}
