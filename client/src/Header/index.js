@@ -5,6 +5,10 @@ import PropTypes from 'prop-types';
 import Logo from './Logo';
 import TitleBar from './TitleBar';
 import FilterAndSearchBar from './FilterAndSearchBar';
+import Filters from './FilterAndSearchBar/Filters'
+
+// Import css
+import './style.css';
 
 class Header extends Component {
   render() {
@@ -21,18 +25,23 @@ class Header extends Component {
     } = this.props;
 
     return (
-      <div>
-        <Logo url={`https://${storeHost}/public/logo`} />
-        <TitleBar
-          storeTitle={storeTitle}
-          catalogTitle={catalogTitle}
-        />
-        <FilterAndSearchBar
-          filterDrawerOpen={filterDrawerOpen}
-          onFilterToggle={onFilterToggle}
-          searchQuery={searchQuery}
-          onSearchChanged={onSearchChanged}
-        />
+      <div className="header-container">
+        <div className="header-container">
+          <Logo url={`https://${storeHost}/public/logo`} />
+          <TitleBar
+            storeTitle={storeTitle}
+            catalogTitle={catalogTitle}
+          />
+          <FilterAndSearchBar
+            filterDrawerOpen={filterDrawerOpen}
+            onFilterToggle={onFilterToggle}
+            searchQuery={searchQuery}
+            onSearchChanged={onSearchChanged}
+          />
+        </div>
+        <div className="filters-container bg-secondary">
+          <Filters tags={tags} />
+        </div>
       </div>
     );
   }
@@ -53,6 +62,8 @@ Header.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   // Function to update the text in searchfield
   onSearchChanged: PropTypes.func.isRequired,
+  // The tags object for filtering
+  tags: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default Header;
