@@ -49,6 +49,8 @@ FilterAndSearchBar.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   // The function to update the search query
   onSearchChanged: PropTypes.func.isRequired,
+  // The tags object for filtering
+  tags: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default FilterAndSearchBar;
