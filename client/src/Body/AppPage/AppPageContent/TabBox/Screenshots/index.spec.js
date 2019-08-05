@@ -4,7 +4,8 @@ import assert from 'assert';
 
 import Screenshots from './index';
 
-describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots',
+describe(
+  'client > src > Body > AppPage > AppPageContent > TabBox > Screenshots',
   () => {
     it('Checks all screenshots are there', async () => {
       // first fake screenshot
@@ -39,4 +40,5 @@ describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots'
       const srcTwo = attTwo.src;
       assert(srcTwo.includes('/public/dce/gradeup/screenshots/event_chooser.png'));
     });
-  });
+  }
+);

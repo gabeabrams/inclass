@@ -15,7 +15,12 @@ class Screenshot extends Component {
         <div className="card-header bg-secondary text-light border-secondary">
           <h5 className="card-title mb-0">{title}</h5>
         </div>
-        <img className="card-img-top" id={`screenshot-${index}`} src={fakeURL} alt={title} />
+        <img
+          className="card-img-top"
+          id={`screenshot-${index}`}
+          src={fakeURL}
+          alt={title}
+        />
       </div>
     );
   }

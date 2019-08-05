@@ -24,8 +24,11 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     // clicks screenshots tab and checks that it is clicked
     driver.click('#screenshots');
     assert(clicked, 'Screenshots tab was not clicked');
-    assert.equal(mostRecentTabName, TAB_NAMES.SCREENSHOTS,
-      'Did not specifically click screenshots');
+    assert.equal(
+      mostRecentTabName,
+      TAB_NAMES.SCREENSHOTS,
+      'Did not specifically click screenshots'
+    );
 
     // reset clicked to false to test clicking guides tab
     clicked = false;
@@ -86,15 +89,24 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     );
 
     // checks guides tab has correct text
-    assert.equal(driver.getText('#guides'), 'Guides',
-      'Guides tab text is not correct');
+    assert.equal(
+      driver.getText('#guides'),
+      'Guides',
+      'Guides tab text is not correct'
+    );
 
     // checks screenshot tab has correct text
-    assert.equal(driver.getText('#screenshots'), 'Screenshots',
-      'Screenshots tab text is not correct');
+    assert.equal(
+      driver.getText('#screenshots'),
+      'Screenshots',
+      'Screenshots tab text is not correct'
+    );
 
     // checks info tab has correct text
-    assert.equal(driver.getText('#info'), 'Info',
-      'Info tab text is not correct');
+    assert.equal(
+      driver.getText('#info'),
+      'Info',
+      'Info tab text is not correct'
+    );
   });
 });

@@ -14,7 +14,10 @@ describe('client > src > Body > AppPage > AppPageContent > TabBox > Guides', () 
     // Grabs the text on Guides page
     const text = driver.getText('p');
     // Checks text on guides page matches expectations
-    assert.equal(text, 'This is a placeholder for the Guides page',
-      'The paragraph text is incorrect');
+    assert.equal(
+      text,
+      'This is a placeholder for the Guides page',
+      'The paragraph text is incorrect'
+    );
   });
 });

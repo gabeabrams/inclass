@@ -13,17 +13,14 @@ class Screenshots extends Component {
     // deconstruct props
     const { app } = this.props;
     const { screenshots } = app;
-    // keeps track of number of screenshots for screenshot id
-    let index = 0;
     // maps the screenshots with styling
-    const toRender = screenshots.map((screenshot) => {
-      index += 1;
+    const toRender = screenshots.map((screenshot, index) => {
       return (
         <div key={screenshot.filename}>
           <div
             className="screenshots-elem p-3 mw-20"
           >
-            <Screenshot screenshot={screenshot} index={index} />
+            <Screenshot screenshot={screenshot} index={index + 1} />
           </div>
         </div>
       );

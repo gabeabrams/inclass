@@ -37,13 +37,19 @@ class AppPageContent extends Component {
     const { currentTab } = this.state;
 
     // Changes display based on tabs
-    let toDisplay;
+    let contentToDisplay;
     if (currentTab === TAB_NAMES.INFO) {
-      toDisplay = <Info />;
+      contentToDisplay = (
+        <Info />
+      );
     } else if (currentTab === TAB_NAMES.GUIDES) {
-      toDisplay = <Guides />;
+      contentToDisplay = (
+        <Guides />
+      );
     } else {
-      toDisplay = <Screenshots app={app} />;
+      contentToDisplay = (
+        <Screenshots app={app} />
+      );
     }
     return (
       <div className="appPageContent-container p-2">
@@ -51,7 +57,7 @@ class AppPageContent extends Component {
           currentTab={currentTab}
           onTabChanged={this.tabChanged}
         />
-        {toDisplay}
+        {contentToDisplay}
       </div>
     );
   }

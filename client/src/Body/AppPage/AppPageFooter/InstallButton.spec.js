@@ -22,8 +22,11 @@ describe('client > src > Body > AppPage > AppPageFooter > InstallButton', () => 
     // checks button exists
     assert(driver.elementExists('#install-button'), 'install button absent');
     // checks that button says "Install"
-    assert.equal(driver.getText('#install-button'), 'Install',
-      'Text on install button does not match expected');
+    assert.equal(
+      driver.getText('#install-button'),
+      'Install',
+      'Text on install button does not match expected'
+    );
     // simulate a click
     driver.click('#install-button');
     // makes sure button is clicked

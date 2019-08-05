@@ -80,7 +80,6 @@ AppPage.propTypes = {
   storeHost: PropTypes.string.isRequired,
   // Object with the colors for each tag
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
-
 };
 
 export default AppPage;

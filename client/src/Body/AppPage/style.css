@@ -15,7 +15,9 @@
   /* Scrolls when contents don't fit screen*/
   overflow-y: scroll;
 
+  /* Add padding so the footer doesn't obscure the content */
   padding-bottom: 85px;
+
   min-height: 100px;
 }
 
