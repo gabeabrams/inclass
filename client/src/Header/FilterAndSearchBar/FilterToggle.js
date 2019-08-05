@@ -17,11 +17,9 @@ class FilterToggle extends Component {
 
     // Create caret icon element
     let caretElem;
-    let filterButton;
 
     // If the filter drawer is closed, caret will face right, if it is open,
     // caret will face down
-
     if (!filterDrawerOpen) {
       caretElem = (
         <FontAwesomeIcon icon={faCaretRight} />
@@ -32,7 +30,7 @@ class FilterToggle extends Component {
       );
     }
 
-    // Return the Filters & Tags text with a caret button
+    // Return the button
     return (
       <div className="filtertoggle-container">
         <button

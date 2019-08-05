@@ -238,7 +238,6 @@ class AppStore extends Component {
     return (
       <div>
         <div className="appstore-header-container">
-
           <Header
             storeHost={storeHost}
             storeTitle={storeTitle}
