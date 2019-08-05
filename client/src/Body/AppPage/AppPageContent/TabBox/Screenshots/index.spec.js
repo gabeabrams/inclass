@@ -26,9 +26,11 @@ describe(
         screenshots: [screenshotOne, screenshotTwo],
       };
 
+      const fakeStoreHost = 'localhost';
+
       // create new driver with screenshot element
       const driver = new Driver(
-        <Screenshots app={app} />
+        <Screenshots app={app} storeHost={fakeStoreHost} />
       );
 
       // Checks that both screenshots exist

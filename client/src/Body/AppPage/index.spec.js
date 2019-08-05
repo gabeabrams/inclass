@@ -45,11 +45,13 @@ describe('client > src > Body > AppPage', () => {
       },
     };
 
+    const fakeStoreHost = 'localhost';
+
     // initializes a new driver with AppPageContent
     const driver = new Driver(
       <AppPage
         app={app}
-        storeHost="localhost:3000"
+        storeHost={fakeStoreHost}
         tagColors={fakeTagColors}
       />
     );

@@ -48,7 +48,7 @@ class AppPageContent extends Component {
       );
     } else {
       contentToDisplay = (
-        <Screenshots app={app} />
+        <Screenshots app={app} storeHost={storeHost} />
       );
     }
     return (

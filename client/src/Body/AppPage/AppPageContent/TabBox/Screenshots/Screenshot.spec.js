@@ -14,9 +14,15 @@ describe('client > src > Body > AppPage > AppPageContent > TabBox > Screenshots 
         url: '/public/dce/gradeup/screenshots/event_chooser.png',
       };
 
+      const fakeStoreHost = 'localhost';
+
       // create new driver with screenshot element
       const driver = new Driver(
-        <Screenshot screenshot={screenshot} index={1} />
+        <Screenshot
+          screenshot={screenshot}
+          index={1}
+          storeHost={fakeStoreHost}
+        />
       );
 
       // checks that the screenshot exists
