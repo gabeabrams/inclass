@@ -18,9 +18,14 @@ class CancelButton extends Component {
 
 CancelButton.propTypes = {
   // the text display on the botton
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   // the onClick function to close down the modal
   onClick: PropTypes.func.isRequired,
+};
+
+CancelButton.defaultProps = {
+  // default text is okay
+  text: 'Cancel',
 };
 
 export default CancelButton;

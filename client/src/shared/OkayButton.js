@@ -19,9 +19,14 @@ class OkayButton extends Component {
 
 OkayButton.propTypes = {
   // the text display on the botton
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   // the onClick function to close down the modal
   onClick: PropTypes.func.isRequired,
+};
+
+OkayButton.defaultProps = {
+  // default text is okay
+  text: 'Okay',
 };
 
 export default OkayButton;
