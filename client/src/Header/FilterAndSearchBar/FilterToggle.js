@@ -17,32 +17,38 @@ class FilterToggle extends Component {
 
     // Create caret icon element
     let caretElem;
+    let filterButton;
 
     // If the filter drawer is closed, caret will face right, if it is open,
     // caret will face down
+
     if (!filterDrawerOpen) {
       caretElem = (
-        <FontAwesomeIcon icon={faCaretRight} className="ml-3" />
+        <FontAwesomeIcon icon={faCaretRight} />
       );
     } else {
       caretElem = (
-        <FontAwesomeIcon icon={faCaretDown} className="ml-3" />
+        <FontAwesomeIcon icon={faCaretDown} />
       );
     }
 
     // Return the Filters & Tags text with a caret button
     return (
       <div className="filtertoggle-container">
-        <span className="text-white text-nowrap font-weight-bold">Filters</span>
-        <span className="text-white text-nowrap font-weight-bold ml-1 d-none d-sm-block">& Tags</span>
         <button
           type="button"
-          className="btn btn-inline btn-lg btn-outline-secondary h-100 p-0"
+          className="btn btn-outline-secondary p-0"
           onClick={() => {
             onFilterToggle(!filterDrawerOpen);
           }}
         >
-          {caretElem}
+          <div className="filtertoggle-container">
+            <span className="text-white text-nowrap font-weight-bold">Filters</span>
+            <span className="text-white text-nowrap font-weight-bold ml-1 d-none d-sm-block">& Tags</span>
+            <div className="button-container ml-3">
+              {caretElem}
+            </div>
+          </div>
         </button>
       </div>
     );
