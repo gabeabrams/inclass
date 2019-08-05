@@ -10,6 +10,7 @@ import Body from './Body';
 
 import SupportModal from './Modal/SupportModal';
 import MessageBefore from './Modal/InstallOrUninstallModal/MessageBefore';
+import InstallOrUninstallSuccess from './Modal/InstallOrUninstallModal/InstallOrUninstallSuccess';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -237,10 +238,10 @@ class AppStore extends Component {
         //   subject="this is a test subject"
         //   onClose={(this.onSupportModalClose)}
         // />
-        <MessageBefore
-          messageBefore="this is the message to display before installing"
+        <InstallOrUninstallSuccess
+          message="this is the message to display before installing"
           onClose={(this.onSupportModalClose)}
-          onClick={(this.onSupportModalClose)}
+          appName="GradeUp"
         />
       );
     }
