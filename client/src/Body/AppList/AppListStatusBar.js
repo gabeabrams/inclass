@@ -10,11 +10,14 @@ class AppListStatusBar extends Component {
     // destructure props
     const { appCount } = this.props;
 
-    const message = (
-      appCount === 0
-        ? 'There are no matching apps. Please broaden your search criteria'
-        : `${appCount} apps match your search`
-    );
+    let message;
+    if (appCount === 0) {
+      message = 'There are no matching apps. Please broaden your search criteria';
+    } else if (appCount === 1) {
+      message = `${appCount} app matches your search`;
+    } else {
+      message = `${appCount} apps match your search`;
+    }
 
     this.state = {
       // the message to display on the status bar

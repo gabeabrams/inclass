@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 // Import other components
 import Header from './Header';
 import Body from './Body';
-import Screenshots from './Body/AppPage/AppPageContent/TabBox/Screenshots'
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';

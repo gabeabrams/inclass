@@ -14,10 +14,10 @@ class CatalogTitle extends Component {
 
     return (
       <div className="catalogtitle-container">
-        <span className="font-weight-bold mr-1">
+        <span className="catalogtitle-title font-weight-bold mr-1">
           {catalogTitle}
         </span>
-        <span className="d-none d-sm-inline">
+        <span className="catalogtitle-catalogtext d-none d-sm-inline">
           Catalog
         </span>
       </div>

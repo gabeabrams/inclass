@@ -23,7 +23,7 @@ class InstallButton extends Component {
 }
 
 InstallButton.propTypes = {
-  // TODO: add comment
+  // Function that installs the app
   onClick: PropTypes.func.isRequired,
 };
 
