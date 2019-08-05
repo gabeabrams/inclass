@@ -10,6 +10,9 @@
 
   /* Align children along center of cross-axis */
   align-items: center;
+
+  /* Set background color */
+  background-color: white;
 }
 
 /* Style for the left titlebar component */
