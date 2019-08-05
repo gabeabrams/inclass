@@ -64,10 +64,15 @@ class AppStore extends Component {
         open: false,
         installing: false,
       },
+      // Mapping of LTI Ids for installed apps
+      ltiIdsMap: {}, // appId => list of lti ids if the app is installed
     };
 
     // Bind handlers
     this.onAppSelected = this.onAppSelected.bind(this);
+    this.onInstallClicked = this.onInstallClicked.bind(this);
+    this.onUninstallClicked = this.onUninstallClicked.bind(this);
+    this.onSupportClicked = this.onSupportClicked.bind(this);
   }
 
   /**
@@ -186,6 +191,27 @@ class AppStore extends Component {
     this.setState({
       currentSpecificApp: allApps[appId],
     });
+  }
+
+  /**
+   * Handles when the install button is clicked
+   */
+  onInstallClicked() {
+
+  }
+
+  /**
+   * Handles when the install button is clicked
+   */
+  onInstallClicked() {
+
+  }
+
+  /**
+   * Handles when the install button is clicked
+   */
+  onSupportClicked() {
+
   }
 
   /**
