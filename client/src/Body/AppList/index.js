@@ -19,6 +19,7 @@ class AppList extends Component {
     const appElements = Object.keys(apps).map((appId) => {
       return (
         <AppItem
+          key={appId}
           app={apps[appId]}
           tagColors={tagColors}
           storeHost={storeHost}
