@@ -5,7 +5,7 @@ import assert from 'assert';
 import Guides from './Guides';
 
 describe('client > src > Body > AppPage > AppPageContent > TabBox > Guides', () => {
-  it('Handles a click', async () => {
+  it('Checks text on page exists', async () => {
     // initializes the driver with the Guides info
     const driver = new Driver(
       <Guides />

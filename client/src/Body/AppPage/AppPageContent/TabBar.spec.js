@@ -42,8 +42,8 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     assert.equal(mostRecentTabName, TAB_NAMES.INFO);
 
     // Checks screenshots page is accurate
-    const att = driver.getHTML('.active');
-    assert(att.includes('screenshots'), 'not the correct tab (screenshots)');
+    const html = driver.getHTML('.active');
+    assert(html.includes('screenshots'), 'not the correct tab (screenshots)');
   });
 
   it('Checks guides tab active', async () => {
@@ -57,8 +57,8 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     );
 
     // Checks guides page is active
-    const att = driver.getHTML('.active');
-    assert(att.includes('guides'), 'not the correct tab (guides)');
+    const html = driver.getHTML('.active');
+    assert(html.includes('guides'), 'not the correct tab (guides)');
   });
 
   it('Checks info tab active', async () => {
@@ -72,7 +72,29 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     );
 
     // Checks screenshots page is active
-    const att = driver.getHTML('.active');
-    assert(att.includes('info'), 'not the correct tab (info)');
+    const html = driver.getHTML('.active');
+    assert(html.includes('info'), 'not the correct tab (info)');
+  });
+
+  it('Checks each tab text is correct', async () => {
+    // initializes driver with a tab bar
+    const driver = new Driver(
+      <TabBar
+        onTabChanged={() => {}}
+        currentTab={TAB_NAMES.SCREENSHOTS}
+      />
+    );
+
+    // checks guides tab has correct text
+    assert.equal(driver.getText('#guides'), 'Guides',
+      'Guides tab text is not correct');
+
+    // checks screenshot tab has correct text
+    assert.equal(driver.getText('#screenshots'), 'Screenshots',
+      'Screenshots tab text is not correct');
+
+    // checks info tab has correct text
+    assert.equal(driver.getText('#info'), 'Info',
+      'Info tab text is not correct');
   });
 });

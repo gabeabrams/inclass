@@ -5,7 +5,7 @@ import assert from 'assert';
 import Info from './Info';
 
 describe('client > src > Body > AppPage > AppPageContent > TabBox > Info', () => {
-  it('Handles a click', async () => {
+  it('Checks text on page exists', async () => {
     // initializes the driver with the Info page
     const driver = new Driver(
       <Info />

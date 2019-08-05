@@ -19,7 +19,7 @@ class Screenshots extends Component {
     const toRender = screenshots.map((screenshot) => {
       index += 1;
       return (
-        <div key={screenshot.title}>
+        <div key={screenshot.filename}>
           <div
             className="screenshots-elem p-3 mw-20"
           >
