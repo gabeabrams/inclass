@@ -165,7 +165,6 @@ class AppStore extends Component {
         storeTitle: storeMetadata.title,
         catalogTitle: catalog.title,
         allApps: catalog.apps,
-        currentSpecificApp: catalog.apps.gradeup,
       });
     } catch (err) {
       // eslint-disable-next-line no-console
