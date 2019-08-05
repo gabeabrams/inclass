@@ -24,9 +24,11 @@ describe('client > src > Body > AppPage > AppPageContent', () => {
       screenshots: [screenshotOne, screenshotTwo],
     };
 
+    const fakeStoreHost = 'storehost';
+
     // initializes a new driver with AppPageContent
     const driver = new Driver(
-      <AppPageContent app={app} />
+      <AppPageContent app={app} storeHost={fakeStoreHost} />
     );
 
     // Checks that the tab bar exists
