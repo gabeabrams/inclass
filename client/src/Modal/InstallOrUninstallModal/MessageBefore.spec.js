@@ -6,9 +6,10 @@ import MessageBefore from './MessageBefore';
 
 describe('client > src > Modal > InstallOrUninstallModal > MessageBefore', () => {
   it('Displays the Modal', () => {
+    const message = 'please install with caution';
     const driver = new Driver(
       <MessageBefore
-        messageBefore="please install with caution"
+        message={message}
         onClose={() => {}}
         onClick={() => {}}
       />
