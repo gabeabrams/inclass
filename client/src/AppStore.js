@@ -245,6 +245,16 @@ class AppStore extends Component {
           onSupportButtonClicked={() => {}}
         />
       );
+
+      fakeCurrenctSpecificApp = {
+        messageBeforeInstall: 'this is message before install',
+        messageAfterInstall: 'you have installed this app',
+        messageBeforeUninstall: 'this is message before uninstall',
+        messageAfterUninstall: 'you have uninstalled this app',
+        supportEmail: 'harvardSupportEmail@gmail.com',
+        requestInstallEmail: 'requestInstall@harvard.edu',
+        requestUninstallEmail: 'requestUninstall@harvard.edu',
+      };
     }
 
     // Render the component
