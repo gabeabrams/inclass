@@ -9,9 +9,7 @@ import Header from './Header';
 import Body from './Body';
 
 import SupportModal from './Modal/SupportModal';
-import MessageBefore from './Modal/InstallOrUninstallModal/MessageBefore';
-import InstallOrUninstallSuccess from './Modal/InstallOrUninstallModal/InstallOrUninstallSuccess';
-import InstallOrUninstallFailure from './Modal/InstallOrUninstallModal/InstallOrUninstallFailure';
+import InstallOrUninstallModal from './Modal/InstallOrUninstallModal';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -233,20 +231,7 @@ class AppStore extends Component {
     if (supportModalStatus.open) {
       const { email, subject } = supportModalStatus;
       // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
-      supportModelElement = (
-        // <SupportModal
-        //   address="lshhenry98@gmail.com"
-        //   subject="this is a test subject"
-        //   onClose={(this.onSupportModalClose)}
-        // />
-        <InstallOrUninstallFailure
-          message="this is the message to display reason failed"
-          onClose={(this.onSupportModalClose)}
-          onSupportButtonClicked={() => {}}
-        />
-      );
-
-      fakeCurrenctSpecificApp = {
+      const fakeCurrenctSpecificApp = {
         messageBeforeInstall: 'this is message before install',
         messageAfterInstall: 'you have installed this app',
         messageBeforeUninstall: 'this is message before uninstall',
@@ -255,6 +240,17 @@ class AppStore extends Component {
         requestInstallEmail: 'requestInstall@harvard.edu',
         requestUninstallEmail: 'requestUninstall@harvard.edu',
       };
+      supportModelElement = (
+        // <SupportModal
+        //   address="lshhenry98@gmail.com"
+        //   subject="this is a test subject"
+        //   onClose={(this.onSupportModalClose)}
+        // />
+        <InstallOrUninstallModal
+          currentSpecificApp={fakeCurrenctSpecificApp}
+          onClose={(this.onSupportModalClose)}
+        />
+      );
     }
 
     // Render the component

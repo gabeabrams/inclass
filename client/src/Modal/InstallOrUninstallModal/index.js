@@ -18,8 +18,17 @@ class InstallOrUninstallModal extends Component {
 
   async componentDidMount() {
     const { currentSpecificApp } = this.props;
+    const {
+      messageBeforeInstall,
+      messageAfterInstall,
+      messageBeforeUninstall,
+      messageAfterUninstall,
+      supportEmail,
+      requestInstallEmail,
+      requestUninstallEmail,
+    } = currentSpecificApp;
 
-    if (messageBefore exists) {
+    if (messageBeforeInstall) {
       this.state = {
         currentView: CURRENT_VIEWS.SHOW_MESSAGE_BEFORE,
       };
@@ -47,7 +56,22 @@ class InstallOrUninstallModal extends Component {
   render() {
     // TODO: decide based on currentView which modal to render
     // TODO: pass handler functions to children modals that will change the current view
+    return();
   }
 }
+
+InstallOrUninstallModal.propTypes = {
+  /* the current app to install or uninstall */
+  currentSpecificApp: PropTypes.objectOf(PropTypes.string).isRequired,
+  /* boolean to determine whether to show install or uninstall process */
+  uninstall: PropTypes.bool,
+  /* function that closes the whole modal */
+  onClose: PropTypes.func.isRequired,
+}
+
+InstallOrUninstallModal.defaultProps = {
+  /* Assume display installing */
+  uninstall: false,
+};
 
 export default InstallOrUninstallModal;
