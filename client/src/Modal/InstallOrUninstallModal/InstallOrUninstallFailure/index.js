@@ -4,36 +4,55 @@ import PropTypes from 'prop-types';
 
 import Modal from '../..';
 import OkayButton from '../../../shared/OkayButton';
+import SupportButton from '../../../shared/SupportButton';
+import FailureReason from './FailureReason';
 
 
-class MessageBefore extends Component {
+class InstallOrUninstallFailure extends Component {
   /**
    * Render the Modal
    */
   render() {
-    const { onClose, onClick, message } = this.props;
+    const {
+      onClose,
+      onSupportButtonClicked,
+      message,
+      uninstall,
+    } = this.props;
+
     const modalFooter = (
       <div>
-        <CancelButton text="Cancel" onClick={onClose} />
-        <OkayButton text="Install" onClick={onClick} />
+        <OkayButton onClick={onClose} />
       </div>
     );
 
     return (
-      <Modal title="Please Read Before Installing:" onClose={onClose} footer={modalFooter}>
-        <MessageBody messageBody={message} />
+      <Modal
+        title={`${(uninstall) ? 'Uninstall Failed' : 'Install Failed'}!`}
+        onClose={onClose}
+        footer={modalFooter}
+      >
+        <FailureReason message={message} />
+        <SupportButton onClick={onSupportButtonClicked} />
       </Modal>
     );
   }
 }
 
-MessageBefore.propTypes = {
-  /* Function to call when the modal is closed */
+InstallOrUninstallFailure.propTypes = {
+  /* Function to call when the modal is closed, i.e. when okay button clicked */
   onClose: PropTypes.func.isRequired,
-  /* Function to call to show installation steps */
-  onClick: PropTypes.func.isRequired,
+  /* Function to call to show support steps */
+  onSupportButtonClicked: PropTypes.func.isRequired,
   /* Message to display to user before they can install the app */
   message: PropTypes.string.isRequired,
+  /* Install boolean to determine use for install or uninstall */
+  uninstall: PropTypes.bool,
 };
 
-export default MessageBefore;
+InstallOrUninstallFailure.defaultProps = {
+  /* Assume display installing */
+  uninstall: false,
+};
+
+export default InstallOrUninstallFailure;

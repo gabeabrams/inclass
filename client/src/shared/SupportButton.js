@@ -8,7 +8,7 @@ class SupportButton extends Component {
     return (
       <button
         type="button"
-        className="btn btn-info support-button border-0 rounded text-white font-weight-bold ml-1"
+        className="btn btn-secondary support-button border-0 rounded text-white font-weight-bold ml-1"
         onClick={onClick}
       >
         {text}

@@ -11,6 +11,7 @@ import Body from './Body';
 import SupportModal from './Modal/SupportModal';
 import MessageBefore from './Modal/InstallOrUninstallModal/MessageBefore';
 import InstallOrUninstallSuccess from './Modal/InstallOrUninstallModal/InstallOrUninstallSuccess';
+import InstallOrUninstallFailure from './Modal/InstallOrUninstallModal/InstallOrUninstallFailure';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -238,10 +239,10 @@ class AppStore extends Component {
         //   subject="this is a test subject"
         //   onClose={(this.onSupportModalClose)}
         // />
-        <InstallOrUninstallSuccess
-          message="this is the message to display before installing"
+        <InstallOrUninstallFailure
+          message="this is the message to display reason failed"
           onClose={(this.onSupportModalClose)}
-          appName="GradeUp"
+          onSupportButtonClicked={() => {}}
         />
       );
     }
