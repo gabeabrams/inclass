@@ -13,16 +13,23 @@ class MessageBefore extends Component {
    * Render the Modal
    */
   render() {
-    const { onClose, onClick, message } = this.props;
+    // deconstruct the props
+    const {
+      onClose,
+      onClick,
+      message,
+      uninstall,
+    } = this.props;
     const modalFooter = (
       <div>
         <CancelButton text="Cancel" onClick={onClose} />
         <OkayButton text="Install" onClick={onClick} />
       </div>
     );
+    const modalTitle = `Please Read Before ${(uninstall) ? 'Uninstalling' : 'Installing'}`;
 
     return (
-      <Modal title="Please Read Before Installing:" onClose={onClose} footer={modalFooter}>
+      <Modal title={modalTitle} onClose={onClose} footer={modalFooter}>
         <MessageBody messageBody={message} />
       </Modal>
     );
@@ -36,6 +43,13 @@ MessageBefore.propTypes = {
   onClick: PropTypes.func.isRequired,
   /* Message to display to user before they can install the app */
   message: PropTypes.string.isRequired,
+  /* Install boolean to determine use for install or uninstall */
+  uninstall: PropTypes.bool,
+};
+
+MessageBefore.defaultProps = {
+  /* Assume display installing */
+  uninstall: false,
 };
 
 export default MessageBefore;
