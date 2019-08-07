@@ -23,7 +23,7 @@ class InstallOrUninstallModal extends Component {
       currentView: 'show-message-before',
     };
     // Bind the handlers
-    this.attemptInstall = this.attemptInstall.bind(this);
+    this.attemptInstallOrUninstall = this.attemptInstallOrUninstall.bind(this);
   }
 
   async componentDidMount() {
@@ -43,7 +43,7 @@ class InstallOrUninstallModal extends Component {
         currentView: CURRENT_VIEWS.SHOW_MESSAGE_BEFORE,
       };
     } else {
-      await this.attemptInstall();
+      await this.attemptInstallOrUninstall();
     }
   }
 
@@ -51,7 +51,7 @@ class InstallOrUninstallModal extends Component {
    * Called immediately if there is no message before, or called when user
    *   clicks "Install" or "Uninstall" in the messageBefore page
    */
-  async attemptInstall() {
+  async attemptInstallOrUninstall() {
     // try to install, right now hard coded install success
     const success = true;
     if (success) {
