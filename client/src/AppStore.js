@@ -58,17 +58,20 @@ class AppStore extends Component {
       currentSpecificApp: null,
       // Support modal status
       supportModalStatus: {
-        open: true,
+        open: false,
         email: '',
         subject: '',
       },
       // Status of the installOrUninstall modal
       installOrUninstallModalStatus: {
-        open: false,
-        installing: false,
+        open: true,
+        installing: true,
       },
     };
     this.onSupportModalClose = this.onSupportModalClose.bind(this);
+    this.onInstallOrUninstallModalClose = (
+      this.onInstallOrUninstallModalClose.bind(this)
+    );
   }
 
   /**
@@ -188,6 +191,17 @@ class AppStore extends Component {
     });
   }
 
+  onInstallOrUninstallModalClose() {
+    // How do I handle whether it is installing or uninstalling?????????
+    const newInstallOrUninstallModalStatus = {
+      open: false,
+      installing: false,
+    };
+    this.setState({
+      installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+    });
+  }
+
   /**
    * Render the AppStore
    */
@@ -204,6 +218,7 @@ class AppStore extends Component {
       currentSpecificApp,
       loadingMessage,
       fatalErrorMessage,
+      installOrUninstallModalStatus,
     } = this.state;
 
     // Show loading message
@@ -227,30 +242,36 @@ class AppStore extends Component {
     }
 
     // Create supportModelElement if open
-    let supportModelElement;
+    let supportModalElement;
     if (supportModalStatus.open) {
       const { email, subject } = supportModalStatus;
       // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
+      supportModalElement = (
+        <SupportModal
+          address="lshhenry98@gmail.com"
+          subject="this is a test subject"
+          onClose={(this.onSupportModalClose)}
+        />
+      );
+    }
+
+    // Create Install/Uninstall Element if open
+    let installModalElement;
+    if (installOrUninstallModalStatus.open) {
       const fakeCurrenctSpecificApp = {
         title: 'GradeUp',
         messageBeforeInstall: 'this is message before install',
         messageAfterInstall: 'you have installed this app',
         messageBeforeUninstall: 'this is message before uninstall',
         messageAfterUninstall: 'you have uninstalled this app',
-        supportEmail: 'harvardSupportEmail@gmail.com',
         requestInstallEmail: 'requestInstall@harvard.edu',
         requestUninstallEmail: 'requestUninstall@harvard.edu',
       };
-      supportModelElement = (
-        // <SupportModal
-        //   address="lshhenry98@gmail.com"
-        //   subject="this is a test subject"
-        //   onClose={(this.onSupportModalClose)}
-        // />
+      installModalElement = (
         <InstallOrUninstallModal
           currentSpecificApp={fakeCurrenctSpecificApp}
           catalog={catalogTitle}
-          onClose={(this.onSupportModalClose)}
+          onClose={(this.onInstallOrUninstallModalClose)}
         />
       );
     }
@@ -275,7 +296,8 @@ class AppStore extends Component {
             appList={allApps}
           />
         </div>
-        {supportModelElement}
+        {supportModalElement}
+        {installModalElement}
       </div>
     );
   }

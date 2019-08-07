@@ -20,7 +20,7 @@ class InstallOrUninstallModal extends Component {
 
     // current view that tracks which modal we are displaying, default to null
     this.state = {
-      currentView: null,
+      currentView: 'show-message-before',
     };
     // Bind the handlers
     this.attemptInstall = this.attemptInstall.bind(this);
@@ -28,14 +28,13 @@ class InstallOrUninstallModal extends Component {
 
   async componentDidMount() {
     // deconstruct the props
-    const { currentSpecificApp, onClose, uninstall } = this.props;
+    const { currentSpecificApp, uninstall } = this.props;
     const {
       title,
       messageBeforeInstall,
       messageAfterInstall,
       messageBeforeUninstall,
       messageAfterUninstall,
-      supportEmail,
       requestInstallEmail,
       requestUninstallEmail,
     } = currentSpecificApp;
@@ -53,12 +52,18 @@ class InstallOrUninstallModal extends Component {
    *   clicks "Install" or "Uninstall" in the messageBefore page
    */
   async attemptInstall() {
-    // TODO: try to install (for now, just skip this and hardcode whether if succeeds or fails)
+    // try to install, right now hard coded install success
     const success = true;
     if (success) {
-      // TODO: set the state
+      // install/uninstall successful, set the state
+      this.setState({
+        currentView: CURRENT_VIEWS.SHOW_SUCCESS,
+      });
     } else {
-      // TODO: set the state
+      // install/uninstall failed, set the state
+      this.setState({
+        currentView: CURRENT_VIEWS.SHOW_FAILURE,
+      });
     }
   }
 
@@ -82,7 +87,6 @@ class InstallOrUninstallModal extends Component {
       messageAfterInstall,
       messageBeforeUninstall,
       messageAfterUninstall,
-      supportEmail,
       requestInstallEmail,
       requestUninstallEmail,
     } = currentSpecificApp;
@@ -95,7 +99,11 @@ class InstallOrUninstallModal extends Component {
           <MessageBefore
             onClose={onClose}
             onClick={() => {}}
-            message={messageBeforeInstall}
+            message={
+              (uninstall)
+                ? messageBeforeUninstall
+                : messageBeforeInstall
+            }
           />
         );
         break;
@@ -104,7 +112,11 @@ class InstallOrUninstallModal extends Component {
           <InstallOrUninstallSuccess
             onClose={onClose}
             appName={title}
-            message={messageAfterInstall}
+            message={
+              (uninstall)
+                ? messageAfterUninstall
+                : messageAfterInstall
+            }
           />
         );
         break;
@@ -114,16 +126,22 @@ class InstallOrUninstallModal extends Component {
             message="this failed"
             onClose={onClose}
             onSupportButtonClicked={() => {}}
+            uninstall={uninstall}
           />
         );
         break;
       case 'show-request-via-email':
         viewToDisplay = (
           <RequestInstallOrUninstall
-            address={requestInstallEmail}
+            address={
+              (uninstall)
+                ? requestUninstallEmail
+                : requestInstallEmail
+            }
             catalog={catalog}
             appName={title}
             onClose={onClose}
+            uninstall={uninstall}
           />
         );
         break;
@@ -132,7 +150,9 @@ class InstallOrUninstallModal extends Component {
     }
     // pass handler functions to children modals to change the current view
     return (
-      { viewToDisplay }
+      <div className="displayed-modal-container">
+        { viewToDisplay }
+      </div>
     );
   }
 }
