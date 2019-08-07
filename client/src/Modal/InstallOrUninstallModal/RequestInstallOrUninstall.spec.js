@@ -9,7 +9,8 @@ describe('client > src > Modal > InstallOrUninstallModal > RequestInstallOrUnins
     const driver = new Driver(
       <RequestInstallOrUninstall
         address="testEmail@gmail.com"
-        subject="testSubject"
+        catalog="dce"
+        appName="gradeUp"
         onClose={() => {}}
       />
     );
