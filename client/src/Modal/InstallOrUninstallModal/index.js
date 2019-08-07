@@ -1,5 +1,10 @@
 // Import React
 import React, { Component } from 'react';
+// import different modals to display
+import MessageBefore from './MessageBefore';
+import InstallOrUninstallSuccess from './InstallOrUninstallSuccess';
+import InstallOrUninstallFailure from './InstallOrUninstallFailure';
+import RequestInstallOrUninstall from './RequestInstallOrUninstall';
 
 const CURRENT_VIEWS = {
   SHOW_MESSAGE_BEFORE: 'show-message-before',
@@ -56,7 +61,8 @@ class InstallOrUninstallModal extends Component {
   render() {
     // TODO: decide based on currentView which modal to render
     // TODO: pass handler functions to children modals that will change the current view
-    return();
+    return(
+    );
   }
 }
 
