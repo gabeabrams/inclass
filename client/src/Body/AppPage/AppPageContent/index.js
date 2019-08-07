@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 // Import other components
 import Screenshots from './TabBox/Screenshots';
-import Guides from './TabBox/Guides';
 import Info from './TabBox/Info';
+import Guides from './TabBox/Guides';
 
 // Names of tabs
 import TAB_NAMES from './TAB_NAMES';
@@ -44,7 +44,7 @@ class AppPageContent extends Component {
       );
     } else if (currentTab === TAB_NAMES.GUIDES) {
       contentToDisplay = (
-        <Guides />
+        <Screenshots app={app} storeHost={storeHost} />
       );
     } else {
       contentToDisplay = (

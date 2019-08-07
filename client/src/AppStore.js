@@ -69,10 +69,10 @@ class AppStore extends Component {
     };
 
     // Bind handlers
-    this.onAppSelected = this.onAppSelected.bind(this);
-    this.onInstallClicked = this.onInstallClicked.bind(this);
-    this.onUninstallClicked = this.onUninstallClicked.bind(this);
-    this.onSupportClicked = this.onSupportClicked.bind(this);
+    // this.onAppSelected = this.onAppSelected.bind(this);
+    // this.onInstallClicked = this.onInstallClicked.bind(this);
+    // this.onUninstallClicked = this.onUninstallClicked.bind(this);
+    // this.onSupportClicked = this.onSupportClicked.bind(this);
   }
 
   /**
@@ -170,6 +170,7 @@ class AppStore extends Component {
         storeTitle: storeMetadata.title,
         catalogTitle: catalog.title,
         allApps: catalog.apps,
+        currentSpecificApp: catalog.apps.gradeup,
       });
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -193,26 +194,26 @@ class AppStore extends Component {
     });
   }
 
-  /**
-   * Handles when the install button is clicked
-   */
-  onInstallClicked() {
+  // /**
+  //  * Handles when the install button is clicked
+  //  */
+  // onInstallClicked() {
 
-  }
+  // }
 
-  /**
-   * Handles when the install button is clicked
-   */
-  onInstallClicked() {
+  // /**
+  //  * Handles when the install button is clicked
+  //  */
+  // onInstallClicked() {
 
-  }
+  // }
 
-  /**
-   * Handles when the install button is clicked
-   */
-  onSupportClicked() {
+  // /**
+  //  * Handles when the install button is clicked
+  //  */
+  // onSupportClicked() {
 
-  }
+  // }
 
   /**
    * Render the AppStore
