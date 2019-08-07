@@ -30,15 +30,15 @@ class InstallOrUninstallModal extends Component {
     // deconstruct the props
     const { currentSpecificApp, uninstall } = this.props;
     const {
-      title,
       messageBeforeInstall,
-      messageAfterInstall,
       messageBeforeUninstall,
-      messageAfterUninstall,
-      requestInstallEmail,
-      requestUninstallEmail,
     } = currentSpecificApp;
-    if (messageBeforeInstall) {
+    const messageBefore = (
+      (uninstall)
+        ? messageBeforeInstall
+        : messageBeforeUninstall
+    );
+    if (messageBefore) {
       this.state = {
         currentView: CURRENT_VIEWS.SHOW_MESSAGE_BEFORE,
       };
