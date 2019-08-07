@@ -1,5 +1,6 @@
 // Import React
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // import different modals to display
 import MessageBefore from './MessageBefore';
 import InstallOrUninstallSuccess from './InstallOrUninstallSuccess';
@@ -17,13 +18,19 @@ class InstallOrUninstallModal extends Component {
   constructor(props) {
     super(props);
 
+    // current view that tracks which modal we are displaying, default to null
+    this.state = {
+      currentView: null,
+    };
     // Bind the handlers
     this.attemptInstall = this.attemptInstall.bind(this);
   }
 
   async componentDidMount() {
-    const { currentSpecificApp } = this.props;
+    // deconstruct the props
+    const { currentSpecificApp, onClose, uninstall } = this.props;
     const {
+      title,
       messageBeforeInstall,
       messageAfterInstall,
       messageBeforeUninstall,
@@ -32,7 +39,6 @@ class InstallOrUninstallModal extends Component {
       requestInstallEmail,
       requestUninstallEmail,
     } = currentSpecificApp;
-
     if (messageBeforeInstall) {
       this.state = {
         currentView: CURRENT_VIEWS.SHOW_MESSAGE_BEFORE,
@@ -48,6 +54,7 @@ class InstallOrUninstallModal extends Component {
    */
   async attemptInstall() {
     // TODO: try to install (for now, just skip this and hardcode whether if succeeds or fails)
+    const success = true;
     if (success) {
       // TODO: set the state
     } else {
@@ -59,9 +66,73 @@ class InstallOrUninstallModal extends Component {
    * Render the InstallOrUninstallModal
    */
   render() {
-    // TODO: decide based on currentView which modal to render
-    // TODO: pass handler functions to children modals that will change the current view
-    return(
+    // deconstruct the state
+    const { currentView } = this.state;
+    // deconstruct the props
+    const {
+      currentSpecificApp,
+      onClose,
+      uninstall,
+      catalog,
+    } = this.props;
+    // deconstruct current specific app
+    const {
+      title,
+      messageBeforeInstall,
+      messageAfterInstall,
+      messageBeforeUninstall,
+      messageAfterUninstall,
+      supportEmail,
+      requestInstallEmail,
+      requestUninstallEmail,
+    } = currentSpecificApp;
+
+    let viewToDisplay;
+    // decide based on currentView which modal to render
+    switch (currentView) {
+      case 'show-message-before':
+        viewToDisplay = (
+          <MessageBefore
+            onClose={onClose}
+            onClick={() => {}}
+            message={messageBeforeInstall}
+          />
+        );
+        break;
+      case 'show-install-success':
+        viewToDisplay = (
+          <InstallOrUninstallSuccess
+            onClose={onClose}
+            appName={title}
+            message={messageAfterInstall}
+          />
+        );
+        break;
+      case 'show-install-failure':
+        viewToDisplay = (
+          <InstallOrUninstallFailure
+            message="this failed"
+            onClose={onClose}
+            onSupportButtonClicked={() => {}}
+          />
+        );
+        break;
+      case 'show-request-via-email':
+        viewToDisplay = (
+          <RequestInstallOrUninstall
+            address={requestInstallEmail}
+            catalog={catalog}
+            appName={title}
+            onClose={onClose}
+          />
+        );
+        break;
+      default:
+        viewToDisplay = null;
+    }
+    // pass handler functions to children modals to change the current view
+    return (
+      { viewToDisplay }
     );
   }
 }
@@ -73,7 +144,9 @@ InstallOrUninstallModal.propTypes = {
   uninstall: PropTypes.bool,
   /* function that closes the whole modal */
   onClose: PropTypes.func.isRequired,
-}
+  /* the catalog the app is in */
+  catalog: PropTypes.string.isRequired,
+};
 
 InstallOrUninstallModal.defaultProps = {
   /* Assume display installing */
