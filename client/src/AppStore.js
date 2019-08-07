@@ -232,6 +232,7 @@ class AppStore extends Component {
       const { email, subject } = supportModalStatus;
       // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
       const fakeCurrenctSpecificApp = {
+        title: 'GradeUp',
         messageBeforeInstall: 'this is message before install',
         messageAfterInstall: 'you have installed this app',
         messageBeforeUninstall: 'this is message before uninstall',
@@ -248,6 +249,7 @@ class AppStore extends Component {
         // />
         <InstallOrUninstallModal
           currentSpecificApp={fakeCurrenctSpecificApp}
+          catalog={catalogTitle}
           onClose={(this.onSupportModalClose)}
         />
       );
