@@ -8,7 +8,7 @@ describe('client > src > shared > EmailForm', () => {
   it('Displays the EmailForm', async () => {
     const driver = new Driver(
       <EmailForm
-        address="lshhenry98@gmail.com"
+        address="Harvard@support.edu"
         subject="this is a test subject"
       />
     );

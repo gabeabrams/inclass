@@ -263,7 +263,7 @@ class AppStore extends Component {
       // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
       supportModalElement = (
         <SupportModal
-          address="lshhenry98@gmail.com"
+          address="HarvardSupport@gmail.com"
           subject="this is a test subject"
           onClose={(this.onSupportModalClose)}
         />
