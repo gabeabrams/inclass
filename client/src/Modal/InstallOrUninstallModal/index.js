@@ -39,9 +39,9 @@ class InstallOrUninstallModal extends Component {
         : messageBeforeUninstall
     );
     if (messageBefore) {
-      this.state = {
+      this.setState({
         currentView: CURRENT_VIEWS.SHOW_MESSAGE_BEFORE,
-      };
+      });
     } else {
       await this.attemptInstallOrUninstall();
     }
@@ -52,18 +52,36 @@ class InstallOrUninstallModal extends Component {
    *   clicks "Install" or "Uninstall" in the messageBefore page
    */
   async attemptInstallOrUninstall() {
-    // try to install, right now hard coded install success
-    const success = true;
-    if (success) {
-      // install/uninstall successful, set the state
+    // deconstruct the props
+    const { currentSpecificApp, uninstall } = this.props;
+    const {
+      requestInstallEmail,
+      requestUninstallEmail,
+    } = currentSpecificApp;
+
+    const requestEmail = (
+      (uninstall)
+        ? requestUninstallEmail
+        : requestInstallEmail
+    );
+    // if the app needs permission to install or uninstall
+    if (requestEmail) {
       this.setState({
-        currentView: CURRENT_VIEWS.SHOW_SUCCESS,
+        currentView: CURRENT_VIEWS.SHOW_REQUEST_VIA_EMAIL,
       });
     } else {
-      // install/uninstall failed, set the state
-      this.setState({
-        currentView: CURRENT_VIEWS.SHOW_FAILURE,
-      });
+      const success = false;
+      if (success) {
+        // install/uninstall successful, set the state
+        this.setState({
+          currentView: CURRENT_VIEWS.SHOW_SUCCESS,
+        });
+      } else {
+        // install/uninstall failed, set the state
+        this.setState({
+          currentView: CURRENT_VIEWS.SHOW_FAILURE,
+        });
+      }
     }
   }
 
@@ -79,6 +97,7 @@ class InstallOrUninstallModal extends Component {
       onClose,
       uninstall,
       catalog,
+      onSupportButtonClicked,
     } = this.props;
     // deconstruct current specific app
     const {
@@ -98,12 +117,13 @@ class InstallOrUninstallModal extends Component {
         viewToDisplay = (
           <MessageBefore
             onClose={onClose}
-            onClick={() => {}}
+            onClick={this.attemptInstallOrUninstall}
             message={
               (uninstall)
                 ? messageBeforeUninstall
                 : messageBeforeInstall
             }
+            uninstall={uninstall}
           />
         );
         break;
@@ -117,6 +137,7 @@ class InstallOrUninstallModal extends Component {
                 ? messageAfterUninstall
                 : messageAfterInstall
             }
+            uninstall={uninstall}
           />
         );
         break;
@@ -125,7 +146,7 @@ class InstallOrUninstallModal extends Component {
           <InstallOrUninstallFailure
             message="this failed"
             onClose={onClose}
-            onSupportButtonClicked={() => {}}
+            onSupportButtonClicked={onSupportButtonClicked}
             uninstall={uninstall}
           />
         );
@@ -166,6 +187,8 @@ InstallOrUninstallModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   /* the catalog the app is in */
   catalog: PropTypes.string.isRequired,
+  /* function that shows the support modal */
+  onSupportButtonClicked: PropTypes.func.isRequired,
 };
 
 InstallOrUninstallModal.defaultProps = {

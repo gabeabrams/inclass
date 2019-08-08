@@ -72,6 +72,9 @@ class AppStore extends Component {
     this.onInstallOrUninstallModalClose = (
       this.onInstallOrUninstallModalClose.bind(this)
     );
+    this.onSupportButtonClickedFromInstallModal = (
+      this.onSupportButtonClickedFromInstallModal.bind(this)
+    );
   }
 
   /**
@@ -202,6 +205,18 @@ class AppStore extends Component {
     });
   }
 
+  onSupportButtonClickedFromInstallModal() {
+    this.onInstallOrUninstallModalClose();
+    const newsupportModalStatus = {
+      open: true,
+      email: 'Harvard_Support@harvard.edu',
+      subject: 'having trouble installing this app',
+    };
+    this.setState({
+      supportModalStatus: newsupportModalStatus,
+    });
+  }
+
   /**
    * Render the AppStore
    */
@@ -264,14 +279,16 @@ class AppStore extends Component {
         messageAfterInstall: 'you have installed this app',
         messageBeforeUninstall: 'this is message before uninstall',
         messageAfterUninstall: 'you have uninstalled this app',
-        requestInstallEmail: 'requestInstall@harvard.edu',
-        requestUninstallEmail: 'requestUninstall@harvard.edu',
+        // requestInstallEmail: 'requestInstall@harvard.edu',
+        // requestUninstallEmail: 'requestUninstall@harvard.edu',
       };
       installModalElement = (
         <InstallOrUninstallModal
           currentSpecificApp={fakeCurrenctSpecificApp}
           catalog={catalogTitle}
           onClose={(this.onInstallOrUninstallModalClose)}
+          onSupportButtonClicked={this.onSupportButtonClickedFromInstallModal}
+          uninstall
         />
       );
     }

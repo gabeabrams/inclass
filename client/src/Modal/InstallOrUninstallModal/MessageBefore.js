@@ -23,7 +23,10 @@ class MessageBefore extends Component {
     const modalFooter = (
       <div>
         <CancelButton text="Cancel" onClick={onClose} />
-        <OkayButton text="Install" onClick={onClick} />
+        <OkayButton
+          text={`${(uninstall) ? 'Uninstall' : 'Install'}`}
+          onClick={onClick}
+        />
       </div>
     );
     const modalTitle = `Please Read Before ${(uninstall) ? 'Uninstalling' : 'Installing'}`;
