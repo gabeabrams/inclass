@@ -20,7 +20,7 @@ class InstallOrUninstallModal extends Component {
 
     // current view that tracks which modal we are displaying, default to null
     this.state = {
-      currentView: 'show-message-before',
+      currentView: null,
     };
     // Bind the handlers
     this.attemptInstallOrUninstall = this.attemptInstallOrUninstall.bind(this);
