@@ -17,7 +17,7 @@ class Filters extends Component {
 
     const tagElements = Object.keys(tags).map((tagName) => {
       return (
-        <TagFilter tag={tagName} />
+        <TagFilter tags={tags} tagName={tagName} />
       );
     });
 

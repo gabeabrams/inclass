@@ -9,11 +9,11 @@ import PropTypes from 'prop-types';
 class TagFilter extends Component {
   render() {
     const {
-      tag,
-      color,
+      tags,
+      tagName,
     } = this.props;
 
-    const backgroundColor = color;
+    const backgroundColor = tags[tagName].color;
     console.log('hi');
     console.log(backgroundColor);
 
@@ -21,7 +21,7 @@ class TagFilter extends Component {
       <span className="m-3">
         <span className="card">
           <span className="card-body">
-            <h5 className="card-title">{ tag }</h5>
+            <h5 className="card-title">{ tagName }</h5>
             {/* TODO: individual TagValueFilter components */}
             <p className="card-text">TagValueFilter components eventually</p>
           </span>
@@ -32,7 +32,8 @@ class TagFilter extends Component {
 }
 
 TagFilter.propTypes = {
-  tag: PropTypes.objectOf(PropTypes.object).isRequired,
+  tags: PropTypes.objectOf(PropTypes.object).isRequired,
+  tagName: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default TagFilter;
