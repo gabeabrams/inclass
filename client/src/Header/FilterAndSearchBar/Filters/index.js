@@ -6,6 +6,8 @@ import TagFilter from './TagFilter';
 
 // Import css
 
+
+// The filter bar that contains all the tag cards
 class Filters extends Component {
   render() {
     // Deconstruct props
