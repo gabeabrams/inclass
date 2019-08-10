@@ -24,4 +24,18 @@ describe('client > src > Modal > InstallOrUninstallModal > InstallOrUninstallSuc
     // check that title is correct
     assert.equal(driver.getText('.modal-title'), `${appName} Installed!`, 'title is not correct');
   });
+
+  it('Displays the correct title when unisntalling', () => {
+    const message = 'installation succeeded';
+    const appName = 'SwipeIn';
+    const driver = new Driver(
+      <InstallOrUninstallSuccess
+        message={message}
+        onClose={() => {}}
+        appName={appName}
+        uninstall
+      />
+    );
+    assert.equal(driver.getText('.modal-title'), `${appName} Uninstalled!`);
+  });
 });
