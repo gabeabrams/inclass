@@ -1,5 +1,0 @@
-/* display each app in a column order */
-.app-list-container {
-  display: flex;
-  flex-direction: column;
-}

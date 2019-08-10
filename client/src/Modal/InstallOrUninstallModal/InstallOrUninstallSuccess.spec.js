@@ -36,6 +36,6 @@ describe('client > src > Modal > InstallOrUninstallModal > InstallOrUninstallSuc
         uninstall
       />
     );
-    assert.equal(driver.getText('.modal-title'), `${appName} Uninstalled!`);
+    assert.equal(driver.getText('.modal-title'), `${appName} Uninstalled!`, 'title is not correct when unisntalling');
   });
 });
