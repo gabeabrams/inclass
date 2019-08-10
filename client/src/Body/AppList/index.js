@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import AppItem from '../../shared/AppItem';
 import AppListStatusBar from './AppListStatusBar';
 
-import './style.css';
-
 class AppList extends Component {
   render() {
     const {
@@ -28,7 +26,7 @@ class AppList extends Component {
     });
 
     return (
-      <div className="app-list-container">
+      <div className="app-list-container d-flex flex-column">
         <AppListStatusBar appCount={Object.keys(apps).length} />
         {appElements}
       </div>
