@@ -1,8 +1,21 @@
 .tagfilter-container {
+  /* Display */
+  display: flex;
+
+  /* Dimensions */
   width: 20rem;
+
+  /* Rounded edges */
   border-radius: 20px;
 }
 
 .tagfilter-card {
+  /* Display */
+  display: flex;
+  
+  /* Alignment */
+  align-self: center;
+
+  /* Dimensions */
   width: 18rem;
 }
