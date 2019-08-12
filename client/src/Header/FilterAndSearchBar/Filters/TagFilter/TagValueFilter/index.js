@@ -10,25 +10,32 @@ import TagValueFilterLabel from './TagValueFilterLabel';
 
 class TagValueFilter extends Component {
   render() {
-
     const {
       tags,
       tagName,
     } = this.props;
 
-    const tagValueElements = Object.keys(tag[tagName].values).map((tagValue) => {
+    const tagValueElements = Object.keys(tags[tagName].values).map((tagValue) => {
       return (
         <div>
           <TagValueFilterCheckBox isChecked={tagValue} />
-          <TagValueFilterLabel />
-          <TagValueFilterCount />
         </div>
       );
     });
 
     return (
-
+      <div>
+        {tagValueElements}
+      </div>
     );
-
   }
 }
+
+TagValueFilter.propTypes = {
+  // The tags object for filtering
+  tags: PropTypes.objectOf(PropTypes.object).isRequired,
+  // The name of this given tag so we can identify which tag to render
+  tagName: PropTypes.string.isRequired,
+};
+
+export default TagValueFilter;
