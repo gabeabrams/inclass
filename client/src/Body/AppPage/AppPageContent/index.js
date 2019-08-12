@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 // Import other components
 import Screenshots from './TabBox/Screenshots';
 import Info from './TabBox/Info';
-import Guides from './TabBox/Guides';
+
+// TODO: Confused why this needs to have index to recognize it
+import Guides from './TabBox/Guides/index';
 
 // Names of tabs
 import TAB_NAMES from './TAB_NAMES';
@@ -44,7 +46,7 @@ class AppPageContent extends Component {
       );
     } else if (currentTab === TAB_NAMES.GUIDES) {
       contentToDisplay = (
-        <Screenshots app={app} storeHost={storeHost} />
+        <Guides app={app} />
       );
     } else {
       contentToDisplay = (

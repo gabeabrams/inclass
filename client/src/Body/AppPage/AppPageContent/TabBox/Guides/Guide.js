@@ -9,10 +9,10 @@ class Guide extends Component {
     const { guide } = this.props;
     const { title, steps } = guide;
 
-    const stepsToRender = steps.map((step) => {
+    const stepsToRender = steps.map((step, index) => {
       return (
         <div className="steps-elem">
-          <Step step={step} />
+          <Step step={step} stepNum={index} />
         </div>
       );
     });

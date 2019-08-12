@@ -12,6 +12,8 @@ class Guides extends Component {
     const { app } = this.props;
     const { guides } = app;
 
+    console.log('App: ', app);
+
     // maps the guides to toRender with styling
     const toRender = guides.map((guide, index) => {
       const keyName = `${guide.title}-${index}`;
