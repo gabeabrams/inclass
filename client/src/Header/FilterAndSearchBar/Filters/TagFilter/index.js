@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Import other components
+import TagValueFilter from './TagValueFilter';
 
 // Import css
 import './style.css';
@@ -26,6 +27,7 @@ class TagFilter extends Component {
           <span className="card-body">
             <h5 className="card-title">{ tagName }</h5>
             {/* TODO: individual TagValueFilter components */}
+            <TagValueFilter tags={tags} tagName={tagName} />
             <p className="card-text">TagValueFilter components eventually</p>
           </span>
         </div>
@@ -36,7 +38,7 @@ class TagFilter extends Component {
 
 TagFilter.propTypes = {
   tags: PropTypes.objectOf(PropTypes.object).isRequired,
-  tagName: PropTypes.objectOf(PropTypes.object).isRequired,
+  tagName: PropTypes.string.isRequired,
 };
 
 export default TagFilter;
