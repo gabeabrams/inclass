@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Import other components
 
 // Import css
+import './style.css';
 
 // An indi
 class TagFilter extends Component {
@@ -13,19 +14,21 @@ class TagFilter extends Component {
       tagName,
     } = this.props;
 
-    const backgroundColor = tags[tagName].color;
-    console.log('hi');
-    console.log(backgroundColor);
-
+    // For each card, we want to render the TagValueFilter component
     return (
-      <span className="m-3">
-        <span className="card">
+      <span
+        className="card pt-3 p-2 tagfilter-container"
+        style={{
+          backgroundColor: tags[tagName].color,
+        }}
+      >
+        <div className="card tagfilter-card">
           <span className="card-body">
             <h5 className="card-title">{ tagName }</h5>
             {/* TODO: individual TagValueFilter components */}
             <p className="card-text">TagValueFilter components eventually</p>
           </span>
-        </span>
+        </div>
       </span>
     );
   }
