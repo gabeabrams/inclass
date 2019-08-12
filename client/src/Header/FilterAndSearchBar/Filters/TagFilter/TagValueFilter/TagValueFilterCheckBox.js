@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 
 class TagValueFilterCheckBox extends Component {
   render() {
-    
-    const {
 
+    const {
+      isChecked
     } = this.props;
 
     return (
