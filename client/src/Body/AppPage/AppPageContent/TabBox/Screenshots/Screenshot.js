@@ -11,7 +11,7 @@ class Screenshot extends Component {
     const fullURL = `https://${storeHost}${url}`;
     return (
       // Screenshot is displayed with a header and the image
-      <div className="card border-dark mb-3">
+      <div className="card border-secondary mb-3">
         <div className="card-header bg-secondary text-light border-secondary">
           <h5 className="card-title mb-0">{title}</h5>
         </div>

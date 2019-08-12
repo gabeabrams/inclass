@@ -18,11 +18,11 @@ class Guide extends Component {
     });
 
     return (
-      <div className="card border-dark mb-3">
+      <div className="card border-secondary mb-3">
         <div className="card-header bg-secondary text-light border-secondary">
           <h5 className="card-title mb-0">{title}</h5>
         </div>
-        <div className="steps-container">
+        <div className="steps-container p-2">
           {stepsToRender}
         </div>
       </div>

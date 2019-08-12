@@ -19,7 +19,7 @@ class Guides extends Component {
       const keyName = `${guide.title}-${index}`;
       return (
         <div key={keyName}>
-          <div className="guides-elem">
+          <div className="guides-elem p-3 mw-20">
             <Guide guide={guide} />
           </div>
         </div>
