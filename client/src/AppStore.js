@@ -161,7 +161,7 @@ class AppStore extends Component {
           values,
         };
       });
-      console.log('catalog: ', catalog);
+
       this.setState({
         storeHost,
         isAdmin,

@@ -12,7 +12,7 @@ class Guide extends Component {
     const stepsToRender = steps.map((step, index) => {
       return (
         <div className="steps-elem">
-          <Step step={step} stepNum={index} />
+          <Step step={step} stepNum={index + 1} />
         </div>
       );
     });

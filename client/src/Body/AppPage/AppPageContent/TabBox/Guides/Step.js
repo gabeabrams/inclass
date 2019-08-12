@@ -5,7 +5,10 @@ class Step extends Component {
   render() {
     const { step, stepNum } = this.props;
     return (
-      <span className="badge">{stepNum}</span>
+      <div className="step-container">
+        <span className="badge badge-secondary mr-2 ml-2">{stepNum}</span>
+        {step}
+      </div>
     );
   }
 }
