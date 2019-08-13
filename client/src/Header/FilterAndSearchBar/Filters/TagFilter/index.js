@@ -23,14 +23,12 @@ class TagFilter extends Component {
           backgroundColor: tags[tagName].color,
         }}
       >
-        <div className="card tagfilter-card">
+        { tagName }
+        <span className="card tagfilter-card">
           <span className="card-body">
-            <h5 className="card-title">{ tagName }</h5>
-            {/* TODO: individual TagValueFilter components */}
             <TagValueFilter tags={tags} tagName={tagName} />
-            <p className="card-text">TagValueFilter components eventually</p>
           </span>
-        </div>
+        </span>
       </span>
     );
   }
