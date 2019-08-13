@@ -69,6 +69,8 @@ class AppStore extends Component {
         open: true,
         uninstalling: true,
       },
+      // Mapping of LTI Ids for installed apps
+      ltiIdsMap: {}, // appId => list of lti ids if the app is installed
     };
     this.onSupportModalClose = this.onSupportModalClose.bind(this);
     this.onInstallOrUninstallModalClose = (
@@ -229,6 +231,8 @@ class AppStore extends Component {
    * Attempts to install the current app. If it fails, throws an error.
    */
   async installApp() {
+    const { currentSpecificApp } = this.state;
+    const { appId } = currentSpecificApp;
     console.log('hello install');
     return true;
   }
@@ -237,6 +241,12 @@ class AppStore extends Component {
    * Attempts to uninstall the current app. If it fails, throws an error.
    */
   async uninstallApp() {
+    const { currentSpecificApp, ltiIdsMap } = this.state;
+    const { appId, title } = currentSpecificApp;
+    const ltiIds = ltiIdsMap[appId];
+    if (!ltiIds || ltiIds.length === 0) {
+      throw new Error(`${title} could not be uninstalled because it couldn't be found in your course`);
+    }
     console.log('uninstalled hello');
     throw new Error('new error');
   }
