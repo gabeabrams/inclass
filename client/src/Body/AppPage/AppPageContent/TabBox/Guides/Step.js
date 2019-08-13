@@ -16,7 +16,9 @@ class Step extends Component {
 }
 
 Step.propTypes = {
+  // the instruction
   step: PropTypes.string.isRequired,
+  // the list number of the instruction
   stepNum: PropTypes.number.isRequired,
 };
 

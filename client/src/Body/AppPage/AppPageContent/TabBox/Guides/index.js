@@ -14,7 +14,7 @@ class Guides extends Component {
 
     // maps the guides to toRender with styling
     const toRender = guides.map((guide, index) => {
-      const keyName = `${guide.title}-${index}`;
+      const keyName = `guide-${index}`;
       return (
         <div key={keyName}>
           <div className="guides-elem p-3 mw-20">
@@ -41,10 +41,10 @@ Guides.propTypes = {
     guides: PropTypes.arrayOf(
       PropTypes.shape({
         // a string for the title of the guide
-        title: PropTypes.string.isRequired,
+        title: PropTypes.string,
         // array of strings to iterate the steps for each guide
         steps: PropTypes.arrayOf(
-          PropTypes.string.isRequired
+          PropTypes.string
         ),
       })
     ),

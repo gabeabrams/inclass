@@ -92,10 +92,10 @@ AppPageContent.propTypes = {
     guides: PropTypes.arrayOf(
       PropTypes.shape({
         // a string for the title of the guide
-        title: PropTypes.string.isRequired,
+        title: PropTypes.string,
         // array of strings to iterate the steps for each guide
         steps: PropTypes.arrayOf(
-          PropTypes.string.isRequired
+          PropTypes.string
         ),
       })
     ),

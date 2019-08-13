@@ -9,9 +9,12 @@ class Guide extends Component {
     const { guide } = this.props;
     const { title, steps } = guide;
 
+
+    // Maps the steps to stepsToRender with styling and number
     const stepsToRender = steps.map((step, index) => {
+      const keyName = `step-${index}`;
       return (
-        <div className="steps-elem">
+        <div key={keyName} className="steps-elem">
           <Step step={step} stepNum={index + 1} />
         </div>
       );
@@ -31,8 +34,11 @@ class Guide extends Component {
 }
 
 Guide.propTypes = {
+  // A guide to display
   guide: PropTypes.shape({
+    // Header for the guide
     title: PropTypes.string.isRequired,
+    // String of steps to display
     steps: PropTypes.arrayOf(
       PropTypes.string.isRequired
     ).isRequired,
