@@ -7,15 +7,27 @@
 
   /* Rounded edges */
   border-radius: 20px;
+
+  /* Align children in the center */
+  align-items: center;
+
+  /* Font styling */
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .tagfilter-card {
   /* Display */
   display: flex;
-  
+
   /* Alignment */
   align-self: center;
 
   /* Dimensions */
   width: 18rem;
+
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
 }
