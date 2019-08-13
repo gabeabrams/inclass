@@ -20,7 +20,9 @@ class TagValueFilter extends Component {
           <TagValueFilterCheckBox
             isChecked={tags[tagName].values[tagValue]}
             label={tagValue}
-          />
+          >
+            <TagValueFilterCount />
+          </TagValueFilterCheckBox>
         </span>
       );
     });
