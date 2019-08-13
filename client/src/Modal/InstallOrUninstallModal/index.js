@@ -18,9 +18,11 @@ class InstallOrUninstallModal extends Component {
   constructor(props) {
     super(props);
 
-    // current view that tracks which modal we are displaying, default to null
     this.state = {
+      // current view that tracks which modal we are displaying, default to null
       currentView: null,
+      // error message shown when install or uninstall failed
+      errMessage: null,
     };
     // Bind the handlers
     this.attemptInstallOrUninstall = this.attemptInstallOrUninstall.bind(this);
@@ -70,6 +72,7 @@ class InstallOrUninstallModal extends Component {
         ? requestUninstallEmail
         : requestInstallEmail
     );
+    let errMessage;
     // if the app needs permission to install or uninstall
     if (requestEmail) {
       this.setState({
@@ -77,14 +80,17 @@ class InstallOrUninstallModal extends Component {
       });
     } else {
       // attempt to install/uninstall the app
-      let success;
-      if (uninstalling) {
-        success = await uninstallApp();
-      } else {
-        success = await installApp();
+      try {
+        if (uninstalling) {
+          await uninstallApp();
+        } else {
+          await installApp();
+        }
+      } catch (err) {
+        errMessage = err.message;
       }
 
-      if (success) {
+      if (!errMessage) {
         // install/uninstall successful, set the state
         this.setState({
           currentView: CURRENT_VIEWS.SHOW_SUCCESS,
@@ -93,6 +99,7 @@ class InstallOrUninstallModal extends Component {
         // install/uninstall failed, set the state
         this.setState({
           currentView: CURRENT_VIEWS.SHOW_FAILURE,
+          errMessage,
         });
       }
     }
@@ -103,7 +110,7 @@ class InstallOrUninstallModal extends Component {
    */
   render() {
     // deconstruct the state
-    const { currentView } = this.state;
+    const { currentView, errMessage } = this.state;
     // deconstruct the props
     const {
       currentSpecificApp,
@@ -159,7 +166,7 @@ class InstallOrUninstallModal extends Component {
       case 'show-install-failure':
         viewToDisplay = (
           <InstallOrUninstallFailure
-            message="this failed"
+            message={errMessage}
             onClose={onClose}
             onSupportButtonClicked={() => {
               onClose();
