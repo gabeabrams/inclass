@@ -77,6 +77,8 @@ class AppStore extends Component {
     this.showSupportModal = (
       this.showSupportModal.bind(this)
     );
+    this.installApp = this.installApp.bind(this);
+    this.uninstallApp = this.uninstallApp.bind(this);
   }
 
   /**
@@ -224,6 +226,20 @@ class AppStore extends Component {
   }
 
   /**
+   * Attempts to install the current app. If it fails, throws an error.
+   */
+  async installApp() {
+
+  }
+
+  /**
+   * Attempts to uninstall the current app. If it fails, throws an error.
+   */
+  async uninstallApp() {
+
+  }
+
+  /**
    * Render the AppStore
    */
   render() {
@@ -299,6 +315,8 @@ class AppStore extends Component {
           showSupportModal={this.showSupportModal}
           uninstalling={uninstalling}
           courseId={courseId}
+          installApp={this.installApp}
+          uninstallApp={this.uninstallApp}
         />
       );
     }

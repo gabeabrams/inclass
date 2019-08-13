@@ -198,6 +198,10 @@ InstallOrUninstallModal.propTypes = {
   showSupportModal: PropTypes.func.isRequired,
   /* courseId for the app */
   courseId: PropTypes.number.isRequired,
+  /* function to install the app */
+  installApp: PropTypes.func.isRequired,
+  /* function to uninstall the app */
+  uninstallApp: PropTypes.func.isRequired,
 };
 
 InstallOrUninstallModal.defaultProps = {
