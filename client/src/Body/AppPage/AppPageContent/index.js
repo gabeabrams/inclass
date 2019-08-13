@@ -18,7 +18,7 @@ class AppPageContent extends Component {
 
     this.state = {
       // the tab that is displayed
-      currentTab: TAB_NAMES.SCREENSHOTS,
+      currentTab: TAB_NAMES.INFO,
     };
 
     this.tabChanged = this.tabChanged.bind(this);
@@ -37,6 +37,17 @@ class AppPageContent extends Component {
     const { app, storeHost } = this.props;
     // Deconstruct state
     const { currentTab } = this.state;
+
+    let screenshotsExist = false;
+    let guidesExist = false;
+
+    if (app.screenshots) {
+      screenshotsExist = true;
+    }
+
+    if (app.guides) {
+      guidesExist = true;
+    }
 
     // Changes display based on tabs
     let contentToDisplay;
@@ -58,6 +69,8 @@ class AppPageContent extends Component {
         <TabBar
           currentTab={currentTab}
           onTabChanged={this.tabChanged}
+          screenshotsExist={screenshotsExist}
+          guidesExist={guidesExist}
         />
         {contentToDisplay}
       </div>
@@ -75,7 +88,19 @@ AppPageContent.propTypes = {
         url: PropTypes.string,
       })
     ),
+    // Array of guides
+    guides: PropTypes.arrayOf(
+      PropTypes.shape({
+        // a string for the title of the guide
+        title: PropTypes.string.isRequired,
+        // array of strings to iterate the steps for each guide
+        steps: PropTypes.arrayOf(
+          PropTypes.string.isRequired
+        ),
+      })
+    ),
   }).isRequired,
+
 
   // The host for the URL
   storeHost: PropTypes.string.isRequired,
