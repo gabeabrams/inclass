@@ -67,7 +67,7 @@ class AppStore extends Component {
       // Status of the installOrUninstall modal
       installOrUninstallModalStatus: {
         open: true,
-        uninstalling: true,
+        uninstalling: false,
       },
       // Mapping of LTI Ids for installed apps
       ltiIdsMap: {}, // appId => list of lti ids if the app is installed
@@ -233,8 +233,17 @@ class AppStore extends Component {
   async installApp() {
     const { currentSpecificApp } = this.state;
     const { appId } = currentSpecificApp;
-    console.log('hello install');
-    return true;
+    let success;
+    let message;
+    try {
+      const response = await sendRequest({ path: `/install/${appId}` });
+      ({ success, message } = response);
+    } catch (err) {
+      throw new Error('We couldn\'t reach the server please check your internet connection');
+    }
+    if (!success) {
+      throw new Error(message);
+    }
   }
 
   /**
