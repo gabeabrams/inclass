@@ -126,7 +126,7 @@ class AppStore extends Component {
         sendRequest({ path: '/store' }),
         sendRequest({ path: '/catalog' }),
       ]);
-      console.log('catalog response is ', catalogRes);
+
       // Process store metadata
       if (!storeRes.body.success) {
         return this.setState({
@@ -183,6 +183,7 @@ class AppStore extends Component {
         storeTitle: storeMetadata.title,
         catalogTitle: catalog.title,
         allApps: catalog.apps,
+        currentSpecificApp: catalog.apps.gradeup,
       });
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -228,6 +229,34 @@ class AppStore extends Component {
   }
 
   /**
+   * Load and process the LTI Ids from the server
+   */
+  async loadLTIIds() {
+    let success;
+    let message;
+    let apps;
+    try {
+      const response = await sendRequest({ path: '/installed-apps' });
+      ({ success, message, apps } = response);
+    } catch (err) {
+      throw new Error('We couldn\'t reach the server please check your internet connection');
+    }
+
+    if (!success) {
+      throw new Error(message);
+    }
+    // Post-processing for LTIIds
+    const ltiIdsMap = {};
+    apps.forEach((app) => {
+      ltiIdsMap[app.appId] = app.ltiIds;
+    });
+
+    this.setState({
+      ltiIdsMap,
+    });
+  }
+
+  /**
    * Attempts to install the current app. If it fails, throws an error.
    */
   async installApp() {
@@ -236,7 +265,10 @@ class AppStore extends Component {
     let success;
     let message;
     try {
-      const response = await sendRequest({ path: `/install/${appId}` });
+      const response = await sendRequest({
+        path: `/install/${appId}`,
+        method: 'POST',
+      });
       ({ success, message } = response);
     } catch (err) {
       throw new Error('We couldn\'t reach the server please check your internet connection');
@@ -318,19 +350,19 @@ class AppStore extends Component {
     let installModalElement;
     if (installOrUninstallModalStatus.open) {
       const { uninstalling } = installOrUninstallModalStatus;
-      const fakeCurrenctSpecificApp = {
-        title: 'GradeUp',
-        messageBeforeInstall: 'this is message before install',
-        messageAfterInstall: 'you have installed this app',
-        messageBeforeUninstall: 'this is message before uninstall',
-        messageAfterUninstall: 'you have uninstalled this app',
-        supportEmail: 'harvardSupport@harvard.edu',
-        // requestInstallEmail: 'requestInstall@harvard.edu',
-        // requestUninstallEmail: 'requestUninstall@harvard.edu',
-      };
+      // const fakeCurrenctSpecificApp = {
+      //   title: 'GradeUp',
+      //   messageBeforeInstall: 'this is message before install',
+      //   messageAfterInstall: 'you have installed this app',
+      //   messageBeforeUninstall: 'this is message before uninstall',
+      //   messageAfterUninstall: 'you have uninstalled this app',
+      //   supportEmail: 'harvardSupport@harvard.edu',
+      //   requestInstallEmail: 'requestInstall@harvard.edu',
+      //   requestUninstallEmail: 'requestUninstall@harvard.edu',
+      // };
       installModalElement = (
         <InstallOrUninstallModal
-          currentSpecificApp={fakeCurrenctSpecificApp}
+          currentSpecificApp={currentSpecificApp}
           catalog={catalogTitle}
           onClose={(this.onInstallOrUninstallModalClose)}
           showSupportModal={this.showSupportModal}
