@@ -53,7 +53,7 @@ class AppPageContent extends Component {
     let contentToDisplay;
     if (currentTab === TAB_NAMES.INFO) {
       contentToDisplay = (
-        <Info />
+        <Info description={app.description} />
       );
     } else if (currentTab === TAB_NAMES.GUIDES) {
       contentToDisplay = (
