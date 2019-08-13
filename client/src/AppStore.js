@@ -42,6 +42,8 @@ class AppStore extends Component {
       storeHost: null,
       // Catalog title
       catalogTitle: null,
+      // Canvas Course ID
+      courseId: null,
       // isAdmin (true if user is an admin)
       isAdmin: false,
       // Tags
@@ -82,6 +84,7 @@ class AppStore extends Component {
    */
   async componentDidMount() {
     /* ---------------------- Load Server State --------------------- */
+    let courseId;
     try {
       // Get status from server
       const status = await getStatus();
@@ -101,6 +104,9 @@ class AppStore extends Component {
           fatalErrorMessage: 'We don\'t have access to Canvas. Please re-launch the app.',
         });
       }
+
+      // > Get courseId from launchInfo
+      ({ courseId } = status.launchInfo);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
@@ -165,6 +171,7 @@ class AppStore extends Component {
       });
 
       this.setState({
+        courseId,
         storeHost,
         isAdmin,
         tags,
@@ -289,7 +296,7 @@ class AppStore extends Component {
           catalog={catalogTitle}
           onClose={(this.onInstallOrUninstallModalClose)}
           showSupportModal={this.showSupportModal}
-          uninstalling
+          uninstalling={uninstalling}
         />
       );
     }
