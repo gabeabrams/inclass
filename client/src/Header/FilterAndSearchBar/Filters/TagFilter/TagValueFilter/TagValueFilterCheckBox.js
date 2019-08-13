@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Other components
 
 // Import css
+import './TagValueFilterCheckBox.css';
 
 class TagValueFilterCheckBox extends Component {
   render() {
@@ -12,10 +13,13 @@ class TagValueFilterCheckBox extends Component {
       label,
     } = this.props;
 
+    // Make individual checkbox id based on tagValue name (label)
+    const idName = `defaultCheck${label}`;
+
     return (
       <span className="form-check">
-        <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-        <label className="form-check-label" for="defaultCheck1">
+        <input className="form-check-input" type="checkbox" value="" id={idName} />
+        <label className="form-check-label " for={idName}>
           {label}
         </label>
       </span>
