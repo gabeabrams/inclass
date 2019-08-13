@@ -98,8 +98,8 @@ class InstallOrUninstallModal extends Component {
       } else {
         // install/uninstall failed, set the state
         this.setState({
-          currentView: CURRENT_VIEWS.SHOW_FAILURE,
           errMessage,
+          currentView: CURRENT_VIEWS.SHOW_FAILURE,
         });
       }
     }
@@ -170,8 +170,7 @@ class InstallOrUninstallModal extends Component {
             onClose={onClose}
             onSupportButtonClicked={() => {
               onClose();
-              // TODO: add in the real failure message
-              const subject = `I got an error while ${uninstalling ? ('uninstalling') : ('installing')} ${title} in course ${courseId}: replace this after`;
+              const subject = `I got an error while ${uninstalling ? ('uninstalling') : ('installing')} ${title} in course ${courseId}: ${errMessage}`;
               showSupportModal(supportEmail, subject);
             }}
             uninstalling={uninstalling}
