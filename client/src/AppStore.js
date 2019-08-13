@@ -229,6 +229,7 @@ class AppStore extends Component {
    * Attempts to install the current app. If it fails, throws an error.
    */
   async installApp() {
+    console.log('hello install');
     return true;
   }
 
@@ -236,7 +237,8 @@ class AppStore extends Component {
    * Attempts to uninstall the current app. If it fails, throws an error.
    */
   async uninstallApp() {
-    return true;
+    console.log('uninstalled hello');
+    throw new Error('new error');
   }
 
   /**

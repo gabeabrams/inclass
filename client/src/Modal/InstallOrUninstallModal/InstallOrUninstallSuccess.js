@@ -16,7 +16,7 @@ class InstallOrUninstallSuccess extends Component {
       appName,
       message,
       onClose,
-      uninstall,
+      uninstalling,
     } = this.props;
 
     const modalFooter = (
@@ -27,7 +27,7 @@ class InstallOrUninstallSuccess extends Component {
 
     return (
       <Modal
-        title={`${appName} ${(uninstall) ? 'Uninstalled' : 'Installed'}!`}
+        title={`${appName} ${(uninstalling) ? 'Uninstalled' : 'Installed'}!`}
         onClose={onClose}
         footer={modalFooter}
       >
@@ -45,12 +45,12 @@ InstallOrUninstallSuccess.propTypes = {
   /* App name to display in modal title */
   appName: PropTypes.string.isRequired,
   /* Install boolean to determine use for install or uninstall */
-  uninstall: PropTypes.bool,
+  uninstalling: PropTypes.bool,
 };
 
 InstallOrUninstallSuccess.defaultProps = {
   /* Assume display installing */
-  uninstall: false,
+  uninstalling: false,
 };
 
 export default InstallOrUninstallSuccess;
