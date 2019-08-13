@@ -67,7 +67,7 @@ class AppStore extends Component {
       // Status of the installOrUninstall modal
       installOrUninstallModalStatus: {
         open: true,
-        uninstalling: false,
+        uninstalling: true,
       },
       // Mapping of LTI Ids for installed apps
       ltiIdsMap: {}, // appId => list of lti ids if the app is installed
@@ -125,6 +125,7 @@ class AppStore extends Component {
       const [storeRes, catalogRes] = await Promise.all([
         sendRequest({ path: '/store' }),
         sendRequest({ path: '/catalog' }),
+        this.loadLTIIds(),
       ]);
 
       // Process store metadata
@@ -210,7 +211,7 @@ class AppStore extends Component {
     // How do I handle whether it is installing or uninstalling?????????
     const newInstallOrUninstallModalStatus = {
       open: false,
-      installing: false,
+      installing: true,
     };
     this.setState({
       installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
@@ -237,7 +238,8 @@ class AppStore extends Component {
     let apps;
     try {
       const response = await sendRequest({ path: '/installed-apps' });
-      ({ success, message, apps } = response);
+      console.log('load LTI ids response is ', response);
+      ({ success, message, apps } = response.body);
     } catch (err) {
       throw new Error('We couldn\'t reach the server please check your internet connection');
     }
@@ -269,13 +271,16 @@ class AppStore extends Component {
         path: `/install/${appId}`,
         method: 'POST',
       });
-      ({ success, message } = response);
+      console.log('install app response is ', response);
+      ({ success, message } = response.body);
     } catch (err) {
       throw new Error('We couldn\'t reach the server please check your internet connection');
     }
     if (!success) {
       throw new Error(message);
     }
+    // if app is installed successfully, reload the ltiIds
+    await this.loadLTIIds();
   }
 
   /**
@@ -288,8 +293,28 @@ class AppStore extends Component {
     if (!ltiIds || ltiIds.length === 0) {
       throw new Error(`${title} could not be uninstalled because it couldn't be found in your course`);
     }
-    console.log('uninstalled hello');
-    throw new Error('new error');
+
+    let success;
+    let message;
+    try {
+      const response = await sendRequest({
+        path: '/uninstall',
+        method: 'POST',
+        params: {
+          ltiIds: JSON.stringify(ltiIds),
+        },
+      });
+      console.log('uninstall app response is ', response);
+      ({ success, message } = response.body);
+    } catch (err) {
+      throw new Error('We couldn\'t reach the server please check your internet connection');
+    }
+    if (!success) {
+      throw new Error(message);
+    }
+
+    // if app is uninstalled successfully, reload the ltiIds
+    await this.loadLTIIds();
   }
 
   /**
