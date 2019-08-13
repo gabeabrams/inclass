@@ -1,5 +1,19 @@
 {
     "title": "GradeUp",
     "subtitle": "GradeUp is a great tool",
-    "creator": "dce"
+    "creator": "dce",
+    "tags": {
+      "cost": "free",
+      "type": "grading"
+    },
+    "screenshots": [
+        {
+            "title": "Event Chooser",
+            "filename": "event_chooser.png"
+        },
+        {
+            "title": "Manual Seating Dashboard",
+            "filename": "man_dash"
+        }
+    ]
 }

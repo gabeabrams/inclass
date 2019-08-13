@@ -6,6 +6,7 @@
 
 /* ------------------------- Store Class ------------------------ */
 const loadStore = require('./helpers/loadStore');
+const postProcessTags = require('./helpers/postProcessTags');
 const serveScreenshots = require('./helpers/serveScreenshots');
 const serveIcon = require('./helpers/serveIcon');
 const serveStoreLogo = require('./helpers/serveStoreLogo');
@@ -48,7 +49,6 @@ class Store {
   async _attemptLoad() {
     try {
       const myStore = await loadStore();
-      const { catalogs } = myStore;
       const storeMetadata = myStore.store;
       const { logoFullPath } = storeMetadata;
       const accountIdToCatalogId = {};
@@ -57,6 +57,12 @@ class Store {
 
       // Serves logoFullPath using serveStoreLogo function
       serveStoreLogo(logoFullPath, this.expressApp);
+
+      // Post-process the catalogs
+      const catalogs = {};
+      Object.keys(myStore.catalogs).forEach((catalogId) => {
+        catalogs[catalogId] = postProcessTags(myStore.catalogs[catalogId]);
+      });
 
       /**
        * Goes through each catalog in catalogs
