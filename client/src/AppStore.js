@@ -229,14 +229,14 @@ class AppStore extends Component {
    * Attempts to install the current app. If it fails, throws an error.
    */
   async installApp() {
-
+    return true;
   }
 
   /**
    * Attempts to uninstall the current app. If it fails, throws an error.
    */
   async uninstallApp() {
-
+    return true;
   }
 
   /**

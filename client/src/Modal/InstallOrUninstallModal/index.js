@@ -53,7 +53,13 @@ class InstallOrUninstallModal extends Component {
    */
   async attemptInstallOrUninstall() {
     // deconstruct the props
-    const { currentSpecificApp, uninstalling } = this.props;
+    const {
+      currentSpecificApp,
+      uninstalling,
+      installApp,
+      uninstallApp,
+    } = this.props;
+
     const {
       requestInstallEmail,
       requestUninstallEmail,
@@ -70,7 +76,14 @@ class InstallOrUninstallModal extends Component {
         currentView: CURRENT_VIEWS.SHOW_REQUEST_VIA_EMAIL,
       });
     } else {
-      const success = false;
+      // attempt to install/uninstall the app
+      let success;
+      if (uninstalling) {
+        success = await uninstallApp();
+      } else {
+        success = await installApp();
+      }
+
       if (success) {
         // install/uninstall successful, set the state
         this.setState({
