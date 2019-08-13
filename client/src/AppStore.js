@@ -124,7 +124,7 @@ class AppStore extends Component {
         sendRequest({ path: '/store' }),
         sendRequest({ path: '/catalog' }),
       ]);
-
+      console.log('catalog response is ', catalogRes);
       // Process store metadata
       if (!storeRes.body.success) {
         return this.setState({

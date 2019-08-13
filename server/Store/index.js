@@ -61,7 +61,17 @@ class Store {
       // Post-process the catalogs
       const catalogs = {};
       Object.keys(myStore.catalogs).forEach((catalogId) => {
+        // Post-process tags
         catalogs[catalogId] = postProcessTags(myStore.catalogs[catalogId]);
+        // Post-process to add appIds to app metadata
+        Object.keys(catalogs[catalogId].apps).forEach((appId) => {
+          // Extract this app's metadata
+          const appMetadata = catalogs[catalogId].apps[appId];
+          // Add the appId
+          appMetadata.appId = appId;
+          // Store the updated metadata to the catalog
+          catalogs[catalogId].apps[appId] = appMetadata;
+        });
       });
 
       /**
