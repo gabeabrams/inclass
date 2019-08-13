@@ -208,14 +208,14 @@ class AppStore extends Component {
   }
 
   /**
-   * Handles when the install button is clicked
+   * Handles when the uninstall button is clicked
    */
-  onInstallClicked() {
+  onUninstallClicked() {
 
   }
 
   /**
-   * Handles when the install button is clicked
+   * Handles when the support button is clicked
    */
   onSupportClicked() {
 
