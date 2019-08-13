@@ -7,16 +7,11 @@ describeS('Server', function () {
   itS('Responds with Store Metadata', async function (driver) {
     await driver.visit(`https://localhost:8088/courses/${courseId}`);
     // Click "Simulate Launch"
-    try {
-      await driver.click('.launch-button');
-    } catch (err) {
-      driver.log(err);
-    }
+    await driver.click('.launch-button');
     // Click "Authorize"
-    try {
+    await driver.wait(1000);
+    if (await driver.elementExists('.authorize-button')) {
       await driver.click('.authorize-button');
-    } catch (err) {
-      driver.log(err);
     }
     // Wait 2s
     await driver.wait(2000);
