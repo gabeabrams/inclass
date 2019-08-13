@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // Import other components
 import TagValueFilterCheckBox from './TagValueFilterCheckBox';
 import TagValueFilterCount from './TagValueFilterCount';
-import TagValueFilterLabel from './TagValueFilterLabel';
 
 // Import styling
 
@@ -15,17 +14,20 @@ class TagValueFilter extends Component {
       tagName,
     } = this.props;
 
-    const tagValueElements = Object.keys(tags[tagName].values).map((tagValue) => {
+    const tagValueElems = Object.keys(tags[tagName].values).map((tagValue) => {
       return (
-        <div>
-          <TagValueFilterCheckBox isChecked={tagValue} />
-        </div>
+        <span>
+          <TagValueFilterCheckBox
+            isChecked={tags[tagName].values[tagValue]}
+            label={tagValue}
+          />
+        </span>
       );
     });
 
     return (
       <div>
-        {tagValueElements}
+        {tagValueElems}
       </div>
     );
   }

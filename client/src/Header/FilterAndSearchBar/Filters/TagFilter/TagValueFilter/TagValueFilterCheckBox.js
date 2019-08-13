@@ -9,15 +9,16 @@ class TagValueFilterCheckBox extends Component {
   render() {
     const {
       isChecked,
+      label,
     } = this.props;
 
     return (
-      <div className="form-check">
+      <span className="form-check">
         <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
         <label className="form-check-label" for="defaultCheck1">
-        Default checkbox
+          {label}
         </label>
-      </div>
+      </span>
     );
   }
 }
@@ -25,6 +26,8 @@ class TagValueFilterCheckBox extends Component {
 TagValueFilterCheckBox.propTypes = {
   // Whether the checkbox should be clicked or not
   isChecked: PropTypes.bool.isRequired,
+  // The label of the tagValue to render
+  label: PropTypes.string.isRequired,
 };
 
 export default TagValueFilterCheckBox;
