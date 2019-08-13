@@ -30,7 +30,7 @@ describe('client > src > Modal > InstallOrUninstallModal > MessageBefore', () =>
         message={message}
         onClose={() => {}}
         onClick={() => {}}
-        uninstall
+        uninstalling
       />
     );
     // check title is rendered

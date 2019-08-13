@@ -17,7 +17,7 @@ class SupportModal extends Component {
       catalog,
       appName,
       onClose,
-      uninstall,
+      uninstalling,
     } = this.props;
 
     const modalFooter = (
@@ -28,7 +28,7 @@ class SupportModal extends Component {
 
     // generate the subject of the support email
     const subject = (
-      `I want to ${(uninstall) ? 'uninstall' : 'install'} ${appName} into catalog: ${catalog}`
+      `I want to ${(uninstalling) ? 'uninstall' : 'install'} ${appName} into catalog: ${catalog}`
     );
 
     return (
@@ -49,12 +49,12 @@ SupportModal.propTypes = {
   /* Function to call when the modal is closed */
   onClose: PropTypes.func.isRequired,
   /* Install boolean to determine use for install or uninstall */
-  uninstall: PropTypes.bool,
+  uninstalling: PropTypes.bool,
 };
 
 SupportModal.defaultProps = {
   /* Assume display installing */
-  uninstall: false,
+  uninstalling: false,
 };
 
 export default SupportModal;

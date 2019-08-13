@@ -28,13 +28,13 @@ class InstallOrUninstallModal extends Component {
 
   async componentDidMount() {
     // deconstruct the props
-    const { currentSpecificApp, uninstall } = this.props;
+    const { currentSpecificApp, uninstalling } = this.props;
     const {
       messageBeforeInstall,
       messageBeforeUninstall,
     } = currentSpecificApp;
     const messageBefore = (
-      (uninstall)
+      (uninstalling)
         ? messageBeforeInstall
         : messageBeforeUninstall
     );
@@ -53,14 +53,14 @@ class InstallOrUninstallModal extends Component {
    */
   async attemptInstallOrUninstall() {
     // deconstruct the props
-    const { currentSpecificApp, uninstall } = this.props;
+    const { currentSpecificApp, uninstalling } = this.props;
     const {
       requestInstallEmail,
       requestUninstallEmail,
     } = currentSpecificApp;
 
     const requestEmail = (
-      (uninstall)
+      (uninstalling)
         ? requestUninstallEmail
         : requestInstallEmail
     );
@@ -95,9 +95,9 @@ class InstallOrUninstallModal extends Component {
     const {
       currentSpecificApp,
       onClose,
-      uninstall,
+      uninstalling,
       catalog,
-      onSupportButtonClicked,
+      showSupportModal,
     } = this.props;
     // deconstruct current specific app
     const {
@@ -108,6 +108,7 @@ class InstallOrUninstallModal extends Component {
       messageAfterUninstall,
       requestInstallEmail,
       requestUninstallEmail,
+      supportEmail,
     } = currentSpecificApp;
 
     let viewToDisplay;
@@ -119,11 +120,11 @@ class InstallOrUninstallModal extends Component {
             onClose={onClose}
             onClick={this.attemptInstallOrUninstall}
             message={
-              (uninstall)
+              (uninstalling)
                 ? messageBeforeUninstall
                 : messageBeforeInstall
             }
-            uninstall={uninstall}
+            uninstalling={uninstalling}
           />
         );
         break;
@@ -133,11 +134,11 @@ class InstallOrUninstallModal extends Component {
             onClose={onClose}
             appName={title}
             message={
-              (uninstall)
+              (uninstalling)
                 ? messageAfterUninstall
                 : messageAfterInstall
             }
-            uninstall={uninstall}
+            uninstalling={uninstalling}
           />
         );
         break;
@@ -146,8 +147,13 @@ class InstallOrUninstallModal extends Component {
           <InstallOrUninstallFailure
             message="this failed"
             onClose={onClose}
-            onSupportButtonClicked={onSupportButtonClicked}
-            uninstall={uninstall}
+            onSupportButtonClicked={() => {
+              onClose();
+              let subject = `I got an error while ${uninstalling ? ('uninstalling') : ('installing')} ${title} in course `;
+              // I got an error while [installing/uninstalling] ${appName} in course ${courseId}: ${errorMessage}
+              showSupportModal(showSupportModal, 'this is subject');
+            }}
+            uninstalling={uninstalling}
           />
         );
         break;
@@ -155,14 +161,14 @@ class InstallOrUninstallModal extends Component {
         viewToDisplay = (
           <RequestInstallOrUninstall
             address={
-              (uninstall)
+              (uninstalling)
                 ? requestUninstallEmail
                 : requestInstallEmail
             }
             catalog={catalog}
             appName={title}
             onClose={onClose}
-            uninstall={uninstall}
+            uninstalling={uninstalling}
           />
         );
         break;
@@ -182,18 +188,18 @@ InstallOrUninstallModal.propTypes = {
   /* the current app to install or uninstall */
   currentSpecificApp: PropTypes.objectOf(PropTypes.string).isRequired,
   /* boolean to determine whether to show install or uninstall process */
-  uninstall: PropTypes.bool,
+  uninstalling: PropTypes.bool,
   /* function that closes the whole modal */
   onClose: PropTypes.func.isRequired,
   /* the catalog the app is in */
   catalog: PropTypes.string.isRequired,
   /* function that shows the support modal */
-  onSupportButtonClicked: PropTypes.func.isRequired,
+  showSupportModal: PropTypes.func.isRequired,
 };
 
 InstallOrUninstallModal.defaultProps = {
   /* Assume display installing */
-  uninstall: false,
+  uninstalling: false,
 };
 
 export default InstallOrUninstallModal;

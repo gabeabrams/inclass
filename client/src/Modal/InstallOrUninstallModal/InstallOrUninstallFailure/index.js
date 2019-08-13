@@ -17,7 +17,7 @@ class InstallOrUninstallFailure extends Component {
       onClose,
       onSupportButtonClicked,
       message,
-      uninstall,
+      uninstalling,
     } = this.props;
 
     const modalFooter = (
@@ -28,7 +28,7 @@ class InstallOrUninstallFailure extends Component {
 
     return (
       <Modal
-        title={`${(uninstall) ? 'Uninstall Failed' : 'Install Failed'}!`}
+        title={`${(uninstalling) ? 'Uninstall Failed' : 'Install Failed'}!`}
         onClose={onClose}
         footer={modalFooter}
       >
@@ -47,12 +47,12 @@ InstallOrUninstallFailure.propTypes = {
   /* Message to display to user before they can install the app */
   message: PropTypes.string.isRequired,
   /* Install boolean to determine use for install or uninstall */
-  uninstall: PropTypes.bool,
+  uninstalling: PropTypes.bool,
 };
 
 InstallOrUninstallFailure.defaultProps = {
   /* Assume display installing */
-  uninstall: false,
+  uninstalling: false,
 };
 
 export default InstallOrUninstallFailure;

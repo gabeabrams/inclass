@@ -33,7 +33,7 @@ describe('client > src > Modal > InstallOrUninstallModal > InstallOrUninstallSuc
         message={message}
         onClose={() => {}}
         appName={appName}
-        uninstall
+        uninstalling
       />
     );
     assert.equal(driver.getText('.modal-title'), `${appName} Uninstalled!`, 'title is not correct when unisntalling');

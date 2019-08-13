@@ -65,15 +65,15 @@ class AppStore extends Component {
       // Status of the installOrUninstall modal
       installOrUninstallModalStatus: {
         open: true,
-        installing: true,
+        uninstalling: true,
       },
     };
     this.onSupportModalClose = this.onSupportModalClose.bind(this);
     this.onInstallOrUninstallModalClose = (
       this.onInstallOrUninstallModalClose.bind(this)
     );
-    this.onSupportButtonClickedFromInstallModal = (
-      this.onSupportButtonClickedFromInstallModal.bind(this)
+    this.showSupportModal = (
+      this.showSupportModal.bind(this)
     );
   }
 
@@ -205,12 +205,11 @@ class AppStore extends Component {
     });
   }
 
-  onSupportButtonClickedFromInstallModal() {
-    this.onInstallOrUninstallModalClose();
+  showSupportModal(email, subject) {
     const newsupportModalStatus = {
+      email,
+      subject,
       open: true,
-      email: 'Harvard_Support@harvard.edu',
-      subject: 'having trouble installing this app',
     };
     this.setState({
       supportModalStatus: newsupportModalStatus,
@@ -273,12 +272,14 @@ class AppStore extends Component {
     // Create Install/Uninstall Element if open
     let installModalElement;
     if (installOrUninstallModalStatus.open) {
+      const { uninstalling } = installOrUninstallModalStatus;
       const fakeCurrenctSpecificApp = {
         title: 'GradeUp',
         messageBeforeInstall: 'this is message before install',
         messageAfterInstall: 'you have installed this app',
         messageBeforeUninstall: 'this is message before uninstall',
         messageAfterUninstall: 'you have uninstalled this app',
+        supportEmail: 'harvardSupport@harvard.edu',
         // requestInstallEmail: 'requestInstall@harvard.edu',
         // requestUninstallEmail: 'requestUninstall@harvard.edu',
       };
@@ -287,8 +288,8 @@ class AppStore extends Component {
           currentSpecificApp={fakeCurrenctSpecificApp}
           catalog={catalogTitle}
           onClose={(this.onInstallOrUninstallModalClose)}
-          onSupportButtonClicked={this.onSupportButtonClickedFromInstallModal}
-          uninstall
+          showSupportModal={this.showSupportModal}
+          uninstalling
         />
       );
     }
