@@ -98,6 +98,7 @@ class InstallOrUninstallModal extends Component {
       uninstalling,
       catalog,
       showSupportModal,
+      courseId,
     } = this.props;
     // deconstruct current specific app
     const {
@@ -149,9 +150,9 @@ class InstallOrUninstallModal extends Component {
             onClose={onClose}
             onSupportButtonClicked={() => {
               onClose();
-              let subject = `I got an error while ${uninstalling ? ('uninstalling') : ('installing')} ${title} in course `;
-              // I got an error while [installing/uninstalling] ${appName} in course ${courseId}: ${errorMessage}
-              showSupportModal(showSupportModal, 'this is subject');
+              // TODO: add in the real failure message
+              const subject = `I got an error while ${uninstalling ? ('uninstalling') : ('installing')} ${title} in course ${courseId}: replace this after`;
+              showSupportModal(supportEmail, subject);
             }}
             uninstalling={uninstalling}
           />
@@ -195,6 +196,8 @@ InstallOrUninstallModal.propTypes = {
   catalog: PropTypes.string.isRequired,
   /* function that shows the support modal */
   showSupportModal: PropTypes.func.isRequired,
+  /* courseId for the app */
+  courseId: PropTypes.number.isRequired,
 };
 
 InstallOrUninstallModal.defaultProps = {

@@ -240,6 +240,7 @@ class AppStore extends Component {
       loadingMessage,
       fatalErrorMessage,
       installOrUninstallModalStatus,
+      courseId,
     } = this.state;
 
     // Show loading message
@@ -269,8 +270,8 @@ class AppStore extends Component {
       // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
       supportModalElement = (
         <SupportModal
-          address="HarvardSupport@gmail.com"
-          subject="this is a test subject"
+          address={email}
+          subject={subject}
           onClose={(this.onSupportModalClose)}
         />
       );
@@ -297,6 +298,7 @@ class AppStore extends Component {
           onClose={(this.onInstallOrUninstallModalClose)}
           showSupportModal={this.showSupportModal}
           uninstalling={uninstalling}
+          courseId={courseId}
         />
       );
     }
