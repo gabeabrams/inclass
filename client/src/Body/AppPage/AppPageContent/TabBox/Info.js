@@ -25,6 +25,7 @@ Info.propTypes = {
 };
 
 Info.defaultProps = {
+  // Description for the info page
   description: 'No Description Provided',
 };
 
