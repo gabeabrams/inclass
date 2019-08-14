@@ -6,6 +6,8 @@
       "cost": "free",
       "type": "grading"
     },
+    "messageBeforeInstall": "this is message before install",
+    "requestInstallEmail": "harvard@hvd.edu",
     "screenshots": [
         {
             "title": "Event Chooser",

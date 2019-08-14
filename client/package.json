@@ -32,9 +32,9 @@
     ]
   },
   "devDependencies": {
-    "dce-enzyme": "^1.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-jest": "^22.9.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "dce-enzyme": "^1.0.0"
   }
 }
