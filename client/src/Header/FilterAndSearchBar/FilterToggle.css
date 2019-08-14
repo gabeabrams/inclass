@@ -1,0 +1,40 @@
+/* The container for the FilterToggle component */
+.filtertoggle-container {
+  /* Using flex to keep children on center axis */
+  display: flex;
+
+  /* Dimensions */
+  height: 100%;
+  width: 100%;
+
+  /* Text formatting */
+  font-size: 20px;
+
+  /* Align children along center and to the right */
+  align-items: center;
+  justify-content: flex-end;
+
+  /* Padding and margin for alignment */
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Styling for Font Awesome icons */
+.fa-caret-right, .fa-caret-down {
+  font-size: 35px;
+  color: white;
+}
+
+/* Keep button hidden behind header */
+.btn {
+  height: 40px;
+}
+
+/* Container to keep caret button fixed width and centered*/
+.button-container {
+  /* Keep button centered */
+  display: flex;
+  align-self: center;
+
+  width: 10px;
+}

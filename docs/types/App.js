@@ -4,6 +4,7 @@
  *   app extends
  * @param {string} [extends.catalogId] - the catalogId holding the parent app
  * @param {string} [extends.appId] - the appId of the parent app
+ * @param {string} [appId] - the appId of the app
  * @param {string} [title] - the title of the app
  * @param {string} [subtitle] - the subtitle of the app
  * @param {string} [description] - a long description of the app

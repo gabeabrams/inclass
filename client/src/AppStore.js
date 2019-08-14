@@ -8,6 +8,9 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Body from './Body';
 
+import SupportModal from './Modal/SupportModal';
+import InstallOrUninstallModal from './Modal/InstallOrUninstallModal';
+
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
 
@@ -39,6 +42,8 @@ class AppStore extends Component {
       storeHost: null,
       // Catalog title
       catalogTitle: null,
+      // Canvas Course ID
+      courseId: null,
       // isAdmin (true if user is an admin)
       isAdmin: false,
       // Tags
@@ -50,7 +55,7 @@ class AppStore extends Component {
       // The full list of apps (unfiltered)
       allApps: [],
       // The type of the current page body to show (see BODY_TYPE above)
-      currentBodyType: BODY_TYPE.APP_PAGE,
+      currentBodyType: BODY_TYPE.APP_LIST,
       // Current app
       currentSpecificApp: null,
       // Support modal status
@@ -62,13 +67,25 @@ class AppStore extends Component {
       // Status of the installOrUninstall modal
       installOrUninstallModalStatus: {
         open: false,
-        installing: false,
+        uninstalling: false,
       },
       // Mapping of LTI Ids for installed apps
       ltiIdsMap: {}, // appId => list of lti ids if the app is installed
     };
 
     // Bind handlers
+    this.onSearchChanged = this.onSearchChanged.bind(this);
+    this.onFilterToggle = this.onFilterToggle.bind(this);
+    this.onFilterChanged = this.onFilterChanged.bind(this);
+    this.onSupportModalClose = this.onSupportModalClose.bind(this);
+    this.onInstallOrUninstallModalClose = (
+      this.onInstallOrUninstallModalClose.bind(this)
+    );
+    this.showSupportModal = (
+      this.showSupportModal.bind(this)
+    );
+    this.installApp = this.installApp.bind(this);
+    this.uninstallApp = this.uninstallApp.bind(this);
     this.onAppSelected = this.onAppSelected.bind(this);
     this.onInstallClicked = this.onInstallClicked.bind(this);
     this.onUninstallClicked = this.onUninstallClicked.bind(this);
@@ -80,6 +97,7 @@ class AppStore extends Component {
    */
   async componentDidMount() {
     /* ---------------------- Load Server State --------------------- */
+    let courseId;
     try {
       // Get status from server
       const status = await getStatus();
@@ -99,6 +117,9 @@ class AppStore extends Component {
           fatalErrorMessage: 'We don\'t have access to Canvas. Please re-launch the app.',
         });
       }
+
+      // > Get courseId from launchInfo
+      ({ courseId } = status.launchInfo);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
@@ -113,6 +134,7 @@ class AppStore extends Component {
       const [storeRes, catalogRes] = await Promise.all([
         sendRequest({ path: '/store' }),
         sendRequest({ path: '/catalog' }),
+        this.loadLTIIds(),
       ]);
 
       // Process store metadata
@@ -133,7 +155,6 @@ class AppStore extends Component {
         });
       }
       const { catalog, isAdmin } = catalogRes.body;
-
       // Post-process store metadata, catalog, and add to state
       // > Tags
       const tags = {};
@@ -163,6 +184,7 @@ class AppStore extends Component {
       });
 
       this.setState({
+        courseId,
         storeHost,
         isAdmin,
         tags,
@@ -183,6 +205,64 @@ class AppStore extends Component {
   }
 
   /**
+   * Function to call when the search bar query is updated
+   * @param {string} newSearchQuery - the updated text in the search bar
+   */
+  onSearchChanged(newSearchQuery) {
+    this.setState({
+      searchQuery: newSearchQuery,
+    });
+  }
+  
+  /**
+   * Set the support modal status open to false to hide the modal
+   */
+  onSupportModalClose() {
+    const newSupportModalStatus = {
+      open: false,
+      email: '',
+      subject: '',
+    };
+    this.setState({
+      supportModalStatus: newSupportModalStatus,
+    });
+  }
+
+  /**
+   * Function to call when filter drawer is clicked
+   * @param {boolean} newFilterDrawerOpen - the boolean passed from the button
+   */
+  onFilterToggle(newFilterDrawerOpen) {
+    this.setState({
+      filterDrawerOpen: !!newFilterDrawerOpen,
+    });
+  }
+  
+  /**
+   * Set the install modal status open to false to hide the modal
+   */
+  onInstallOrUninstallModalClose() {
+    const newInstallOrUninstallModalStatus = {
+      open: false,
+      installing: true,
+    };
+    this.setState({
+      installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+    });
+  }
+
+  /**
+   * Function to call when checkbox is clicked or when reset button is clicked
+   * @param {boolean} isChecked - bool for new value of checkbox(es)
+   * @param {string} tagName - name of the tag to update
+   * @param {string} [tagValue] - optional value of the tag to be updated; if
+   *   none, all tagValues are updated
+   */
+  onFilterChanged(isChecked, tagName, tagValue) {
+    // TODO: Implement
+  }
+
+  /**
    * Handles when an app is clicked in the list
    * @param {string} appId - the id of the app that was clicked
    */
@@ -194,6 +274,20 @@ class AppStore extends Component {
     });
   }
 
+  /**
+   * Set the support modal status to true to show the modal
+   */
+  showSupportModal(email, subject) {
+    const newSupportModalStatus = {
+      email,
+      subject,
+      open: true,
+    };
+    this.setState({
+      supportModalStatus: newSupportModalStatus,
+    });
+  }
+  
   /**
    * Handles when the install button is clicked
    * TODO: Pull ltiIds through to buttons
@@ -209,16 +303,99 @@ class AppStore extends Component {
    * Handles when the uninstall button is clicked
    */
   onUninstallClicked() {
+
+  }
+
+  /**
+   * Handles when the support button is clicked
+   */
+  onSupportClicked() {
+
+  }
+
+  /**
+   * Load and process the LTI Ids from the server
+   */
+  async loadLTIIds() {
+    let success;
+    let message;
+    let apps;
+    try {
+      const response = await sendRequest({ path: '/installed-apps' });
+      ({ success, message, apps } = response.body);
+    } catch (err) {
+      throw new Error('We couldn\'t reach the server please check your internet connection');
+    }
+
+    if (!success) {
+      throw new Error(message);
+    }
+    // Post-processing for LTIIds
+    const ltiIdsMap = {};
+    apps.forEach((app) => {
+      ltiIdsMap[app.appId] = app.ltiIds;
+    });
+
     this.setState({
-      appInstalled: false,
+      ltiIdsMap,
     });
   }
 
   /**
-   * Handles when the install button is clicked
+   * Attempts to install the current app. If it fails, throws an error.
    */
-  onSupportClicked() {
-    console.log('Clicked Support Button');
+  async installApp() {
+    const { currentSpecificApp } = this.state;
+    const { appId } = currentSpecificApp;
+    let success;
+    let message;
+    try {
+      const response = await sendRequest({
+        path: `/install/${appId}`,
+        method: 'POST',
+      });
+      ({ success, message } = response.body);
+    } catch (err) {
+      throw new Error('We couldn\'t reach the server please check your internet connection');
+    }
+    if (!success) {
+      throw new Error(message);
+    }
+    // if app is installed successfully, reload the ltiIds
+    await this.loadLTIIds();
+  }
+
+  /**
+   * Attempts to uninstall the current app. If it fails, throws an error.
+   */
+  async uninstallApp() {
+    const { currentSpecificApp, ltiIdsMap } = this.state;
+    const { appId, title } = currentSpecificApp;
+    const ltiIds = ltiIdsMap[appId];
+    if (!ltiIds || ltiIds.length === 0) {
+      throw new Error(`${title} could not be uninstalled because it couldn't be found in your course`);
+    }
+
+    let success;
+    let message;
+    try {
+      const response = await sendRequest({
+        path: '/uninstall',
+        method: 'POST',
+        params: {
+          ltiIds: JSON.stringify(ltiIds),
+        },
+      });
+      ({ success, message } = response.body);
+    } catch (err) {
+      throw new Error('We couldn\'t reach the server please check your internet connection');
+    }
+    if (!success) {
+      throw new Error(message);
+    }
+
+    // if app is uninstalled successfully, reload the ltiIds
+    await this.loadLTIIds();
   }
 
   /**
@@ -237,6 +414,11 @@ class AppStore extends Component {
       currentSpecificApp,
       loadingMessage,
       fatalErrorMessage,
+      filterDrawerOpen,
+      searchQuery,
+      installOrUninstallModalStatus,
+      courseId,
+      isAdmin,
     } = this.state;
 
     // Show loading message
@@ -260,16 +442,36 @@ class AppStore extends Component {
     }
 
     // Create supportModelElement if open
-    let supportModelElement;
+    let supportModalElement;
     if (supportModalStatus.open) {
       const { email, subject } = supportModalStatus;
-      supportModelElement = (
-        <span email={email} subject={subject} onClose={() => {}}>
-          No Support Modal Yet!
-        </span>
+      supportModalElement = (
+        <SupportModal
+          address={email}
+          subject={subject}
+          onClose={(this.onSupportModalClose)}
+        />
       );
     }
 
+    // Create Install/Uninstall Element if open
+    let installModalElement;
+    if (installOrUninstallModalStatus.open) {
+      const { uninstalling } = installOrUninstallModalStatus;
+      installModalElement = (
+        <InstallOrUninstallModal
+          isAdmin={isAdmin}
+          currentSpecificApp={currentSpecificApp}
+          catalog={catalogTitle}
+          onClose={this.onInstallOrUninstallModalClose}
+          showSupportModal={this.showSupportModal}
+          uninstalling={uninstalling}
+          courseId={courseId}
+          installApp={this.installApp}
+          uninstallApp={this.uninstallApp}
+        />
+      );
+    }
     // Render the component
     return (
       <div>
@@ -278,6 +480,11 @@ class AppStore extends Component {
             storeHost={storeHost}
             storeTitle={storeTitle}
             catalogTitle={catalogTitle}
+            filterDrawerOpen={filterDrawerOpen}
+            onFilterToggle={this.onFilterToggle}
+            searchQuery={searchQuery}
+            onSearchChanged={this.onSearchChanged}
+            tags={tags}
           />
         </div>
         <div className="appstore-body-container">
@@ -294,7 +501,8 @@ class AppStore extends Component {
             onSupportClicked={this.onSupportClicked}
           />
         </div>
-        {supportModelElement}
+        {supportModalElement}
+        {installModalElement}
       </div>
     );
   }

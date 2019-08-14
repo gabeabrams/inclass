@@ -207,7 +207,8 @@ module.exports = (expressApp) => {
 
   /**
    * Endpoint that uninstalls an app from the current course
-   * @param {string[]} ltiIds - the list of lti app ids from Canvas to uninstall
+   * @param {string} ltiIds - the JSONified list of lti app ids from Canvas to
+   *   uninstall (once parsed, type should be string[])
    * @return {object} success description response of the form:
    * {
    *   success: <true/false>,
