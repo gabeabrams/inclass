@@ -207,7 +207,6 @@ class AppStore extends Component {
   }
 
   onInstallOrUninstallModalClose() {
-    // How do I handle whether it is installing or uninstalling?????????
     const newInstallOrUninstallModalStatus = {
       open: false,
       installing: true,
