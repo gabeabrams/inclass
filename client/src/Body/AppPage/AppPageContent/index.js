@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 // Import other components
 import Screenshots from './TabBox/Screenshots';
-import Guides from './TabBox/Guides';
 import Info from './TabBox/Info';
+
+import Guides from './TabBox/Guides';
 
 // Names of tabs
 import TAB_NAMES from './TAB_NAMES';
@@ -13,10 +14,21 @@ import TabBar from './TabBar';
 class AppPageContent extends Component {
   constructor(props) {
     super(props);
+    // Deconstruct Props
+    const { app } = this.props;
 
+    // Shows which tab to show depending on the tabs available
+    let startTab;
+    if (app.screenshots) {
+      startTab = TAB_NAMES.SCREENSHOTS;
+    } else if (app.guides) {
+      startTab = TAB_NAMES.GUIDES;
+    } else {
+      startTab = TAB_NAMES.INFO;
+    }
     this.state = {
       // the tab that is displayed
-      currentTab: TAB_NAMES.SCREENSHOTS,
+      currentTab: startTab,
     };
 
     this.tabChanged = this.tabChanged.bind(this);
@@ -36,15 +48,26 @@ class AppPageContent extends Component {
     // Deconstruct state
     const { currentTab } = this.state;
 
+    let screenshotsExist = false;
+    let guidesExist = false;
+
+    if (app.screenshots) {
+      screenshotsExist = true;
+    }
+
+    if (app.guides) {
+      guidesExist = true;
+    }
+
     // Changes display based on tabs
     let contentToDisplay;
     if (currentTab === TAB_NAMES.INFO) {
       contentToDisplay = (
-        <Info />
+        <Info description={app.description} />
       );
     } else if (currentTab === TAB_NAMES.GUIDES) {
       contentToDisplay = (
-        <Guides />
+        <Guides app={app} />
       );
     } else {
       contentToDisplay = (
@@ -56,6 +79,8 @@ class AppPageContent extends Component {
         <TabBar
           currentTab={currentTab}
           onTabChanged={this.tabChanged}
+          screenshotsExist={screenshotsExist}
+          guidesExist={guidesExist}
         />
         {contentToDisplay}
       </div>
@@ -73,7 +98,19 @@ AppPageContent.propTypes = {
         url: PropTypes.string,
       })
     ),
+    // Array of guides
+    guides: PropTypes.arrayOf(
+      PropTypes.shape({
+        // a string for the title of the guide
+        title: PropTypes.string,
+        // array of strings to iterate the steps for each guide
+        steps: PropTypes.arrayOf(
+          PropTypes.string
+        ),
+      })
+    ),
   }).isRequired,
+
 
   // The host for the URL
   storeHost: PropTypes.string.isRequired,

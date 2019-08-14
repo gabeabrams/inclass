@@ -8,10 +8,6 @@ import AppItem from '../../shared/AppItem';
 
 import './style.css';
 
-// Note: this is a temporary function
-const onSupportClicked = () => {
-  console.log('clicked support button');
-};
 class AppPage extends Component {
   constructor(props) {
     super(props);
@@ -19,26 +15,18 @@ class AppPage extends Component {
     this.state = {
       appInstalled: false,
     };
-
-    this.onInstallClicked = this.onInstallClicked.bind(this);
-    this.onUninstallClicked = this.onUninstallClicked.bind(this);
-  }
-
-  onInstallClicked() {
-    this.setState({
-      appInstalled: true,
-    });
-  }
-
-  onUninstallClicked() {
-    this.setState({
-      appInstalled: false,
-    });
   }
 
   render() {
     // Deconstruct props
-    const { app, storeHost, tagColors } = this.props;
+    const {
+      app,
+      storeHost,
+      tagColors,
+      onInstallClicked,
+      onUninstallClicked,
+      onSupportClicked,
+    } = this.props;
     const { appInstalled } = this.state;
 
     return (
@@ -56,8 +44,8 @@ class AppPage extends Component {
         <div className="appPage-footer">
           <AppPageFooter
             appInstalled={appInstalled}
-            onInstallClicked={this.onInstallClicked}
-            onUninstallClicked={this.onUninstallClicked}
+            onInstallClicked={onInstallClicked}
+            onUninstallClicked={onUninstallClicked}
             onSupportClicked={onSupportClicked}
           />
         </div>
@@ -81,6 +69,9 @@ AppPage.propTypes = {
   storeHost: PropTypes.string.isRequired,
   // Object with the colors for each tag
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
+  onInstallClicked: PropTypes.func.isRequired,
+  onUninstallClicked: PropTypes.func.isRequired,
+  onSupportClicked: PropTypes.func.isRequired,
 };
 
 export default AppPage;

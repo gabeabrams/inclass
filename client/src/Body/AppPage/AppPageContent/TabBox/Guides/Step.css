@@ -1,0 +1,7 @@
+/* Styling for each line of instructions */
+.step-instructions {
+  /* Allows text to wrap with space left for badge*/
+  display: block;
+  margin-top: -21px;
+  margin-left: 28px;
+}

@@ -18,6 +18,8 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
           mostRecentTabName = tabName;
         }}
         currentTab={TAB_NAMES.SCREENSHOTS}
+        screenshotsExist
+        guidesExist
       />
     );
 
@@ -56,6 +58,8 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
         onTabChanged={() => {
         }}
         currentTab={TAB_NAMES.GUIDES}
+        screenshotsExist
+        guidesExist
       />
     );
 
@@ -68,9 +72,10 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     // initializes driver with a tab bar showing Guides
     const driver = new Driver(
       <TabBar
-        onTabChanged={() => {
-        }}
+        onTabChanged={() => {}}
         currentTab={TAB_NAMES.INFO}
+        screenshotsExist
+        guidesExist
       />
     );
 
@@ -85,6 +90,8 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
       <TabBar
         onTabChanged={() => {}}
         currentTab={TAB_NAMES.SCREENSHOTS}
+        screenshotsExist
+        guidesExist
       />
     );
 
@@ -107,6 +114,25 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
       driver.getText('#info'),
       'Info',
       'Info tab text is not correct'
+    );
+  });
+
+  it('Checks screenshots/guides tabs do not exist with no data', async () => {
+    // initializes driver with an info only tab bar
+    const driver = new Driver(
+      <TabBar
+        onTabChanged={() => {}}
+        currentTab={TAB_NAMES.SCREENSHOTS}
+        screenshotsExist={false}
+        guidesExist={false}
+      />
+    );
+
+    assert(driver.elementExists('#info'), 'Info tab is missing');
+    assert(!driver.elementExists('#guides'), 'Guides tab should not exist');
+    assert(
+      !driver.elementExists('#screenshots'),
+      'Screenshots tab should not exist'
     );
   });
 });

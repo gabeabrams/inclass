@@ -55,7 +55,7 @@ class AppStore extends Component {
       // The full list of apps (unfiltered)
       allApps: [],
       // The type of the current page body to show (see BODY_TYPE above)
-      currentBodyType: BODY_TYPE.APP_PAGE,
+      currentBodyType: BODY_TYPE.APP_LIST,
       // Current app
       currentSpecificApp: null,
       // Support modal status
@@ -290,9 +290,13 @@ class AppStore extends Component {
   
   /**
    * Handles when the install button is clicked
+   * TODO: Pull ltiIds through to buttons
+   * TODO: InstallorUninstallModal status rather than appInstalled
    */
   onInstallClicked() {
-
+    this.setState({
+      appInstalled: true,
+    });
   }
 
   /**
@@ -306,7 +310,7 @@ class AppStore extends Component {
    * Handles when the support button is clicked
    */
   onSupportClicked() {
-  
+
   }
 
   /**
@@ -492,6 +496,9 @@ class AppStore extends Component {
             currentSpecificApp={currentSpecificApp}
             appList={allApps}
             onAppSelected={this.onAppSelected}
+            onInstallClicked={this.onInstallClicked}
+            onUninstallClicked={this.onUninstallClicked}
+            onSupportClicked={this.onSupportClicked}
           />
         </div>
         {supportModalElement}

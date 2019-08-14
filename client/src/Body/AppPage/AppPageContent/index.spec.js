@@ -34,7 +34,6 @@ describe('client > src > Body > AppPage > AppPageContent', () => {
     // Checks that the tab bar exists
     assert(driver.elementExists('.nav'), 'Tab bar is absent');
     // Checks the default content exists
-    assert(driver.elementExists('.screenshots-container'),
-      'screenshots is absent');
+    assert(driver.elementExists('#info'), 'Info is absent');
   });
 });

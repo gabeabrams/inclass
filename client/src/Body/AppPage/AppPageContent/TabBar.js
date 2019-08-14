@@ -9,10 +9,16 @@ class TabBar extends Component {
     const {
       onTabChanged,
       currentTab,
+      screenshotsExist,
+      guidesExist,
     } = this.props;
 
-    return (
-      <ul className="nav nav-tabs">
+
+    let screenshotsTabElem;
+    let guidesTabElem;
+
+    if (screenshotsExist) {
+      screenshotsTabElem = (
         <li className="nav-item">
           <a
             href="#screenshots"
@@ -28,6 +34,10 @@ class TabBar extends Component {
             Screenshots
           </a>
         </li>
+      );
+    }
+    if (guidesExist) {
+      guidesTabElem = (
         <li className="nav-item">
           <a
             href="#guides"
@@ -43,6 +53,13 @@ class TabBar extends Component {
             Guides
           </a>
         </li>
+      );
+    }
+
+    return (
+      <ul className="nav nav-tabs">
+        {screenshotsTabElem}
+        {guidesTabElem}
         <li className="nav-item">
           <a
             href="#info"
@@ -66,6 +83,10 @@ TabBar.propTypes = {
   onTabChanged: PropTypes.func.isRequired,
   // The tab currently displayed
   currentTab: PropTypes.string.isRequired,
+  // Boolean value for showing screenshot tab
+  screenshotsExist: PropTypes.bool.isRequired,
+  // Boolean value for showing guides tab
+  guidesExist: PropTypes.bool.isRequired,
 };
 
 export default TabBar;

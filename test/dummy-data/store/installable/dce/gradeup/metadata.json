@@ -17,5 +17,30 @@
             "title": "Manual Seating Dashboard",
             "filename": "man_dash"
         }
+    ],
+    "guides": [
+        {
+            "title": "Getting Started",
+            "steps": [
+                "Launch GradeUp",
+                "Click \"Admin Dashboard\"",
+                "Enter your full name",
+                "Upload your list of lectures as a CSV",
+                "Verify that the information is correct",
+                "Click \"I am Done\" and make sure that all of the things that you have to do are done and this is a long step",
+                "Step 7",
+                "Step 8",
+                "Step 9",
+                "Step 10"
+            ]
+        },
+        {
+            "title": "Turning on",
+            "steps": [
+                "Launch GradeUp",
+                "Click \"Admin Dashboard\"",
+                "Click \"I am Done\" and make sure that all of the things that you have to do are done and this is a long step"
+            ]
+        }
     ]
 }

@@ -11,16 +11,22 @@ import TabBox from '.';
 
 class Info extends Component {
   render() {
+    const { description } = this.props;
     return (
       <TabBox>
-        <p>This is a placeholder for the Info page</p>
+        <p>{description}</p>
       </TabBox>
     );
   }
 }
 
 Info.propTypes = {
+  description: PropTypes.string,
+};
 
+Info.defaultProps = {
+  // Description for the info page
+  description: 'No Description Provided',
 };
 
 export default Info;
