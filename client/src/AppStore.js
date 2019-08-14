@@ -69,6 +69,7 @@ class AppStore extends Component {
     // Bind handler functions
     this.onSearchChanged = this.onSearchChanged.bind(this);
     this.onFilterToggle = this.onFilterToggle.bind(this);
+    this.onFilterChanged = this.onFilterChanged.bind(this);
   }
 
   /**
@@ -195,6 +196,17 @@ class AppStore extends Component {
     this.setState({
       filterDrawerOpen: !!newFilterDrawerOpen,
     });
+  }
+
+  /**
+   * Function to call when checkbox is clicked or when reset button is clicked
+   * @param {boolean} isChecked - bool for new value of checkbox(es)
+   * @param {string} tagName - name of the tag to update
+   * @param {string} [tagValue] - optional value of the tag to be updated; if
+   *   none, all tagValues are updated
+   */
+  onFilterChanged(isChecked, tagName, tagValue) {
+
   }
 
   /**
