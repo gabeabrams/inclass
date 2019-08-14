@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import Screenshots from './TabBox/Screenshots';
 import Info from './TabBox/Info';
 
-// TODO: Confused why this needs to have index to recognize it
-import Guides from './TabBox/Guides/index';
+import Guides from './TabBox/Guides';
 
 // Names of tabs
 import TAB_NAMES from './TAB_NAMES';
