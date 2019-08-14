@@ -10,8 +10,8 @@ describe('client > src > shared > EmailForm > EmailSubject', () => {
       <EmailSubject subject="this is a test subject" />
     );
     // check if add on is rendered on page
-    assert(driver.elementExists('#basic-addon3'), 'did not render correctly');
-    assert.equal(driver.getText('#basic-addon3'), 'Subject:', 'did not render the correct text');
+    assert(driver.elementExists('#subject_addon'), 'did not render correctly');
+    assert.equal(driver.getText('#subject_addon'), 'Subject:', 'did not render the correct text');
     // check if input tag is rendered on page
     const inputGroupHTML = driver.getHTML('.input-group');
     assert(inputGroupHTML.includes('<input'), 'did not render input tag');

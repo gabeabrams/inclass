@@ -13,7 +13,7 @@ class EmailSubject extends Component {
         <div className="input-group-prepend">
           <span
             className="input-group-text bg-info border-0 font-weight-bold text-white rounded"
-            id="basic-addon3"
+            id="subject_addon"
           >
             Subject:
           </span>
@@ -21,11 +21,11 @@ class EmailSubject extends Component {
         <input
           type="text"
           className="form-control rounded text-truncate"
-          aria-describedby="basic-addon3"
+          aria-describedby="subject_addon"
           value={subject}
           readOnly
         />
-        <div className="input-group-append" id="button-addon4">
+        <div className="input-group-append" id="copy-button-addon">
           <CopyButton text={subject} />
         </div>
       </div>

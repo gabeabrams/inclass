@@ -24,7 +24,7 @@ CancelButton.propTypes = {
 };
 
 CancelButton.defaultProps = {
-  // default text is okay
+  // default text is cancel
   text: 'Cancel',
 };
 

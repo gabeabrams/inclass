@@ -13,8 +13,8 @@ describe('client > src > shared > EmailForm > EmailAddress', () => {
       />
     );
     // check if add on is rendered on page
-    assert(driver.elementExists('#basic-addon3'), 'did not render correctly');
-    assert.equal(driver.getText('#basic-addon3'), 'Send to:', 'did not render the correct text');
+    assert(driver.elementExists('#address_addon'), 'did not render correctly');
+    assert.equal(driver.getText('#address_addon'), 'Send to:', 'did not render the correct text');
     // check if alert tag is rendered on page
     assert(driver.elementExists('.alert'), 'alert field did not render correctly');
     assert.equal(driver.getText('.alert'), 'Harvard@support.edu', 'email field did not display email passed in');

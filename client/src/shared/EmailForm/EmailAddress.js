@@ -11,7 +11,7 @@ class EmailAddress extends Component {
         <div className="input-group-prepend">
           <span
             className="input-group-text bg-info border-0 font-weight-bold text-white rounded"
-            id="basic-addon3"
+            id="address_addon"
           >
               Send to:
           </span>

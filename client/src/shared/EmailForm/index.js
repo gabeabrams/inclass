@@ -6,21 +6,9 @@ import EmailAddress from './EmailAddress';
 import EmailSubject from './EmailSubject';
 
 class EmailForm extends Component {
-  constructor(props) {
-    super(props);
-    // deconstruct props
-    const { address, subject } = this.props;
-    this.state = {
-      // the address to send the email to
-      address,
-      // the subject of the email
-      subject,
-    };
-  }
-
   render() {
     // deconstruct props
-    const { address, subject } = this.state;
+    const { address, subject } = this.props;
 
     return (
       <div className="emailform-container d-flex flex-column">
