@@ -17,19 +17,21 @@ class TagFilter extends Component {
 
     // For each card, we want to render the TagValueFilter component
     return (
-      <span
-        className="card pt-3 p-2 tagfilter-container"
-        style={{
-          backgroundColor: tags[tagName].color,
-        }}
-      >
-        { tagName }
-        <span className="card tagfilter-card">
-          <span className="card-body">
-            <TagValueFilter tags={tags} tagName={tagName} />
+      <div className="card-columns">
+        <span
+          className="card pt-3 p-2 tagfilter-container"
+          style={{
+            backgroundColor: tags[tagName].color,
+          }}
+        >
+          { tagName }
+          <span className="card tagfilter-card">
+            <span className="card-body">
+              <TagValueFilter tags={tags} tagName={tagName} />
+            </span>
           </span>
         </span>
-      </span>
+      </div>
     );
   }
 }
