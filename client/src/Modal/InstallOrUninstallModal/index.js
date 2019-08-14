@@ -60,6 +60,7 @@ class InstallOrUninstallModal extends Component {
       uninstalling,
       installApp,
       uninstallApp,
+      isAdmin,
     } = this.props;
 
     const {
@@ -74,7 +75,7 @@ class InstallOrUninstallModal extends Component {
     );
     let errMessage;
     // if the app needs permission to install or uninstall
-    if (requestEmail) {
+    if (requestEmail && !isAdmin) {
       this.setState({
         currentView: CURRENT_VIEWS.SHOW_REQUEST_VIA_EMAIL,
       });
@@ -205,6 +206,8 @@ class InstallOrUninstallModal extends Component {
 }
 
 InstallOrUninstallModal.propTypes = {
+  /* boolean to determin whether the admin can bypass request to install */
+  isAdmin: PropTypes.bool.isRequired,
   /* the current app to install or uninstall */
   currentSpecificApp: PropTypes.objectOf(PropTypes.string).isRequired,
   /* boolean to determine whether to show install or uninstall process */

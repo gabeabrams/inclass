@@ -332,6 +332,7 @@ class AppStore extends Component {
       fatalErrorMessage,
       installOrUninstallModalStatus,
       courseId,
+      isAdmin,
     } = this.state;
 
     // Show loading message
@@ -374,6 +375,7 @@ class AppStore extends Component {
       const { uninstalling } = installOrUninstallModalStatus;
       installModalElement = (
         <InstallOrUninstallModal
+          isAdmin={isAdmin}
           currentSpecificApp={currentSpecificApp}
           catalog={catalogTitle}
           onClose={(this.onInstallOrUninstallModalClose)}
