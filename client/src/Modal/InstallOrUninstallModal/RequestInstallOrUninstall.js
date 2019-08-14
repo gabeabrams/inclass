@@ -6,7 +6,7 @@ import Modal from '..';
 import EmailForm from '../../shared/EmailForm';
 import OkayButton from '../../shared/OkayButton';
 
-class SupportModal extends Component {
+class RequestInstallOrUninstall extends Component {
   /**
    * Render the Modal
    */
@@ -29,18 +29,20 @@ class SupportModal extends Component {
 
     // generate the subject of the support email
     const subject = (
-      `I want to ${(uninstalling) ? 'uninstall' : 'install'} ${appName} into catalog: ${catalog}`
+      `I want to ${(uninstalling) ? 'uninstall' : 'install'} ${appName} ${(uninstalling) ? 'from' : 'into'} catalog: ${catalog}`
     );
 
+    const title = `To ${(uninstalling) ? 'uninstall' : 'install'} this app, request it via email`;
+
     return (
-      <Modal title="To install this app, request it via email" onClose={onClose} footer={modalFooter}>
+      <Modal title={title} onClose={onClose} footer={modalFooter}>
         <EmailForm address={address} subject={subject} />
       </Modal>
     );
   }
 }
 
-SupportModal.propTypes = {
+RequestInstallOrUninstall.propTypes = {
   // the email address to send to
   address: PropTypes.string.isRequired,
   // the title of the catalog the app is in
@@ -53,9 +55,9 @@ SupportModal.propTypes = {
   uninstalling: PropTypes.bool,
 };
 
-SupportModal.defaultProps = {
+RequestInstallOrUninstall.defaultProps = {
   /* Assume display installing */
   uninstalling: false,
 };
 
-export default SupportModal;
+export default RequestInstallOrUninstall;
