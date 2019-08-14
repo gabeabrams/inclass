@@ -19,6 +19,7 @@ class InstallOrUninstallSuccess extends Component {
       uninstalling,
     } = this.props;
 
+    // Install success modal requires an Okay button for footer
     const modalFooter = (
       <div>
         <OkayButton onClick={onClose} />
@@ -31,6 +32,7 @@ class InstallOrUninstallSuccess extends Component {
         onClose={onClose}
         footer={modalFooter}
       >
+        {/* MessageBody has a default value of 'refresh canvas page' */}
         <MessageBody messageBody={
           (message)
             ? `${message} 

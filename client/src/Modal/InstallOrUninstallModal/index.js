@@ -196,7 +196,7 @@ class InstallOrUninstallModal extends Component {
       default:
         viewToDisplay = null;
     }
-    // pass handler functions to children modals to change the current view
+    // render the current modal
     return (
       <div className="displayed-modal-container">
         { viewToDisplay }

@@ -20,6 +20,7 @@ class SupportModal extends Component {
       uninstalling,
     } = this.props;
 
+    // Require install modal needs an Okay button as footer
     const modalFooter = (
       <div>
         <OkayButton text="Close" onClick={onClose} />

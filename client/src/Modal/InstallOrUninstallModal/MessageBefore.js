@@ -20,6 +20,8 @@ class MessageBefore extends Component {
       message,
       uninstalling,
     } = this.props;
+
+    // MessageBefore modal requires cancel button and okay button as footers
     const modalFooter = (
       <div>
         <CancelButton text="Cancel" onClick={onClose} />
@@ -29,6 +31,8 @@ class MessageBefore extends Component {
         />
       </div>
     );
+
+    // Modal title is different depending on installing or uninstalling
     const modalTitle = `Please Read Before ${(uninstalling) ? 'Uninstalling' : 'Installing'}`;
 
     return (

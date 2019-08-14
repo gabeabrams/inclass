@@ -20,6 +20,7 @@ class InstallOrUninstallFailure extends Component {
       uninstalling,
     } = this.props;
 
+    // Install failure modal requires an Okay button for footer
     const modalFooter = (
       <div>
         <OkayButton onClick={onClose} />
