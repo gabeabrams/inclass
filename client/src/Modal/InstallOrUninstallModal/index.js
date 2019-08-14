@@ -73,10 +73,8 @@ class InstallOrUninstallModal extends Component {
         : requestInstallEmail
     );
     let errMessage;
-    console.log('request email and is admin is ', requestEmail, isAdmin);
     // if the app needs permission to install or uninstall
     if (requestEmail !== undefined && isAdmin === false) {
-      console.log('here');
       this.setState({
         currentView: CURRENT_VIEWS.SHOW_REQUEST_VIA_EMAIL,
       });
