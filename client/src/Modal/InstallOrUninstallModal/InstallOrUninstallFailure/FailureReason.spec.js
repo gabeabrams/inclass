@@ -11,7 +11,14 @@ describe('client > src > Modal > InstallOrUninstallModal InstallOrUninstallFailu
       <FailureReason message={message} />
     );
     // check that body is rendered
-    assert(driver.elementExists('.failure-reason-container'), 'failure reason is not rendered');
-    assert.equal(driver.getText('.failure-reason-container'), message, 'failure reason was not rendered correctly');
+    assert(
+      driver.elementExists('.failure-reason-container'),
+      'failure reason is not rendered'
+    );
+    assert.equal(
+      driver.getText('.failure-reason-container'),
+      message,
+      'failure reason was not rendered correctly'
+    );
   });
 });

@@ -27,8 +27,15 @@ describe.only('client > src > Modal', () => {
     // check that modal is rendered
     assert(driver.elementExists('.modal'), 'modal is not rendered');
     // check that title is rendered
-    assert(driver.elementExists('.modal-title'), 'title is not rendered on page');
-    assert.equal(driver.getText('.modal-title'), 'testTitle', 'title text was not rendered correctly');
+    assert(
+      driver.elementExists('.modal-title'),
+      'title is not rendered on page'
+    );
+    assert.equal(
+      driver.getText('.modal-title'),
+      'testTitle',
+      'title text was not rendered correctly'
+    );
     // check that children is rendered
     assert(driver.elementExists('.okay-button'), 'children is not rendered');
     await driver.click('.okay-button');

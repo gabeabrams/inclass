@@ -17,6 +17,9 @@ describe('client > src > Modal > InstallOrUninstallModal > RequestInstallOrUnins
     // check that modal is rendered
     assert(driver.elementExists('.modal'), 'modal is not rendered');
     // check that email form is rendered
-    assert(driver.elementExists('.emailform-container'), 'did not render email form');
+    assert(
+      driver.elementExists('.emailform-container'),
+      'did not render email form'
+    );
   });
 });

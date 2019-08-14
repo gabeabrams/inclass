@@ -11,7 +11,14 @@ describe('client > src > Modal > InstallOrUninstallModal > MessageBody', () => {
       <MessageBody messageBody={message} />
     );
     // check that body is rendered
-    assert(driver.elementExists('.message-body-container'), 'message body is not rendered');
-    assert.equal(driver.getText('.message-body-container'), message, 'message before was not rendered correctly');
+    assert(
+      driver.elementExists('.message-body-container'),
+      'message body is not rendered'
+    );
+    assert.equal(
+      driver.getText('.message-body-container'),
+      message,
+      'message before was not rendered correctly'
+    );
   });
 });

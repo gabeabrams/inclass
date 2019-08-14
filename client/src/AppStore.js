@@ -356,7 +356,6 @@ class AppStore extends Component {
     let supportModalElement;
     if (supportModalStatus.open) {
       const { email, subject } = supportModalStatus;
-      // FIX THIS LATER TO USE REAL EMAIL AND SUBJECT!!
       supportModalElement = (
         <SupportModal
           address={email}
@@ -375,7 +374,7 @@ class AppStore extends Component {
           isAdmin={isAdmin}
           currentSpecificApp={currentSpecificApp}
           catalog={catalogTitle}
-          onClose={(this.onInstallOrUninstallModalClose)}
+          onClose={this.onInstallOrUninstallModalClose}
           showSupportModal={this.showSupportModal}
           uninstalling={uninstalling}
           courseId={courseId}
