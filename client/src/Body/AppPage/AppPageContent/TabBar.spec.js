@@ -72,8 +72,7 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     // initializes driver with a tab bar showing Guides
     const driver = new Driver(
       <TabBar
-        onTabChanged={() => {
-        }}
+        onTabChanged={() => {}}
         currentTab={TAB_NAMES.INFO}
         screenshotsExist
         guidesExist
