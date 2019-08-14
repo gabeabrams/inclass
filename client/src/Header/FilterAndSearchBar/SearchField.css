@@ -1,0 +1,11 @@
+/* Styling for the SearchField container */
+.searchfield-container {
+  /* Dimensions */
+  width: 75%;
+}
+
+.form-control {
+  width: auto;
+  min-width: 20px;
+  max-width: 200px;
+}

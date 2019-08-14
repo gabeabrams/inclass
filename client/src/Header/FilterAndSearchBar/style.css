@@ -1,0 +1,26 @@
+.filterandsearchbar-container {
+  /* Set positioning for container in header */
+  position: absolute;
+  top: 50px;
+
+  /* Set background border */
+  border-top: 1px solid black;
+
+  /* Dimensions */
+  height: 50px;
+  width: 100%;
+
+  /* Align children along cross-axis */
+  align-items: center;
+}
+
+.filterandsearchbar-filterbutton {
+  /* Dimensions */
+  height: 100%;
+
+  margin-right: 65px;
+}
+
+.filterandsearchbar-searchbox {
+  margin-left: 65px;
+}

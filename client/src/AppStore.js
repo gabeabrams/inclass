@@ -74,6 +74,9 @@ class AppStore extends Component {
     };
 
     // Bind handlers
+    this.onSearchChanged = this.onSearchChanged.bind(this);
+    this.onFilterToggle = this.onFilterToggle.bind(this);
+    this.onFilterChanged = this.onFilterChanged.bind(this);
     this.onSupportModalClose = this.onSupportModalClose.bind(this);
     this.onInstallOrUninstallModalClose = (
       this.onInstallOrUninstallModalClose.bind(this)
@@ -202,6 +205,16 @@ class AppStore extends Component {
   }
 
   /**
+   * Function to call when the search bar query is updated
+   * @param {string} newSearchQuery - the updated text in the search bar
+   */
+  onSearchChanged(newSearchQuery) {
+    this.setState({
+      searchQuery: newSearchQuery,
+    });
+  }
+  
+  /**
    * Set the support modal status open to false to hide the modal
    */
   onSupportModalClose() {
@@ -216,7 +229,17 @@ class AppStore extends Component {
   }
 
   /**
-   * set the install modal status open to false to hide the modal
+   * Function to call when filter drawer is clicked
+   * @param {boolean} newFilterDrawerOpen - the boolean passed from the button
+   */
+  onFilterToggle(newFilterDrawerOpen) {
+    this.setState({
+      filterDrawerOpen: !!newFilterDrawerOpen,
+    });
+  }
+  
+  /**
+   * Set the install modal status open to false to hide the modal
    */
   onInstallOrUninstallModalClose() {
     const newInstallOrUninstallModalStatus = {
@@ -226,6 +249,17 @@ class AppStore extends Component {
     this.setState({
       installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
     });
+  }
+
+  /**
+   * Function to call when checkbox is clicked or when reset button is clicked
+   * @param {boolean} isChecked - bool for new value of checkbox(es)
+   * @param {string} tagName - name of the tag to update
+   * @param {string} [tagValue] - optional value of the tag to be updated; if
+   *   none, all tagValues are updated
+   */
+  onFilterChanged(isChecked, tagName, tagValue) {
+    // TODO: Implement
   }
 
   /**
@@ -376,10 +410,13 @@ class AppStore extends Component {
       currentSpecificApp,
       loadingMessage,
       fatalErrorMessage,
+      filterDrawerOpen,
+      searchQuery,
       installOrUninstallModalStatus,
       courseId,
       isAdmin,
     } = this.state;
+
     // Show loading message
     if (loadingMessage) {
       return (
@@ -439,6 +476,11 @@ class AppStore extends Component {
             storeHost={storeHost}
             storeTitle={storeTitle}
             catalogTitle={catalogTitle}
+            filterDrawerOpen={filterDrawerOpen}
+            onFilterToggle={this.onFilterToggle}
+            searchQuery={searchQuery}
+            onSearchChanged={this.onSearchChanged}
+            tags={tags}
           />
         </div>
         <div className="appstore-body-container">
