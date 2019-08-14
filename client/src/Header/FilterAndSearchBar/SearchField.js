@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 // Import css
 import './SearchField.css';
@@ -27,7 +26,6 @@ class SearchField extends Component {
             }}
             className="form-control"
             aria-label="Search"
-            aria-describedby="basic-addon1"
           />
         </div>
       </div>

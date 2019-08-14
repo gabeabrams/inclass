@@ -4,11 +4,6 @@
   width: 75%;
 }
 
-/* Styling for the Font Awesome search icon */
-.fa-search {
-  color: rgb(89, 98, 106);
-}
-
 .form-control {
   width: auto;
   min-width: 20px;
