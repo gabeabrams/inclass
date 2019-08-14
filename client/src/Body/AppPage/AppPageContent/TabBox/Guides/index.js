@@ -16,7 +16,7 @@ class Guides extends Component {
     const toRender = guides.map((guide, index) => {
       const keyName = `guide-${index}`;
       return (
-        <div key={keyName}>
+        <div className={keyName} key={keyName}>
           <div className="guides-elem p-3 mw-20">
             <Guide guide={guide} />
           </div>

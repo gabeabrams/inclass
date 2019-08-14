@@ -14,7 +14,7 @@ class Guide extends Component {
     const stepsToRender = steps.map((step, index) => {
       const keyName = `step-${index}`;
       return (
-        <div key={keyName} className="steps-elem">
+        <div key={keyName} className="steps-container">
           <Step step={step} stepNum={index + 1} />
         </div>
       );

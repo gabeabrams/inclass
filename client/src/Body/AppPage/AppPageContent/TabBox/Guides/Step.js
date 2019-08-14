@@ -7,9 +7,9 @@ class Step extends Component {
   render() {
     const { step, stepNum } = this.props;
     return (
-      <div className="step-container font-weight-bold">
+      <div className={`step-${stepNum}`}>
         <span className="badge badge-secondary mr-2 ml-2">{stepNum}</span>
-        <span className="step-instructions">{step}</span>
+        <span className="step-instructions font-weight-bold">{step}</span>
       </div>
     );
   }
