@@ -26,7 +26,7 @@ class MessageBefore extends Component {
       <div>
         <CancelButton text="Cancel" onClick={onClose} />
         <OkayButton
-          text={`${(uninstalling) ? 'Uninstall' : 'Install'}`}
+          text={(uninstalling) ? 'Uninstall' : 'Install'}
           onClick={onClick}
         />
       </div>

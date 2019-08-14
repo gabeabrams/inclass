@@ -74,7 +74,7 @@ class InstallOrUninstallModal extends Component {
     );
     let errMessage;
     // if the app needs permission to install or uninstall
-    if (requestEmail !== undefined && isAdmin === false) {
+    if (requestEmail && !isAdmin) {
       this.setState({
         currentView: CURRENT_VIEWS.SHOW_REQUEST_VIA_EMAIL,
       });
@@ -135,7 +135,7 @@ class InstallOrUninstallModal extends Component {
     let viewToDisplay;
     // decide based on currentView which modal to render
     switch (currentView) {
-      case 'show-message-before':
+      case CURRENT_VIEWS.SHOW_MESSAGE_BEFORE:
         viewToDisplay = (
           <MessageBefore
             onClose={onClose}
@@ -149,7 +149,7 @@ class InstallOrUninstallModal extends Component {
           />
         );
         break;
-      case 'show-install-success':
+      case CURRENT_VIEWS.SHOW_SUCCESS:
         viewToDisplay = (
           <InstallOrUninstallSuccess
             onClose={onClose}
@@ -163,7 +163,7 @@ class InstallOrUninstallModal extends Component {
           />
         );
         break;
-      case 'show-install-failure':
+      case CURRENT_VIEWS.SHOW_FAILURE:
         viewToDisplay = (
           <InstallOrUninstallFailure
             message={errMessage}
@@ -177,7 +177,7 @@ class InstallOrUninstallModal extends Component {
           />
         );
         break;
-      case 'show-request-via-email':
+      case CURRENT_VIEWS.SHOW_REQUEST_VIA_EMAIL:
         viewToDisplay = (
           <RequestInstallOrUninstall
             address={
