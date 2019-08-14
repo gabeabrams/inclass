@@ -12,7 +12,8 @@
 		"dev:server": "export DEV=true;npm start",
 		"dev:server-installable": "export STORE_PATH=/test/dummy-data/store/installable;export DEV=true;npm run dev:server",
 		"dev:client": "export DEV=true;cd client;npm start",
-		"selenium": "node ./node_modules/dce-selenium/run"
+		"selenium": "node ./node_modules/dce-selenium/run",
+		"postinstall": "cd client;npm install"
 	},
 	"repository": {
 		"type": "git",
