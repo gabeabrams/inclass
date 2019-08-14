@@ -196,13 +196,13 @@ class AppStore extends Component {
   }
 
   onSupportModalClose() {
-    const newsupportModalStatus = {
+    const newSupportModalStatus = {
       open: false,
       email: '',
       subject: '',
     };
     this.setState({
-      supportModalStatus: newsupportModalStatus,
+      supportModalStatus: newSupportModalStatus,
     });
   }
 
