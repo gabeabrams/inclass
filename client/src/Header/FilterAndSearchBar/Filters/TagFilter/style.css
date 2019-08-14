@@ -9,7 +9,7 @@
   border-radius: 20px;
 
   /* Align children in the center */
-  align-items: center;
+  align-content: center;
 
   /* Font styling */
   color: white;
@@ -30,4 +30,8 @@
   color: black;
   font-weight: bold;
   font-size: 18px;
+}
+
+.tagfilter-header {
+  align-self: center;
 }
