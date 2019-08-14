@@ -7,7 +7,7 @@ import Guide from './Guide';
 describe(
   'client > src > Body > AppPage > AppPageContent > TabBox > Guides > Guide',
   () => {
-    it('', async () => {
+    it('Checks Guide Card renders title and steps', async () => {
       // fake guide data
       const guide = {
         title: 'Fake Guide',
