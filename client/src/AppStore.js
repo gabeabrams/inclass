@@ -217,13 +217,13 @@ class AppStore extends Component {
   }
 
   showSupportModal(email, subject) {
-    const newsupportModalStatus = {
+    const newSupportModalStatus = {
       email,
       subject,
       open: true,
     };
     this.setState({
-      supportModalStatus: newsupportModalStatus,
+      supportModalStatus: newSupportModalStatus,
     });
   }
 
