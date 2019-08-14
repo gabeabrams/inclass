@@ -40,7 +40,7 @@ Guide.propTypes = {
     title: PropTypes.string.isRequired,
     // String of steps to display
     steps: PropTypes.arrayOf(
-      PropTypes.string.isRequired
+      PropTypes.string
     ).isRequired,
   }).isRequired,
 };
