@@ -195,6 +195,9 @@ class AppStore extends Component {
     }
   }
 
+  /**
+   * set the support modal status open to false to hide the modal
+   */
   onSupportModalClose() {
     const newSupportModalStatus = {
       open: false,
@@ -206,6 +209,9 @@ class AppStore extends Component {
     });
   }
 
+  /**
+   * set the install modal status open to false to hide the modal
+   */
   onInstallOrUninstallModalClose() {
     const newInstallOrUninstallModalStatus = {
       open: false,
@@ -216,6 +222,9 @@ class AppStore extends Component {
     });
   }
 
+  /**
+   * set the support modal status to true to show the modal
+   */
   showSupportModal(email, subject) {
     const newSupportModalStatus = {
       email,
