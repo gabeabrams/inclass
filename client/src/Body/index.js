@@ -63,8 +63,11 @@ Body.propTypes = {
   apps: PropTypes.objectOf(PropTypes.object).isRequired,
   // The tags information for the app
   tags: PropTypes.objectOf(PropTypes.object).isRequired,
+  // Function for when install button is clicked (installs app)
   onInstallClicked: PropTypes.func.isRequired,
+  // Function for when uninstall button is clicked (uninstalls app)
   onUninstallClicked: PropTypes.func.isRequired,
+  // Function for when support button is clicked (bring up email modal)
   onSupportClicked: PropTypes.func.isRequired,
 };
 
