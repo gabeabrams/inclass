@@ -35,8 +35,14 @@ class InstallOrUninstallSuccess extends Component {
         {/* MessageBody has a default value of 'refresh canvas page' */}
         <MessageBody messageBody={
           (message)
-            ? `${message} 
-            Now, refresh your Canvas page for the changes to be applied.`
+            ? (
+              <div>
+                <div>{message}</div>
+                <div>
+                  Now, refresh your Canvas page for the changes to be applied.
+                </div>
+              </div>
+            )
             : 'Now, refresh your Canvas page for the changes to be applied.'
           }
         />

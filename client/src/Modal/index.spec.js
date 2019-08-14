@@ -5,7 +5,7 @@ import assert from 'assert';
 import Modal from '.';
 import OkayButton from '../shared/OkayButton';
 
-describe.only('client > src > Modal', () => {
+describe('client > src > Modal', () => {
   it('Displays the Modal', async () => {
     // Create testing button to pass in as children
     let clicked = false;
