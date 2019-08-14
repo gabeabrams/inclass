@@ -1,34 +1,60 @@
-// TODO: remove instruction comments
-// props:
-// - app (the app to show the screenshots of)
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// Import other components
-// TODO: remove instruction comments
-// Questions to answer: How to get the app to show the screenshots of?
+import TAB_NAMES from './TAB_NAMES';
 
 class TabBar extends Component {
   render() {
     // Deconstruct props
     const {
-      onClick,
-      screenshotsActive,
-      guidesActive,
-      infoActive,
+      onTabChanged,
+      currentTab,
     } = this.props;
+
     return (
       <ul className="nav nav-tabs">
-        {/* TODO: add comments to jsx */}
         <li className="nav-item">
-          <a href="#screenshots" className={`nav-link${screenshotsActive ? ' active' : ''}`} onClick={onClick}>Screenshots</a>
+          <a
+            href="#screenshots"
+            id="screenshots"
+            // shows screenshots if currentTab equals screenshots
+            className={
+              `nav-link${
+                (currentTab === TAB_NAMES.SCREENSHOTS) ? ' active' : ''
+              }`
+            }
+            onClick={() => { onTabChanged(TAB_NAMES.SCREENSHOTS); }}
+          >
+            Screenshots
+          </a>
         </li>
         <li className="nav-item">
-          <a href="#guides" className={`nav-link${guidesActive ? ' active' : ''}`} onClick={onClick}>Guides</a>
+          <a
+            href="#guides"
+            id="guides"
+            // shows guides if currentTab equals guides
+            className={
+              `nav-link${
+                (currentTab === TAB_NAMES.GUIDES) ? ' active' : ''
+              }`
+            }
+            onClick={() => { onTabChanged(TAB_NAMES.GUIDES); }}
+          >
+            Guides
+          </a>
         </li>
         <li className="nav-item">
-          <a href="#info" className={`nav-link${infoActive ? ' active' : ''}`} onClick={onClick}>Info</a>
+          <a
+            href="#info"
+            id="info"
+            // shows info if currentTab equals info
+            className={`nav-link${
+              (currentTab === TAB_NAMES.INFO) ? ' active' : ''
+            }`}
+            onClick={() => { onTabChanged(TAB_NAMES.INFO); }}
+          >
+            Info
+          </a>
         </li>
       </ul>
     );
@@ -36,19 +62,10 @@ class TabBar extends Component {
 }
 
 TabBar.propTypes = {
-  // TODO: add descriptions for each prop
-  // TODO: use TAB_NAMES as a value for an 'activeTab' prop instead of booleans
-  onClick: PropTypes.func.isRequired,
-  screenshotsActive: PropTypes.bool,
-  guidesActive: PropTypes.bool,
-  infoActive: PropTypes.bool,
-};
-
-TabBar.defaultProps = {
-  // TODO: add comments explaining each default
-  screenshotsActive: true,
-  guidesActive: false,
-  infoActive: false,
+  // Sets current tab to the one clicked
+  onTabChanged: PropTypes.func.isRequired,
+  // The tab currently displayed
+  currentTab: PropTypes.string.isRequired,
 };
 
 export default TabBar;

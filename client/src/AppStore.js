@@ -55,7 +55,7 @@ class AppStore extends Component {
       // The full list of apps (unfiltered)
       allApps: [],
       // The type of the current page body to show (see BODY_TYPE above)
-      currentBodyType: BODY_TYPE.APP_LIST,
+      currentBodyType: BODY_TYPE.APP_PAGE,
       // Current app
       currentSpecificApp: null,
       // Support modal status
@@ -66,12 +66,14 @@ class AppStore extends Component {
       },
       // Status of the installOrUninstall modal
       installOrUninstallModalStatus: {
-        open: true,
+        open: false,
         uninstalling: false,
       },
       // Mapping of LTI Ids for installed apps
       ltiIdsMap: {}, // appId => list of lti ids if the app is installed
     };
+
+    // Bind handlers
     this.onSupportModalClose = this.onSupportModalClose.bind(this);
     this.onInstallOrUninstallModalClose = (
       this.onInstallOrUninstallModalClose.bind(this)
@@ -81,6 +83,10 @@ class AppStore extends Component {
     );
     this.installApp = this.installApp.bind(this);
     this.uninstallApp = this.uninstallApp.bind(this);
+    this.onAppSelected = this.onAppSelected.bind(this);
+    this.onInstallClicked = this.onInstallClicked.bind(this);
+    this.onUninstallClicked = this.onUninstallClicked.bind(this);
+    this.onSupportClicked = this.onSupportClicked.bind(this);
   }
 
   /**
@@ -196,7 +202,7 @@ class AppStore extends Component {
   }
 
   /**
-   * set the support modal status open to false to hide the modal
+   * Set the support modal status open to false to hide the modal
    */
   onSupportModalClose() {
     const newSupportModalStatus = {
@@ -223,7 +229,19 @@ class AppStore extends Component {
   }
 
   /**
-   * set the support modal status to true to show the modal
+   * Handles when an app is clicked in the list
+   * @param {string} appId - the id of the app that was clicked
+   */
+  onAppSelected(appId) {
+    const { allApps } = this.state;
+
+    this.setState({
+      currentSpecificApp: allApps[appId],
+    });
+  }
+
+  /**
+   * Set the support modal status to true to show the modal
    */
   showSupportModal(email, subject) {
     const newSupportModalStatus = {
@@ -234,6 +252,27 @@ class AppStore extends Component {
     this.setState({
       supportModalStatus: newSupportModalStatus,
     });
+  }
+  
+  /**
+   * Handles when the install button is clicked
+   */
+  onInstallClicked() {
+
+  }
+
+  /**
+   * Handles when the uninstall button is clicked
+   */
+  onUninstallClicked() {
+
+  }
+
+  /**
+   * Handles when the support button is clicked
+   */
+  onSupportClicked() {
+  
   }
 
   /**
@@ -410,6 +449,7 @@ class AppStore extends Component {
             currentBodyType={currentBodyType}
             currentSpecificApp={currentSpecificApp}
             appList={allApps}
+            onAppSelected={this.onAppSelected}
           />
         </div>
         {supportModalElement}

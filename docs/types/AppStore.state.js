@@ -18,6 +18,9 @@
  * @param {object} supportModalStatus - the status of the support modal in the
  *   form: { open: <true/false>, email: <support email>, subject: <string>}
  * @param {object} installOrUninstallModalStatus - the status of the install or
- *   uninstall modal in the form: { open: <true/false>, installing: false }
- *   where installing is false if we are uninstalling
+ *   uninstall modal in the form: { open: <true/false>, uninstalling: false }
+ *   where uninstalling is true if we are uninstalling
+ * @param {object} ltiIdsMap - a map { appId => list if lti ids } where an app
+ *   will show up in this mapping only if the app is installed in the current
+ *   Canvas course
  */

@@ -33,8 +33,10 @@ class AppTags extends Component {
 
     // map each array elem into AppTag element
     const tagsList = tagsArray.map((tagPair) => {
+      const tagUniqueKey = `${tagPair[0]}=>${tagPair[1]}`;
       return (
         <AppTag
+          key={tagUniqueKey}
           tagKey={tagPair[0]}
           tagValue={tagPair[1]}
           tagColor={tagPair[2]}

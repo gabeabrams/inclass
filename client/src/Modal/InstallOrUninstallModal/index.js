@@ -1,5 +1,6 @@
 // Import React
 import React, { Component } from 'react';
+
 import PropTypes from 'prop-types';
 // import different modals to display
 import MessageBefore from './MessageBefore';

@@ -15,51 +15,51 @@ class AppPageContent extends Component {
     super(props);
 
     this.state = {
+      // the tab that is displayed
       currentTab: TAB_NAMES.SCREENSHOTS,
     };
 
     this.tabChanged = this.tabChanged.bind(this);
   }
 
+  // Changes the current tab to what is passed in
   tabChanged(newTabName) {
     this.setState({
       currentTab: newTabName,
     });
   }
 
+
   render() {
-    const { app } = this.props;
+    // Deconstruct props
+    const { app, storeHost } = this.props;
+    // Deconstruct state
     const { currentTab } = this.state;
 
-    // if (currentTab === "info") {
-    //   return (
-    //     <div className="appPageContent-container">
-    //       <TabBar onClick={() => this.tabChanged("info")} screenshotsActive={false} guidesActive={false} infoActive={true} />
-    //       <Info />
-    //     </div>
-    //   )
-    // } else if (currentTab === "guides") {
-    //   return (
-    //     <div className="appPageContent-container">
-    //       <TabBar onClick={() => this.tabChanged(TAB_NAMES.GUIDES)} screenshotsActive={false} guidesActive={true} infoActive={false}/>
-    //       <Guides />
-    //     </div>
-    //   )
-    // } else {
+    // Changes display based on tabs
+    let contentToDisplay;
+    if (currentTab === TAB_NAMES.INFO) {
+      contentToDisplay = (
+        <Info />
+      );
+    } else if (currentTab === TAB_NAMES.GUIDES) {
+      contentToDisplay = (
+        <Guides />
+      );
+    } else {
+      contentToDisplay = (
+        <Screenshots app={app} storeHost={storeHost} />
+      );
+    }
     return (
-      <div className="appPageContent-container">
+      <div className="appPageContent-container p-2">
         <TabBar
-          onClick={() => {
-            this.tabChanged(TAB_NAMES.SCREENSHOTS);
-          }}
-          screenshotsActive
+          currentTab={currentTab}
+          onTabChanged={this.tabChanged}
         />
-        <Screenshots app={app} />
+        {contentToDisplay}
       </div>
     );
-    // }
-    // TODO: show the current tab box (screenshots, guides, or info)
-    // TODO: pass this.tabChanged to the tab bar so it can call it when a new tab is selected
   }
 }
 
@@ -74,6 +74,9 @@ AppPageContent.propTypes = {
       })
     ),
   }).isRequired,
+
+  // The host for the URL
+  storeHost: PropTypes.string.isRequired,
 };
 
 export default AppPageContent;
