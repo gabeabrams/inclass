@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // Import other components
 import FilterToggle from './FilterToggle';
 import SearchField from './SearchField';
-import Filters from './Filters';
 
 // Import css
 import './style.css';
@@ -17,7 +16,6 @@ class FilterAndSearchBar extends Component {
       onFilterToggle,
       searchQuery,
       onSearchChanged,
-      tags,
     } = this.props;
 
     // Divided into FilterToggle component and SearchField component
@@ -49,8 +47,6 @@ FilterAndSearchBar.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   // The function to update the search query
   onSearchChanged: PropTypes.func.isRequired,
-  // The tags object for filtering
-  tags: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default FilterAndSearchBar;
