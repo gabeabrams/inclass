@@ -67,7 +67,7 @@ class AppStore extends Component {
       // Status of the installOrUninstall modal
       installOrUninstallModalStatus: {
         open: true,
-        uninstalling: true,
+        uninstalling: false,
       },
       // Mapping of LTI Ids for installed apps
       ltiIdsMap: {}, // appId => list of lti ids if the app is installed
@@ -146,7 +146,6 @@ class AppStore extends Component {
         });
       }
       const { catalog, isAdmin } = catalogRes.body;
-
       // Post-process store metadata, catalog, and add to state
       // > Tags
       const tags = {};
@@ -334,7 +333,6 @@ class AppStore extends Component {
       courseId,
       isAdmin,
     } = this.state;
-
     // Show loading message
     if (loadingMessage) {
       return (
@@ -387,7 +385,6 @@ class AppStore extends Component {
         />
       );
     }
-
     // Render the component
     return (
       <div>

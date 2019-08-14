@@ -37,8 +37,8 @@ class InstallOrUninstallModal extends Component {
     } = currentSpecificApp;
     const messageBefore = (
       (uninstalling)
-        ? messageBeforeInstall
-        : messageBeforeUninstall
+        ? messageBeforeUninstall
+        : messageBeforeInstall
     );
     if (messageBefore) {
       this.setState({
@@ -62,7 +62,6 @@ class InstallOrUninstallModal extends Component {
       uninstallApp,
       isAdmin,
     } = this.props;
-
     const {
       requestInstallEmail,
       requestUninstallEmail,
@@ -74,8 +73,10 @@ class InstallOrUninstallModal extends Component {
         : requestInstallEmail
     );
     let errMessage;
+    console.log('request email and is admin is ', requestEmail, isAdmin);
     // if the app needs permission to install or uninstall
-    if (requestEmail && !isAdmin) {
+    if (requestEmail !== undefined && isAdmin === false) {
+      console.log('here');
       this.setState({
         currentView: CURRENT_VIEWS.SHOW_REQUEST_VIA_EMAIL,
       });
