@@ -8,7 +8,7 @@ class Step extends Component {
     const { step, stepNum } = this.props;
     return (
       <div className={`step-${stepNum}`}>
-        <span className="badge badge-secondary mr-2 ml-2">{stepNum}</span>
+        <span className="badge badge-secondary">{stepNum}</span>
         <span className="step-instructions font-weight-bold">{step}</span>
       </div>
     );

@@ -197,6 +197,7 @@ class AppStore extends Component {
   /**
    * Handles when the install button is clicked
    * TODO: Pull ltiIds through to buttons
+   * TODO: InstallorUninstallModal status rather than appInstalled
    */
   onInstallClicked() {
     this.setState({

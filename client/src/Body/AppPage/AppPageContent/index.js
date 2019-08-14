@@ -14,10 +14,21 @@ import TabBar from './TabBar';
 class AppPageContent extends Component {
   constructor(props) {
     super(props);
+    // Deconstruct Props
+    const { app } = this.props;
 
+    // Shows which tab to show depending on the tabs available
+    let startTab;
+    if (app.screenshots) {
+      startTab = TAB_NAMES.SCREENSHOTS;
+    } else if (app.guides) {
+      startTab = TAB_NAMES.GUIDES;
+    } else {
+      startTab = TAB_NAMES.INFO;
+    }
     this.state = {
       // the tab that is displayed
-      currentTab: TAB_NAMES.INFO,
+      currentTab: startTab,
     };
 
     this.tabChanged = this.tabChanged.bind(this);
