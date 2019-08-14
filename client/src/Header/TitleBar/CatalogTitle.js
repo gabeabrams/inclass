@@ -8,20 +8,25 @@ class CatalogTitle extends Component {
   render() {
     // Deconstruct props
     const {
+      // The title of the catalog
       catalogTitle,
     } = this.props;
 
     return (
-      <div className="catalogtitle-container row no-gutters">
-        {/* Used col-{breakpoint}-auto to make column fit to content */}
-        <div className="col-{breakpoint}-auto"><b>{ catalogTitle }</b></div>
-        <div className="catalogtitle-catalogtext d-none d-sm-block col">Catalog</div>
+      <div className="catalogtitle-container">
+        <span className="catalogtitle-title font-weight-bold mr-1">
+          {catalogTitle}
+        </span>
+        <span className="catalogtitle-catalogtext d-none d-sm-inline">
+          Catalog
+        </span>
       </div>
     );
   }
 }
 
 CatalogTitle.propTypes = {
+  // catalogTitle is a string and is required
   catalogTitle: PropTypes.string.isRequired,
 };
 

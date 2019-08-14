@@ -6,21 +6,26 @@ import './StoreTitle.css';
 
 class StoreTitle extends Component {
   render() {
-    // Deconstruct props
     const {
+      // The title of the store
       storeTitle,
     } = this.props;
 
     return (
-      <div className="storetitle-container row no-gutters">
-        <div className="col"><b>{ storeTitle }</b></div>
-        <div className="storetitle-storetext d-none d-sm-block col-{breakpoint}-auto">App Store</div>
+      <div className="storetitle-container">
+        <span className="storetitle-title font-weight-bold">
+          {storeTitle}
+        </span>
+        <span className="storetitle-text ml-1 d-none d-sm-inline">
+          App Store
+        </span>
       </div>
     );
   }
 }
 
 StoreTitle.propTypes = {
+  // storeTitle prop must be a string and is required
   storeTitle: PropTypes.string.isRequired,
 };
 

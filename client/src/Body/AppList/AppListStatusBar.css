@@ -1,0 +1,7 @@
+.app-list-status-bar-container {
+  font-size: 25px;
+
+  /* same margin as appList */
+  margin-left: 8px;
+  margin-bottom: 5px;
+}

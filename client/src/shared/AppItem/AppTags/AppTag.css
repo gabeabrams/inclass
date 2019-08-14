@@ -1,0 +1,19 @@
+/* styling for the whole tag, including the left label and right label */
+.apptag-single-tag {
+  font-size: 18px;
+  margin-right: 5px;
+  white-space: nowrap;
+}
+
+/* the left label of the tag */
+.apptag-left-side {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+
+/* the right label of the tag */
+.apptag-right-side {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}

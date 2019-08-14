@@ -1,3 +1,4 @@
+/* Container for catalog title */
 .catalogtitle-container {
   /* Simple padding to center text nicely */
   padding-top: 5px;
@@ -6,7 +7,12 @@
   font-size: 20px;
 }
 
+/* Empty class for catalog title, mainly for specific element identification */
+.catlogtitle-title {
+
+}
+
+/* Empty class for catalog text, mainly for specific element identification */
 .catalogtitle-catalogtext {
-  /* Add padding so words space nicely */
-  margin-left: 5px;
+
 }
