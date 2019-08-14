@@ -53,6 +53,9 @@ describe('client > src > Body > AppPage', () => {
         app={app}
         storeHost={fakeStoreHost}
         tagColors={fakeTagColors}
+        onInstallClicked={() => {}}
+        onUninstallClicked={() => {}}
+        onSupportClicked={() => {}}
       />
     );
 

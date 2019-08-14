@@ -69,10 +69,10 @@ class AppStore extends Component {
     };
 
     // Bind handlers
-    // this.onAppSelected = this.onAppSelected.bind(this);
-    // this.onInstallClicked = this.onInstallClicked.bind(this);
-    // this.onUninstallClicked = this.onUninstallClicked.bind(this);
-    // this.onSupportClicked = this.onSupportClicked.bind(this);
+    this.onAppSelected = this.onAppSelected.bind(this);
+    this.onInstallClicked = this.onInstallClicked.bind(this);
+    this.onUninstallClicked = this.onUninstallClicked.bind(this);
+    this.onSupportClicked = this.onSupportClicked.bind(this);
   }
 
   /**
@@ -194,26 +194,30 @@ class AppStore extends Component {
     });
   }
 
-  // /**
-  //  * Handles when the install button is clicked
-  //  */
-  // onInstallClicked() {
+  /**
+   * Handles when the install button is clicked
+   */
+  onInstallClicked() {
+    this.setState({
+      appInstalled: true,
+    });
+  }
 
-  // }
+  /**
+   * Handles when the uninstall button is clicked
+   */
+  onUninstallClicked() {
+    this.setState({
+      appInstalled: false,
+    });
+  }
 
-  // /**
-  //  * Handles when the install button is clicked
-  //  */
-  // onInstallClicked() {
-
-  // }
-
-  // /**
-  //  * Handles when the install button is clicked
-  //  */
-  // onSupportClicked() {
-
-  // }
+  /**
+   * Handles when the install button is clicked
+   */
+  onSupportClicked() {
+    console.log('Clicked Support Button');
+  }
 
   /**
    * Render the AppStore
@@ -283,6 +287,9 @@ class AppStore extends Component {
             currentSpecificApp={currentSpecificApp}
             appList={allApps}
             onAppSelected={this.onAppSelected}
+            onInstallClicked={this.onInstallClicked}
+            onUninstallClicked={this.onUninstallClicked}
+            onSupportClicked={this.onSupportClicked}
           />
         </div>
         {supportModelElement}
