@@ -372,16 +372,6 @@ class AppStore extends Component {
     let installModalElement;
     if (installOrUninstallModalStatus.open) {
       const { uninstalling } = installOrUninstallModalStatus;
-      // const fakeCurrenctSpecificApp = {
-      //   title: 'GradeUp',
-      //   messageBeforeInstall: 'this is message before install',
-      //   messageAfterInstall: 'you have installed this app',
-      //   messageBeforeUninstall: 'this is message before uninstall',
-      //   messageAfterUninstall: 'you have uninstalled this app',
-      //   supportEmail: 'harvardSupport@harvard.edu',
-      //   requestInstallEmail: 'requestInstall@harvard.edu',
-      //   requestUninstallEmail: 'requestUninstall@harvard.edu',
-      // };
       installModalElement = (
         <InstallOrUninstallModal
           currentSpecificApp={currentSpecificApp}
