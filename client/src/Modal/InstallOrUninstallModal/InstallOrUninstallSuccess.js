@@ -31,7 +31,13 @@ class InstallOrUninstallSuccess extends Component {
         onClose={onClose}
         footer={modalFooter}
       >
-        <MessageBody messageBody={message} />
+        <MessageBody messageBody={
+          (message)
+            ? `${message} 
+            Now, refresh your Canvas page for the changes to be applied.`
+            : 'Now, refresh your Canvas page for the changes to be applied.'
+          }
+        />
       </Modal>
     );
   }
@@ -44,7 +50,7 @@ InstallOrUninstallSuccess.propTypes = {
   message: PropTypes.string.isRequired,
   /* App name to display in modal title */
   appName: PropTypes.string.isRequired,
-  /* Install boolean to determine use for install or uninstall */
+  /* Install boolean to determine use for install or uninstalling */
   uninstalling: PropTypes.bool,
 };
 

@@ -238,7 +238,6 @@ class AppStore extends Component {
     let apps;
     try {
       const response = await sendRequest({ path: '/installed-apps' });
-      console.log('load LTI ids response is ', response);
       ({ success, message, apps } = response.body);
     } catch (err) {
       throw new Error('We couldn\'t reach the server please check your internet connection');
@@ -271,7 +270,6 @@ class AppStore extends Component {
         path: `/install/${appId}`,
         method: 'POST',
       });
-      console.log('install app response is ', response);
       ({ success, message } = response.body);
     } catch (err) {
       throw new Error('We couldn\'t reach the server please check your internet connection');
@@ -304,7 +302,6 @@ class AppStore extends Component {
           ltiIds: JSON.stringify(ltiIds),
         },
       });
-      console.log('uninstall app response is ', response);
       ({ success, message } = response.body);
     } catch (err) {
       throw new Error('We couldn\'t reach the server please check your internet connection');
