@@ -9,7 +9,3 @@
 
 # Ignore mac filesystem files
 **/.DS_Store
-
-# Ignore test files
-/src/_isolator_generated_files_
-/config-overrides.js
