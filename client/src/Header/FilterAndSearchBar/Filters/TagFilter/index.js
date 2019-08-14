@@ -7,7 +7,6 @@ import TagValueFilter from './TagValueFilter';
 // Import css
 import './style.css';
 
-// An indi
 class TagFilter extends Component {
   render() {
     const {
@@ -35,7 +34,9 @@ class TagFilter extends Component {
 }
 
 TagFilter.propTypes = {
+  // Object that has all of the tags
   tags: PropTypes.objectOf(PropTypes.object).isRequired,
+  // string for the tagName being rendered
   tagName: PropTypes.string.isRequired,
 };
 

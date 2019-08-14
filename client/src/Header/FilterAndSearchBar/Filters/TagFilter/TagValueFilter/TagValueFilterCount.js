@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// Import css
-
 class TagValueFilterCount extends Component {
+  // TODO: add a proptype
   render() {
     return (
       <span>
-      (5)
+        (5)
       </span>
     );
   }
