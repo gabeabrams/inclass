@@ -170,7 +170,7 @@ class InstallOrUninstallModal extends Component {
             onClose={onClose}
             onSupportButtonClicked={() => {
               onClose();
-              const subject = `I got an error while ${uninstalling ? ('uninstalling') : ('installing')} ${title} in course ${courseId}: ${errMessage}`;
+              const subject = `I got an error while ${uninstalling ? ('uninstalling') : ('installing')} ${title} ${uninstalling ? ('from') : ('in')} course ${courseId}: ${errMessage}`;
               showSupportModal(supportEmail, subject);
             }}
             uninstalling={uninstalling}
