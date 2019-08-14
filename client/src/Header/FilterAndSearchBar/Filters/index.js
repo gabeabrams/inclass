@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 // Import other components
 import TagFilter from './TagFilter';
 
-// Import css
-
-
 // The filter bar that contains all the tag cards
 class Filters extends Component {
   render() {
@@ -17,7 +14,11 @@ class Filters extends Component {
 
     const tagElements = Object.keys(tags).map((tagName) => {
       return (
-        <TagFilter tags={tags} tagName={tagName} />
+        <TagFilter
+          key={tagName}
+          tags={tags}
+          tagName={tagName}
+        />
       );
     });
 
