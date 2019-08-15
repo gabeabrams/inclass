@@ -38,7 +38,7 @@ class AppCreatorTag extends Component {
     // Deconstruct props
     const { dark } = this.props;
 
-    const className = `badge ${dark ? 'bg-secondary' : 'badge-light'} text-dark p-2 appcreatortag-box`;
+    const className = `badge ${dark ? 'bg-secondary' : 'badge-light'} ${dark ? 'text-white' : 'text-dark'} p-2 appcreatortag-box`;
     return (
       <span className={className}>
         {message}

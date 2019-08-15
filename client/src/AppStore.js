@@ -213,7 +213,7 @@ class AppStore extends Component {
       searchQuery: newSearchQuery,
     });
   }
-  
+
   /**
    * Set the support modal status open to false to hide the modal
    */
