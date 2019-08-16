@@ -1,20 +1,17 @@
 /* Step container styling */
 .step-container {
   display: flex;
-  align-items: center;
 }
 
 .step-badge {
-  margin: 5px;
-  width: 1.5em;
+  margin-right: 7px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  min-width: 1.5em;
   height: 1.5em;
   text-align: center;
 }
 
 .step-bigBadge {
-  width: 2em;
-}
-
-/* Styling for each line of instructions */
-.step-instructions {
+  min-width: 2em;
 }
