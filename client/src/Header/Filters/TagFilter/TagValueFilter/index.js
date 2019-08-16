@@ -14,6 +14,7 @@ class TagValueFilter extends Component {
       tags,
       tagName,
       onFilterChanged,
+      counts,
     } = this.props;
 
     let uncategorizedFilterTag;
@@ -22,6 +23,7 @@ class TagValueFilter extends Component {
       .map((tagValue) => {
         // Skip over other/uncategorized tag and add it manually to the end
         const isChecked = tags[tagName].values[tagValue];
+        const count = counts[tagName][tagValue];
         const filterElem = (
           <div className="tagvaluefilter-container">
             <TagValueFilterCheckBox
@@ -32,7 +34,9 @@ class TagValueFilter extends Component {
                 onFilterChanged(!isChecked, tagName, tagValue);
               }}
             />
-            <TagValueFilterCount />
+            <TagValueFilterCount
+              count={count}
+            />
           </div>
         );
 
@@ -60,6 +64,10 @@ TagValueFilter.propTypes = {
   tags: PropTypes.objectOf(PropTypes.object).isRequired,
   // The name of this given tag so we can identify which tag to render
   tagName: PropTypes.string.isRequired,
+  // Handler for filtering by checkboxes and updating state
+  onFilterChanged: PropTypes.func.isRequired,
+  // Mapping to tagValues' app counts
+  counts: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default TagValueFilter;

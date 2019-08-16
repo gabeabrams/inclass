@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Logo from './Logo';
 import TitleBar from './TitleBar';
 import FilterAndSearchBar from './FilterAndSearchBar';
-import Filters from './FilterAndSearchBar/Filters'
+import Filters from './Filters'
 
 // Import css
 import './style.css';
@@ -22,6 +22,7 @@ class Header extends Component {
       searchQuery,
       onSearchChanged,
       tags,
+      apps,
       onFilterChanged,
     } = this.props;
 
@@ -33,6 +34,7 @@ class Header extends Component {
         <div className="filters-container bg-secondary">
           <Filters
             tags={tags}
+            apps={apps}
             onFilterChanged={onFilterChanged}
           />
         </div>
@@ -77,6 +79,10 @@ Header.propTypes = {
   onSearchChanged: PropTypes.func.isRequired,
   // The tags object for filtering
   tags: PropTypes.objectOf(PropTypes.object).isRequired,
+  // Filtered apps object to generate filter counts
+  apps: PropTypes.objectOf(PropTypes.object).isRequired,
+  // Handler for filtering by checkboxes and updating state
+  onFilterChanged: PropTypes.func.isRequired,
 };
 
 export default Header;

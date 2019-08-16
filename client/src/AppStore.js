@@ -511,6 +511,7 @@ class AppStore extends Component {
             searchQuery={searchQuery}
             onSearchChanged={this.onSearchChanged}
             tags={tags}
+            apps={filteredApps}
             onFilterChanged={this.onFilterChanged}
           />
         </div>

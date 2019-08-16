@@ -13,6 +13,7 @@ class TagFilter extends Component {
       tags,
       tagName,
       onFilterChanged,
+      counts,
     } = this.props;
 
     // For each card, we want to render the TagValueFilter component
@@ -30,6 +31,7 @@ class TagFilter extends Component {
               tags={tags}
               tagName={tagName}
               onFilterChanged={onFilterChanged}
+              counts={counts}
             />
           </span>
         </span>
@@ -43,6 +45,10 @@ TagFilter.propTypes = {
   tags: PropTypes.objectOf(PropTypes.object).isRequired,
   // string for the tagName being rendered
   tagName: PropTypes.string.isRequired,
+  // Handler for filtering by checkboxes and updating state
+  onFilterChanged: PropTypes.func.isRequired,
+  // Mapping to tagValues' app counts
+  counts: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default TagFilter;
