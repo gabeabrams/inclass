@@ -7,10 +7,29 @@ class AppTitle extends Component {
     // deconstruct props
     const { title, dark, onClick } = this.props;
 
-    const className = `btn btn-${dark ? 'secondary' : 'light'} ${onClick ? '' : 'disabled'} text-dark app-title pl-0`;
+    // if dark, make app title into button
+    if (dark) {
+      // if onClick is undefined, then make button disabled
+      const className = `btn btn-secondary ${onClick ? '' : 'disabled'} text-dark app-title pl-0 border-0`;
+
+      return (
+        <button
+          type="button"
+          className={className}
+          style={{
+            backgroundColor: 'transparent',
+          }}
+        >
+          <h3 className="app-title-h3">
+            {title}
+          </h3>
+        </button>
+      );
+    }
+    // if not dark, title is not a button
     return (
-      <div type="button" className={className}>
-        <h3 className="app-title-h3">
+      <div className="app-title">
+        <h3>
           {title}
         </h3>
       </div>
@@ -29,9 +48,9 @@ AppTitle.propTypes = {
 
 AppTitle.defaultProps = {
   // default is to render the appItem in a light theme
-  dark: false,
+  dark: undefined,
   // default for onClick is null, in which app title is not interactable
-  onClick: null,
+  onClick: undefined,
 };
 
 export default AppTitle;

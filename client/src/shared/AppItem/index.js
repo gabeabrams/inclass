@@ -21,6 +21,7 @@ class AppItem extends Component {
       tagColors,
       storeHost,
       dark,
+      onClick,
     } = this.props;
 
     // Deconstruct the app
@@ -44,7 +45,7 @@ class AppItem extends Component {
           <div className="appitem-right-container">
             {/* contains app title and creator */}
             <div className="appitem-title-and-creator-container">
-              <AppTitle title={title} />
+              <AppTitle title={title} dark={dark} onClick={() => {}} />
               {/* if class is dark, creator is light. and vice versa */}
               <div className="d-none d-sm-block">
                 {/* if app item is dark, creator is light. and vice versa */}
@@ -80,9 +81,9 @@ AppItem.propTypes = {
 
 AppItem.defaultProps = {
   // default is to render the appItem in a light theme
-  dark: false,
+  dark: undefined,
   // default for onClick is null, in which app Item is not interactable
-  onClick: null,
+  onClick: undefined,
 };
 
 export default AppItem;
