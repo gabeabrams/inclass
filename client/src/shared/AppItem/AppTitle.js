@@ -7,7 +7,7 @@ class AppTitle extends Component {
     // deconstruct props
     const { title } = this.props;
     return (
-      <div className="app-title">
+      <div type="button" className=" btn btn-primary app-title">
         <h3>
           {title}
         </h3>

@@ -74,11 +74,15 @@ AppItem.propTypes = {
   storeHost: PropTypes.string.isRequired,
   // whether the app is shown as dark background
   dark: PropTypes.bool,
+  // function that executes when clicking app Item
+  onClick: PropTypes.func,
 };
 
 AppItem.defaultProps = {
   // default is to render the appItem in a light theme
   dark: false,
+  // default for onClick is null, in which app Item is not interactable
+  onClick: null,
 };
 
 export default AppItem;
