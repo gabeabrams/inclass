@@ -5,7 +5,12 @@ import './AppTitle.css';
 class AppTitle extends Component {
   render() {
     // deconstruct props
-    const { title, dark, onClick } = this.props;
+    const {
+      title,
+      dark,
+      onClick,
+      appId,
+    } = this.props;
 
     // if dark, make app title into button
     if (dark) {
@@ -16,6 +21,7 @@ class AppTitle extends Component {
         <button
           type="button"
           className={className}
+          onClick={() => { onClick(appId); }}
           style={{
             backgroundColor: 'transparent',
           }}
@@ -40,6 +46,8 @@ class AppTitle extends Component {
 AppTitle.propTypes = {
   // the title of the app
   title: PropTypes.string.isRequired,
+  // the appId of the app
+  appId: PropTypes.string.isRequired,
   // whether the app is shown as dark background
   dark: PropTypes.bool,
   // function that executes when clicking app title

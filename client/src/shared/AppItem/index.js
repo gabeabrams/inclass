@@ -45,7 +45,12 @@ class AppItem extends Component {
           <div className="appitem-right-container">
             {/* contains app title and creator */}
             <div className="appitem-title-and-creator-container">
-              <AppTitle title={title} dark={dark} onClick={() => {}} />
+              <AppTitle
+                title={title}
+                dark={dark}
+                onClick={dark ? onClick : undefined}
+                appId={app.appId}
+              />
               {/* if class is dark, creator is light. and vice versa */}
               <div className="d-none d-sm-block">
                 {/* if app item is dark, creator is light. and vice versa */}

@@ -271,6 +271,7 @@ class AppStore extends Component {
 
     this.setState({
       currentSpecificApp: allApps[appId],
+      currentBodyType: BODY_TYPE.APP_PAGE,
     });
   }
 
