@@ -9,13 +9,13 @@ class Guide extends Component {
     const { guide } = this.props;
     const { title, steps } = guide;
 
-
+    const greaterTen = (steps.length >= 10);
     // Maps the steps to stepsToRender with styling and number
     const stepsToRender = steps.map((step, index) => {
       const keyName = `step-${index}`;
       return (
         <div key={keyName} className="steps-container">
-          <Step step={step} stepNum={index + 1} />
+          <Step step={step} greaterTen={greaterTen} stepNum={index + 1} />
         </div>
       );
     });

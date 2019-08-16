@@ -1,13 +1,18 @@
 /* Step container styling */
 .step-container {
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
 }
 
 .badge {
   margin: 5px;
-  max-width: 1.5em;
-  max-height: 1.5em;
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+}
+
+.step-bigBadge {
+  width: 2em;
 }
 
 /* Styling for each line of instructions */
