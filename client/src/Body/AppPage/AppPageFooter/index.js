@@ -53,9 +53,4 @@ AppPageFooter.propTypes = {
   isInstalled: PropTypes.bool.isRequired,
 };
 
-AppPageFooter.defaultProps = {
-  // App is automatically not installed
-  appInstalled: false,
-};
-
 export default AppPageFooter;
