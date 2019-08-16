@@ -1,4 +1,9 @@
-.form-check-label {
-  display: flex;
-  align-content: space-between;
+.tagvaluefiltercheckbox-container {
+  flex-grow: 1;
+
+  overflow: hidden;
+}
+
+.tagvaluefiltercheckbox-label {
+  text-overflow: ellipsis;
 }
