@@ -5,10 +5,12 @@ import './AppTitle.css';
 class AppTitle extends Component {
   render() {
     // deconstruct props
-    const { title } = this.props;
+    const { title, dark, onClick } = this.props;
+
+    const className = `btn btn-${dark ? 'secondary' : 'light'} ${onClick ? '' : 'disabled'} text-dark app-title pl-0`;
     return (
-      <div type="button" className=" btn btn-primary app-title">
-        <h3>
+      <div type="button" className={className}>
+        <h3 className="app-title-h3">
           {title}
         </h3>
       </div>
@@ -19,6 +21,17 @@ class AppTitle extends Component {
 AppTitle.propTypes = {
   // the title of the app
   title: PropTypes.string.isRequired,
+  // whether the app is shown as dark background
+  dark: PropTypes.bool,
+  // function that executes when clicking app title
+  onClick: PropTypes.func,
+};
+
+AppTitle.defaultProps = {
+  // default is to render the appItem in a light theme
+  dark: false,
+  // default for onClick is null, in which app title is not interactable
+  onClick: null,
 };
 
 export default AppTitle;
