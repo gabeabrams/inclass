@@ -61,8 +61,11 @@ AppPage.propTypes = {
   storeHost: PropTypes.string.isRequired,
   // Object with the colors for each tag
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
+  // Function that occurs when install button clicked
   onInstallClicked: PropTypes.func.isRequired,
+  // Function that occurs when uninstall button clicked
   onUninstallClicked: PropTypes.func.isRequired,
+  // Function that occurs when support button clicked
   onSupportClicked: PropTypes.func.isRequired,
   // Boolean for if app is installed yet
   isInstalled: PropTypes.bool.isRequired,
