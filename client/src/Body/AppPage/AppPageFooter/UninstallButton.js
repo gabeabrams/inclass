@@ -9,9 +9,6 @@ class UninstallButton extends Component {
       <button
         type="button"
         id="uninstall-button"
-        style={{
-          fontSize: '25px',
-        }}
         className="btn btn-danger btn-lg font-weight-bold ml-1"
         onClick={onClick}
       >

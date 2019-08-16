@@ -8,7 +8,7 @@ class Step extends Component {
     const { step, stepNum, greaterTen } = this.props;
     return (
       <div className="step-container" id={`step-${stepNum}`}>
-        <span className={`badge badge-secondary ${greaterTen ? 'step-bigBadge' : ''}`}>{stepNum}</span>
+        <span className={`step-badge badge badge-secondary ${greaterTen ? 'step-bigBadge' : ''}`}>{stepNum}</span>
         <span className="step-instructions font-weight-bold">{step}</span>
       </div>
     );

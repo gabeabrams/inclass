@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './InstallButton.css';
+
 class InstallButton extends Component {
   render() {
     // Deconstruct props
@@ -10,9 +12,6 @@ class InstallButton extends Component {
       <button
         type="button"
         id="install-button"
-        style={{
-          fontSize: '25px',
-        }}
         className="btn btn-warning btn-lg font-weight-bold pl-4 pr-4 ml-1"
         onClick={onClick}
       >
