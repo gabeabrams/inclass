@@ -7,6 +7,9 @@ import TagFilter from './TagFilter';
 // Import count generator helper
 import genTagValueCounts from '../../utils/filter/genTagValueCounts';
 
+// Import styling
+import './style.css';
+
 // The filter bar that contains all the tag cards
 class Filters extends Component {
   render() {
@@ -33,7 +36,7 @@ class Filters extends Component {
     });
 
     return (
-      <div className="card-columns">
+      <div className="card-columns filters-container bg-secondary">
         {tagElements}
       </div>
     );
