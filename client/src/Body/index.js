@@ -20,6 +20,7 @@ class Body extends Component {
       onInstallClicked,
       onUninstallClicked,
       onSupportClicked,
+      onAppSelected,
     } = this.props;
 
     // Show the app page
@@ -47,6 +48,7 @@ class Body extends Component {
         storeHost={storeHost}
         apps={apps}
         tagColors={tags}
+        onAppSelected={onAppSelected}
       />
     );
   }
@@ -69,6 +71,8 @@ Body.propTypes = {
   onUninstallClicked: PropTypes.func.isRequired,
   // Function for when support button is clicked (bring up email modal)
   onSupportClicked: PropTypes.func.isRequired,
+  // Function called when specific app in app list is clicked
+  onAppSelected: PropTypes.func.isRequired,
 };
 
 Body.defaultProps = {

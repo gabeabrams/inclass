@@ -237,7 +237,7 @@ class AppStore extends Component {
       filterDrawerOpen: !!newFilterDrawerOpen,
     });
   }
-  
+
   /**
    * Set the install modal status open to false to hide the modal
    */

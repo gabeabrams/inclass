@@ -11,6 +11,7 @@ class AppList extends Component {
       storeHost,
       apps,
       tagColors,
+      onAppSelected,
     } = this.props;
 
     // map each app to AppItem element to render
@@ -21,6 +22,7 @@ class AppList extends Component {
           app={apps[appId]}
           tagColors={tagColors}
           storeHost={storeHost}
+          onAppSelected={onAppSelected}
           dark
         />
       );
@@ -42,6 +44,8 @@ AppList.propTypes = {
   apps: PropTypes.objectOf(PropTypes.object).isRequired,
   // The tags color information for the app
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
+  // Function called when specific app in app list is clicked
+  onAppSelected: PropTypes.func.isRequired,
 };
 
 export default AppList;
