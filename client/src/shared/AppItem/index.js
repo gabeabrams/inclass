@@ -37,7 +37,7 @@ class AppItem extends Component {
     const className = `alert alert-${dark ? 'secondary' : 'light'} text-dark pr-3 pl-3 pt-2 pb-2`;
 
     return (
-      <div className={className}>
+      <div className={className} onClick={dark ? () => {onClick(app.appId)} : undefined}>
         {/* contains the whole appItem */}
         <div className="appitem-container">
           <AppIcon appTitle={title} iconURL={iconURL} />
