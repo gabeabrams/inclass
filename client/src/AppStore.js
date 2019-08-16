@@ -213,7 +213,7 @@ class AppStore extends Component {
       searchQuery: newSearchQuery,
     });
   }
-  
+
   /**
    * Set the support modal status open to false to hide the modal
    */
@@ -237,7 +237,7 @@ class AppStore extends Component {
       filterDrawerOpen: !!newFilterDrawerOpen,
     });
   }
-  
+
   /**
    * Set the install modal status open to false to hide the modal
    */
@@ -275,22 +275,7 @@ class AppStore extends Component {
   }
 
   /**
-   * Set the support modal status to true to show the modal
-   */
-  showSupportModal(email, subject) {
-    const newSupportModalStatus = {
-      email,
-      subject,
-      open: true,
-    };
-    this.setState({
-      supportModalStatus: newSupportModalStatus,
-    });
-  }
-  
-  /**
    * Handles when the install button is clicked
-   * TODO: InstallorUninstallModal status rather than appInstalled
    */
   onInstallClicked() {
     const newInstallOrUninstallModalStatus = {
@@ -327,6 +312,20 @@ class AppStore extends Component {
 
     const subject = `I need support with ${title} in course ${courseId}`;
     this.showSupportModal(supportEmail, subject);
+  }
+
+  /**
+   * Set the support modal status to true to show the modal
+   */
+  showSupportModal(email, subject) {
+    const newSupportModalStatus = {
+      email,
+      subject,
+      open: true,
+    };
+    this.setState({
+      supportModalStatus: newSupportModalStatus,
+    });
   }
 
   /**
