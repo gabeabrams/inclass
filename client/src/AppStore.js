@@ -244,7 +244,7 @@ class AppStore extends Component {
   onInstallOrUninstallModalClose() {
     const newInstallOrUninstallModalStatus = {
       open: false,
-      installing: true,
+      uninstalling: true,
     };
     this.setState({
       installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
@@ -293,21 +293,40 @@ class AppStore extends Component {
    * TODO: InstallorUninstallModal status rather than appInstalled
    */
   onInstallClicked() {
-    
+    const newInstallOrUninstallModalStatus = {
+      open: true,
+      uninstalling: false,
+    };
+
+    this.setState({
+      installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+    });
   }
 
   /**
    * Handles when the uninstall button is clicked
    */
   onUninstallClicked() {
+    const newInstallOrUninstallModalStatus = {
+      open: true,
+      uninstalling: true,
+    };
 
+    this.setState({
+      installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+    });
   }
 
   /**
    * Handles when the support button is clicked
    */
   onSupportClicked() {
+    // Deconstruct state and state variables
+    const { currentSpecificApp, courseId } = this.state;
+    const { supportEmail, title } = currentSpecificApp;
 
+    const subject = `I need support with ${title} in course ${courseId}`;
+    this.showSupportModal(supportEmail, subject);
   }
 
   /**
