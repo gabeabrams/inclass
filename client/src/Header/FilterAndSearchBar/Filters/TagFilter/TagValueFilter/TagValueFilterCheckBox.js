@@ -15,12 +15,15 @@ class TagValueFilterCheckBox extends Component {
     const idName = `defaultCheck${label}`;
 
     return (
-      <span className="form-check">
+      <div className="form-check tagvaluefiltercheckbox-container">
         <input className="form-check-input" type="checkbox" value="" id={idName} />
-        <label className="form-check-label " for={idName}>
+        <label
+          className="form-check-label tagvaluefiltercheckbox-label"
+          for={idName}
+        >
           {label}
         </label>
-      </span>
+      </div>
     );
   }
 }
