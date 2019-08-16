@@ -1,7 +1,15 @@
+/* Step container styling */
+.step-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.badge {
+  margin: 5px;
+  max-width: 1.5em;
+  max-height: 1.5em;
+}
+
 /* Styling for each line of instructions */
 .step-instructions {
-  /* Allows text to wrap with space left for badge*/
-  display: block;
-  margin-top: -21px;
-  margin-left: 28px;
 }
