@@ -1,4 +1,8 @@
 /* Styling for filter container */
 .filters-container {
+  /* Dimensions */
+  max-height: 300px;
+
+  /* Padding and margins */
   padding-top: 25px;
 }

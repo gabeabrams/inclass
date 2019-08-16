@@ -22,6 +22,7 @@
 
 .tagfilter-title {
   text-align: center;
+  justify-content: center;
 }
 
 .tagfilter-card {
@@ -39,6 +40,7 @@
   font-size: 18px;
 
   /* Padding and margins */
+  margin-bottom: 0 !important;
 }
 
 .tagfilter-cardbody {

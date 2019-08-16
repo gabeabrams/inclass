@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Logo from './Logo';
 import TitleBar from './TitleBar';
 import FilterAndSearchBar from './FilterAndSearchBar';
-import Filters from './Filters'
+import Filters from './Filters';
 
 // Import css
 import './style.css';
