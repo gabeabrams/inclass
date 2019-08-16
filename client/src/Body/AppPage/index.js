@@ -9,14 +9,6 @@ import AppItem from '../../shared/AppItem';
 import './style.css';
 
 class AppPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      appInstalled: false,
-    };
-  }
-
   render() {
     // Deconstruct props
     const {
@@ -26,8 +18,8 @@ class AppPage extends Component {
       onInstallClicked,
       onUninstallClicked,
       onSupportClicked,
+      isInstalled,
     } = this.props;
-    const { appInstalled } = this.state;
 
     return (
       <div className="appPage-container">
@@ -43,10 +35,10 @@ class AppPage extends Component {
         </div>
         <div className="appPage-footer">
           <AppPageFooter
-            appInstalled={appInstalled}
             onInstallClicked={onInstallClicked}
             onUninstallClicked={onUninstallClicked}
             onSupportClicked={onSupportClicked}
+            isInstalled={isInstalled}
           />
         </div>
       </div>
@@ -72,6 +64,8 @@ AppPage.propTypes = {
   onInstallClicked: PropTypes.func.isRequired,
   onUninstallClicked: PropTypes.func.isRequired,
   onSupportClicked: PropTypes.func.isRequired,
+  // Boolean for if app is installed yet
+  isInstalled: PropTypes.bool.isRequired,
 };
 
 export default AppPage;

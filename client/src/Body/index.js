@@ -20,6 +20,7 @@ class Body extends Component {
       onInstallClicked,
       onUninstallClicked,
       onSupportClicked,
+      isInstalled,
     } = this.props;
 
     // Show the app page
@@ -36,6 +37,7 @@ class Body extends Component {
             onInstallClicked={onInstallClicked}
             onUninstallClicked={onUninstallClicked}
             onSupportClicked={onSupportClicked}
+            isInstalled={isInstalled}
           />
         </div>
       );
@@ -69,6 +71,8 @@ Body.propTypes = {
   onUninstallClicked: PropTypes.func.isRequired,
   // Function for when support button is clicked (bring up email modal)
   onSupportClicked: PropTypes.func.isRequired,
+  // Boolean for if app is installed yet
+  isInstalled: PropTypes.bool.isRequired,
 };
 
 Body.defaultProps = {

@@ -290,13 +290,10 @@ class AppStore extends Component {
   
   /**
    * Handles when the install button is clicked
-   * TODO: Pull ltiIds through to buttons
    * TODO: InstallorUninstallModal status rather than appInstalled
    */
   onInstallClicked() {
-    this.setState({
-      appInstalled: true,
-    });
+    
   }
 
   /**
@@ -419,6 +416,7 @@ class AppStore extends Component {
       installOrUninstallModalStatus,
       courseId,
       isAdmin,
+      ltiIdsMap,
     } = this.state;
 
     // Show loading message
@@ -472,6 +470,12 @@ class AppStore extends Component {
         />
       );
     }
+
+    // Checks if the app is installed
+    const { appId } = currentSpecificApp;
+    const isInstalled = (ltiIdsMap[appId] && ltiIdsMap[appId].length > 0);
+
+
     // Render the component
     return (
       <div>
@@ -499,6 +503,7 @@ class AppStore extends Component {
             onInstallClicked={this.onInstallClicked}
             onUninstallClicked={this.onUninstallClicked}
             onSupportClicked={this.onSupportClicked}
+            isInstalled={isInstalled}
           />
         </div>
         {supportModalElement}
