@@ -17,19 +17,23 @@ class TagValueFilterCheckBox extends Component {
 
     return (
       <div className="form-check tagvaluefiltercheckbox-container">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          checked={isChecked}
-          id={idName}
-          onClick={onClick}
-        />
-        <label
-          className="form-check-label tagvaluefiltercheckbox-label"
-          for={idName}
-        >
-          {label}
-        </label>
+        <div className="tagvaluefiltercheckbox-checkbox">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            checked={isChecked}
+            id={idName}
+            onClick={onClick}
+          />
+        </div>
+        <div className="tagvaluefiltercheckbox-label">
+          <label
+            className="form-check-label"
+            for={idName}
+          >
+            {label}
+          </label>
+        </div>
       </div>
     );
   }
@@ -40,6 +44,8 @@ TagValueFilterCheckBox.propTypes = {
   isChecked: PropTypes.bool.isRequired,
   // The label of the tagValue to render
   label: PropTypes.string.isRequired,
+  // Handler to update state and filter when checkbox is clicked
+  onClick: PropTypes.func.isRequired,
 };
 
 export default TagValueFilterCheckBox;
