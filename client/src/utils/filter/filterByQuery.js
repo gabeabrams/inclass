@@ -1,6 +1,6 @@
 /**
  * Filters the list of apps based on the text query
- * @param {object[]} apps - the list of apps to filter
+ * @param {object} apps - the list of apps to filter
  * @param {string} query - the string to filter by (checks for substrings in the
  *   title, subtitle, description -- all case insensitive)
  * @return {object[]} apps that match the query
@@ -16,9 +16,18 @@ module.exports = (apps, query = '') => {
 
   // Go through each app in the list
   // If the title, subtitle, or description match, add app to new list
-  const goodApps = apps.filter((app) => {
-    return (reQuery.test(app.title) || reQuery.test(app.subtitle) ||
-      reQuery.test(app.description));
+  const filteredApps = {}; // appId => app
+  Object.keys(apps).forEach((appId) => {
+    const app = apps[appId];
+
+    if (
+      reQuery.test(app.title)
+      || reQuery.test(app.subtitle)
+      || reQuery.test(app.description)
+    ) {
+      filteredApps[appId] = app;
+    }
   });
-  return goodApps;
+
+  return filteredApps;
 };

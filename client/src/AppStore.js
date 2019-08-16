@@ -495,8 +495,8 @@ class AppStore extends Component {
       );
     }
     // Filter the apps
-    console.log(allApps);
-    const filteredApps = filterByTags(allApps, tags);
+    const filteredAppsByTags = filterByTags(allApps, tags);
+    const filteredApps = filterByQuery(filteredAppsByTags, searchQuery);
 
     // Render the component
     return (
