@@ -5,14 +5,25 @@ import PropTypes from 'prop-types';
 import './TagValueFilterCount.css';
 
 class TagValueFilterCount extends Component {
-  // TODO: add a proptype
   render() {
+    const {
+      count,
+    } = this.props;
+
+    // Make new string for count
+    const appCount = `(${count})`;
+
     return (
       <div className="tagvaluefiltercount-container">
-        (5)
+        {appCount}
       </div>
     );
   }
 }
+
+TagValueFilterCount.propTypes = {
+  // Count of apps that match search for this tagValue
+  count: PropTypes.number.isRequired,
+};
 
 export default TagValueFilterCount;
