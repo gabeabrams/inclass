@@ -35,9 +35,13 @@ class AppItem extends Component {
 
     const iconURL = `https://${path.join(storeHost, icon.url)}`;
     const className = `alert alert-${dark ? 'secondary' : 'light'} text-dark pr-3 pl-3 pt-2 pb-2`;
-
+    /* eslint-disable jsx-a11y/click-events-have-key-events */
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div className={className} onClick={dark ? () => {onClick(app.appId)} : undefined}>
+      <div
+        className={className}
+        onClick={dark ? () => { onClick(app.appId); } : undefined}
+      >
         {/* contains the whole appItem */}
         <div className="appitem-container">
           <AppIcon appTitle={title} iconURL={iconURL} />
