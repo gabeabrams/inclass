@@ -13,36 +13,38 @@ class TagValueFilter extends Component {
     const {
       tags,
       tagName,
+      onFilterChanged,
     } = this.props;
 
     let uncategorizedFilterTag;
 
-    const tagValueElems = Object.keys(tags[tagName].values).map((tagValue) => {
-      // Skip over other/uncategorized tag and add it manually to the end
-      if (tagValue === 'other/uncategorized') {
-        uncategorizedFilterTag = (
+    const tagValueElems = Object.keys(tags[tagName].values)
+      .map((tagValue) => {
+        // Skip over other/uncategorized tag and add it manually to the end
+        const isChecked = tags[tagName].values[tagValue];
+        const filterElem = (
           <div className="tagvaluefilter-container">
             <TagValueFilterCheckBox
               key={tagValue}
-              isChecked={tags[tagName].values[tagValue]}
+              isChecked={isChecked}
               label={tagValue}
+              onClick={() => {
+                onFilterChanged(!isChecked, tagName, tagValue);
+              }}
             />
             <TagValueFilterCount />
           </div>
         );
-      } else {
-        return (
-          <div className="tagvaluefilter-container">
-            <TagValueFilterCheckBox
-              key={tagValue}
-              isChecked={tags[tagName].values[tagValue]}
-              label={tagValue}
-            />
-            <TagValueFilterCount />
-          </div>
-        );
-      }
-    });
+
+        if (tagValue === 'other/uncategorized') {
+          uncategorizedFilterTag = filterElem;
+          return null;
+        }
+        return filterElem;
+      })
+      .filter((elem) => {
+        return (elem !== null);
+      });
 
     return (
       <div>

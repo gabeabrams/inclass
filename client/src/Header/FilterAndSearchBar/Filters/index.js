@@ -10,6 +10,7 @@ class Filters extends Component {
     // Deconstruct props
     const {
       tags,
+      onFilterChanged,
     } = this.props;
 
     const tagElements = Object.keys(tags).map((tagName) => {
@@ -18,6 +19,7 @@ class Filters extends Component {
           key={tagName}
           tags={tags}
           tagName={tagName}
+          onFilterChanged={onFilterChanged}
         />
       );
     });

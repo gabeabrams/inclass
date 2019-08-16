@@ -12,6 +12,7 @@ class TagFilter extends Component {
     const {
       tags,
       tagName,
+      onFilterChanged,
     } = this.props;
 
     // For each card, we want to render the TagValueFilter component
@@ -25,7 +26,11 @@ class TagFilter extends Component {
         <div className="card-title">{ tagName }</div>
         <span className="card tagfilter-card">
           <span className="card-body">
-            <TagValueFilter tags={tags} tagName={tagName} />
+            <TagValueFilter
+              tags={tags}
+              tagName={tagName}
+              onFilterChanged={onFilterChanged}
+            />
           </span>
         </span>
       </span>

@@ -22,6 +22,7 @@ class Header extends Component {
       searchQuery,
       onSearchChanged,
       tags,
+      onFilterChanged,
     } = this.props;
 
     // Only toggle the Filters component if filterDrawerOpen
@@ -30,7 +31,10 @@ class Header extends Component {
     if (filterDrawerOpen) {
       filters = (
         <div className="filters-container bg-secondary">
-          <Filters tags={tags} />
+          <Filters
+            tags={tags}
+            onFilterChanged={onFilterChanged}
+          />
         </div>
       );
     }

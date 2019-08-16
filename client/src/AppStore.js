@@ -11,6 +11,10 @@ import Body from './Body';
 import SupportModal from './Modal/SupportModal';
 import InstallOrUninstallModal from './Modal/InstallOrUninstallModal';
 
+// Import helpers
+import filterByQuery from './utils/filter/filterByQuery';
+import filterByTags from './utils/filter/filterByTags';
+
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
 
@@ -213,7 +217,7 @@ class AppStore extends Component {
       searchQuery: newSearchQuery,
     });
   }
-  
+
   /**
    * Set the support modal status open to false to hide the modal
    */
@@ -237,7 +241,7 @@ class AppStore extends Component {
       filterDrawerOpen: !!newFilterDrawerOpen,
     });
   }
-  
+
   /**
    * Set the install modal status open to false to hide the modal
    */
@@ -259,7 +263,25 @@ class AppStore extends Component {
    *   none, all tagValues are updated
    */
   onFilterChanged(isChecked, tagName, tagValue) {
-    // TODO: Implement
+    const {
+      tags,
+    } = this.state;
+
+    const newTags = tags;
+
+    const tagValuesToChange = (
+      tagValue
+        ? [tagValue]
+        : Object.keys(newTags[tagName].values)
+    );
+
+    tagValuesToChange.forEach((tagValueToChange) => {
+      newTags[tagName].values[tagValueToChange] = !!isChecked;
+    });
+
+    this.setState({
+      tags: newTags,
+    });
   }
 
   /**
@@ -287,7 +309,7 @@ class AppStore extends Component {
       supportModalStatus: newSupportModalStatus,
     });
   }
-  
+
   /**
    * Handles when the install button is clicked
    * TODO: Pull ltiIds through to buttons
@@ -472,6 +494,10 @@ class AppStore extends Component {
         />
       );
     }
+    // Filter the apps
+    console.log(allApps);
+    const filteredApps = filterByTags(allApps, tags);
+
     // Render the component
     return (
       <div>
@@ -485,11 +511,12 @@ class AppStore extends Component {
             searchQuery={searchQuery}
             onSearchChanged={this.onSearchChanged}
             tags={tags}
+            onFilterChanged={this.onFilterChanged}
           />
         </div>
         <div className="appstore-body-container">
           <Body
-            apps={allApps}
+            apps={filteredApps}
             tags={tags}
             storeHost={storeHost}
             currentBodyType={currentBodyType}
