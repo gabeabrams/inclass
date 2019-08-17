@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 // Import other components
 import TagValueFilter from './TagValueFilter';
+import TagFilterResetButton from './TagFilterResetButton';
 
 // Import css
 import './style.css';
@@ -32,6 +33,11 @@ class TagFilter extends Component {
               tagName={tagName}
               onFilterChanged={onFilterChanged}
               counts={counts}
+            />
+            <TagFilterResetButton
+              onClick={() => {
+                onFilterChanged(false, tagName);
+              }}
             />
           </div>
         </div>
