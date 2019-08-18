@@ -77,6 +77,7 @@ class AppStore extends Component {
     this.onSearchChanged = this.onSearchChanged.bind(this);
     this.onFilterToggle = this.onFilterToggle.bind(this);
     this.onFilterChanged = this.onFilterChanged.bind(this);
+    this.onBackButtonClicked = this.onBackButtonClicked.bind(this);
     this.onSupportModalClose = this.onSupportModalClose.bind(this);
     this.onInstallOrUninstallModalClose = (
       this.onInstallOrUninstallModalClose.bind(this)
@@ -260,6 +261,13 @@ class AppStore extends Component {
    */
   onFilterChanged(isChecked, tagName, tagValue) {
     // TODO: Implement
+  }
+
+  onBackButtonClicked() {
+    const newBodyType = BODY_TYPE.APP_LIST;
+    this.setState({
+      currentBodyType: newBodyType,
+    });
   }
 
   /**
@@ -507,6 +515,8 @@ class AppStore extends Component {
             searchQuery={searchQuery}
             onSearchChanged={this.onSearchChanged}
             tags={tags}
+            currentBodyType={currentBodyType}
+            onBackButtonClicked={this.onBackButtonClicked}
           />
         </div>
         <div className="appstore-body-container">
