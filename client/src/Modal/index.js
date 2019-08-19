@@ -43,7 +43,7 @@ class Modal extends Component {
                 </button>
               </div>
               <div
-                className="modal-body"
+                className="modal-body border-bottom-0"
                 style={{
                   maxHeight: '70vh',
                   overflowY: 'scroll',
@@ -53,7 +53,7 @@ class Modal extends Component {
                 {children}
               </div>
               {footer && (
-                <div className="modal-footer">
+                <div className="modal-footer border-top-0">
                   {footer}
                 </div>
               )}
