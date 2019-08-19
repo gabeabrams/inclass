@@ -36,7 +36,7 @@ class Filters extends Component {
     });
 
     return (
-      <div className="card-columns filters-container bg-secondary overflow-auto">
+      <div className="card-columns filters-container bg-secondary">
         {tagElements}
       </div>
     );
