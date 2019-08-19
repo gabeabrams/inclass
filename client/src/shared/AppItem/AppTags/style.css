@@ -1,6 +1,7 @@
 .apptags-tags-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   background-color: white;
 
   /* padding to separate the tagItems from tagList container */
