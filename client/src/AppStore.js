@@ -67,7 +67,7 @@ class AppStore extends Component {
       // Status of the installOrUninstall modal
       installOrUninstallModalStatus: {
         open: true,
-        uninstalling: false,
+        uninstalling: true,
       },
       // Mapping of LTI Ids for installed apps
       ltiIdsMap: {}, // appId => list of lti ids if the app is installed
