@@ -1,8 +1,12 @@
 /* Styling for filter container */
 .filters-container {
+  display: flex;
+
+  flex-flow: row wrap;
   /* Dimensions */
-  max-height: 300px;
+  max-height: 400px;
+  width: 100%;
 
   /* Padding and margins */
-  padding-top: 25px;
+  padding: 25px;
 }
