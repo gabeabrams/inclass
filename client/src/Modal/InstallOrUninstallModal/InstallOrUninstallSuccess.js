@@ -28,7 +28,7 @@ class InstallOrUninstallSuccess extends Component {
 
     return (
       <Modal
-        title={`${'\u2714'} ${appName} ${(uninstalling) ? 'Uninstalled' : 'Installed'}!`}
+        title={`\u2714 ${appName} ${(uninstalling) ? 'Uninstalled' : 'Installed'}!`}
         onClose={onClose}
         footer={modalFooter}
         titleBackgroundColor="#87CEFA"
