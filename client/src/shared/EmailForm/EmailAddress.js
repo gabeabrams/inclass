@@ -16,18 +16,18 @@ class EmailAddress extends Component {
               Send to:
           </span>
         </div>
-        <div
-          className="alert alert-light form-control rounded text-truncate p-1"
+        <span
+          className="alert alert-light form-control rounded text-truncate p-1 w-100"
         >
           <a
-            className="emailLink"
+            className="emailLink w-100"
             target="_blank"
             rel="noopener noreferrer"
             href={`mailto:${address}?subject=${encodeURIComponent(subject)}`}
           >
             {address}
           </a>
-        </div>
+        </span>
       </div>
     );
   }
