@@ -5,12 +5,20 @@
   ],
   "tagsToShow": [
     {
-      "name": "cost",
-      "color": "blue"
+      "name": "cost"
     },
     {
-      "name": "type",
-      "color": "red"
+      "name": "type"
+    },
+    {
+      "name": "for",
+      "color": "pink"
+    },
+    {
+      "name": "language"
+    },
+    {
+      "name": "OS"
     }
   ],
   "defaultSupportEmail": "example@harvard.edu"

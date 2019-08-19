@@ -4,7 +4,12 @@
     "creator": "dce",
     "tags": {
       "cost": "free",
-      "type": "grading"
+      "type": "grading",
+      "for": [
+        "instructors",
+        "TAs",
+        "students"
+      ]
     },
     "messageBeforeInstall": "this is message before install",
     "requestInstallEmail": "harvard@hvd.edu",

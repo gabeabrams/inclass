@@ -8,6 +8,11 @@
       "type": [
         "grading",
         "attendance"
+      ],
+      "language": "english",
+      "OS": [
+        "browser",
+        "mac"
       ]
     }
 }
