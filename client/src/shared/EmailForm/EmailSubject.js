@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import CopyButton from './CopyButton';
 
-import './EmailSubject.css';
-
 class EmailSubject extends Component {
   render() {
     // deconstruct the state
