@@ -10,6 +10,10 @@ class AppTag extends Component {
       tagValue,
       tagColor,
     } = this.props;
+    // if it is uncategorized, it is not displayed
+    if (tagValue === 'other/uncategorized') {
+      return (null);
+    }
     return (
       <div className="apptag-single-tag text-light">
         <span
