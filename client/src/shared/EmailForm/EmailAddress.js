@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './EmailAddress.css';
+
 class EmailAddress extends Component {
   render() {
     // deconstruct props
@@ -17,10 +19,10 @@ class EmailAddress extends Component {
           </span>
         </div>
         <span
-          className="alert alert-light form-control rounded text-truncate p-1 w-100"
+          className="alert alert-light form-control rounded text-truncate p-1 col-auto"
         >
           <a
-            className="emailLink w-100"
+            className="emailLink"
             target="_blank"
             rel="noopener noreferrer"
             href={`mailto:${address}?subject=${encodeURIComponent(subject)}`}

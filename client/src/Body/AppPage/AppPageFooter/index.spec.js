@@ -9,7 +9,7 @@ describe('client > src > Body > AppPage > AppPageFooter', () => {
     // initializes the driver with the footer button
     const driver = new Driver(
       <AppPageFooter
-        appInstalled={false}
+        isInstalled={false}
         onInstallClicked={() => {}}
         onUninstallClicked={() => {}}
         onSupportClicked={() => {}}
@@ -26,7 +26,7 @@ describe('client > src > Body > AppPage > AppPageFooter', () => {
     // initializes the driver with the footer button
     const driver = new Driver(
       <AppPageFooter
-        appInstalled
+        isInstalled
         onInstallClicked={() => {}}
         onUninstallClicked={() => {}}
         onSupportClicked={() => {}}
