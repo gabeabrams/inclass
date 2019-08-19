@@ -28,9 +28,10 @@ class InstallOrUninstallSuccess extends Component {
 
     return (
       <Modal
-        title={`${appName} ${(uninstalling) ? 'Uninstalled' : 'Installed'}!`}
+        title={`${'\u2714'} ${appName} ${(uninstalling) ? 'Uninstalled' : 'Installed'}!`}
         onClose={onClose}
         footer={modalFooter}
+        titleBackgroundColor="#87CEFA"
       >
         {/* MessageBody has a default value of 'refresh canvas page' */}
         <MessageBody messageBody={

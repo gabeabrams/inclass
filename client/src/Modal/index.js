@@ -26,15 +26,13 @@ class Modal extends Component {
         <div className="modal d-block" id="modal" tabIndex="-1" role="dialog">
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
-              <div className="modal-header">
-                <h5
-                  className="modal-title"
-                  style={{
-                    backgroundColor: titleBackgroundColor,
-                  }}
-                >
-                  {title}
-                </h5>
+              <div
+                className="modal-header"
+                style={{
+                  backgroundColor: titleBackgroundColor,
+                }}
+              >
+                <h5 className="modal-title">{title}</h5>
                 <button
                   type="button"
                   className="close"
