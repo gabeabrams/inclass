@@ -22,7 +22,7 @@ class BackToAppListButton extends Component {
           }}
         >
           <div className="backtoapplistbutton-container">
-            <div className="backtoapplistbutton-button-container mr-3">
+            <div className="back-button-container mr-3">
               <FontAwesomeIcon icon={faCaretLeft} />
             </div>
             <span className="text-white text-nowrap font-weight-bold">Back</span>

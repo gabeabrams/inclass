@@ -31,7 +31,7 @@
 }
 
 /* Container to keep caret button fixed width and centered*/
-.button-container {
+.back-button-container {
   /* Keep button centered */
   display: flex;
   align-self: center;
