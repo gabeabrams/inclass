@@ -25,13 +25,15 @@ class Filters extends Component {
 
     const tagElements = Object.keys(tags).map((tagName) => {
       return (
-        <TagFilter
-          key={tagName}
-          tags={tags}
-          tagName={tagName}
-          onFilterChanged={onFilterChanged}
-          counts={countMapping}
-        />
+        <div className="filters-elem">
+          <TagFilter
+            key={tagName}
+            tags={tags}
+            tagName={tagName}
+            onFilterChanged={onFilterChanged}
+            counts={countMapping}
+          />
+        </div>
       );
     });
 

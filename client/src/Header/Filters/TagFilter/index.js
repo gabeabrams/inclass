@@ -25,9 +25,19 @@ class TagFilter extends Component {
           backgroundColor: tags[tagName].color,
         }}
       >
-        <div className="tagfilter-title">{ tagName }</div>
-        <div className="card tagfilter-card">
-          <div className="tagfilter-cardbody">
+        <div className="tagfilter-title card-header">{ tagName }</div>
+        <div
+          className="card-body tagfilter-card"
+          style={{
+            backgroundColor: 'white',
+          }}
+        >
+          <div
+            className="tagfilter-cardbody"
+            style={{
+              backgroundColor: 'white',
+            }}
+          >
             <TagValueFilter
               tags={tags}
               tagName={tagName}

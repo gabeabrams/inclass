@@ -2,10 +2,12 @@
 .filters-container {
   /* Dimensions */
   width: 100%;
-
   /* Padding and margins */
   padding: 25px;
-
   overflow-y: scroll;
-  overflow-x: hidden;
+
+  min-height: 100px;
+}
+
+.filters-elem {
 }

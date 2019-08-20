@@ -1,9 +1,9 @@
 .tagfilter-container {
   /* Display */
-  display: flex;
+  display: inline-block;
 
   /* Dimensions */
-  width: 20rem;
+  min-width: 60rem;
 
   /* Rounded edges */
   border-radius: 20px;
@@ -26,14 +26,6 @@
 }
 
 .tagfilter-card {
-  /* Display */
-  display: flex;
-
-  /* Alignment */
-  align-self: center;
-
-  /* Dimensions */
-  width: 15rem;
 
   color: black;
   font-weight: 500;
