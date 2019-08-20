@@ -19,6 +19,12 @@
     },
     {
       "name": "OS"
+    },
+    {
+      "name": "semester"
+    },
+    {
+      "name": "grade"
     }
   ],
   "defaultSupportEmail": "example@harvard.edu"

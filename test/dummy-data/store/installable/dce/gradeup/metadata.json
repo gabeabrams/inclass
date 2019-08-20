@@ -9,6 +9,12 @@
         "instructors",
         "TAs",
         "students"
+      ],
+      "grade": [
+        "freshman",
+        "sophomore",
+        "junior",
+        "senior"
       ]
     },
     "messageBeforeInstall": "this is message before install",

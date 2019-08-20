@@ -13,6 +13,11 @@
       "OS": [
         "browser",
         "mac"
+      ],
+      "semester": [
+        "fall",
+        "spring",
+        "summer"
       ]
     }
 }
