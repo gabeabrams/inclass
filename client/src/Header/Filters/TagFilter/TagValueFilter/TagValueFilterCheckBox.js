@@ -29,7 +29,7 @@ class TagValueFilterCheckBox extends Component {
         <div className="tagvaluefiltercheckbox-label">
           <label
             className="form-check-label"
-            for={idName}
+            htmlFor={idName}
           >
             {label}
           </label>
