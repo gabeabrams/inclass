@@ -1,13 +1,17 @@
 /* Styling for filter container */
 .filters-container {
-  /* Dimensions */
-  width: 100%;
-  /* Padding and margins */
-  padding: 25px;
-  overflow-y: scroll;
+  display: flex;
+
+  flex-flow: wrap;
+  justify-content: space-around;
+  width: device-width;
 
   min-height: 100px;
 }
 
 .filters-elem {
+  flex: 1;
+  min-width: 25rem;
+  max-width: 40rem;
+  padding: 5px;
 }

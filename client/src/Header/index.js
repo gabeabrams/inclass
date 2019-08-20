@@ -31,7 +31,7 @@ class Header extends Component {
 
     if (filterDrawerOpen) {
       filters = (
-        <div>
+        <div className="header-filter">
           <Filters
             tags={tags}
             apps={apps}

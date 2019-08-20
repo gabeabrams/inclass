@@ -3,3 +3,10 @@
   /* Dimensions */
   height: 100%;
 }
+
+.header-filter {
+  flex: 1 0 auto;
+  overflow-y: scroll;
+
+  height: 700px;
+}
