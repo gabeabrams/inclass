@@ -23,7 +23,7 @@ class TagValueFilterCheckBox extends Component {
             type="checkbox"
             checked={isChecked}
             id={idName}
-            onClick={onClick}
+            onChange={onClick}
           />
         </div>
         <div className="tagvaluefiltercheckbox-label">
