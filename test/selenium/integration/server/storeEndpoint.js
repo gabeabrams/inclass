@@ -24,6 +24,6 @@ describeS('Server', function () {
     // Test the json
     assert.equal(success, true, 'Success object should be true');
 
-    assert.equal(store.title, 'Harvard Appstore', 'Store title is not correct');
+    assert.equal(store.title, 'Harvard', 'Store title is not correct');
   });
 });
