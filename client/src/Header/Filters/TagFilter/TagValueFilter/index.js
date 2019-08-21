@@ -25,9 +25,11 @@ class TagValueFilter extends Component {
         const isChecked = tags[tagName].values[tagValue];
         const count = counts[tagName][tagValue];
         const filterElem = (
-          <div className="tagvaluefilter-container">
+          <div
+            className="tagvaluefilter-container"
+            key={tagValue}
+          >
             <TagValueFilterCheckBox
-              key={tagValue}
               isChecked={isChecked}
               label={tagValue}
               onClick={() => {
