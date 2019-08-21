@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const filterByQuery = require('../../../../../client/src/utils/filter/filterByQuery.js');
 
-describe.only('client > src > utils > filter > filterByQuery', function () {
+describe('client > src > utils > filter > filterByQuery', function () {
   const AppOne = {
     title: 'Hi',
     subtitle: 'lala',
