@@ -27,6 +27,7 @@ class FilterAndSearchBar extends Component {
     let filterToggleElem;
     let backButtonElem;
 
+    // If in app page display back button to app list
     if (currentBodyType === BODY_TYPE.APP_LIST) {
       filterToggleElem = (
         <FilterToggle
