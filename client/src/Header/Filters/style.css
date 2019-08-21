@@ -6,16 +6,13 @@
   justify-content: space-around;
   width: device-width;
 
-  min-height: 100px;
-
   /* Padding and margins */
-  padding: 25px;
-  padding-bottom: 150px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
 }
 
 .filters-elem {
-  flex: 1;
-  min-width: 25rem;
-  max-width: 40rem;
+  width: 25em;
   padding: 5px;
 }

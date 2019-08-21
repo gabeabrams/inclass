@@ -33,7 +33,7 @@ class Header extends Component {
 
     if (filterDrawerOpen) {
       filters = (
-        <div className="header-filter">
+        <div className="header-filter bg-secondary">
           <Filters
             tags={tags}
             apps={apps}
@@ -45,7 +45,7 @@ class Header extends Component {
 
     return (
       <div className="header-container">
-        <div className="header-container">
+        <div className="header-inner-container">
           <Logo url={`https://${storeHost}/public/logo`} />
           <TitleBar
             storeTitle={storeTitle}

@@ -37,7 +37,7 @@ class AppList extends Component {
     });
 
     return (
-      <div className="app-list-container d-flex flex-column">
+      <div className="app-list-container d-flex flex-column ml-2 mr-2">
         {statusBarElement}
         {appElements}
       </div>
