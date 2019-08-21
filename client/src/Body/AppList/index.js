@@ -12,14 +12,13 @@ class AppList extends Component {
       apps,
       tagColors,
       onAppSelected,
-      filtered,
-      appCount,
+      isFiltering,
     } = this.props;
 
     // display or hide the status bar depending on if it's being filtered
     const statusBarElement = (
-      filtered
-        ? <AppListStatusBar appCount={appCount} />
+      isFiltering
+        ? <AppListStatusBar appCount={apps.length} />
         : null
     );
 
@@ -55,17 +54,13 @@ AppList.propTypes = {
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
   // Function called when specific app in app list is clicked
   onAppSelected: PropTypes.func.isRequired,
-  // whether the app list is being filtered
-  filtered: PropTypes.bool,
-  // how many apps are displayed after filtering
-  appCount: PropTypes.number,
+  // Bool that determines if apps are being filtered
+  isFiltering: PropTypes.bool,
 };
 
 AppList.defaultProps = {
-  // default is set to not displaying status bar
-  filtered: false,
-  // default app count is 0
-  appCount: 0,
+  // By default, the apps are not being filtered
+  isFiltering: false,
 };
 
 export default AppList;

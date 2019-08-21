@@ -473,6 +473,9 @@ class AppStore extends Component {
         />
       );
     }
+    // create isFiltering bool to pass into body
+    // const isFiltering = (allApps.length !== filteredApps.length);
+
     // Render the component
     return (
       <div>
@@ -500,6 +503,7 @@ class AppStore extends Component {
             onInstallClicked={this.onInstallClicked}
             onUninstallClicked={this.onUninstallClicked}
             onSupportClicked={this.onSupportClicked}
+            isFiltering
           />
         </div>
         {supportModalElement}

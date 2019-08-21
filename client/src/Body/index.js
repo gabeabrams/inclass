@@ -21,6 +21,7 @@ class Body extends Component {
       onUninstallClicked,
       onSupportClicked,
       onAppSelected,
+      isFiltering,
     } = this.props;
 
     // Show the app page
@@ -49,6 +50,7 @@ class Body extends Component {
         apps={apps}
         tagColors={tags}
         onAppSelected={onAppSelected}
+        isFiltering={isFiltering}
       />
     );
   }
@@ -73,11 +75,15 @@ Body.propTypes = {
   onSupportClicked: PropTypes.func.isRequired,
   // Function called when specific app in app list is clicked
   onAppSelected: PropTypes.func.isRequired,
+  // Bool that determines if apps are being filtered
+  isFiltering: PropTypes.bool,
 };
 
 Body.defaultProps = {
   // By default, no specific app is selected
   currentSpecificApp: null,
+  // By default, the apps are not being filtered
+  isFiltering: false,
 };
 
 export default Body;
