@@ -2,6 +2,7 @@
     "title": "GradeUp",
     "subtitle": "GradeUp is a great tool",
     "creator": "dce",
+    "supportEmail": "tuftsSupport@tufts.edu",
     "tags": {
       "cost": "free",
       "type": "grading",
@@ -16,6 +17,8 @@
         "junior",
         "senior"
       ]
+      "catagory": "education",
+      "size": "big"
     },
     "messageBeforeInstall": "this is message before install",
     "requestInstallEmail": "harvard@hvd.edu",

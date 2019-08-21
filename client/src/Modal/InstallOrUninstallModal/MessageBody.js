@@ -15,7 +15,7 @@ class MessageBody extends Component {
 
 MessageBody.propTypes = {
   /* the body of the modal */
-  messageBody: PropTypes.string.isRequired,
+  messageBody: PropTypes.node.isRequired,
 };
 
 export default MessageBody;

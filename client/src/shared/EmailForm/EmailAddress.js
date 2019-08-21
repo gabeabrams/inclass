@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './EmailAddress.css';
+
 class EmailAddress extends Component {
   render() {
     // deconstruct props
@@ -16,8 +18,8 @@ class EmailAddress extends Component {
               Send to:
           </span>
         </div>
-        <div
-          className="alert alert-light form-control rounded text-truncate p-1"
+        <span
+          className="alert alert-light form-control rounded text-truncate p-1 col-auto"
         >
           <a
             className="emailLink"
@@ -27,7 +29,7 @@ class EmailAddress extends Component {
           >
             {address}
           </a>
-        </div>
+        </span>
       </div>
     );
   }

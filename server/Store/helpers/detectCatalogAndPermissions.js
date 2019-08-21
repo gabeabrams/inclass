@@ -61,7 +61,13 @@ module.exports = async (api, launchInfo, catalogs) => {
 
   for (let i = 0; i < matchAccounts.length; i++) {
     try {
-      await api.account.get({ accountId: matchAccounts[i] });
+      const res = await api.account.get({ accountId: matchAccounts[i] });
+      if (!('sis_account_id' in res)) {
+        throw new Error('No sis_account_id');
+      }
+      if (!('integration_id' in res)) {
+        throw new Error('No integration_id');
+      }
       isAdmin = true;
       break;
     } catch (err) {

@@ -7,7 +7,6 @@ import OkayButton from '../../shared/OkayButton';
 import CancelButton from '../../shared/CancelButton';
 import MessageBody from './MessageBody';
 
-
 class MessageBefore extends Component {
   /**
    * Render the Modal
@@ -31,12 +30,16 @@ class MessageBefore extends Component {
         />
       </div>
     );
-
     // Modal title is different depending on installing or uninstalling
     const modalTitle = `Please Read Before ${(uninstalling) ? 'Uninstalling' : 'Installing'}`;
 
     return (
-      <Modal title={modalTitle} onClose={onClose} footer={modalFooter}>
+      <Modal
+        title={modalTitle}
+        onClose={onClose}
+        footer={modalFooter}
+        titleBackgroundColor="#87CEFA"
+      >
         <MessageBody messageBody={message} />
       </Modal>
     );

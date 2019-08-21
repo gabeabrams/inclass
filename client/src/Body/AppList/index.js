@@ -11,7 +11,16 @@ class AppList extends Component {
       storeHost,
       apps,
       tagColors,
+      onAppSelected,
+      isFiltering,
     } = this.props;
+
+    // display or hide the status bar depending on if it's being filtered
+    const statusBarElement = (
+      isFiltering
+        ? <AppListStatusBar appCount={apps.length} />
+        : null
+    );
 
     // map each app to AppItem element to render
     const appElements = Object.keys(apps).map((appId) => {
@@ -21,6 +30,7 @@ class AppList extends Component {
           app={apps[appId]}
           tagColors={tagColors}
           storeHost={storeHost}
+          onClick={onAppSelected}
           dark
         />
       );
@@ -28,7 +38,7 @@ class AppList extends Component {
 
     return (
       <div className="app-list-container d-flex flex-column">
-        <AppListStatusBar appCount={Object.keys(apps).length} />
+        {statusBarElement}
         {appElements}
       </div>
     );
@@ -42,6 +52,15 @@ AppList.propTypes = {
   apps: PropTypes.objectOf(PropTypes.object).isRequired,
   // The tags color information for the app
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
+  // Function called when specific app in app list is clicked
+  onAppSelected: PropTypes.func.isRequired,
+  // Bool that determines if apps are being filtered
+  isFiltering: PropTypes.bool,
+};
+
+AppList.defaultProps = {
+  // By default, the apps are not being filtered
+  isFiltering: false,
 };
 
 export default AppList;

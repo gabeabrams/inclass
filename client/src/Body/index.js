@@ -20,6 +20,9 @@ class Body extends Component {
       onInstallClicked,
       onUninstallClicked,
       onSupportClicked,
+      onAppSelected,
+      isFiltering,
+      isInstalled,
     } = this.props;
 
     // Show the app page
@@ -36,6 +39,7 @@ class Body extends Component {
             onInstallClicked={onInstallClicked}
             onUninstallClicked={onUninstallClicked}
             onSupportClicked={onSupportClicked}
+            isInstalled={isInstalled}
           />
         </div>
       );
@@ -47,6 +51,8 @@ class Body extends Component {
         storeHost={storeHost}
         apps={apps}
         tagColors={tags}
+        onAppSelected={onAppSelected}
+        isFiltering={isFiltering}
       />
     );
   }
@@ -69,11 +75,19 @@ Body.propTypes = {
   onUninstallClicked: PropTypes.func.isRequired,
   // Function for when support button is clicked (bring up email modal)
   onSupportClicked: PropTypes.func.isRequired,
+  // Function called when specific app in app list is clicked
+  onAppSelected: PropTypes.func.isRequired,
+  // Bool that determines if apps are being filtered
+  isFiltering: PropTypes.bool,
+  // Boolean for if app is installed yet
+  isInstalled: PropTypes.bool.isRequired,
 };
 
 Body.defaultProps = {
   // By default, no specific app is selected
   currentSpecificApp: null,
+  // By default, the apps are not being filtered
+  isFiltering: false,
 };
 
 export default Body;

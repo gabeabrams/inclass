@@ -23,18 +23,19 @@ class InstallOrUninstallFailure extends Component {
     // Install failure modal requires an Okay button for footer
     const modalFooter = (
       <div>
+        <SupportButton onClick={onSupportButtonClicked} />
         <OkayButton onClick={onClose} />
       </div>
     );
 
     return (
       <Modal
-        title={`${(uninstalling) ? 'Uninstall Failed' : 'Install Failed'}!`}
+        title={`\u2718 ${(uninstalling) ? 'Uninstall Failed' : 'Install Failed'}!`}
         onClose={onClose}
         footer={modalFooter}
+        titleBackgroundColor="#df9f9f"
       >
         <FailureReason message={message} />
-        <SupportButton onClick={onSupportButtonClicked} />
       </Modal>
     );
   }

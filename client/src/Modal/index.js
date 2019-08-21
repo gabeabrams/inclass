@@ -12,6 +12,7 @@ class Modal extends Component {
       footer,
       onClose,
       children,
+      titleBackgroundColor,
     } = this.props;
 
     return (
@@ -25,7 +26,12 @@ class Modal extends Component {
         <div className="modal d-block" id="modal" tabIndex="-1" role="dialog">
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
-              <div className="modal-header">
+              <div
+                className="modal-header"
+                style={{
+                  backgroundColor: titleBackgroundColor,
+                }}
+              >
                 <h5 className="modal-title">{title}</h5>
                 <button
                   type="button"
@@ -37,7 +43,7 @@ class Modal extends Component {
                 </button>
               </div>
               <div
-                className="modal-body"
+                className="modal-body border-bottom-0"
                 style={{
                   maxHeight: '70vh',
                   overflowY: 'scroll',
@@ -47,7 +53,7 @@ class Modal extends Component {
                 {children}
               </div>
               {footer && (
-                <div className="modal-footer">
+                <div className="modal-footer border-top-0">
                   {footer}
                 </div>
               )}
@@ -62,6 +68,8 @@ class Modal extends Component {
 Modal.propTypes = {
   /* The title of the modal */
   title: PropTypes.node.isRequired,
+  /* The color of the title */
+  titleBackgroundColor: PropTypes.string,
   /* The footer of the modal */
   footer: PropTypes.node,
   /* Function to call when the modal is closed */
@@ -71,7 +79,10 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
+  /* the default modal does not have a footer */
   footer: null,
+  /* the default title background is transparent */
+  titleBackgroundColor: 'white',
 };
 
 export default Modal;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './UninstallButton.css';
+
 class UninstallButton extends Component {
   render() {
     // Deconstruct props
@@ -9,9 +11,6 @@ class UninstallButton extends Component {
       <button
         type="button"
         id="uninstall-button"
-        style={{
-          fontSize: '25px',
-        }}
         className="btn btn-danger btn-lg font-weight-bold ml-1"
         onClick={onClick}
       >

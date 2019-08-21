@@ -24,6 +24,8 @@ class Header extends Component {
       tags,
       apps,
       onFilterChanged,
+      currentBodyType,
+      onBackButtonClicked,
     } = this.props;
 
     // Only toggle the Filters component if filterDrawerOpen
@@ -54,6 +56,8 @@ class Header extends Component {
             onFilterToggle={onFilterToggle}
             searchQuery={searchQuery}
             onSearchChanged={onSearchChanged}
+            currentBodyType={currentBodyType}
+            onBackButtonClicked={onBackButtonClicked}
           />
         </div>
         {filters}
@@ -83,6 +87,10 @@ Header.propTypes = {
   apps: PropTypes.objectOf(PropTypes.object).isRequired,
   // Handler for filtering by checkboxes and updating state
   onFilterChanged: PropTypes.func.isRequired,
+  // The current page displayed (app list or app page)
+  currentBodyType: PropTypes.string.isRequired,
+  // Goes back to App list when button clicked
+  onBackButtonClicked: PropTypes.func.isRequired,
 };
 
 export default Header;
