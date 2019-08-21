@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       title: 'Manual Seating Dashboard',
-      filename: 'man_dash',
+      filename: 'man_dash.png',
     },
   ],
   guides: [

@@ -73,8 +73,8 @@ describe('server > Store > helpers > serveScreenshots', function () {
     };
     const app = await serveScreenshots(opts);
     assert.equal(app.screenshots[0].url, '/public/dce/swipein/screenshots/event_chooser.png', 'The first URL does not match format ');
-    assert.equal(app.screenshots[1].url, '/public/dce/swipein/screenshots/man_dash', 'The second URL does not match format');
-    assert.equal(myExpressApp.used[0].path, '/public/dce/swipein/screenshots/', 'Express app was not called for first screenshot');
-    assert.equal(myExpressApp.used[1].path, '/public/dce/swipein/screenshots/', 'Express app was not called for second screenshot');
+    assert.equal(app.screenshots[1].url, '/public/dce/swipein/screenshots/man_dash.png', 'The second URL does not match format');
+    assert.equal(myExpressApp.used[0].path, '/public/dce/swipein/screenshots/event_chooser.png', 'Express app was not called for first screenshot');
+    assert.equal(myExpressApp.used[1].path, '/public/dce/swipein/screenshots/man_dash.png', 'Express app was not called for second screenshot');
   });
 });
