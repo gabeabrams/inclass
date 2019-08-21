@@ -499,7 +499,7 @@ class AppStore extends Component {
 
     // Checks if the app is installed
     const { appId } = currentSpecificApp;
-    const isInstalled = (ltiIdsMap[appId] && ltiIdsMap[appId].length > 0);
+    const isInstalled = (!!ltiIdsMap[appId] && ltiIdsMap[appId].length > 0);
 
 
     // Render the component
