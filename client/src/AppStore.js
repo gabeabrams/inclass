@@ -93,6 +93,7 @@ class AppStore extends Component {
     this.onInstallClicked = this.onInstallClicked.bind(this);
     this.onUninstallClicked = this.onUninstallClicked.bind(this);
     this.onSupportClicked = this.onSupportClicked.bind(this);
+    this.onMouseOverList = this.onMouseOverList.bind(this);
   }
 
   /**
@@ -280,6 +281,15 @@ class AppStore extends Component {
 
     this.setState({
       tags: newTags,
+    });
+  }
+
+  /**
+   * Function called when mouse goes over the app list
+   */
+  onMouseOverList() {
+    this.setState({
+      filterDrawerOpen: false,
     });
   }
 
@@ -548,7 +558,7 @@ class AppStore extends Component {
             onBackButtonClicked={this.onBackButtonClicked}
           />
         </div>
-        <div className="appstore-body-container">
+        <div className="appstore-body-container" onMouseEnter={this.onMouseOverList}>
           <Body
             apps={filteredApps}
             tags={tags}
