@@ -6,7 +6,7 @@ describeS('Server', function () {
     await driver.launchAppStore();
     const { catalog } = await driver.getJSON();
     // Test the json to see if it matches data in installable store
-    assert.equal(catalog.title, 'DCE catalog', 'title data did not match');
+    assert.equal(catalog.title, 'DCE', 'title data did not match');
     assert.deepEqual(catalog.accounts, [1176], 'accounts data did not match');
     const expectedTagsToShow = [
       {
