@@ -60,7 +60,7 @@ AppList.propTypes = {
 
 AppList.defaultProps = {
   // By default, the apps are not being filtered
-  isFiltering: false,
+  isFiltering: undefined,
 };
 
 export default AppList;

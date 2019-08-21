@@ -53,6 +53,8 @@ describe('client > src > Body > AppList', () => {
         apps={fakeApps}
         tagColors={fakeTagColors}
         storeHost={fakeStoreHost}
+        onAppSelected={() => {}}
+        isFiltering
       />
     );
     // displays the appListStatusBar

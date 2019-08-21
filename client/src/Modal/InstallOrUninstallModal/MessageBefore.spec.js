@@ -41,12 +41,12 @@ describe('client > src > Modal > InstallOrUninstallModal > MessageBefore', () =>
     );
     // check title is rendered
     assert(
-      driver.elementExists('modal-title'),
+      driver.elementExists('.modal-title'),
       'modal title is not rendered'
     );
     assert.equal(
-      driver.getText('modal-title'),
-      'Please Read Before Uninstallling',
+      driver.getText('.modal-title'),
+      'Please Read Before Uninstalling',
       'did not display correct title when uninstlling'
     );
   });
