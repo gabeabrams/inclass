@@ -83,7 +83,7 @@ Body.defaultProps = {
   // By default, no specific app is selected
   currentSpecificApp: null,
   // By default, the apps are not being filtered
-  isFiltering: undefined,
+  isFiltering: false,
 };
 
 export default Body;
