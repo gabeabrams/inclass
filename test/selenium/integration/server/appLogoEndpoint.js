@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('Server', function () {
+describeS('Server > appLogoEndpoint', function () {
   itS('Checks app icons are loaded', async function (driver) {
     await driver.launchAppStore();
     const { catalog } = await driver.getJSON();

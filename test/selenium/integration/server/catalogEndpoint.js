@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('Server', function () {
+describeS('Server > catalogEndpoint', function () {
   itS('Responds with Catalog', async function (driver) {
     await driver.launchAppStore();
     const { catalog } = await driver.getJSON();
@@ -10,12 +10,32 @@ describeS('Server', function () {
     assert.deepEqual(catalog.accounts, [1176], 'accounts data did not match');
     const expectedTagsToShow = [
       {
+        color: '#701938',
         name: 'cost',
-        color: 'blue',
       },
       {
+        color: '#236842',
         name: 'type',
-        color: 'red',
+      },
+      {
+        color: 'pink',
+        name: 'for',
+      },
+      {
+        color: '#4f3814',
+        name: 'language',
+      },
+      {
+        color: '#ff9300',
+        name: 'OS',
+      },
+      {
+        color: '#005392',
+        name: 'semester',
+      },
+      {
+        color: '#701938',
+        name: 'grade',
       },
     ];
     assert.deepEqual(catalog.tagsToShow, expectedTagsToShow, 'tagsToShow data did not match');

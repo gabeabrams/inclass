@@ -3,7 +3,7 @@ const assert = require('assert');
 
 const { courseId } = require('../../../../config/devEnvironment');
 
-describeS('Server', function () {
+describeS('Server > storeEndpoint', function () {
   itS('Responds with Store Metadata', async function (driver) {
     await driver.visit(`https://localhost:8088/courses/${courseId}`);
     // Click "Simulate Launch"

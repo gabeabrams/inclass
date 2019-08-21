@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('Server', function () {
+describeS('Server > appLifecycle', function () {
   itS('Successfully Completes App Lifecycle', async function (driver) {
     await driver.launchAppStore();
 
