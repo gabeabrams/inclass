@@ -86,9 +86,7 @@ class AppStore extends Component {
     this.onInstallOrUninstallModalClose = (
       this.onInstallOrUninstallModalClose.bind(this)
     );
-    this.showSupportModal = (
-      this.showSupportModal.bind(this)
-    );
+    this.showSupportModal = this.showSupportModal.bind(this);
     this.installApp = this.installApp.bind(this);
     this.uninstallApp = this.uninstallApp.bind(this);
     this.onAppSelected = this.onAppSelected.bind(this);
@@ -302,20 +300,6 @@ class AppStore extends Component {
     this.setState({
       currentSpecificApp: allApps[appId],
       currentBodyType: BODY_TYPE.APP_PAGE,
-    });
-  }
-
-  /**
-   * Set the support modal status to true to show the modal
-   */
-  showSupportModal(email, subject) {
-    const newSupportModalStatus = {
-      email,
-      subject,
-      open: true,
-    };
-    this.setState({
-      supportModalStatus: newSupportModalStatus,
     });
   }
 
@@ -539,8 +523,7 @@ class AppStore extends Component {
     const filteredApps = filterByQuery(filteredAppsByTags, searchQuery);
 
     // create isFiltering bool to pass into body
-    // const isFiltering = (allApps.length !== filteredApps.length);
-    const isFiltering = true;
+    const isFiltering = (allApps.length !== filteredApps.length);
 
     // Checks if the app is installed
     const { appId } = currentSpecificApp;
