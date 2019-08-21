@@ -51,6 +51,7 @@ describe('client > src > Body > AppPage', () => {
     const driver = new Driver(
       <AppPage
         app={app}
+        isInstalled
         storeHost={fakeStoreHost}
         tagColors={fakeTagColors}
         onInstallClicked={() => {}}

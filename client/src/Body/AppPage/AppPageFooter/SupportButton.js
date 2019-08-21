@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './SupportButton.css';
+
 class SupportButton extends Component {
   render() {
     // Deconstruct props
@@ -10,10 +12,7 @@ class SupportButton extends Component {
       <button
         type="button"
         id="support-button"
-        style={{
-          fontSize: '25px',
-        }}
-        className="btn btn-light btn-lg ml-1"
+        className="support-button btn btn-light btn-lg ml-1"
         onClick={onClick}
       >
         Get Support

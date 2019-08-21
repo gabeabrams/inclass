@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Logo from './Logo';
 import TitleBar from './TitleBar';
 import FilterAndSearchBar from './FilterAndSearchBar';
-import Filters from './FilterAndSearchBar/Filters'
+import Filters from './FilterAndSearchBar/Filters';
 
 // Import css
 import './style.css';
@@ -22,6 +22,8 @@ class Header extends Component {
       searchQuery,
       onSearchChanged,
       tags,
+      currentBodyType,
+      onBackButtonClicked,
     } = this.props;
 
     // Only toggle the Filters component if filterDrawerOpen
@@ -48,6 +50,8 @@ class Header extends Component {
             onFilterToggle={onFilterToggle}
             searchQuery={searchQuery}
             onSearchChanged={onSearchChanged}
+            currentBodyType={currentBodyType}
+            onBackButtonClicked={onBackButtonClicked}
           />
         </div>
         {filters}
@@ -73,6 +77,10 @@ Header.propTypes = {
   onSearchChanged: PropTypes.func.isRequired,
   // The tags object for filtering
   tags: PropTypes.objectOf(PropTypes.object).isRequired,
+  // The current page displayed (app list or app page)
+  currentBodyType: PropTypes.string.isRequired,
+  // Goes back to App list when button clicked
+  onBackButtonClicked: PropTypes.func.isRequired,
 };
 
 export default Header;
