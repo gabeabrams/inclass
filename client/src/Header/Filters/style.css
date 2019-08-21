@@ -7,6 +7,10 @@
   width: device-width;
 
   min-height: 100px;
+
+  /* Padding and margins */
+  padding: 25px;
+  padding-bottom: 150px;
 }
 
 .filters-elem {
