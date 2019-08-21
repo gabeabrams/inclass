@@ -72,6 +72,16 @@ module.exports = (catalog) => {
     }
   });
 
+  // If an app has tags that aren't in tags to show, remove those tags
+  Object.keys(apps).forEach((appId) => {
+    // Loop through tag names
+    Object.keys(apps[appId].tags).forEach((tagName) => {
+      if (!tagsToShow[tagName]) {
+        delete apps[appId].tags[tagName];
+      }
+    });
+  });
+
   // Now that we have apps and tagsToShow, make sure tag data is correct
   // If tag doesn't have a color, give it one
   tagsToShow.forEach((originalTag, i) => {
@@ -104,6 +114,8 @@ module.exports = (catalog) => {
 
     tagsToShow[i] = tag;
   });
+
+  // Save the changes
   const updatedCatalog = catalog;
   updatedCatalog.tagsToShow = tagsToShow;
   updatedCatalog.apps = apps;
