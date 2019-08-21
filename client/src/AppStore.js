@@ -77,6 +77,7 @@ class AppStore extends Component {
     this.onSearchChanged = this.onSearchChanged.bind(this);
     this.onFilterToggle = this.onFilterToggle.bind(this);
     this.onFilterChanged = this.onFilterChanged.bind(this);
+    this.onBackButtonClicked = this.onBackButtonClicked.bind(this);
     this.onSupportModalClose = this.onSupportModalClose.bind(this);
     this.onInstallOrUninstallModalClose = (
       this.onInstallOrUninstallModalClose.bind(this)
@@ -244,7 +245,7 @@ class AppStore extends Component {
   onInstallOrUninstallModalClose() {
     const newInstallOrUninstallModalStatus = {
       open: false,
-      installing: true,
+      uninstalling: true,
     };
     this.setState({
       installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
@@ -262,6 +263,13 @@ class AppStore extends Component {
     // TODO: Implement
   }
 
+  onBackButtonClicked() {
+    const newBodyType = BODY_TYPE.APP_LIST;
+    this.setState({
+      currentBodyType: newBodyType,
+    });
+  }
+
   /**
    * Handles when an app is clicked in the list
    * @param {string} appId - the id of the app that was clicked
@@ -276,6 +284,46 @@ class AppStore extends Component {
   }
 
   /**
+   * Handles when the install button is clicked
+   */
+  onInstallClicked() {
+    const newInstallOrUninstallModalStatus = {
+      open: true,
+      uninstalling: false,
+    };
+
+    this.setState({
+      installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+    });
+  }
+
+  /**
+   * Handles when the uninstall button is clicked
+   */
+  onUninstallClicked() {
+    const newInstallOrUninstallModalStatus = {
+      open: true,
+      uninstalling: true,
+    };
+
+    this.setState({
+      installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+    });
+  }
+
+  /**
+   * Handles when the support button is clicked
+   */
+  onSupportClicked() {
+    // Deconstruct state and state variables
+    const { currentSpecificApp, courseId } = this.state;
+    const { supportEmail, title } = currentSpecificApp;
+
+    const subject = `I need support with ${title} in course ${courseId}`;
+    this.showSupportModal(supportEmail, subject);
+  }
+
+  /**
    * Set the support modal status to true to show the modal
    */
   showSupportModal(email, subject) {
@@ -287,31 +335,6 @@ class AppStore extends Component {
     this.setState({
       supportModalStatus: newSupportModalStatus,
     });
-  }
-  
-  /**
-   * Handles when the install button is clicked
-   * TODO: Pull ltiIds through to buttons
-   * TODO: InstallorUninstallModal status rather than appInstalled
-   */
-  onInstallClicked() {
-    this.setState({
-      appInstalled: true,
-    });
-  }
-
-  /**
-   * Handles when the uninstall button is clicked
-   */
-  onUninstallClicked() {
-
-  }
-
-  /**
-   * Handles when the support button is clicked
-   */
-  onSupportClicked() {
-
   }
 
   /**
@@ -420,6 +443,7 @@ class AppStore extends Component {
       installOrUninstallModalStatus,
       courseId,
       isAdmin,
+      ltiIdsMap,
     } = this.state;
 
     // Show loading message
@@ -473,9 +497,14 @@ class AppStore extends Component {
         />
       );
     }
-    // create isFiltering bool to pass into body
+
+  // create isFiltering bool to pass into body
     // const isFiltering = (allApps.length !== filteredApps.length);
     const isFiltering = true;
+
+    // Checks if the app is installed
+    const { appId } = currentSpecificApp;
+    const isInstalled = (!!ltiIdsMap[appId] && ltiIdsMap[appId].length > 0);
 
     // Render the component
     return (
@@ -490,6 +519,8 @@ class AppStore extends Component {
             searchQuery={searchQuery}
             onSearchChanged={this.onSearchChanged}
             tags={tags}
+            currentBodyType={currentBodyType}
+            onBackButtonClicked={this.onBackButtonClicked}
           />
         </div>
         <div className="appstore-body-container">
@@ -505,6 +536,7 @@ class AppStore extends Component {
             onUninstallClicked={this.onUninstallClicked}
             onSupportClicked={this.onSupportClicked}
             isFiltering={isFiltering}
+            isInstalled={isInstalled}
           />
         </div>
         {supportModalElement}

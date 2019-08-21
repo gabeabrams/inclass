@@ -31,9 +31,9 @@ describe(
       );
 
       // Check 3 steps were rendered
-      assert(driver.elementExists('.step-1'), 'Step one does not exist');
-      assert(driver.elementExists('.step-2'), 'Step two does not exist');
-      assert(driver.elementExists('.step-3'), 'Step three does not exist');
+      assert(driver.elementExists('#step-1'), 'Step one does not exist');
+      assert(driver.elementExists('#step-2'), 'Step two does not exist');
+      assert(driver.elementExists('#step-3'), 'Step three does not exist');
     });
   }
 );
