@@ -4,7 +4,8 @@
 	"description": "An edtech app store for Canvas, created by and designed for education-focused faculty and staff",
 	"main": "index.js",
 	"scripts": {
-		"test": "export SILENT=true;mocha './test/{,!(selenium)/**}/*.spec.js' --exit --recursive --reporter spec",
+		"test": "echo \"\n\nSee RUNNING_TESTS.md for instructions on how to run tests\"",
+		"test-server": "export SILENT=true;mocha './test/{,!(selenium)/**}/*.spec.js' --exit --recursive --reporter spec",
 		"test-client": "cd client;npm test",
 		"start": "node index.js",
 		"build": "cd ./client;npm install;npm run build",
