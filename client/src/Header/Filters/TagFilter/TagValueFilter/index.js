@@ -30,6 +30,7 @@ class TagValueFilter extends Component {
             key={tagValue}
           >
             <TagValueFilterCheckBox
+              tagName={tagName}
               isChecked={isChecked}
               label={tagValue}
               onClick={() => {

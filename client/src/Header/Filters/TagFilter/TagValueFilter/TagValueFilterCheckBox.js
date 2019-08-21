@@ -7,13 +7,14 @@ import './TagValueFilterCheckBox.css';
 class TagValueFilterCheckBox extends Component {
   render() {
     const {
+      tagName,
       isChecked,
       label,
       onClick,
     } = this.props;
 
     // Make individual checkbox id based on tagValue name (label)
-    const idName = `filter-checkbox-${label}`;
+    const idName = `filter-checkbox-${tagName}-${label}`;
 
     return (
       <div className="form-check tagvaluefiltercheckbox-container">
@@ -40,6 +41,8 @@ class TagValueFilterCheckBox extends Component {
 }
 
 TagValueFilterCheckBox.propTypes = {
+  // The name of the tag
+  tagName: PropTypes.string.isRequired,
   // Whether the checkbox should be clicked or not
   isChecked: PropTypes.bool.isRequired,
   // The label of the tagValue to render

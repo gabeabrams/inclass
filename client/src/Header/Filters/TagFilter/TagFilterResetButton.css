@@ -1,7 +1,8 @@
 .tagfilterresetbutton-container {
   display: flex;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 5px;
+  margin-bottom: 0;
 
   justify-content: center;
 }
@@ -11,7 +12,9 @@
   height: inherit;
   width: 100%;
 
+  padding: 4px !important;
+
   /* Text */
-  font-size: 1.25rem !important;
-  font-weight: 500 !important;
+  font-size: 1.2rem !important;
+  font-weight: bold !important;
 }
