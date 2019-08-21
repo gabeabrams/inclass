@@ -41,6 +41,9 @@ class AppItem extends Component {
       <div
         className={className}
         onClick={dark ? () => { onClick(app.appId); } : undefined}
+        style={{
+          cursor: (dark ? 'pointer' : undefined),
+        }}
       >
         {/* contains the whole appItem */}
         <div className="appitem-container">
@@ -66,7 +69,11 @@ class AppItem extends Component {
             </div>
             <AppSubtitle subtitle={subtitle} />
             <div className="d-none d-sm-block">
-              <AppTags tags={tags} tagColors={tagColors} />
+              <AppTags
+                tags={tags}
+                tagColors={tagColors}
+                dark={dark}
+              />
             </div>
           </div>
         </div>
@@ -90,7 +97,7 @@ AppItem.propTypes = {
 
 AppItem.defaultProps = {
   // default is to render the appItem in a light theme
-  dark: undefined,
+  dark: false,
   // default for onClick is null, in which app Item is not interactable
   onClick: undefined,
 };

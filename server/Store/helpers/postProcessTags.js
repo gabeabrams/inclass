@@ -1,15 +1,13 @@
 // Colors we're going to be using for the tags
 const COLORS = [
-  '#701938',
-  '#12327c',
-  '#236842',
-  '#3c1b43',
-  '#4f3814',
-  '#ff2f92',
-  '#ff9300',
-  '#4f2563',
-  '#005392',
-  '#929000',
+  '#0096ff', // blue
+  '#ff9300', // orange
+  '#008e00', // green
+  '#8c3437', // red
+  '#672980', // purple
+  '#0432ff', // dark blue
+  '#ff2f92', // pink
+  '#00d8af', // turquoise
 ];
 
 /**
@@ -100,7 +98,6 @@ module.exports = (catalog) => {
     // add a color from the list
     if (!tag.color) {
       tag.color = getNextRandomColor();
-      nextColorIndex += 1;
     }
 
     // Increment through each app and make sure that each one has this name,

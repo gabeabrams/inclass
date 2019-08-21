@@ -7,11 +7,13 @@ class AppIcon extends Component {
     // deconstruct props
     const { appTitle, iconURL } = this.props;
     return (
-      <img
-        className="app-icon mr-3"
-        src={iconURL}
-        alt={`${appTitle} icon`}
-      />
+      <div className="mr-3">
+        <img
+          className="app-icon"
+          src={iconURL}
+          alt={`${appTitle} icon`}
+        />
+      </div>
     );
   }
 }

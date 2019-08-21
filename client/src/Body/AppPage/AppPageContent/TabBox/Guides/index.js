@@ -14,10 +14,10 @@ class Guides extends Component {
 
     // maps the guides to toRender with styling
     const toRender = guides.map((guide, index) => {
-      const keyName = `guide-${index}`;
+      const keyName = `pt-2 guide-${index}`;
       return (
         <div className={keyName} key={keyName}>
-          <div className="guides-elem p-3 mw-20">
+          <div className="guides-elem">
             <Guide guide={guide} />
           </div>
         </div>
