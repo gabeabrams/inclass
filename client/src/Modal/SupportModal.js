@@ -19,7 +19,12 @@ class SupportModal extends Component {
     );
 
     return (
-      <Modal title="Send an email to get support" onClose={onClose} footer={modalFooter}>
+      <Modal
+        title="Send an email to get support"
+        onClose={onClose}
+        footer={modalFooter}
+        titleBackgroundColor="#FFFACD"
+      >
         <EmailForm address={address} subject={subject} />
       </Modal>
     );

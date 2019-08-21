@@ -1,0 +1,7 @@
+.email-subject-container {
+  display: flex;
+}
+
+.email-subject-text {
+  flex-grow: 1;
+}

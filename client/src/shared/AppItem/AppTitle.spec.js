@@ -7,7 +7,7 @@ import AppTitle from './AppTitle';
 describe('client > src > shared > AppTitle', () => {
   it('Displays the AppTitle', async () => {
     const driver = new Driver(
-      <AppTitle title="Harvard EdTech GradeUp" />
+      <AppTitle title="Harvard EdTech GradeUp" appId="gradeup" />
     );
     // check if app title is rendered on page
     assert(driver.elementExists('.app-title'), 'did not render correctly');

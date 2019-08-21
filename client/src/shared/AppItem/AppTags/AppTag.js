@@ -10,6 +10,7 @@ class AppTag extends Component {
       tagValue,
       tagColor,
     } = this.props;
+
     return (
       <div className="apptag-single-tag text-light">
         <span

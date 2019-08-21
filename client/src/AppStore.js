@@ -279,6 +279,7 @@ class AppStore extends Component {
 
     this.setState({
       currentSpecificApp: allApps[appId],
+      currentBodyType: BODY_TYPE.APP_PAGE,
     });
   }
 
@@ -497,10 +498,13 @@ class AppStore extends Component {
       );
     }
 
+  // create isFiltering bool to pass into body
+    // const isFiltering = (allApps.length !== filteredApps.length);
+    const isFiltering = true;
+
     // Checks if the app is installed
     const { appId } = currentSpecificApp;
     const isInstalled = (!!ltiIdsMap[appId] && ltiIdsMap[appId].length > 0);
-
 
     // Render the component
     return (
@@ -531,6 +535,7 @@ class AppStore extends Component {
             onInstallClicked={this.onInstallClicked}
             onUninstallClicked={this.onUninstallClicked}
             onSupportClicked={this.onSupportClicked}
+            isFiltering={isFiltering}
             isInstalled={isInstalled}
           />
         </div>

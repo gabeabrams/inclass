@@ -32,17 +32,21 @@ class AppTags extends Component {
     const { tagsArray } = this.state;
 
     // map each array elem into AppTag element
-    const tagsList = tagsArray.map((tagPair) => {
-      const tagUniqueKey = `${tagPair[0]}=>${tagPair[1]}`;
-      return (
-        <AppTag
-          key={tagUniqueKey}
-          tagKey={tagPair[0]}
-          tagValue={tagPair[1]}
-          tagColor={tagPair[2]}
-        />
-      );
-    });
+    const tagsList = tagsArray
+      .filter((tagPair) => {
+        return (tagPair[0] !== 'other/uncategorized');
+      })
+      .map((tagPair) => {
+        const tagUniqueKey = `${tagPair[0]}=>${tagPair[1]}`;
+        return (
+          <AppTag
+            key={tagUniqueKey}
+            tagKey={tagPair[0]}
+            tagValue={tagPair[1]}
+            tagColor={tagPair[2]}
+          />
+        );
+      });
     return (
       <div className="apptags-tags-list">
         {tagsList}

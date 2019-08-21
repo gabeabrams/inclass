@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import CopyButton from './CopyButton';
 
+import './EmailSubject.css';
+
 class EmailSubject extends Component {
   render() {
     // deconstruct the state
@@ -18,13 +20,15 @@ class EmailSubject extends Component {
             Subject:
           </span>
         </div>
-        <input
-          type="text"
-          className="form-control rounded text-truncate"
-          aria-describedby="subject_addon"
-          value={subject}
-          readOnly
-        />
+        <div className="email-subject-text">
+          <input
+            type="text"
+            className="form-control rounded text-truncate col-auto"
+            aria-describedby="subject_addon"
+            value={subject}
+            readOnly
+          />
+        </div>
         <div className="input-group-append" id="copy-button-addon">
           <CopyButton text={subject} />
         </div>

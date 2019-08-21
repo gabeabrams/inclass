@@ -14,6 +14,7 @@ describe('client > src > Body > AppList', () => {
       icon: {
         url: '/public/dce/gradeup/icon',
       },
+      appId: 'gradeup',
       supportEmail: 'example@harvard.edu',
       tags: {
         cost: ['free'],
@@ -24,6 +25,7 @@ describe('client > src > Body > AppList', () => {
       title: 'NotInstalled',
       subtitle: 'not installed is not a great tool',
       creator: ['dce'],
+      appId: 'notinstalled',
       icon: {
         url: '/public/dce/notinstalled/icon',
       },
@@ -53,6 +55,8 @@ describe('client > src > Body > AppList', () => {
         apps={fakeApps}
         tagColors={fakeTagColors}
         storeHost={fakeStoreHost}
+        onAppSelected={() => {}}
+        isFiltering
       />
     );
     // displays the appListStatusBar

@@ -11,6 +11,18 @@
     {
       "name": "type",
       "color": "red"
+    },
+    {
+      "name": "for",
+      "color": "orange"
+    },
+    {
+      "name": "catagory",
+      "color": "pink"
+    },
+    {
+      "name": "size",
+      "color": "green"
     }
   ],
   "defaultSupportEmail": "example@harvard.edu"

@@ -1,0 +1,7 @@
+.email-address-container {
+  display: flex;
+}
+
+.alert {
+  flex-grow: 1;
+}

@@ -13,6 +13,7 @@ describe('client > src > shared > AppItem', () => {
     icon: {
       url: '/public/dce/gradeup/icon',
     },
+    appId: 'gradeup',
     supportEmail: 'example@harvard.edu',
     tags: {
       cost: ['free'],

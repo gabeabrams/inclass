@@ -209,7 +209,7 @@ InstallOrUninstallModal.propTypes = {
   /* boolean to determin whether the admin can bypass request to install */
   isAdmin: PropTypes.bool.isRequired,
   /* the current app to install or uninstall */
-  currentSpecificApp: PropTypes.objectOf(PropTypes.string).isRequired,
+  currentSpecificApp: PropTypes.objectOf(PropTypes.any).isRequired,
   /* boolean to determine whether to show install or uninstall process */
   uninstalling: PropTypes.bool,
   /* function that closes the whole modal */

@@ -5,7 +5,10 @@
     "supportEmail": "tuftsSupport@tufts.edu",
     "tags": {
       "cost": "free",
-      "type": "grading"
+      "type": "grading",
+      "for": "students",
+      "catagory": "education",
+      "size": "big"
     },
     "messageBeforeInstall": "this is message before install",
     "requestInstallEmail": "harvard@hvd.edu",

@@ -21,6 +21,7 @@ class AppItem extends Component {
       tagColors,
       storeHost,
       dark,
+      onClick,
     } = this.props;
 
     // Deconstruct the app
@@ -34,9 +35,13 @@ class AppItem extends Component {
 
     const iconURL = `https://${path.join(storeHost, icon.url)}`;
     const className = `alert alert-${dark ? 'secondary' : 'light'} text-dark pr-3 pl-3 pt-2 pb-2`;
-
+    /* eslint-disable jsx-a11y/click-events-have-key-events */
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div className={className}>
+      <div
+        className={className}
+        onClick={dark ? () => { onClick(app.appId); } : undefined}
+      >
         {/* contains the whole appItem */}
         <div className="appitem-container">
           <AppIcon appTitle={title} iconURL={iconURL} />
@@ -44,7 +49,12 @@ class AppItem extends Component {
           <div className="appitem-right-container">
             {/* contains app title and creator */}
             <div className="appitem-title-and-creator-container">
-              <AppTitle title={title} />
+              <AppTitle
+                title={title}
+                dark={dark}
+                onClick={dark ? onClick : undefined}
+                appId={app.appId}
+              />
               {/* if class is dark, creator is light. and vice versa */}
               <div className="d-none d-sm-block">
                 {/* if app item is dark, creator is light. and vice versa */}
@@ -74,11 +84,15 @@ AppItem.propTypes = {
   storeHost: PropTypes.string.isRequired,
   // whether the app is shown as dark background
   dark: PropTypes.bool,
+  // function that executes when clicking app Item
+  onClick: PropTypes.func,
 };
 
 AppItem.defaultProps = {
   // default is to render the appItem in a light theme
-  dark: false,
+  dark: undefined,
+  // default for onClick is null, in which app Item is not interactable
+  onClick: undefined,
 };
 
 export default AppItem;
