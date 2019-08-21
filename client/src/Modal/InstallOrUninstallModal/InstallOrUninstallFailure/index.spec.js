@@ -32,7 +32,7 @@ describe('client > src > Modal > InstallOrUninstallModal > InstallOrUninstallFai
     // check that title is correct
     assert.equal(
       driver.getText('.modal-title'),
-      'Install Failed!',
+      '\u2718 Install Failed!',
       'title is not correct'
     );
   });
@@ -49,7 +49,7 @@ describe('client > src > Modal > InstallOrUninstallModal > InstallOrUninstallFai
     );
     assert.equal(
       driver.getText('.modal-title'),
-      'Uninstall Failed!',
+      '\u2718 Uninstall Failed!',
       'title is not correct'
     );
   });

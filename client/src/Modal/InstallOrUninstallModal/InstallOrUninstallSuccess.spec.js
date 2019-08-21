@@ -22,7 +22,7 @@ describe('client > src > Modal > InstallOrUninstallModal > InstallOrUninstallSuc
     // check that children is rendered
     assert(driver.elementExists('.okay-button'), 'okay button is not rendered');
     // check that title is correct
-    assert.equal(driver.getText('.modal-title'), `${appName} Installed!`, 'title is not correct');
+    assert.equal(driver.getText('.modal-title'), `\u2714 ${appName} Installed!`, 'title is not correct');
   });
 
   it('Displays the correct title when unisntalling', () => {
@@ -38,7 +38,7 @@ describe('client > src > Modal > InstallOrUninstallModal > InstallOrUninstallSuc
     );
     assert.equal(
       driver.getText('.modal-title'),
-      `${appName} Uninstalled!`,
+      `\u2714 ${appName} Uninstalled!`,
       'title is not correct when unisntalling'
     );
   });
