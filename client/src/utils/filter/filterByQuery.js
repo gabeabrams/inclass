@@ -3,7 +3,7 @@
  * @param {object} apps - the list of apps to filter
  * @param {string} query - the string to filter by (checks for substrings in the
  *   title, subtitle, description -- all case insensitive)
- * @return {object[]} apps that match the query
+ * @return {object} apps that match the query
  */
 module.exports = (apps, query = '') => {
   // If query empty/only whitespace, return all apps
