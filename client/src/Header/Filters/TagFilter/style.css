@@ -1,9 +1,6 @@
 .tagfilter-container {
-  /* Display */
-  display: flex;
-
   /* Dimensions */
-  width: 20rem;
+  min-width: 60rem;
 
   /* Rounded edges */
   border-radius: 20px;
@@ -14,22 +11,29 @@
   /* Font styling */
   color: white;
   font-size: 25px;
-  font-weight: bold;
+  font-weight: 500;
+
+  /* Padding and margins */
+  padding: 0;
+}
+
+.tagfilter-title {
+  text-align: center;
+  justify-content: center;
 }
 
 .tagfilter-card {
-  /* Display */
-  display: flex;
-
-  /* Alignment */
-  align-self: center;
-
-  /* Dimensions */
-  width: 18rem;
 
   color: black;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 18px;
+
+  /* Padding and margins */
+  margin-bottom: 0 !important;
+}
+
+.tagfilter-cardbody {
+  margin: 10px;
 }
 
 .tagfilter-header {

@@ -8,6 +8,16 @@
       "type": [
         "grading",
         "attendance"
+      ],
+      "language": "english",
+      "OS": [
+        "browser",
+        "mac"
+      ],
+      "semester": [
+        "fall",
+        "spring",
+        "summer"
       ]
     }
 }

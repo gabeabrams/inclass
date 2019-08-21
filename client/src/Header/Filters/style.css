@@ -1,0 +1,21 @@
+/* Styling for filter container */
+.filters-container {
+  display: flex;
+
+  flex-flow: wrap;
+  justify-content: space-around;
+  width: device-width;
+
+  min-height: 100px;
+
+  /* Padding and margins */
+  padding: 25px;
+  padding-bottom: 150px;
+}
+
+.filters-elem {
+  flex: 1;
+  min-width: 25rem;
+  max-width: 40rem;
+  padding: 5px;
+}

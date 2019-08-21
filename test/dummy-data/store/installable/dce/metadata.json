@@ -5,24 +5,26 @@
   ],
   "tagsToShow": [
     {
-      "name": "cost",
-      "color": "blue"
+      "name": "cost"
     },
     {
-      "name": "type",
-      "color": "red"
+      "name": "type"
     },
     {
       "name": "for",
-      "color": "orange"
-    },
-    {
-      "name": "catagory",
       "color": "pink"
     },
     {
-      "name": "size",
-      "color": "green"
+      "name": "language"
+    },
+    {
+      "name": "OS"
+    },
+    {
+      "name": "semester"
+    },
+    {
+      "name": "grade"
     }
   ],
   "defaultSupportEmail": "example@harvard.edu"

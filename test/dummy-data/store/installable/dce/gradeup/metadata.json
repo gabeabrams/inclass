@@ -6,7 +6,17 @@
     "tags": {
       "cost": "free",
       "type": "grading",
-      "for": "students",
+      "for": [
+        "instructors",
+        "TAs",
+        "students"
+      ],
+      "grade": [
+        "freshman",
+        "sophomore",
+        "junior",
+        "senior"
+      ]
       "catagory": "education",
       "size": "big"
     },

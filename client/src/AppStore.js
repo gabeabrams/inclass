@@ -11,6 +11,10 @@ import Body from './Body';
 import SupportModal from './Modal/SupportModal';
 import InstallOrUninstallModal from './Modal/InstallOrUninstallModal';
 
+// Import helpers
+import filterByQuery from './utils/filter/filterByQuery';
+import filterByTags from './utils/filter/filterByTags';
+
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
 
@@ -260,7 +264,25 @@ class AppStore extends Component {
    *   none, all tagValues are updated
    */
   onFilterChanged(isChecked, tagName, tagValue) {
-    // TODO: Implement
+    const {
+      tags,
+    } = this.state;
+
+    const newTags = tags;
+
+    const tagValuesToChange = (
+      tagValue
+        ? [tagValue]
+        : Object.keys(newTags[tagName].values)
+    );
+
+    tagValuesToChange.forEach((tagValueToChange) => {
+      newTags[tagName].values[tagValueToChange] = !!isChecked;
+    });
+
+    this.setState({
+      tags: newTags,
+    });
   }
 
   onBackButtonClicked() {
@@ -280,6 +302,20 @@ class AppStore extends Component {
     this.setState({
       currentSpecificApp: allApps[appId],
       currentBodyType: BODY_TYPE.APP_PAGE,
+    });
+  }
+
+  /**
+   * Set the support modal status to true to show the modal
+   */
+  showSupportModal(email, subject) {
+    const newSupportModalStatus = {
+      email,
+      subject,
+      open: true,
+    };
+    this.setState({
+      supportModalStatus: newSupportModalStatus,
     });
   }
 
@@ -498,7 +534,11 @@ class AppStore extends Component {
       );
     }
 
-  // create isFiltering bool to pass into body
+    // Filter the apps
+    const filteredAppsByTags = filterByTags(allApps, tags);
+    const filteredApps = filterByQuery(filteredAppsByTags, searchQuery);
+
+    // create isFiltering bool to pass into body
     // const isFiltering = (allApps.length !== filteredApps.length);
     const isFiltering = true;
 
@@ -519,13 +559,15 @@ class AppStore extends Component {
             searchQuery={searchQuery}
             onSearchChanged={this.onSearchChanged}
             tags={tags}
+            apps={filteredApps}
+            onFilterChanged={this.onFilterChanged}
             currentBodyType={currentBodyType}
             onBackButtonClicked={this.onBackButtonClicked}
           />
         </div>
         <div className="appstore-body-container">
           <Body
-            apps={allApps}
+            apps={filteredApps}
             tags={tags}
             storeHost={storeHost}
             currentBodyType={currentBodyType}

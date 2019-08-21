@@ -1,0 +1,15 @@
+.tagvaluefilter-container {
+  display: flex;
+  flex-direction: row;
+
+  text-overflow: ellipsis;
+}
+
+.tagvaluefilter-checkboxes {
+  display: inline;
+}
+
+.tagvaluefilter-count {
+  display: inline;
+  float: right;
+}

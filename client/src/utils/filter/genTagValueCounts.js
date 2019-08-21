@@ -3,10 +3,10 @@ const excludeTagName = require('./excludeTagName');
 
 /**
  * Generates the counts to show on each tagItem
- * @param {object[]} apps - the list of apps after they are already filtered by
+ * @param {object} apps - the list of apps after they are already filtered by
  *   the query
  * @param {object} tags - tag mapping that stores whether values are checked:
- *   { tagName => { color, values: { tagValue: isChecked }}}
+ *   { tagName => { color, values: { tagValue => isChecked }}}
  * @return {object} mapping { tagName => tagItem => count } where count is
  *   the number of apps that have that tagItem while all the other tagNames are
  *   applied as filters
@@ -36,7 +36,8 @@ module.exports = (apps, tags) => {
     tagVals.forEach((tagItem) => {
       // Take the filtered apps that match our other tags, and only count the
       // ones that have this tagItem
-      const countedApps = filteredApps.filter((app) => {
+      const appIdsWithTag = Object.keys(filteredApps).filter((appId) => {
+        const app = apps[appId];
         // Go through the array of this tagName (ex. 'cost') in this app and
         // check if the array has the tagItem we're looking for (ex. 'free')
         // We do not have to worry about the tagName not existing
@@ -46,7 +47,7 @@ module.exports = (apps, tags) => {
       });
       // The count of the apps that match this tagItem's count will be equal to
       // the length of the list of apps we found that tagItem in
-      tagCounts[tagName][tagItem] = countedApps.length;
+      tagCounts[tagName][tagItem] = appIdsWithTag.length;
     });
   });
   // Return completed object

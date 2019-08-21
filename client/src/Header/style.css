@@ -4,7 +4,9 @@
   height: 100%;
 }
 
-/* Styling for filter container */
-.filters-container {
-  padding-top: 25px;
+.header-filter {
+  flex: 1 0 auto;
+  overflow-y: scroll;
+
+  height: 700px;
 }

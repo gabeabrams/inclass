@@ -1,0 +1,32 @@
+{
+    "title": "Sam's App",
+    "subtitle": "This is the best app in the entire universe",
+    "creator": "dce",
+    "tags": {
+      "cost": [
+        "free",
+        "expensive",
+        "arm and leg"
+      ],
+      "type": [
+        "grading",
+        "activities",
+        "import/export"
+      ],
+      "for": [
+        "instructors",
+        "TAs",
+        "students"
+      ],
+      "language": [
+        "english",
+        "spanish",
+        "mandarin"
+      ],
+      "OS": [
+        "browser",
+        "mac",
+        "windows"
+      ]
+    }
+}
