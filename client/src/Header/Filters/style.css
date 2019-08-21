@@ -1,18 +1,7 @@
 /* Styling for filter container */
 .filters-container {
-  display: flex;
-
-  flex-flow: wrap;
-  justify-content: space-around;
-  width: device-width;
-
-  /* Padding and margins */
+  /* Padding */
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 20px;
-}
-
-.filters-elem {
-  width: 25em;
-  padding: 5px;
+  padding-top: 30px;
 }
