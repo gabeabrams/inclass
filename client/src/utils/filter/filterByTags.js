@@ -5,7 +5,7 @@ const excludeTagName = require('./excludeTagName');
  * @param {object} apps - the list of apps to filter
  * @param {object} tags - tag mapping that stores whether values are checked:
  *   { tagName => { color, values: { tagValue => isChecked }}}
- * @return {object[]} apps that for each tag that has a mix of checked and
+ * @return {object} apps that for each tag that has a mix of checked and
  *   unchecked tagValues, the app has at least one tagValue that is checked
  */
 module.exports = (apps, tags) => {
