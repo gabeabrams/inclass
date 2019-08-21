@@ -11,6 +11,7 @@ describe('client > src > Header > Filters > TagFilter > TagValueFilter > TagValu
     // Initialize Driver
     const driver = new Driver(
       <TagValueFilterCheckBox
+        tagName="cost"
         isChecked={false}
         label="test-checkbox"
         onClick={() => {
@@ -21,11 +22,11 @@ describe('client > src > Header > Filters > TagFilter > TagValueFilter > TagValu
 
     // Assert that checkbox exists
     assert(
-      driver.elementExists('#filter-checkbox-test-checkbox'),
+      driver.elementExists('#filter-checkbox-cost-test-checkbox'),
       'Checkbox is missing'
     );
     // Simulate a click
-    await driver.toggleCheckbox('#filter-checkbox-test-checkbox');
+    await driver.toggleCheckbox('#filter-checkbox-cost-test-checkbox');
     // Assert that onClick was called
     assert(!!checkboxClicked, 'Checkbox was not checked');
   });

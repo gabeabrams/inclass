@@ -17,7 +17,6 @@ class AppTags extends Component {
     // put array of options to pass into each tagItem into an array
     Object.keys(tags).forEach((tagName) => {
       tags[tagName].forEach((tagValue) => {
-        console.log(tagName, tagColors[tagName]);
         newTagsArray.push([tagName, tagValue, tagColors[tagName].color]);
       });
     });
