@@ -33,6 +33,7 @@ describe('client > src > Body > AppPage', () => {
     const app = {
       screenshots: [screenshotOne, screenshotTwo],
       title: 'GradeUp',
+      appId: 'gradeup',
       subtitle: 'greade up is a great tool',
       creator: ['dce'],
       icon: {

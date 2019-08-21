@@ -10,7 +10,9 @@ describe('client > src > Header > Filters > TagFilter', () => {
     const fakeTags = {
       cost: {
         color: 'blue',
-        values: 'free',
+        values: {
+          free: true,
+        },
       },
     };
     const fakeCounts = {

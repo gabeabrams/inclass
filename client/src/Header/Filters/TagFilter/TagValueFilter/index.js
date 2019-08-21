@@ -22,7 +22,7 @@ class TagValueFilter extends Component {
     const tagValueElems = Object.keys(tags[tagName].values)
       .map((tagValue) => {
         // Skip over other/uncategorized tag and add it manually to the end
-        const isChecked = tags[tagName].values[tagValue];
+        const isChecked = !!tags[tagName].values[tagValue];
         const count = counts[tagName][tagValue];
         const filterElem = (
           <div

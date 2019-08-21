@@ -3,17 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.19",
-    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.21",
+    "@fortawesome/free-solid-svg-icons": "^5.10.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "bootstrap": "^4.3.1",
-    "caccl": "^1.0.83",
+    "caccl": "^1.0.88",
     "fast-clone": "^1.5.13",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-scripts": "3.0.0"
   },
   "scripts": {
@@ -35,9 +35,9 @@
     ]
   },
   "devDependencies": {
+    "dce-enzyme": "^1.0.5",
     "eslint": "^5.16.0",
     "eslint-plugin-jest": "^22.9.0",
-    "typescript": "^3.5.3",
-    "dce-enzyme": "^1.0.0"
+    "typescript": "^3.5.3"
   }
 }

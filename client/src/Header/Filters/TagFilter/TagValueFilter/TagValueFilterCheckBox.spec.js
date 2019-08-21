@@ -25,8 +25,8 @@ describe('client > src > Header > Filters > TagFilter > TagValueFilter > TagValu
       'Checkbox is missing'
     );
     // Simulate a click
-    await driver.click('#filter-checkbox-test-checkbox');
+    await driver.toggleCheckbox('#filter-checkbox-test-checkbox');
     // Assert that onClick was called
-    assert(checkboxClicked, 'Checkbox was not checked');
+    assert(!!checkboxClicked, 'Checkbox was not checked');
   });
 });
