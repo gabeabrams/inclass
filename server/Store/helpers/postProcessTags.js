@@ -73,10 +73,14 @@ module.exports = (catalog) => {
   });
 
   // If an app has tags that aren't in tags to show, remove those tags
+  const tagShown = {}; // tagName => true if shown
+  tagsToShow.forEach((tagToShow) => {
+    tagShown[tagToShow.name] = true;
+  });
   Object.keys(apps).forEach((appId) => {
     // Loop through tag names
     Object.keys(apps[appId].tags).forEach((tagName) => {
-      if (!tagsToShow[tagName]) {
+      if (!tagShown[tagName]) {
         delete apps[appId].tags[tagName];
       }
     });
