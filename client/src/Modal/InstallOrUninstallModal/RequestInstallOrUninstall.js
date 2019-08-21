@@ -35,7 +35,12 @@ class RequestInstallOrUninstall extends Component {
     const title = `To ${(uninstalling) ? 'uninstall' : 'install'} this app, request it via email`;
 
     return (
-      <Modal title={title} onClose={onClose} footer={modalFooter}>
+      <Modal
+        title={title}
+        onClose={onClose}
+        footer={modalFooter}
+        titleBackgroundColor="#FFFACD"
+      >
         <EmailForm address={address} subject={subject} />
       </Modal>
     );
