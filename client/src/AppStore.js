@@ -135,9 +135,9 @@ class AppStore extends Component {
       const [storeRes, catalogRes] = await Promise.all([
         sendRequest({ path: '/store' }),
         sendRequest({ path: '/catalog' }),
-        this.loadLTIIds(),
       ]);
-
+      // loadLTIIds after catalog and store loads
+      await this.loadLTIIds();
       // Process store metadata
       if (!storeRes.body.success) {
         return this.setState({
