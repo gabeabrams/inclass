@@ -13,7 +13,7 @@ class TagValueFilterCheckBox extends Component {
     } = this.props;
 
     // Make individual checkbox id based on tagValue name (label)
-    const idName = `defaultCheck${label}`;
+    const idName = `filter-checkbox-${label}`;
 
     return (
       <div className="form-check tagvaluefiltercheckbox-container">

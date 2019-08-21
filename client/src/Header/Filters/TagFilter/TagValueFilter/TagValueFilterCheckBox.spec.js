@@ -20,9 +20,12 @@ describe('client > src > Header > Filters > TagFilter > TagValueFilter > TagValu
     );
 
     // Assert that checkbox exists
-    assert(driver.elementExists('#defaultChecktest-checkbox'), 'Checkbox is missing');
+    assert(
+      driver.elementExists('#filter-checkbox-test-checkbox'),
+      'Checkbox is missing'
+    );
     // Simulate a click
-    await driver.click('#defaultChecktest-checkbox');
+    await driver.click('#filter-checkbox-test-checkbox');
     // Assert that onClick was called
     assert(checkboxClicked, 'Checkbox was not checked');
   });
