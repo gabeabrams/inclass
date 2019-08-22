@@ -353,7 +353,7 @@ class AppStore extends Component {
     const { currentSpecificApp, courseId } = this.state;
     const { supportEmail, title } = currentSpecificApp;
 
-    const subject = `I need support with ${title} in course ${courseId}`;
+    const subject = `I need support for ${title} in course ${courseId}`;
     this.showSupportModal(supportEmail, subject);
   }
 

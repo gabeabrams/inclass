@@ -186,6 +186,7 @@ class InstallOrUninstallModal extends Component {
                 ? requestUninstallEmail
                 : requestInstallEmail
             }
+            courseId={courseId}
             catalog={catalog}
             appName={title}
             onClose={onClose}

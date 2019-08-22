@@ -14,7 +14,7 @@ class RequestInstallOrUninstall extends Component {
     // deconstruct the props
     const {
       address,
-      catalog,
+      courseId,
       appName,
       onClose,
       uninstalling,
@@ -29,7 +29,7 @@ class RequestInstallOrUninstall extends Component {
 
     // generate the subject of the support email
     const subject = (
-      `I want to ${(uninstalling) ? 'uninstall' : 'install'} ${appName} ${(uninstalling) ? 'from' : 'into'} catalog: ${catalog}`
+      `I want to ${(uninstalling) ? 'uninstall' : 'install'} ${appName} ${(uninstalling) ? 'from' : 'into'} course ${courseId}`
     );
 
     const title = `To ${(uninstalling) ? 'uninstall' : 'install'} this app, request it via email`;
@@ -51,7 +51,7 @@ RequestInstallOrUninstall.propTypes = {
   // the email address to send to
   address: PropTypes.string.isRequired,
   // the title of the catalog the app is in
-  catalog: PropTypes.string.isRequired,
+  courseId: PropTypes.number.isRequired,
   /* the title of tha app */
   appName: PropTypes.string.isRequired,
   /* Function to call when the modal is closed */

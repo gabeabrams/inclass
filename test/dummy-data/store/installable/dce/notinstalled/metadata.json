@@ -2,6 +2,7 @@
     "title": "NotInstalled",
     "subtitle": "NotInstalled is an awful tool",
     "creator": "dce",
+    "requestInstallEmail": "nobody@ether.com",
     "launchPrivacy": "anonymous",
     "tags": {
       "cost": "expensive",
