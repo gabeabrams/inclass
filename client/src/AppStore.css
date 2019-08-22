@@ -36,3 +36,9 @@
   /* Take up the whole screen */
   height: 100vh;
 }
+
+/* The container for the loading spinner */
+.loading-container {
+  font-size: 70px;
+  opacity: 0.7;
+}

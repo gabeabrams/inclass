@@ -4,6 +4,10 @@ import initCACCL from 'caccl/client/cached';
 // Import React
 import React, { Component } from 'react';
 
+// Import FontAwesome Icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+
 // Import other components
 import Header from './Header';
 import Body from './Body';
@@ -479,9 +483,16 @@ class AppStore extends Component {
     // Show loading message
     if (loadingMessage) {
       return (
-        <div className="alert alert-info m-5 text-center">
-          <h3>Loading...</h3>
-          {loadingMessage}
+        <div
+          className="loading-container text-center text-info p-3"
+        >
+          <FontAwesomeIcon
+            icon={faCircleNotch}
+            spin
+            style={{
+              animation: 'fa-spin 1s infinite linear',
+            }}
+          />
         </div>
       );
     }
