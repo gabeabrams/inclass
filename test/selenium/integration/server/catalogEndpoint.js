@@ -4,37 +4,38 @@ const assert = require('assert');
 describeS('Server > catalogEndpoint', function () {
   itS('Responds with Catalog', async function (driver) {
     await driver.launchAppStore();
+    await driver.visit('https://localhost/catalog');
     const { catalog } = await driver.getJSON();
     // Test the json to see if it matches data in installable store
     assert.equal(catalog.title, 'DCE', 'title data did not match');
     assert.deepEqual(catalog.accounts, [1176], 'accounts data did not match');
     const expectedTagsToShow = [
       {
-        color: '#701938',
+        color: '#0096ff',
         name: 'cost',
       },
       {
-        color: '#236842',
+        color: '#ff9300',
         name: 'type',
       },
       {
-        color: 'pink',
+        color: '#008e00',
         name: 'for',
       },
       {
-        color: '#4f3814',
+        color: '#8c3437',
         name: 'language',
       },
       {
-        color: '#ff9300',
+        color: '#672980',
         name: 'OS',
       },
       {
-        color: '#005392',
+        color: '#0432ff',
         name: 'semester',
       },
       {
-        color: '#701938',
+        color: '#ff2f92',
         name: 'grade',
       },
     ];
