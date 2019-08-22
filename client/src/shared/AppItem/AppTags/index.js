@@ -69,7 +69,12 @@ AppTags.propTypes = {
   // color of the tag
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
   // whether the app is shown as dark background
-  dark: PropTypes.bool.isRequired,
+  dark: PropTypes.bool,
+};
+
+AppTags.defaultProps = {
+  // By default, the app item is not dark
+  dark: false,
 };
 
 export default AppTags;

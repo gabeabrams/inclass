@@ -24,7 +24,7 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     );
 
     // clicks screenshots tab and checks that it is clicked
-    driver.click('#screenshots');
+    driver.click('#screenshots-tab-button');
     assert(clicked, 'Screenshots tab was not clicked');
     assert.equal(
       mostRecentTabName,
@@ -35,14 +35,14 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
     // reset clicked to false to test clicking guides tab
     clicked = false;
     mostRecentTabName = null;
-    driver.click('#guides');
+    driver.click('#guides-tab-button');
     assert(clicked, 'Guides tab was not clicked');
     assert.equal(mostRecentTabName, TAB_NAMES.GUIDES);
 
     // reset clicked to false to test clicking info tab
     clicked = false;
     mostRecentTabName = null;
-    driver.click('#info');
+    driver.click('#info-tab-button');
     assert(clicked, 'Info tab was not clicked');
     assert.equal(mostRecentTabName, TAB_NAMES.INFO);
 
@@ -97,21 +97,21 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
 
     // checks guides tab has correct text
     assert.equal(
-      driver.getText('#guides'),
+      driver.getText('#guides-tab-button'),
       'Guides',
       'Guides tab text is not correct'
     );
 
     // checks screenshot tab has correct text
     assert.equal(
-      driver.getText('#screenshots'),
+      driver.getText('#screenshots-tab-button'),
       'Screenshots',
       'Screenshots tab text is not correct'
     );
 
     // checks info tab has correct text
     assert.equal(
-      driver.getText('#info'),
+      driver.getText('#info-tab-button'),
       'Info',
       'Info tab text is not correct'
     );
@@ -128,10 +128,13 @@ describe('client > src > Body > AppPage > AppPageContent > TabBar', () => {
       />
     );
 
-    assert(driver.elementExists('#info'), 'Info tab is missing');
-    assert(!driver.elementExists('#guides'), 'Guides tab should not exist');
+    assert(driver.elementExists('#info-tab-button'), 'Info tab is missing');
     assert(
-      !driver.elementExists('#screenshots'),
+      !driver.elementExists('#guides-tab-button'),
+      'Guides tab should not exist'
+    );
+    assert(
+      !driver.elementExists('#screenshots-tab-button'),
       'Screenshots tab should not exist'
     );
   });
