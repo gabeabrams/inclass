@@ -12,7 +12,7 @@ module.exports = (apps, query = '') => {
   }
 
   // Make the query a regular expression so we can search for it in any string
-  const reQuery = new RegExp(query, 'i');
+  const reQuery = new RegExp(query.trim(), 'i');
 
   // Go through each app in the list
   // If the title, subtitle, or description match, add app to new list

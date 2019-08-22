@@ -22,7 +22,7 @@ class TabBar extends Component {
         <li className="nav-item">
           <a
             href="#screenshots"
-            id="screenshots"
+            id="screenshots-tab-button"
             // shows screenshots if currentTab equals screenshots
             className={
               `nav-link${
@@ -41,7 +41,7 @@ class TabBar extends Component {
         <li className="nav-item">
           <a
             href="#guides"
-            id="guides"
+            id="guides-tab-button"
             // shows guides if currentTab equals guides
             className={
               `nav-link${
@@ -63,7 +63,7 @@ class TabBar extends Component {
         <li className="nav-item">
           <a
             href="#info"
-            id="info"
+            id="info-tab-button"
             // shows info if currentTab equals info
             className={`nav-link${
               (currentTab === TAB_NAMES.INFO) ? ' active' : ''

@@ -26,6 +26,7 @@ class Filters extends Component {
     const tagElements = Object.keys(tags).map((tagName) => {
       return (
         <TagFilter
+          key={`tag-filter-${tagName}`}
           tags={tags}
           tagName={tagName}
           onFilterChanged={onFilterChanged}

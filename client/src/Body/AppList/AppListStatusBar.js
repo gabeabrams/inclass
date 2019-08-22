@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import './AppListStatusBar.css';
 
 class AppListStatusBar extends Component {
-  constructor(props) {
-    super(props);
-
+  render() {
     // destructure props
     const { appCount } = this.props;
 
@@ -19,15 +17,6 @@ class AppListStatusBar extends Component {
       message = `${appCount} apps match your search`;
     }
 
-    this.state = {
-      // the message to display on the status bar
-      message,
-    };
-  }
-
-  render() {
-    // deconstruct state
-    const { message } = this.state;
     return (
       <div className="app-list-status-bar-container font-italic">
         {message}

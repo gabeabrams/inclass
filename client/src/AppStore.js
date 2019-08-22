@@ -533,7 +533,9 @@ class AppStore extends Component {
     const filteredApps = filterByQuery(filteredAppsByTags, searchQuery);
 
     // create isFiltering bool to pass into body
-    const isFiltering = (allApps.length !== filteredApps.length);
+    const isFiltering = (
+      Object.keys(allApps).length !== Object.keys(filteredApps).length
+    );
 
     // Checks if the app is installed
     const { appId } = currentSpecificApp;
