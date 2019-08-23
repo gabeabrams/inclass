@@ -34,14 +34,16 @@ class MessageBefore extends Component {
     const modalTitle = `Please Read Before ${(uninstalling) ? 'Uninstalling' : 'Installing'}`;
 
     return (
-      <Modal
-        title={modalTitle}
-        onClose={onClose}
-        footer={modalFooter}
-        titleBackgroundColor="#87CEFA"
-      >
-        <MessageBody messageBody={message} />
-      </Modal>
+      <div className="message-before-modal">
+        <Modal
+          title={modalTitle}
+          onClose={onClose}
+          footer={modalFooter}
+          titleBackgroundColor="#87CEFA"
+        >
+          <MessageBody messageBody={message} />
+        </Modal>
+      </div>
     );
   }
 }
