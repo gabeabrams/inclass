@@ -5,7 +5,14 @@ import assert from 'assert';
 import MessageBody from './MessageBody';
 
 describe('client > src > Modal > InstallOrUninstallModal > MessageBody', () => {
-  const message = 'Please install with caution';
+  const message = (
+    <div>
+      <div>The app is now installed!</div>
+      <div>
+        Now, refresh your Canvas page for the changes to be applied.
+      </div>
+    </div>
+  );
   it('Displays the body', async () => {
     const driver = new Driver(
       <MessageBody messageBody={message} />
@@ -17,7 +24,7 @@ describe('client > src > Modal > InstallOrUninstallModal > MessageBody', () => {
     );
     assert.equal(
       driver.getText('.message-body-container'),
-      message,
+      'The app is now installed!Now, refresh your Canvas page for the changes to be applied.',
       'message before was not rendered correctly'
     );
   });
