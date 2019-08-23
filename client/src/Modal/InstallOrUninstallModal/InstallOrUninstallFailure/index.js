@@ -46,7 +46,7 @@ InstallOrUninstallFailure.propTypes = {
   onClose: PropTypes.func.isRequired,
   /* Function to call to show support steps */
   onSupportButtonClicked: PropTypes.func.isRequired,
-  /* Message to display to user before they can install the app */
+  /* Message to display to user why install/uninstall failed */
   message: PropTypes.string.isRequired,
   /* Install boolean to determine use for install or uninstall */
   uninstalling: PropTypes.bool,
