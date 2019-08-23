@@ -21,6 +21,7 @@ class AppTitle extends Component {
         <button
           type="button"
           className={className}
+          id={`${appId}-app-title`}
           onClick={() => { onClick(appId); }}
           style={{
             backgroundColor: 'transparent',

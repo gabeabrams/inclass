@@ -91,7 +91,7 @@ describe('client > src > Modal > InstallOrUninstallModal', () => {
     };
 
     // create driver
-    new Driver(
+    const driver = new Driver(
       <InstallOrUninstallModal
         isAdmin={isAdmin}
         currentSpecificApp={fakeCurrentSpecificApp}
@@ -120,7 +120,7 @@ describe('client > src > Modal > InstallOrUninstallModal', () => {
     };
     let clicked = false;
     // create driver
-    new Driver(
+    const driver = new Driver(
       <InstallOrUninstallModal
         uninstalling
         isAdmin={isAdmin}
