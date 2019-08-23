@@ -4,7 +4,7 @@ const assert = require('assert');
 const { courseId } = require('../../../../config/devEnvironment');
 
 describeS('Client > InstallFollowedByUninstall', function () {
-  itS('installs and immediately uninstalls app', async function (driver) {
+  itS.only('installs and immediately uninstalls app', async function (driver) {
     await driver.visit(`https://localhost:8088/courses/${courseId}`);
     // Click "Simulate Launch"
     await driver.click('.launch-button');
@@ -15,30 +15,26 @@ describeS('Client > InstallFollowedByUninstall', function () {
     }
     // Wait 2s
     await driver.wait(500);
+    // click filter toggle button
+    await driver.click('.filter-toggle-button');
+    await driver.wait(200);
+    // click two lables inside the menu
+    await driver.click('#filter-checkbox-OS-mac');
+    await driver.click('#filter-checkbox-cost-free');
+    await driver.wait(200);
+    // click filter toggle button to retract the menu
+    await driver.click('.filter-toggle-button');
+    await driver.wait(200);
     // click into app page
     await driver.click('#samsapp-app-title');
     await driver.wait(300);
     // click the install button
     await driver.click('#install-button');
-    await driver.wait(1000);
+    await driver.wait(600);
     // click okay button
     await driver.click('.okay-button');
     await driver.wait(200);
-    // leave page
-    await driver.click('.back-to-app-list-button');
-    await driver.wait(200);
-    // click into another app
-    await driver.click('#gradeup-app-title');
-    await driver.wait(200);
-    // click the screenshot tab of another app
-    await driver.click('#screenshots-tab-button');
-    // go back to app list
-    await driver.click('.back-to-app-list-button');
-    await driver.wait(200);
-    // go back into original app
-    await driver.click('#samsapp-app-title');
-    await driver.wait(300);
-    // uninstall the app
+    // uninstalls the app
     await driver.click('#uninstall-button');
     await driver.wait(600);
     // click okay button
