@@ -116,14 +116,16 @@ class Store {
             appId,
             app: apps[appId],
           });
+
           // delete the screenshots fullPath if it exists
           if (apps[appId].screenshots) {
-            apps[appId].screenshots.map((screenshot) => {
+            apps[appId].screenshots.forEach((screenshot, i) => {
               const noFullPathScreenshot = screenshot;
               delete noFullPathScreenshot.fullPath;
-              return noFullPathScreenshot;
+              apps[appId].screenshots[i] = noFullPathScreenshot;
             });
           }
+
           // Update opts object after serveScreenshots
           apps[appId] = serveIcon({
             expressApp: this.expressApp,
@@ -131,6 +133,7 @@ class Store {
             appId,
             app: apps[appId],
           });
+
           // delete the icon fullPath if it exists
           try {
             delete apps[appId].icon.fullPath;
