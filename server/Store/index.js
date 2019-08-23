@@ -118,7 +118,11 @@ class Store {
           });
           // delete the screenshots fullPath if it exists
           if (apps[appId].screenshots) {
-            delete apps[appId].screenshots.fullPath;
+            apps[appId].screenshots.map((screenshot) => {
+              const noFullPathScreenshot = screenshot;
+              delete noFullPathScreenshot.fullPath;
+              return noFullPathScreenshot;
+            });
           }
           // Update opts object after serveScreenshots
           apps[appId] = serveIcon({
