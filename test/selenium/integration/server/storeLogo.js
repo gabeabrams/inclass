@@ -2,7 +2,7 @@ require('dce-selenium');
 const assert = require('assert');
 
 describeS('Server', function () {
-  itS.only('Serves store logo', async function (driver) {
+  itS('Serves store logo', async function (driver) {
     await driver.launchAppStore();
     // Visit https://localhost/public/logo
     await driver.visit('https://localhost/public/logo');
