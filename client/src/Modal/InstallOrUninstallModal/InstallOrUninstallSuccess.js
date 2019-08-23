@@ -56,7 +56,7 @@ InstallOrUninstallSuccess.propTypes = {
   /* Function to call when the modal is closed */
   onClose: PropTypes.func.isRequired,
   /* Message to display in the messageBody */
-  message: PropTypes.string.isRequired,
+  message: PropTypes.string,
   /* App name to display in modal title */
   appName: PropTypes.string.isRequired,
   /* Install boolean to determine use for install or uninstalling */
@@ -66,6 +66,8 @@ InstallOrUninstallSuccess.propTypes = {
 InstallOrUninstallSuccess.defaultProps = {
   /* Assume display installing */
   uninstalling: false,
+  /* Message to display in the messageBody */
+  message: null,
 };
 
 export default InstallOrUninstallSuccess;
