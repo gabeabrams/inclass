@@ -29,14 +29,16 @@ class InstallOrUninstallFailure extends Component {
     );
 
     return (
-      <Modal
-        title={`\u2718 ${(uninstalling) ? 'Uninstall Failed' : 'Install Failed'}!`}
-        onClose={onClose}
-        footer={modalFooter}
-        titleBackgroundColor="#df9f9f"
-      >
-        <FailureReason message={message} />
-      </Modal>
+      <div className="install-uninstall-failure-modal">
+        <Modal
+          title={`\u2718 ${(uninstalling) ? 'Uninstall Failed' : 'Install Failed'}!`}
+          onClose={onClose}
+          footer={modalFooter}
+          titleBackgroundColor="#df9f9f"
+        >
+          <FailureReason message={message} />
+        </Modal>
+      </div>
     );
   }
 }
