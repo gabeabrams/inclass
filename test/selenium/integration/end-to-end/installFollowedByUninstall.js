@@ -3,7 +3,7 @@ const assert = require('assert');
 
 const { courseId } = require('../../../../config/devEnvironment');
 
-describeS.only('Client > InstallFollowedByUninstall', function () {
+describeS('Client > InstallFollowedByUninstall', function () {
   itS('installs and immediately uninstalls app', async function (driver) {
     await driver.visit(`https://localhost:8088/courses/${courseId}`);
     // Click "Simulate Launch"
