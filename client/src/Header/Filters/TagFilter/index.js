@@ -48,6 +48,7 @@ class TagFilter extends Component {
               onClick={() => {
                 onFilterChanged(false, tagName);
               }}
+              tagName={tagName}
             />
           </div>
         </div>
