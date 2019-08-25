@@ -22,6 +22,5 @@ module.exports = {
     // Waits 2s for server to finish loading
     await this.wait(2000);
     // Visit https://localhost/catalog so session is set up
-    await this.visit('https://localhost/catalog');
   },
 };
