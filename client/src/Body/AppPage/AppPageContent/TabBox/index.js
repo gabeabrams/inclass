@@ -9,7 +9,7 @@ class TabBox extends Component {
     // Children are Guides, Info or Screenshots module
     const { children } = this.props;
     return (
-      <div>
+      <div className="tabbox-container">
         {children}
       </div>
     );
