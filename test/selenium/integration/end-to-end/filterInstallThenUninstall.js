@@ -1,45 +1,36 @@
 require('dce-selenium');
 const assert = require('assert');
 
-const { courseId } = require('../../../../config/devEnvironment');
-
 describeS('Client > InstallFollowedByUninstall', function () {
-  itS.only('installs and immediately uninstalls app', async function (driver) {
-    await driver.visit(`https://localhost:8088/courses/${courseId}`);
-    // Click "Simulate Launch"
-    await driver.click('.launch-button');
-    // Click "Authorize"
-    await driver.wait(1000);
-    if (await driver.elementExists('.authorize-button')) {
-      await driver.click('.authorize-button');
-    }
-    // Wait 2s
-    await driver.wait(500);
+  itS('installs and immediately uninstalls app', async function (driver) {
+    await driver.launchAppStore(true);
+    // check if filter toggle button exist
+    assert(driver.elementExists('.filter-toggle-button'), 'did not render filter toggle button');
     // click filter toggle button
+    await driver.waitForElementVisible('.filter-toggle-button');
     await driver.click('.filter-toggle-button');
-    await driver.wait(200);
     // click two lables inside the menu
+    await driver.waitForElementVisible('#filter-checkbox-OS-mac');
     await driver.click('#filter-checkbox-OS-mac');
     await driver.click('#filter-checkbox-cost-free');
-    await driver.wait(200);
     // click filter toggle button to retract the menu
+    await driver.waitForElementVisible('.filter-toggle-button');
     await driver.click('.filter-toggle-button');
-    await driver.wait(200);
     // click into app page
+    await driver.waitForElementVisible('#samsapp-app-title');
     await driver.click('#samsapp-app-title');
-    await driver.wait(300);
     // click the install button
+    await driver.waitForElementVisible('#install-button');
     await driver.click('#install-button');
-    await driver.wait(600);
     // click okay button
+    await driver.waitForElementVisible('.okay-button');
     await driver.click('.okay-button');
-    await driver.wait(200);
     // uninstalls the app
+    await driver.waitForElementVisible('#uninstall-button');
     await driver.click('#uninstall-button');
-    await driver.wait(600);
     // click okay button
+    await driver.waitForElementVisible('.okay-button');
     await driver.click('.okay-button');
-    await driver.wait(200);
     assert(await driver.elementExists('#install-button'), 'app was not uninstalled');
   });
 });
