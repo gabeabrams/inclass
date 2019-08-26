@@ -2,6 +2,7 @@
     "title": "Sam's App",
     "subtitle": "This is the best app in the entire universe",
     "creator": "dce",
+    "messageAfterInstall": "The app is now installed!",
     "tags": {
       "cost": [
         "free",

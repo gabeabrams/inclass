@@ -16,7 +16,7 @@ class BackToAppListButton extends Component {
       <div className="backtoapplistbutton-container">
         <button
           type="button"
-          className="btn btn-outline-secondary p-0"
+          className="btn btn-outline-secondary p-0 back-to-app-list-button"
           onClick={() => {
             onBackButtonClicked();
           }}

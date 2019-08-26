@@ -29,14 +29,16 @@ class InstallOrUninstallFailure extends Component {
     );
 
     return (
-      <Modal
-        title={`\u2718 ${(uninstalling) ? 'Uninstall Failed' : 'Install Failed'}!`}
-        onClose={onClose}
-        footer={modalFooter}
-        titleBackgroundColor="#df9f9f"
-      >
-        <FailureReason message={message} />
-      </Modal>
+      <div className="install-uninstall-failure-modal">
+        <Modal
+          title={`\u2718 ${(uninstalling) ? 'Uninstall Failed' : 'Install Failed'}!`}
+          onClose={onClose}
+          footer={modalFooter}
+          titleBackgroundColor="#df9f9f"
+        >
+          <FailureReason message={message} />
+        </Modal>
+      </div>
     );
   }
 }
@@ -46,7 +48,7 @@ InstallOrUninstallFailure.propTypes = {
   onClose: PropTypes.func.isRequired,
   /* Function to call to show support steps */
   onSupportButtonClicked: PropTypes.func.isRequired,
-  /* Message to display to user before they can install the app */
+  /* Message to display to user why install/uninstall failed */
   message: PropTypes.string.isRequired,
   /* Install boolean to determine use for install or uninstall */
   uninstalling: PropTypes.bool,

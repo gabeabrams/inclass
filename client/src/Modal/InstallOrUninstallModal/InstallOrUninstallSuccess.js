@@ -27,27 +27,29 @@ class InstallOrUninstallSuccess extends Component {
     );
 
     return (
-      <Modal
-        title={`\u2714 ${appName} ${(uninstalling) ? 'Uninstalled' : 'Installed'}!`}
-        onClose={onClose}
-        footer={modalFooter}
-        titleBackgroundColor="#87CEFA"
-      >
-        {/* MessageBody has a default value of 'refresh canvas page' */}
-        <MessageBody messageBody={
-          (message)
-            ? (
-              <div>
-                <div>{message}</div>
+      <div className="install-or-uninstall-success-modal">
+        <Modal
+          title={`\u2714 ${appName} ${(uninstalling) ? 'Uninstalled' : 'Installed'}!`}
+          onClose={onClose}
+          footer={modalFooter}
+          titleBackgroundColor="#87CEFA"
+        >
+          {/* MessageBody has a default value of 'refresh canvas page' */}
+          <MessageBody messageBody={
+            (message)
+              ? (
                 <div>
-                  Now, refresh your Canvas page for the changes to be applied.
+                  <div>{message}</div>
+                  <div>
+                    Now, refresh your Canvas page for the changes to be applied.
+                  </div>
                 </div>
-              </div>
-            )
-            : 'Now, refresh your Canvas page for the changes to be applied.'
-          }
-        />
-      </Modal>
+              )
+              : 'Now, refresh your Canvas page for the changes to be applied.'
+            }
+          />
+        </Modal>
+      </div>
     );
   }
 }
@@ -56,7 +58,7 @@ InstallOrUninstallSuccess.propTypes = {
   /* Function to call when the modal is closed */
   onClose: PropTypes.func.isRequired,
   /* Message to display in the messageBody */
-  message: PropTypes.string.isRequired,
+  message: PropTypes.string,
   /* App name to display in modal title */
   appName: PropTypes.string.isRequired,
   /* Install boolean to determine use for install or uninstalling */
@@ -66,6 +68,8 @@ InstallOrUninstallSuccess.propTypes = {
 InstallOrUninstallSuccess.defaultProps = {
   /* Assume display installing */
   uninstalling: false,
+  /* Message to display in the messageBody */
+  message: null,
 };
 
 export default InstallOrUninstallSuccess;
