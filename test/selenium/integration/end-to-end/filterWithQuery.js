@@ -2,7 +2,7 @@ require('dce-selenium');
 const assert = require('assert');
 
 describeS('End-to-End > filterWithQuery', function () {
-  itS.only('Simulates a filtering process using search query', async function (driver) {
+  itS('Simulates a filtering process using search query', async function (driver) {
     await driver.launchAppStore(true);
     // Type into search field
     await driver.waitForElementVisible('#searchfield-input');
