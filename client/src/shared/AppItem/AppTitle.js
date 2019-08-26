@@ -25,6 +25,7 @@ class AppTitle extends Component {
           style={{
             backgroundColor: 'transparent',
           }}
+          id={`${appId}-button`}
         >
           <h3 className="app-title-h3">
             {title}
