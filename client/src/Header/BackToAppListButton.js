@@ -20,6 +20,7 @@ class BackToAppListButton extends Component {
           onClick={() => {
             onBackButtonClicked();
           }}
+          id="backtoapplistbutton-button"
         >
           <div className="backtoapplistbutton-container">
             <div className="back-button-container mr-3">
