@@ -2,7 +2,7 @@ require('dce-selenium');
 const assert = require('assert');
 
 describeS('Client > InstallFollowedByUninstall', function () {
-  itS.only('installs and immediately uninstalls app', async function (driver) {
+  itS('installs and immediately uninstalls app', async function (driver) {
     await driver.launchAppStore(true);
     // click into app page
     await driver.waitForElementVisible('#samsapp-app-title');
