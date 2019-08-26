@@ -1,19 +1,10 @@
 require('dce-selenium');
 const assert = require('assert');
-const { courseId } = require('../../../config/devEnvironment');
 
 describeS('end-to-end > intoAppThenOut', function () {
   itS('Successfully Goes Into an App then Goes Out to AppList', async function (driver) {
-    await driver.visit(`https://localhost:8088/courses/${courseId}`);
-    // Click "Simulate Launch"
-    await driver.click('.launch-button');
-    // Click "Authorize"
-    await driver.wait(1000);
-    if (await driver.elementExists('.authorize-button')) {
-      await driver.click('.authorize-button');
-    }
-
-    await driver.wait(2000);
+    // Launch App Store (without going to catalog)
+    await driver.launchAppStore(true);
 
     // Click on the app GradeUp
     await driver.click('#gradeup-button');
@@ -27,6 +18,7 @@ describeS('end-to-end > intoAppThenOut', function () {
     await driver.scrollTo('.backtoapplistbutton-container');
     await driver.click('#backtoapplistbutton-button');
 
+    // Check it is back into the app list page
     assert(await driver.elementExists('.app-list-container'), 'No appItems exists');
   });
 });
