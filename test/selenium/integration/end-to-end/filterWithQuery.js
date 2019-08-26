@@ -1,9 +1,9 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('End-to-End > filterWithQuery', function () {
+describeS.only('End-to-End > filterWithQuery', function () {
   itS('Simulates a filtering process using search query', async function (driver) {
-    await driver.launchAppStore();
+    await driver.launchAppStore(true);
     // Type into search field
     await driver.typeInto('.form-control', 'Grade');
     // Look for the app that was filtered for
