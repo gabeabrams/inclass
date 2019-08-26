@@ -7,7 +7,7 @@ describeS('end-to-end > clickThroughInfo', function () {
     await driver.launchAppStore(true);
 
     // Click on app gradeup
-    await driver.click('#gradeup-button');
+    await driver.click('#gradeup-app-title');
 
     // Check screenshots container exists
     assert(await driver.elementExists('.screenshots-container'), 'No screenshots exists');

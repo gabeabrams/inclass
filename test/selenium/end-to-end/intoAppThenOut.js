@@ -7,7 +7,7 @@ describeS('end-to-end > intoAppThenOut', function () {
     await driver.launchAppStore(true);
 
     // Click on the app GradeUp
-    await driver.click('#gradeup-button');
+    await driver.click('#gradeup-app-title');
 
     // Check elements of app page are there
     assert(await driver.elementExists('.apppagefooter-container'), 'No footer exists');

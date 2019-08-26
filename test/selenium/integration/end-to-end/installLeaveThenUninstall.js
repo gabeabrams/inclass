@@ -14,8 +14,8 @@ describeS('Client > InstallFollowedByUninstall', function () {
     await driver.waitForElementVisible('.okay-button');
     await driver.click('.okay-button');
     // leave page
-    await driver.waitForElementVisible('.back-to-app-list-button');
-    await driver.click('.back-to-app-list-button');
+    await driver.waitForElementVisible('#backtoapplistbutton-button');
+    await driver.click('#backtoapplistbutton-button');
     // click into another app
     await driver.waitForElementVisible('#gradeup-app-title');
     await driver.click('#gradeup-app-title');
@@ -23,8 +23,8 @@ describeS('Client > InstallFollowedByUninstall', function () {
     await driver.waitForElementVisible('#screenshots-tab-button');
     await driver.click('#screenshots-tab-button');
     // go back to app list
-    await driver.waitForElementVisible('.back-to-app-list-button');
-    await driver.click('.back-to-app-list-button');
+    await driver.waitForElementVisible('#backtoapplistbutton-button');
+    await driver.click('#backtoapplistbutton-button');
     // go back into original app
     await driver.waitForElementVisible('#samsapp-app-title');
     await driver.click('#samsapp-app-title');

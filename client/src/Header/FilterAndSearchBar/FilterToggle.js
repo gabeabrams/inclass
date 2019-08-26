@@ -20,7 +20,7 @@ class FilterToggle extends Component {
         <button
           type="button"
           id="filtertoggle-button"
-          className="btn btn-outline-secondary p-0 filter-toggle-button"
+          className="btn btn-outline-secondary p-0"
           onClick={() => {
             onFilterToggle(!filterDrawerOpen);
           }}
