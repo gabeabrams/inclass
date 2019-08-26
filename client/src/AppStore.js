@@ -297,6 +297,9 @@ class AppStore extends Component {
     });
   }
 
+  /**
+   * TODO: add jsdoc
+   */
   onBackButtonClicked() {
     const newBodyType = BODY_TYPE.APP_LIST;
     this.setState({

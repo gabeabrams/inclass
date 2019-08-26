@@ -6,6 +6,10 @@ import { faCaretRight, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 // Import css
 import './FilterToggle.css';
 
+/**
+ * A button that toggles the filter drawer and has a caret that changes from
+ *   pointing to the right (drawer closed) to down (drawer open)
+ */
 class FilterToggle extends Component {
   render() {
     // Deconstruct props
