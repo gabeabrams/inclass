@@ -13,6 +13,7 @@ describe('client > src > Header > Filters > TagFilter > TagFilterResetButton', (
         onClick={() => {
           clicked = true;
         }}
+        tagName="cost"
       />
     );
 
