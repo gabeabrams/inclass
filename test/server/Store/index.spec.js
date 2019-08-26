@@ -311,4 +311,22 @@ describe('server > Store > index', function () {
       'installXML was not deleted'
     );
   });
+
+  it('checks that the fullPaths were deleted in attempLoad', async function () {
+    const dummyPath = path.join(__dirname, '../../dummy-data/store/simple');
+    const Store = proxyquire('../../../server/Store', {
+      './STORE_CONSTANTS': {
+        path: dummyPath,
+        '@global': true,
+      },
+    });
+    const expressApp = new ExpressApp();
+    const store = new Store(expressApp);
+    await store._attemptLoad();
+    assert(!store.logoFullPath, 'did not delete store\'s logoFullPath');
+    assert(!store.catalogIdToCatalogMetadata.dce.apps.gradeup.screenshots, 'store was loaded incorrectly');
+    assert(!store.catalogIdToCatalogMetadata.dce.apps.swipein.screenshots.fullPath, 'did not delete dce-swipein\'s screenshots.FullPath');
+    assert(!store.catalogIdToCatalogMetadata.pe.apps.swipein.screenshots.fullPath, 'did not delete pe-swipein\'s screenshots.FullPath');
+    assert(!store.catalogIdToCatalogMetadata.seas.apps.swipein.screenshots.fullPath, 'did not delete seas-swipein\'s screenshots.FullPath');
+  });
 });

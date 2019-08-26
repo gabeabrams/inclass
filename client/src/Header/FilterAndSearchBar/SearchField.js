@@ -16,6 +16,7 @@ class SearchField extends Component {
       <div className="searchfield-container">
         <div className="input-group">
           <input
+            id="searchfield-input"
             type="text"
             value={searchQuery}
             placeholder="Search"

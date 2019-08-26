@@ -8,7 +8,11 @@ class TagFilterResetButton extends Component {
   render() {
     const {
       onClick,
+      tagName,
     } = this.props;
+
+    // Make unique id name
+    const idName = `reset-button-${tagName}`;
 
     return (
       <div className="tagfilterresetbutton-container">
@@ -16,6 +20,7 @@ class TagFilterResetButton extends Component {
           type="button"
           onClick={onClick}
           className="btn btn-secondary tagfilterresetbutton-button"
+          id={idName}
         >
           Reset
         </button>
@@ -27,6 +32,8 @@ class TagFilterResetButton extends Component {
 TagFilterResetButton.propTypes = {
   // The handler for resetting all filters
   onClick: PropTypes.func.isRequired,
+  // The tagName for this reset button - for unique id purposes
+  tagName: PropTypes.string.isRequired,
 };
 
 export default TagFilterResetButton;

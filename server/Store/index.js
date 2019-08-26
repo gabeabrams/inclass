@@ -58,6 +58,9 @@ class Store {
       // Serves logoFullPath using serveStoreLogo function
       serveStoreLogo(logoFullPath, this.expressApp);
 
+      // delete logoFullPath after serving
+      delete storeMetadata.logoFullPath;
+
       // Post-process the catalogs
       const catalogs = {};
       Object.keys(myStore.catalogs).forEach((catalogId) => {
@@ -123,6 +126,16 @@ class Store {
             appId,
             app: apps[appId],
           });
+
+          // delete the screenshots fullPath if it exists
+          if (apps[appId].screenshots) {
+            apps[appId].screenshots.forEach((screenshot, i) => {
+              const noFullPathScreenshot = screenshot;
+              delete noFullPathScreenshot.fullPath;
+              apps[appId].screenshots[i] = noFullPathScreenshot;
+            });
+          }
+
           // Update opts object after serveScreenshots
           apps[appId] = serveIcon({
             expressApp: this.expressApp,
@@ -130,6 +143,14 @@ class Store {
             appId,
             app: apps[appId],
           });
+
+          // delete the icon fullPath if it exists
+          try {
+            delete apps[appId].icon.fullPath;
+          } catch (err) {
+            const errMessage = `We ran into an issue deleting icon fullPath for the app ${appId} in catalog ${catalogId}`;
+            throw new Error(errMessage);
+          }
           // save updated catalog to catalogIdToCatalogMetadata
           catalogIdToCatalogMetadata[catalogId] = newCatalog;
         });

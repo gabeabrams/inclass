@@ -31,6 +31,7 @@ class AppItem extends Component {
       creator,
       tags,
       icon,
+      appId,
     } = app;
 
     const iconURL = `https://${path.join(storeHost, icon.url)}`;
@@ -44,6 +45,7 @@ class AppItem extends Component {
         style={{
           cursor: (dark ? 'pointer' : undefined),
         }}
+        id={`${appId}-appItem`}
       >
         {/* contains the whole appItem */}
         <div className="appitem-container">

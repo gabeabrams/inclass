@@ -13,9 +13,11 @@ class Info extends Component {
   render() {
     const { description } = this.props;
     return (
-      <TabBox>
-        <p>{description}</p>
-      </TabBox>
+      <div className="info-container">
+        <TabBox>
+          <p>{description}</p>
+        </TabBox>
+      </div>
     );
   }
 }
