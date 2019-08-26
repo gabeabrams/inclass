@@ -15,5 +15,11 @@ describe('client > src > Body > AppPage > AppPageContent > TabBox', () => {
 
     // Checks TabBox exists
     assert(driver.elementExists('.tabbox-container'), 'Tab Box is absent');
+    // Check children is correct
+    assert.equal(
+      driver.getText('p'),
+      'Fake Text',
+      'children text was incorrect'
+    );
   });
 });
