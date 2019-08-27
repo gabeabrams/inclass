@@ -26,6 +26,7 @@ class FilterAndSearchBar extends Component {
 
     let filterToggleElem;
     let backButtonElem;
+    let searchElem;
 
     // If in app page display back button to app list
     if (currentBodyType === BODY_TYPE.APP_LIST) {
@@ -33,6 +34,12 @@ class FilterAndSearchBar extends Component {
         <FilterToggle
           filterDrawerOpen={filterDrawerOpen}
           onFilterToggle={onFilterToggle}
+        />
+      );
+      searchElem = (
+        <SearchField
+          searchQuery={searchQuery}
+          onSearchChanged={onSearchChanged}
         />
       );
     } else {
@@ -48,10 +55,7 @@ class FilterAndSearchBar extends Component {
           {backButtonElem}
         </div>
         <div className="col filterandsearchbar-searchbox text-left">
-          <SearchField
-            searchQuery={searchQuery}
-            onSearchChanged={onSearchChanged}
-          />
+          {searchElem}
         </div>
       </div>
     );
