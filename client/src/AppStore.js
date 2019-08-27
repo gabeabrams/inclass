@@ -4,6 +4,9 @@ import initCACCL from 'caccl/client/cached';
 // Import React
 import React, { Component } from 'react';
 
+// Import Helmet (for title overwriting)
+import Helmet from 'react-helmet';
+
 // Import FontAwesome Icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
@@ -558,6 +561,11 @@ class AppStore extends Component {
     // Render the component
     return (
       <div>
+        <Helmet>
+          <title>
+            {`${storeTitle} App Store | ${catalogTitle} Catalog`}
+          </title>
+        </Helmet>
         <div className="appstore-header-container">
           <Header
             storeHost={storeHost}
