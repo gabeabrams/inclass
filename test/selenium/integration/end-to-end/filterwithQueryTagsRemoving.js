@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS.only('End-to-End > filterWithQueryTagsRemoving', function () {
+describeS('End-to-End > filterWithQueryTagsRemoving', function () {
   itS('Simulates a filtering process using search query and filter tags, and removes them', async function (driver) {
     await driver.launchAppStore(true);
     // Type into search field
