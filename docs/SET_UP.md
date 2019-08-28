@@ -14,8 +14,9 @@ The store metadata is stored in a single `/store/metadata.json` file with in fol
 ```
 
 **Note:** beingEdited is optional. If it is true, the store is not loaded. 
+
 #### Hot store reloading
-A core function in the loading process is hot store reloading, which reloads all the information the store contains every 5 seconds. In order to temporarily stop the reloading process so the latest changes are not published on the website, set the beingEdited property in the store metadata to true. Another situation where the hot store reloading doesn't publish the newest changes is if there exist errors in the loading process. In this case, the app store maintains the state of the last working version.
+A core function in the loading process is hot store reloading, which reloads all the information the store contains every 5 seconds. In order to temporarily stop the reloading process so the latest changes are not published on the website, set the `beingEdited` property in the store metadata to true. Another situation where the hot store reloading doesn't publish the newest changes is if there exist errors in the loading process. In this case, the app store maintains the state of the last working version.
 
 ## Catalogs:
 
@@ -45,8 +46,10 @@ Each catalog has its own folder within the `/store` folder. Inside that folder i
 ```
 
 ^ this is an example metadata file. See the docs in the `/docs/types` folder for more info.
+
 #### Accounts
-The accounts property inside the catalog metadata is a list of Canvas accountIds. The students have their own unique Canvas accountIds, and the university keeps track which school the students are in, or which catalog to display to each. When a student launches the app store with an accountId that's included in the above list of accounts, the above catalog will be shown to that student. In the case where a student is cross-listed amoung two or more schools, the university will determine which catalog is the paren, thus showing the student that one catalog. 
+
+The accounts property inside the catalog metadata is a list of Canvas accountIds. When a user launches the app store from a course within an account that's included in the above list of accounts, the above catalog will be shown to that user. In the case where a course has been merged, the parent account is the one we will use for this process (when you merge Canvas courses, you choose one course that will be merged _into_ the other, the parent. The parent course's account will be the one we use for the catalog determining process).
 
 ## Apps:
 
@@ -113,8 +116,10 @@ Each app has a metadata file stored at `/store/<catalogId>/<appId>/metadata.json
 ^ this is an example metadata file. See the docs in the `/docs/types` folder for more info.
 
 ### The attributes related to the app install process
-The attribute "messageBeforeInstall" within the app's metadata file will be shown to students prior to installing an app. It may contain important information about the installing process or about the app itself. After viewing the message, students can choose to continue the install process or cancel. If in your app metadata, the "requestInstallEmail" attribute exists, the students will have to send an email to formally request installing the app. However, if the user is an administrator for the app, he or she can directly install the app, bypassing the requesting process even if "requestInstallEmail" appear in the app's metadata.
-Upon successful installation, "messageAfterInstall" will be shown to instruct students on further actions.  "messageBeforeUninstall", "requestUninstallEmail", and "messageAfterUninstall" serve the same purpose when uninstalling an app. 
+
+The attribute "messageBeforeInstall" within the app's metadata file will be shown to users prior to installing an app. It may contain important information about the installing process or about the app itself. After viewing the message, users can choose to continue the install process or cancel. If in your app metadata, the "requestInstallEmail" attribute exists, the users will have to send an email to formally request installing the app. However, if the user is an administrator for the account, they can directly install the app, bypassing the requesting process even if "requestInstallEmail" appears in the app's metadata.
+
+Upon successful installation, "messageAfterInstall" will be shown to instruct users on further actions.  "messageBeforeUninstall", "requestUninstallEmail", and "messageAfterUninstall" serve the same purpose when uninstalling an app. 
 
 ### Screenshots
 
@@ -148,8 +153,10 @@ Each app must have an icon image stored at `/store/<catalogId>/<appId>/icon.png`
 Under the app folder stored at `/store/<catalogId>/<appId>`: there should be a `metadata.json` file, `install.xml`, `icon.png` or `icon.jpg`, `credentials.json`, and a optional `screenshots` folder containing `png`, `jpg`, or `jpeg` image files in the case where you are not extending from another app. 
 
 ## Logic about the loading process
+
 ### Extends
-The apps are designed such that they can be independent, having their own metadata files, or they can extend metadata files from another app, and customize properties based on the admin's choosing. For example, if you want to extend from the above app "SwipeIn 2", and change the creator, requestInstallEmail, requestUninstallEmail, and supportEmail to your own, you can write your metadata file as such (assuming "Swipein 2" is in the dce catalog, and its appId is swipein2):
+
+The apps are designed such that they can be independent, having their own metadata files, or they can extend metadata files from another app, and overwrite properties based on the admin's choosing. For example, if you want to extend from the above app "SwipeIn 2", and change the creator, requestInstallEmail, requestUninstallEmail, and supportEmail to your own, you can write your metadata file as such (assuming "Swipein 2" is in the dce catalog, and its appId is swipein2):
 
 ```json
 {
