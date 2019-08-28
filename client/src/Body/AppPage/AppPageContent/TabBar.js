@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 
 import TAB_NAMES from './TAB_NAMES';
 
+/**
+ * Renders the tab bar and which tab is active,
+ *  if screenshots or guides don't exist, the
+ *  tab will not show
+ */
 class TabBar extends Component {
   render() {
     // Deconstruct props

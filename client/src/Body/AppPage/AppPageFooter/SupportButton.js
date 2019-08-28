@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import './SupportButton.css';
 
+/**
+ * Renders the support button
+ */
 class SupportButton extends Component {
   render() {
     // Deconstruct props

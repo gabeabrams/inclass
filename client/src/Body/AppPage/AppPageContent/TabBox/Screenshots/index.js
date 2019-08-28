@@ -8,6 +8,9 @@ import './style.css';
 import Screenshot from './Screenshot';
 import TabBox from '..';
 
+/**
+ * Renders the screenshot(s) from the app
+ */
 class Screenshots extends Component {
   render() {
     // deconstruct props

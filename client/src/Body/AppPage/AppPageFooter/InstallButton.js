@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import './InstallButton.css';
 
+/**
+ * Renders the install button
+ */
 class InstallButton extends Component {
   render() {
     // Deconstruct props

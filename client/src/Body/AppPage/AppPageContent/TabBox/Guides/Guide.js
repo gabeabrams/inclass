@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import Step from './Step';
 
+/**
+ * Renders the individual guide from store metadata
+ */
 class Guide extends Component {
   render() {
     // deconstruct props

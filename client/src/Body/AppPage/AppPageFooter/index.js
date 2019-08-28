@@ -7,6 +7,10 @@ import InstallButton from './InstallButton';
 import UninstallButton from './UninstallButton';
 import SupportButton from './SupportButton';
 
+/**
+ * Renders the entire footer with install, uninstall, and support button.
+ *   Handles the logic of showing install or uninstall button
+ */
 class AppPageFooter extends Component {
   render() {
     // Deconstruct props

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Renders the individual screenshot with an image and a header
+ */
 class Screenshot extends Component {
   render() {
     // Deconstruct props

@@ -1,9 +1,9 @@
-// props:
-// - app (the app to show the screenshots of)
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Allows tab box to apply one style to all contents (its children)
+ */
 class TabBox extends Component {
   render() {
     // Children are Guides, Info or Screenshots module
