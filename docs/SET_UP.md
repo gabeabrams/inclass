@@ -1,6 +1,6 @@
 # Set Up Instructions
 
-The file structure of the `/store` metadata folder
+This README provides information on the file structure of the `/store` metadata folder and the core logic and functions about the store's loading process.
 
 ## Store:
 
@@ -27,14 +27,26 @@ Each catalog has its own folder within the `/store` folder. Inside that folder i
 {
     "title": "Catalog Title",
     "accounts": [25, 28],
-    "tagColors": {
-        "price": "blue",
-        "type": "#59178e"
-    }
+    "tagsToShow": [
+    {
+      "name": "cost",
+      "color": "blue",
+    },
+    {
+      "name": "language",
+      "color": "#FF7F50",
+    },
+    {
+      "name": "semester"
+    },
+  ],
+  "defaultSupportEmail": "example@harvard.edu"
 }
 ```
 
 ^ this is an example metadata file. See the docs in the `/docs/types` folder for more info.
+#### Accounts
+The accounts property inside the catalog metadata is a list of Canvas accountIds. The students have their own unique Canvas accountIds, and the university keeps track which school the students are in, or which catalog to display to each. When a student launches the app store with an accountId that's included in the above list of accounts, the above catalog will be shown to that student. In the case where a student is cross-listed amoung two or more schools, the university will determine which catalog is the paren, thus showing the student that one catalog. 
 
 ## Apps:
 
@@ -127,3 +139,20 @@ Each app must have an install xml object `install.xml`.
 ### Icon
 
 Each app must have an icon image. It will either be in a file `icon.png` or `icon.jpg`.
+
+## Overview of the loading process
+### Extends
+The apps are designed such that they can be independent, having their own metadata files, or they can extend metadata files from another app, and customize properties based on the admin's choosing. For example, if you want to extend from the above app "SwipeIn 2", and change the creator, requestInstallEmail, requestUninstallEmail, and supportEmail to your own, you can write your metadata file as such (assuming "Swipein 2" is in the dce catalog, and its appId is swipein2):
+```json
+{
+    "extends": {
+        "catalogId": "dce",
+        "appId": "swipein2"
+    },
+    "creator": ["pe", "dce"],
+    "supportEmail": "the_changed_support_email@harvard.edu",
+    "requestInstallEmail": "instructionaltechnology_changed@dce.harvard.edu",
+    "requestUninstallEmail": "instructionaltechnology_changed@dce.harvard.edu"
+}
+```
+The attributes that are not included in your metadata file but included in swipein2 will remain the same. 
