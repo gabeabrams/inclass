@@ -113,7 +113,7 @@ Each app has a metadata file stored at `/store/<catalogId>/<appId>/metadata.json
 ^ this is an example metadata file. See the docs in the `/docs/types` folder for more info.
 
 ### The attributes related to the app install process
-The attribute "messageBeforeInstall" within the app's metadata file will be shown to students prior to installing an app. It can contain important information about the installing process or about the app itself. After viewing the message, students can choose to continue the install process or cancel. If in your app metadata, the "requestInstallEmail" attribute exists, the students will have to send an email to formally request installing the app. However, if the user is an administrator for the app, he or she can directly install the app, bypassing the requesting process even if "requestInstallEmail" appear in the app's metadata.
+The attribute "messageBeforeInstall" within the app's metadata file will be shown to students prior to installing an app. It may contain important information about the installing process or about the app itself. After viewing the message, students can choose to continue the install process or cancel. If in your app metadata, the "requestInstallEmail" attribute exists, the students will have to send an email to formally request installing the app. However, if the user is an administrator for the app, he or she can directly install the app, bypassing the requesting process even if "requestInstallEmail" appear in the app's metadata.
 Upon successful installation, "messageAfterInstall" will be shown to instruct students on further actions.  "messageBeforeUninstall", "requestUninstallEmail", and "messageAfterUninstall" serve the same purpose when uninstalling an app. 
 
 ### Screenshots
@@ -164,4 +164,4 @@ The apps are designed such that they can be independent, having their own metada
 }
 ```
 
-**Note:** If your app is extending the screenshots or icon from another app, you do not need to copy the files and paste them under your own `/screenshots` folder. We will take them from their original position, and load and serve them to your app. If you are planning to use your own set of screenshots and icon, please list them in the `metadata.json` as well as including the physical files.
+**Note:** If your app is extending the screenshots or icon from another app, you do not need to copy the screenshots image files and paste them under your own `/screenshots` folder. We will take them from their original position, and load and serve them to your app. If you are planning to use your own set of screenshots and icon, please list them in the `metadata.json` as well as including the physical files.
