@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('Client > InstallFollowedByUninstall', function () {
+describeS('end-to-end > install followed by uninstall', function () {
   itS('installs and immediately uninstalls app', async function (driver) {
     await driver.launchAppStore(true);
     // check if filter toggle button exist

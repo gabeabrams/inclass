@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('End-to-End > filterWithQueryAndTags', function () {
+describeS('end-to-end > filter with query and tags', function () {
   itS('Simulates a filtering process using search query and filter tags', async function (driver) {
     await driver.launchAppStore(true);
     // Type into search field

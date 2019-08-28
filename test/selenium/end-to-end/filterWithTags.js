@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('End-to-End > filterWithTags', function () {
+describeS('end-to-end > filter with tags', function () {
   itS('Simulates a filtering process using tags', async function (driver) {
     // Launch the appstore
     await driver.launchAppStore(true);

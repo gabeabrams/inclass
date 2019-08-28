@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-const { courseId } = require('../../../../config/devEnvironment');
+const { courseId } = require('../../../config/devEnvironment');
 
 describeS('end-to-end > gettingSupport', function () {
   itS('Successfully gets support', async function (driver) {

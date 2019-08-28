@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('end-to-end > intoAppThenOut', function () {
+describeS('end-to-end > into app then out', function () {
   itS('Successfully Goes Into an App then Goes Out to AppList', async function (driver) {
     // Launch App Store (without going to catalog)
     await driver.launchAppStore(true);

@@ -1,9 +1,9 @@
 require('dce-selenium');
 const assert = require('assert');
 
-const { courseId } = require('../../../../config/devEnvironment');
+const { courseId } = require('../../../config/devEnvironment');
 
-describeS('end-to-end > sendRequestEmail', function () {
+describeS('end-to-end > send request email', function () {
   itS('Successfully sends request email', async function (driver) {
     // Launch app store without going to catalog
     await driver.launchAppStore(true);

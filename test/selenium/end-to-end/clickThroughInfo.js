@@ -1,7 +1,7 @@
 require('dce-selenium');
 const assert = require('assert');
 
-describeS('end-to-end > clickThroughInfo', function () {
+describeS('end-to-end > click through info', function () {
   itS('Successfully Clicks Through Tab Bar', async function (driver) {
     // Launch app store without going to catalog
     await driver.launchAppStore(true);
