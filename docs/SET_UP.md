@@ -140,9 +140,9 @@ Each app must have an install xml object `install.xml`.
 
 Each app must have an icon image. It will either be in a file `icon.png` or `icon.jpg`.
 
-## Overview of the loading process
 ### Extends
 The apps are designed such that they can be independent, having their own metadata files, or they can extend metadata files from another app, and customize properties based on the admin's choosing. For example, if you want to extend from the above app "SwipeIn 2", and change the creator, requestInstallEmail, requestUninstallEmail, and supportEmail to your own, you can write your metadata file as such (assuming "Swipein 2" is in the dce catalog, and its appId is swipein2):
+
 ```json
 {
     "extends": {
@@ -155,4 +155,9 @@ The apps are designed such that they can be independent, having their own metada
     "requestUninstallEmail": "instructionaltechnology_changed@dce.harvard.edu"
 }
 ```
-The attributes that are not included in your metadata file but included in swipein2 will remain the same. 
+
+**Note:** If your app is extending the screenshots or icon from another app, you do not need to copy the files and paste them under your own `/screenshots` folder. We will take them from their original position, and load and serve them to your app. If you are planning to use your own set of screenshots and icon, please list them in the `metadata.json` as well as including the physical files.
+
+### The attributes related to the app install process
+The attribute "messageBeforeInstall" will be shown to students prior to installing an app. It can contain important information about the installing process or about the app itself. After viewing the message, students can choose to continue the install process or cancel. If in your app metadata, the "requestInstallEmail" attribute exists, the students will have to send an email to formally request installing the app. However, if the user is an administrator for the app, he or she can directly install the app, bypassing the requesting process even if "requestInstallEmail" appear in the app's metadata.
+Upon successful installation, "messageAfterInstall" will be shown to instruct students on further actions.  "messageBeforeUninstall", "requestUninstallEmail", and "messageAfterUninstall" serve the same purpose when uninstalling an app. 
