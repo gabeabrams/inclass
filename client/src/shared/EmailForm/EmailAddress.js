@@ -21,6 +21,7 @@ class EmailAddress extends Component {
         <span
           className="alert alert-light form-control rounded text-truncate p-1 col-auto"
         >
+          {/* Open user's default email and send with subject */}
           <a
             className="emailLink"
             target="_blank"
