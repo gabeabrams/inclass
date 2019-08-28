@@ -13,6 +13,7 @@ class AppTag extends Component {
 
     return (
       <div className="apptag-single-tag text-light">
+        {/* left side of the tag */}
         <span
           className="badge apptag-left-side"
           style={{
@@ -21,6 +22,7 @@ class AppTag extends Component {
         >
           {tagKey}
         </span>
+        {/* right side of the tag */}
         <span
           className="badge apptag-right-side bg-secondary"
         >
