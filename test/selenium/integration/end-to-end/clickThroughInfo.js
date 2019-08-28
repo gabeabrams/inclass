@@ -9,9 +9,6 @@ describeS('end-to-end > clickThroughInfo', function () {
     // Click on app gradeup
     await driver.click('#gradeup-app-title');
 
-    // Wait for gradeup page to load in Safari
-    await driver.waitForElementVisible('.apppagefooter-container');
-
     // Check screenshots container exists
     assert(await driver.elementExists('.screenshots-container'), 'No screenshots exists');
 
