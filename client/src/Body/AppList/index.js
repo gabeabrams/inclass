@@ -15,7 +15,7 @@ class AppList extends Component {
       isFiltering,
     } = this.props;
 
-    // display or hide the status bar depending on if it's being filtered
+    // only show the status bar if the apps are being filtered
     const statusBarElement = (
       isFiltering
         ? <AppListStatusBar appCount={Object.keys(apps).length} />

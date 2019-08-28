@@ -17,6 +17,7 @@ class Modal extends Component {
 
     return (
       <div>
+        {/* Grey out background under modal */}
         <div
           className="modal-backdrop"
           style={{
@@ -26,6 +27,7 @@ class Modal extends Component {
         <div className="modal d-block" id="modal" tabIndex="-1" role="dialog">
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
+              {/* Enable customized header color for different modals */}
               <div
                 className="modal-header"
                 style={{
@@ -52,6 +54,7 @@ class Modal extends Component {
               >
                 {children}
               </div>
+              {/* Optional footer */}
               {footer && (
                 <div className="modal-footer border-top-0">
                   {footer}

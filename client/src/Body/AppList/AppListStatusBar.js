@@ -7,7 +7,7 @@ class AppListStatusBar extends Component {
   render() {
     // destructure props
     const { appCount } = this.props;
-
+    // message in status bar depends on how many apps show up under query
     let message;
     if (appCount === 0) {
       message = 'There are no matching apps. Please broaden your search criteria';
