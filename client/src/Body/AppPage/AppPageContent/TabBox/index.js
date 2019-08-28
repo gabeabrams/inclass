@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * Allows tab box to apply one
- *  style to all contents (its children)
+ * Allows tab box to apply one style to all contents (its children)
  */
 class TabBox extends Component {
   render() {

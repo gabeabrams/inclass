@@ -5,7 +5,7 @@ import TabBox from '.';
 
 /**
  * Displays the description of the app
- *  or "No Description Provided" by default
+ *   or "No Description Provided" by default
  */
 class Info extends Component {
   render() {

@@ -1,6 +1,8 @@
 require('dce-selenium');
 const assert = require('assert');
 
+const { courseId } = require('../../../../config/devEnvironment');
+
 describeS('end-to-end > gettingSupport', function () {
   itS('Successfully gets support', async function (driver) {
     // Launch app store without going to catalog
@@ -12,8 +14,7 @@ describeS('end-to-end > gettingSupport', function () {
     // Wait for gradeup page to load in Safari
     await driver.waitForElementVisible('.apppagefooter-container');
 
-    // Scroll to bottom of the page and check if support button exists
-    await driver.scrollTo('.apppagefooter-container');
+    // Check if support button exists
     assert(await driver.elementExists('#support-button'), 'No Support Button');
 
     await driver.click('#support-button');
@@ -32,8 +33,18 @@ describeS('end-to-end > gettingSupport', function () {
     const parentElem = await driver.parentOf('.emailLink');
     const html = await driver.getElementInnerHTML(parentElem);
     const matches = html.match(regex);
-    assert(matches[0].startsWith('mailto:'));
-    assert(matches[0].includes('subject='));
+    assert.equal(matches.length, 1, 'No mailto link');
+    const match = matches[0].replace('"', '');
+    assert(match.startsWith('mailto:'), 'No mailto in link');
+    assert(match.includes('subject='), 'No subject in link');
+
+    // Decode the subject and check that it's right
+    const decodedSubject = decodeURIComponent(match.split('subject=')[1]);
+    assert.equal(
+      decodedSubject,
+      `I need support for GradeUp in course ${courseId}`,
+      'Invalid email subject'
+    );
 
     // Close support modal
     await driver.click('.okay-button');
