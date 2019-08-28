@@ -11,6 +11,11 @@ import Guides from './TabBox/Guides';
 import TAB_NAMES from './TAB_NAMES';
 import TabBar from './TabBar';
 
+/**
+ * Renders the app page content with tab bar and information
+ *  based off the active tab
+ * Contains the logic that determines which tab and content to show
+ */
 class AppPageContent extends Component {
   constructor(props) {
     super(props);

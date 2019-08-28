@@ -1,14 +1,12 @@
-// props:
-// - app (the app to show the screenshots of)
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import TabBox from '.';
 
-// Import other components
-// Questions to answer: How to get the app to show the screenshots of?
-
+/**
+ * Displays the description of the app
+ *  or "No Description Provided" by default
+ */
 class Info extends Component {
   render() {
     const { description } = this.props;

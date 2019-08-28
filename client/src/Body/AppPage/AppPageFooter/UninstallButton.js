@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import './UninstallButton.css';
 
+/**
+ * Renders the uninstall button
+ */
 class UninstallButton extends Component {
   render() {
     // Deconstruct props

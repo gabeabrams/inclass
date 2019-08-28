@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 
 import './Step.css';
 
+/**
+ * Renders each step of a guide
+ * If there are more than 10 steps,
+ *  the step numbers widen to accomodate
+ */
 class Step extends Component {
   render() {
     const { step, stepNum, greaterTen } = this.props;

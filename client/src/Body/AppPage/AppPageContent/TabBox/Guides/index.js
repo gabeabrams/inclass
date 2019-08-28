@@ -6,6 +6,9 @@ import PropTypes from 'prop-types';
 import Guide from './Guide';
 import TabBox from '..';
 
+/**
+ * Renders all the guide(s) from the store
+ */
 class Guides extends Component {
   render() {
     // deconstruct props

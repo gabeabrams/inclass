@@ -8,6 +8,9 @@ import AppItem from '../../shared/AppItem';
 
 import './style.css';
 
+/**
+ * Renders the app page with the app item, content/tab bar, and footer
+ */
 class AppPage extends Component {
   render() {
     // Deconstruct props
