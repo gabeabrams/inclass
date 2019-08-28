@@ -112,6 +112,10 @@ Each app has a metadata file stored at `/store/<catalogId>/<appId>/metadata.json
 
 ^ this is an example metadata file. See the docs in the `/docs/types` folder for more info.
 
+### The attributes related to the app install process
+The attribute "messageBeforeInstall" within the app's metadata file will be shown to students prior to installing an app. It can contain important information about the installing process or about the app itself. After viewing the message, students can choose to continue the install process or cancel. If in your app metadata, the "requestInstallEmail" attribute exists, the students will have to send an email to formally request installing the app. However, if the user is an administrator for the app, he or she can directly install the app, bypassing the requesting process even if "requestInstallEmail" appear in the app's metadata.
+Upon successful installation, "messageAfterInstall" will be shown to instruct students on further actions.  "messageBeforeUninstall", "requestUninstallEmail", and "messageAfterUninstall" serve the same purpose when uninstalling an app. 
+
 ### Screenshots
 
 If your app has screenshots listed in the `metadata.json` file, you need to include those files in a `/screenshots` folder. For instance, for the example `metadata.json` file above, we would need the following files:
@@ -138,8 +142,12 @@ Each app must have an install xml object `install.xml`.
 
 ### Icon
 
-Each app must have an icon image. It will either be in a file `icon.png` or `icon.jpg`.
+Each app must have an icon image stored at `/store/<catalogId>/<appId>/icon.png`. It will either be in a file `icon.png` or `icon.jpg`.
 
+#### The app's folder structure
+Under the app folder stored at `/store/<catalogId>/<appId>`: there should be a `metadata.json` file, `install.xml`, `icon.png` or `icon.jpg`, `credentials.json`, and a optional `screenshots` folder containing `png`, `jpg`, or `jpeg` image files in the case where you are not extending from another app. 
+
+## Logic about the loading process
 ### Extends
 The apps are designed such that they can be independent, having their own metadata files, or they can extend metadata files from another app, and customize properties based on the admin's choosing. For example, if you want to extend from the above app "SwipeIn 2", and change the creator, requestInstallEmail, requestUninstallEmail, and supportEmail to your own, you can write your metadata file as such (assuming "Swipein 2" is in the dce catalog, and its appId is swipein2):
 
@@ -157,7 +165,3 @@ The apps are designed such that they can be independent, having their own metada
 ```
 
 **Note:** If your app is extending the screenshots or icon from another app, you do not need to copy the files and paste them under your own `/screenshots` folder. We will take them from their original position, and load and serve them to your app. If you are planning to use your own set of screenshots and icon, please list them in the `metadata.json` as well as including the physical files.
-
-### The attributes related to the app install process
-The attribute "messageBeforeInstall" will be shown to students prior to installing an app. It can contain important information about the installing process or about the app itself. After viewing the message, students can choose to continue the install process or cancel. If in your app metadata, the "requestInstallEmail" attribute exists, the students will have to send an email to formally request installing the app. However, if the user is an administrator for the app, he or she can directly install the app, bypassing the requesting process even if "requestInstallEmail" appear in the app's metadata.
-Upon successful installation, "messageAfterInstall" will be shown to instruct students on further actions.  "messageBeforeUninstall", "requestUninstallEmail", and "messageAfterUninstall" serve the same purpose when uninstalling an app. 
