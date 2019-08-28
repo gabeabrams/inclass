@@ -9,6 +9,9 @@ describeS('end-to-end > intoAppThenOut', function () {
     // Click on the app GradeUp
     await driver.click('#gradeup-app-title');
 
+    // Wait for gradeup page to load in Safari
+    await driver.waitForElementVisible('.apppagefooter-container');
+
     // Check elements of app page are there
     assert(await driver.elementExists('.apppagefooter-container'), 'No footer exists');
     assert(await driver.elementExists('.nav-tabs'), 'No tab bar exists');
