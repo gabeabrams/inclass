@@ -43,8 +43,8 @@ class AppStore extends Component {
 
     // Set up state
     this.state = {
-      // Loading message (null if not loading)
-      loadingMessage: 'Loading! Just a moment...',
+      // Loading (true if loading)
+      loading: true,
       // Fatal error message (null if no fatal error)
       fatalErrorMessage: null,
       // Store title
@@ -116,7 +116,7 @@ class AppStore extends Component {
       // > AppStore wasn't launched via Canvas
       if (!status.launched) {
         return this.setState({
-          loadingMessage: null,
+          loading: false,
           fatalErrorMessage: 'Please launch this app from Canvas.',
         });
       }
@@ -124,7 +124,7 @@ class AppStore extends Component {
       // > AppStore is not authorized
       if (!status.authorized) {
         return this.setState({
-          loadingMessage: null,
+          loading: false,
           fatalErrorMessage: 'We don\'t have access to Canvas. Please re-launch the app.',
         });
       }
@@ -135,7 +135,7 @@ class AppStore extends Component {
       // eslint-disable-next-line no-console
       console.log(err);
       return this.setState({
-        loadingMessage: null,
+        loading: false,
         fatalErrorMessage: 'We couldn\'t contact the app store server. Please make sure your internet connection is stable. If this issue continues to occur, contact an admin.',
       });
     }
@@ -151,7 +151,7 @@ class AppStore extends Component {
       // Process store metadata
       if (!storeRes.body.success) {
         return this.setState({
-          loadingMessage: null,
+          loading: false,
           fatalErrorMessage: `We couldn't get info on the current app store due to an error: ${storeRes.body.message}`,
         });
       }
@@ -161,7 +161,7 @@ class AppStore extends Component {
       // Process catalog metadata
       if (!catalogRes.body.success) {
         return this.setState({
-          loadingMessage: null,
+          loading: false,
           fatalErrorMessage: `We couldn't get info on the app catalog for your course due to an error: ${catalogRes.body.message}`,
         });
       }
@@ -199,7 +199,7 @@ class AppStore extends Component {
         storeHost,
         isAdmin,
         tags,
-        loadingMessage: null,
+        loading: false,
         storeTitle: storeMetadata.title,
         catalogTitle: catalog.title,
         allApps: catalog.apps,
@@ -209,7 +209,7 @@ class AppStore extends Component {
       // eslint-disable-next-line no-console
       console.log(err);
       return this.setState({
-        loadingMessage: null,
+        loading: false,
         fatalErrorMessage: 'We couldn\'t contact the app store server. Please make sure your internet connection is stable. If this issue continues to occur, contact an admin.',
       });
     }
@@ -476,7 +476,7 @@ class AppStore extends Component {
       catalogTitle,
       currentBodyType,
       currentSpecificApp,
-      loadingMessage,
+      loading,
       fatalErrorMessage,
       filterDrawerOpen,
       searchQuery,
@@ -487,7 +487,7 @@ class AppStore extends Component {
     } = this.state;
 
     // Show loading message
-    if (loadingMessage) {
+    if (loading) {
       return (
         <div
           className="loading-container text-center text-info p-3"
