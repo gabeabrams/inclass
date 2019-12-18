@@ -11,13 +11,13 @@
     <blti:title>Inclass</blti:title>
     <blti:description>An LTI app store for installing, uninstalling, and getting support for tools.</blti:description>
     <blti:icon></blti:icon>
-    <blti:launch_url>https://inclass.dcex.harvard.edu/launch</blti:launch_url>
+    <blti:launch_url>https://HOSTNAME/launch</blti:launch_url>
     <blti:extensions platform="canvas.instructure.com">
-      <lticm:property name="tool_id">inclass-app-store</lticm:property>
+      <lticm:property name="tool_id">inclass-app-store-on-HOSTNAME</lticm:property>
       <lticm:property name="privacy_level">public</lticm:property>
-      <lticm:property name="domain">inclass.dcex.harvard.edu</lticm:property>
+      <lticm:property name="domain">HOSTNAME</lticm:property>
       <lticm:options name="course_navigation">
-        <lticm:property name="url">https://inclass.dcex.harvard.edu/launch</lticm:property>
+        <lticm:property name="url">https://HOSTNAME/launch</lticm:property>
         <lticm:property name="text">App Store</lticm:property>
         <lticm:property name="visibility">public</lticm:property>
         <lticm:property name="default">enabled</lticm:property>
