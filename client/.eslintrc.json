@@ -1,13 +1,5 @@
 {
   "env": {
-    "mocha": true
-  },
-  "rules": {
-    "prefer-arrow-callback": "off",
-    "func-names": ["error","never"]
-  },
-  "globals": {
-    "it": false,
-    "describe": false
+    "jest": true
   }
 }
