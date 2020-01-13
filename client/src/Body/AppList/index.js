@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import AppItem from '../../shared/AppItem';
 import AppListStatusBar from './AppListStatusBar';
 
+// Import styles
+import './style.css';
+
 class AppList extends Component {
   render() {
     const {
@@ -37,9 +40,11 @@ class AppList extends Component {
     });
 
     return (
-      <div className="app-list-container d-flex flex-column ml-2 mr-2">
-        {statusBarElement}
-        {appElements}
+      <div className="applist-outer-container">
+        <div className="app-list-container d-flex flex-column ml-2 mr-2">
+          {statusBarElement}
+          {appElements}
+        </div>
       </div>
     );
   }
