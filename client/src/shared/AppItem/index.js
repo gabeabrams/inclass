@@ -35,7 +35,7 @@ class AppItem extends Component {
     } = app;
 
     const iconURL = `https://${path.join(storeHost, icon.url)}`;
-    const className = `alert alert-${dark ? 'secondary' : 'light'} text-dark pr-3 pl-3 pt-2 pb-2`;
+    const className = `alert alert-${dark ? 'secondary' : 'light'} ${dark ? 'appitem-box ' : ''}text-dark p-2`;
     /* eslint-disable jsx-a11y/click-events-have-key-events */
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -74,7 +74,6 @@ class AppItem extends Component {
               <AppTags
                 tags={tags}
                 tagColors={tagColors}
-                dark={dark}
               />
             </div>
           </div>

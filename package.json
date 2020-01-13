@@ -38,7 +38,7 @@
 	},
 	"homepage": "https://github.com/gabeabrams/inclass#readme",
 	"dependencies": {
-		"caccl": "^1.0.129",
+		"caccl": "^1.0.130",
 		"express": "^4.17.1",
 		"fast-clone": "^1.5.13",
 		"fs": "0.0.1-security"

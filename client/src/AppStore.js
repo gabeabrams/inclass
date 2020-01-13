@@ -203,7 +203,6 @@ class AppStore extends Component {
         storeTitle: storeMetadata.title,
         catalogTitle: catalog.title,
         allApps: catalog.apps,
-        currentSpecificApp: catalog.apps.gradeup,
       });
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -555,8 +554,11 @@ class AppStore extends Component {
     );
 
     // Checks if the app is installed
-    const { appId } = currentSpecificApp;
-    const isInstalled = (!!ltiIdsMap[appId] && ltiIdsMap[appId].length > 0);
+    let isInstalled;
+    if (currentSpecificApp) {
+      const { appId } = currentSpecificApp;
+      isInstalled = (!!ltiIdsMap[appId] && ltiIdsMap[appId].length > 0);
+    }
 
     // Render the component
     return (

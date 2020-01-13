@@ -28,8 +28,6 @@ class AppTags extends Component {
   }
 
   render() {
-    // deconstruct props
-    const { dark } = this.props;
     // deconstruct the state
     const { tagsArray } = this.state;
 
@@ -50,13 +48,7 @@ class AppTags extends Component {
         );
       });
     return (
-      <div
-        className="apptags-tags-list"
-        style={{
-          paddingLeft: (dark ? undefined : 0),
-          marginLeft: (dark ? undefined : 0),
-        }}
-      >
+      <div className="apptags-tags-list">
         {tagsList}
       </div>
     );
@@ -68,13 +60,6 @@ AppTags.propTypes = {
   tags: PropTypes.objectOf(PropTypes.array).isRequired,
   // color of the tag
   tagColors: PropTypes.objectOf(PropTypes.object).isRequired,
-  // whether the app is shown as dark background
-  dark: PropTypes.bool,
-};
-
-AppTags.defaultProps = {
-  // By default, the app item is not dark
-  dark: false,
 };
 
 export default AppTags;

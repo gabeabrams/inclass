@@ -10,11 +10,11 @@ class AppCreatorTag extends Component {
     const { creator } = this.props;
     let message;
     if (creator.length === 1) {
-      message = `by ${creator[0]}`;
+      message = creator[0];
     } else if (creator.length === 2) {
-      message = `by ${creator[0]} and ${creator[1]}`;
+      message = `${creator[0]} and ${creator[1]}`;
     } else {
-      let newMessage = `by ${creator[0]}`;
+      let newMessage = creator[0];
       for (let i = 1; i < creator.length; i++) {
         newMessage += (
           (i === creator.length - 1)
@@ -41,6 +41,9 @@ class AppCreatorTag extends Component {
     const className = `badge ${dark ? 'bg-secondary' : 'badge-light'} ${dark ? 'text-white' : 'text-dark'} p-2 appcreatortag-box`;
     return (
       <span className={className}>
+        <span className="font-weight-light">
+          by&nbsp;
+        </span>
         {message}
       </span>
     );

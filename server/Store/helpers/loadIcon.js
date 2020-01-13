@@ -30,5 +30,5 @@ module.exports = async (iconPathWithoutExtension, parentAppMetadata) => {
     return parentAppMetadata.icon.fullPath;
   }
   // file does not exist and does not have parent
-  throw new Error('We cannot load the icon because the file does not exist');
+  throw new Error(`We cannot an app's icon because the file does not exist. Looking for: ${jpgPath} or .jpeg or .png.`);
 };

@@ -18,6 +18,10 @@
   /* Add padding so the footer doesn't obscure the content */
   padding-bottom: 85px;
 
+  /* Add padding to match item info */
+  padding-left: 10px;
+  padding-right: 10px;
+
   min-height: 100px;
 }
 
@@ -30,7 +34,7 @@
   position: fixed;
   width: 100%;
   bottom: 0;
-  
+
   height: 85px;
 
   /* Footer is the top content */

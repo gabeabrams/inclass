@@ -36,8 +36,10 @@ class Filters extends Component {
     });
 
     return (
-      <div className="filters-container card-columns bg-secondary">
-        {tagElements}
+      <div className="text-center">
+        <div className="filters-container card-columns bg-secondary text-left d-inline-block">
+          {tagElements}
+        </div>
       </div>
     );
   }

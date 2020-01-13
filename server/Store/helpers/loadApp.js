@@ -76,7 +76,12 @@ module.exports = async (opts = {}) => {
   if (appMetadata.screenshots) {
     for (let i = 0; i < appMetadata.screenshots.length; i++) {
       const file = appMetadata.screenshots[i].filename;
-      const completeFilename = `${file}${file.endsWith('.png') ? '' : '.png'}`;
+      const hasExtension = (
+        file.endsWith('.png')
+        || file.endsWith('.jpg')
+        || file.endsWith('.jpeg')
+      );
+      const completeFilename = `${file}${hasExtension ? '' : '.png'}`;
       appMetadata.screenshots[i].filename = completeFilename;
       // If app already has screenshot object, just add fullpath to it
       appMetadata.screenshots[i].fullPath = path.join(STORE_PATH, catalogId, appId, 'screenshots', completeFilename);

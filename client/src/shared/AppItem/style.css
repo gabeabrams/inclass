@@ -16,8 +16,16 @@
 .appitem-title-and-creator-container {
   display: flex;
   flex-direction: row;
-  
+
   /* make title and creator on opposite sides, same horizotal level */
   justify-content: space-between;
   align-items: center;
+
+  /* Set height so it's always the same height, independent of creator */
+  height: 30px;
+}
+
+/* Hover to indicate that the item is clickable */
+.appitem-box:hover {
+  box-shadow: 0 0 3px 5px #def;
 }
