@@ -21,12 +21,16 @@ class AppPageContent extends Component {
     super(props);
     // Deconstruct Props
     const { app } = this.props;
+    const {
+      screenshots,
+      guides,
+    } = app;
 
     // Shows which tab to show depending on the tabs available
     let startTab;
-    if (app.screenshots) {
+    if (screenshots) {
       startTab = TAB_NAMES.SCREENSHOTS;
-    } else if (app.guides) {
+    } else if (guides) {
       startTab = TAB_NAMES.GUIDES;
     } else {
       startTab = TAB_NAMES.INFO;
@@ -52,15 +56,23 @@ class AppPageContent extends Component {
     const { app, storeHost } = this.props;
     // Deconstruct state
     const { currentTab } = this.state;
+    // Deconstruct app
+    const {
+      screenshots,
+      guides,
+      description,
+      requestInstallEmail,
+      placement,
+    } = app;
 
     let screenshotsExist = false;
     let guidesExist = false;
 
-    if (app.screenshots) {
+    if (screenshots) {
       screenshotsExist = true;
     }
 
-    if (app.guides) {
+    if (guides) {
       guidesExist = true;
     }
 
@@ -68,7 +80,11 @@ class AppPageContent extends Component {
     let contentToDisplay;
     if (currentTab === TAB_NAMES.INFO) {
       contentToDisplay = (
-        <Info description={app.description} />
+        <Info
+          description={description}
+          requestInstallEmail={requestInstallEmail}
+          placement={placement}
+        />
       );
     } else if (currentTab === TAB_NAMES.GUIDES) {
       contentToDisplay = (
@@ -96,6 +112,8 @@ class AppPageContent extends Component {
 AppPageContent.propTypes = {
   // The app to display
   app: PropTypes.shape({
+    // Placements
+    placement: PropTypes.arrayOf(PropTypes.string).isRequired,
     // Array of screenshots in the app (Note: what is currently needed)
     screenshots: PropTypes.arrayOf(
       PropTypes.shape({
@@ -114,6 +132,10 @@ AppPageContent.propTypes = {
         ),
       })
     ),
+    // The description of the app
+    description: PropTypes.string,
+    // Defined if the app requires an install
+    requestInstallEmail: PropTypes.string,
   }).isRequired,
 
 

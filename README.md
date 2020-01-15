@@ -4,7 +4,7 @@ An edtech app store for Canvas, created by and designed for education-focused fa
 
 ## Project in Beta
 
-Note: this project is still in beta. Breaking changes could occur at any moment. For more information, contact [**Gabe Abrams**](mailto:gabeabrams@gmail.com).
+Note: this project is still in beta. Breaking changes could occur at any moment.
 
 ## Credit
 
@@ -12,7 +12,9 @@ Note: this project is still in beta. Breaking changes could occur at any moment.
 
 Thanks to the Harvard Initiative for Learning and Teaching (HILT) for their generous funding and support.
 
-#### Special Thanks
+#### Authors
+
+This project is led by [Gabe Abrams](https://github.com/gabeabrams)
 
 Thanks to our brilliant team of contributors:
 

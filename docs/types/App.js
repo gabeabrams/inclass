@@ -10,6 +10,9 @@
  * @param {string} [description] - a long description of the app
  * @param {string|string[]} [creator] - a string description of the creator or a
  *   list of creators. Upon load, if not a list, we turn this field into a list
+ * @param {string|string[]} [placement=['navigation']] - the location(s) that
+ *   the app will show up in (may be an array) in Canvas. Allowed values:
+ *   navigation, editor, assignment
  * @param {string} [launchPrivacy='public'] - the amount of information that
  *   comes along with the LTI launch request ('public' = all info, 'name_only'
  *   = just the user's name, 'anonymous' = no identification info)

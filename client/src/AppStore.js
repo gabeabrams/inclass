@@ -82,6 +82,8 @@ class AppStore extends Component {
       },
       // Mapping of LTI Ids for installed apps
       ltiIdsMap: {}, // appId => list of lti ids if the app is installed
+      // If true, an install or uninstall is currently in progress
+      working: false,
     };
 
     // Bind handlers
@@ -258,6 +260,7 @@ class AppStore extends Component {
     };
     this.setState({
       installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+      working: false,
     });
   }
 
@@ -300,7 +303,7 @@ class AppStore extends Component {
   }
 
   /**
-   * TODO: add jsdoc
+   * Moves the user back to the app list
    */
   onBackButtonClicked() {
     const newBodyType = BODY_TYPE.APP_LIST;
@@ -319,6 +322,7 @@ class AppStore extends Component {
     this.setState({
       currentSpecificApp: allApps[appId],
       currentBodyType: BODY_TYPE.APP_PAGE,
+      working: false,
     });
   }
 
@@ -333,6 +337,7 @@ class AppStore extends Component {
 
     this.setState({
       installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+      working: true,
     });
   }
 
@@ -347,6 +352,7 @@ class AppStore extends Component {
 
     this.setState({
       installOrUninstallModalStatus: newInstallOrUninstallModalStatus,
+      working: true,
     });
   }
 
@@ -483,6 +489,7 @@ class AppStore extends Component {
       courseId,
       isAdmin,
       ltiIdsMap,
+      working,
     } = this.state;
 
     // Show loading message
@@ -598,6 +605,7 @@ class AppStore extends Component {
             onSupportClicked={this.onSupportClicked}
             isFiltering={isFiltering}
             isInstalled={isInstalled}
+            working={working}
           />
         </div>
         {supportModalElement}

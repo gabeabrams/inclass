@@ -13,7 +13,22 @@ class Modal extends Component {
       onClose,
       children,
       titleBackgroundColor,
+      noX,
     } = this.props;
+
+    let xButton;
+    if (!noX) {
+      xButton = (
+        <button
+          type="button"
+          className="close"
+          onClick={onClose}
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      );
+    }
 
     return (
       <div>
@@ -35,14 +50,7 @@ class Modal extends Component {
                 }}
               >
                 <h5 className="modal-title">{title}</h5>
-                <button
-                  type="button"
-                  className="close"
-                  onClick={onClose}
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                {xButton}
               </div>
               <div
                 className="modal-body border-bottom-0"
@@ -76,16 +84,22 @@ Modal.propTypes = {
   /* The footer of the modal */
   footer: PropTypes.node,
   /* Function to call when the modal is closed */
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   /* the children contains the body */
   children: PropTypes.node.isRequired,
+  /* If true, no X button is shown */
+  noX: PropTypes.bool,
 };
 
 Modal.defaultProps = {
   /* the default modal does not have a footer */
   footer: null,
+  /* By default, nothing happens when onClose is clicked */
+  onClose: () => {},
   /* the default title background is transparent */
-  titleBackgroundColor: 'white',
+  titleBackgroundColor: '#eee',
+  /* By default, the X button is shown */
+  noX: false,
 };
 
 export default Modal;

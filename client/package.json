@@ -10,6 +10,7 @@
     "caccl": "^1.0.126",
     "fast-clone": "^1.5.13",
     "jquery": "^3.4.1",
+    "markdown-to-jsx": "^6.10.3",
     "popper.js": "^1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",

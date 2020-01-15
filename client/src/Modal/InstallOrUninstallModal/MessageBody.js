@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 class MessageBody extends Component {
   render() {
-    const { messageBody } = this.props;
+    const { children } = this.props;
     return (
       <div className="message-body-container">
-        { messageBody }
+        {children}
       </div>
     );
   }
@@ -15,7 +15,7 @@ class MessageBody extends Component {
 
 MessageBody.propTypes = {
   /* the body of the modal */
-  messageBody: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default MessageBody;

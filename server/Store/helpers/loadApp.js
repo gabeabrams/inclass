@@ -9,6 +9,13 @@ const STORE_CONSTANTS = require('../STORE_CONSTANTS');
 
 const STORE_PATH = STORE_CONSTANTS.path;
 
+const allowedPlacementValues = [
+  'navigation',
+  'editor',
+  'assignment',
+  'quizzes',
+];
+
 /**
  * Loads an app, merging with parentApp if applicable. If the app has a parent
  *   but one isn't included, throws an error. If the app cannot be read, throws
@@ -34,6 +41,24 @@ module.exports = async (opts = {}) => {
   // load app metadata
   const appMetadataPath = path.join(STORE_PATH, catalogId, appId, 'metadata');
   const appMetadata = await readJSON(appMetadataPath);
+
+  // Set default value for placement and make sure value is an array with valid
+  // element values
+  if (appMetadata.placement) {
+    appMetadata.placement = (
+      Array.isArray(appMetadata.placement)
+        ? appMetadata.placement
+        : [appMetadata.placement]
+    );
+  } else {
+    appMetadata.placement = ['navigation'];
+  }
+  appMetadata.placement.forEach((p) => {
+    if (allowedPlacementValues.indexOf(p) < 0) {
+      // Invalid!
+      throw new Error(`In catalog ${catalogId}, the app ${appId} had an invalid placement value: "${p}". The only allowed values are: ${allowedPlacementValues}`);
+    }
+  });
 
   // Set default value for launchPrivacy
   appMetadata.launchPrivacy = appMetadata.launchPrivacy || 'public';

@@ -23,6 +23,7 @@ class Body extends Component {
       onAppSelected,
       isFiltering,
       isInstalled,
+      working,
     } = this.props;
 
     // Show the app page
@@ -40,6 +41,7 @@ class Body extends Component {
             onUninstallClicked={onUninstallClicked}
             onSupportClicked={onSupportClicked}
             isInstalled={isInstalled}
+            working={working}
           />
         </div>
       );
@@ -81,6 +83,8 @@ Body.propTypes = {
   isFiltering: PropTypes.bool,
   // Boolean for if app is installed yet
   isInstalled: PropTypes.bool.isRequired,
+  // If true, an app is currently being installed or uninstalled
+  working: PropTypes.bool.isRequired,
 };
 
 Body.defaultProps = {

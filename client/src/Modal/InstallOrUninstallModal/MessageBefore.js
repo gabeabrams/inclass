@@ -2,6 +2,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// Import FontAwesome Icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faInfoCircle,
+} from '@fortawesome/free-solid-svg-icons';
+
 import Modal from '..';
 import OkayButton from '../../shared/OkayButton';
 import CancelButton from '../../shared/CancelButton';
@@ -39,9 +45,18 @@ class MessageBefore extends Component {
           title={modalTitle}
           onClose={onClose}
           footer={modalFooter}
-          titleBackgroundColor="#87CEFA"
         >
-          <MessageBody messageBody={message} />
+          <MessageBody>
+            <div className="alert alert-warning mb-0">
+              <p className="font-weight-bold lead text-center mb-0">
+                <FontAwesomeIcon
+                  icon={faInfoCircle}
+                  className="mr-2"
+                />
+                {message}
+              </p>
+            </div>
+          </MessageBody>
         </Modal>
       </div>
     );

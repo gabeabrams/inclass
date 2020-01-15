@@ -22,6 +22,7 @@ class AppPage extends Component {
       onUninstallClicked,
       onSupportClicked,
       isInstalled,
+      working,
     } = this.props;
 
     return (
@@ -42,6 +43,7 @@ class AppPage extends Component {
             onUninstallClicked={onUninstallClicked}
             onSupportClicked={onSupportClicked}
             isInstalled={isInstalled}
+            working={working}
           />
         </div>
       </div>
@@ -72,6 +74,8 @@ AppPage.propTypes = {
   onSupportClicked: PropTypes.func.isRequired,
   // Boolean for if app is installed yet
   isInstalled: PropTypes.bool.isRequired,
+  // If true, install or uninstall is in progress
+  working: PropTypes.bool.isRequired,
 };
 
 export default AppPage;

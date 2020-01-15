@@ -7,12 +7,14 @@ import MessageBefore from './MessageBefore';
 import InstallOrUninstallSuccess from './InstallOrUninstallSuccess';
 import InstallOrUninstallFailure from './InstallOrUninstallFailure';
 import RequestInstallOrUninstall from './RequestInstallOrUninstall';
+import SpinnerModal from './SpinnerModal';
 
 const CURRENT_VIEWS = {
   SHOW_MESSAGE_BEFORE: 'show-message-before',
   SHOW_SUCCESS: 'show-install-success',
   SHOW_FAILURE: 'show-install-failure',
   SHOW_REQUEST_VIA_EMAIL: 'show-request-via-email',
+  SHOW_SPINNER: 'show-spinner',
 };
 
 class InstallOrUninstallModal extends Component {
@@ -131,6 +133,7 @@ class InstallOrUninstallModal extends Component {
       requestInstallEmail,
       requestUninstallEmail,
       supportEmail,
+      placement,
     } = currentSpecificApp;
 
     let viewToDisplay;
@@ -140,7 +143,13 @@ class InstallOrUninstallModal extends Component {
         viewToDisplay = (
           <MessageBefore
             onClose={onClose}
-            onClick={this.attemptInstallOrUninstall}
+            onClick={() => {
+              this.setState({
+                currentView: CURRENT_VIEWS.SHOW_SPINNER,
+              }, () => {
+                this.attemptInstallOrUninstall();
+              });
+            }}
             message={
               (uninstalling)
                 ? messageBeforeUninstall
@@ -148,6 +157,11 @@ class InstallOrUninstallModal extends Component {
             }
             uninstalling={uninstalling}
           />
+        );
+        break;
+      case CURRENT_VIEWS.SHOW_SPINNER:
+        viewToDisplay = (
+          <SpinnerModal />
         );
         break;
       case CURRENT_VIEWS.SHOW_SUCCESS:
@@ -161,6 +175,7 @@ class InstallOrUninstallModal extends Component {
                 : messageAfterInstall
             }
             uninstalling={uninstalling}
+            placement={placement}
           />
         );
         break;

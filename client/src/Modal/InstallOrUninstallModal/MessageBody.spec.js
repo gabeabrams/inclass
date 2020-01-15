@@ -15,7 +15,9 @@ describe('client > src > Modal > InstallOrUninstallModal > MessageBody', () => {
   );
   it('Displays the body', async () => {
     const driver = new Driver(
-      <MessageBody messageBody={message} />
+      <MessageBody>
+        {message}
+      </MessageBody>
     );
     // check that body is rendered
     assert(

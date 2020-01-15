@@ -34,7 +34,6 @@ class InstallOrUninstallFailure extends Component {
           title={`\u2718 ${(uninstalling) ? 'Uninstall Failed' : 'Install Failed'}!`}
           onClose={onClose}
           footer={modalFooter}
-          titleBackgroundColor="#df9f9f"
         >
           <FailureReason message={message} />
         </Modal>

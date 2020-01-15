@@ -40,7 +40,6 @@ class RequestInstallOrUninstall extends Component {
           title={title}
           onClose={onClose}
           footer={modalFooter}
-          titleBackgroundColor="#FFFACD"
         >
           <EmailForm address={address} subject={subject} />
         </Modal>
