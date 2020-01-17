@@ -1,8 +1,33 @@
 const Store = require('./Store');
+const writeLog = require('./writeLog');
 
 module.exports = (expressApp) => {
   // Create an instance of the store
   const store = new Store(expressApp);
+
+  /**
+   * Endpoint to shows a screenshot image
+   */
+  expressApp.get('/screenshot', async (req, res) => {
+    // respond with an error if req.api or req.session.launchInfo does not exist
+    if (!req.api || !req.session.launchInfo) {
+      return res.send('We couldn\'t load that screenshot because we could not connect to Canvas. Please re-launch the app store from Canvsa. If this error continues to occur, contact an admin.');
+    }
+
+    if (!req.query.i || !req.query.i.startsWith('/public/')) {
+      // Invalid screenshot
+      return res.send('We couldn\'t load that screenshot because an error occurred. If this error continues to occur, please contact an admin.');
+    }
+
+    return res.send(`
+      <body>
+        <img
+          src="${req.query.i}"
+          style="text-align: center; position: fixed; top: 0; bottom: 0; left: 0; right: 0; marin: auto; overflow: auto; max-width: 100%; max-height: 100%;"
+        />
+      </body>
+    `);
+  });
 
   /**
    * Endpoint that returns the store metadata
@@ -66,6 +91,7 @@ module.exports = (expressApp) => {
         message: 'We couldn\'t load your list of apps because we could not connect to Canvas. Please re-launch the app store from Canvsa. If this error continues to occur, contact an admin.',
       });
     }
+
     try {
       const {
         catalog,
@@ -91,6 +117,16 @@ module.exports = (expressApp) => {
             resolve();
           }
         });
+      });
+
+      // Log that user loaded the app store
+      writeLog({
+        req,
+        type: 'load',
+        data: {
+          catalogId,
+          isAdmin,
+        },
       });
 
       return res.json({
@@ -173,6 +209,16 @@ module.exports = (expressApp) => {
         launchPrivacy,
       } = installData;
 
+      // Log that user installed an app
+      writeLog({
+        req,
+        type: 'install',
+        data: {
+          appId,
+          appName: name,
+        },
+      });
+
       // Installs the app
       await req.api.course.app.add({
         courseId,
@@ -208,6 +254,8 @@ module.exports = (expressApp) => {
   /**
    * Endpoint that uninstalls an app from the current course
    * @param {string} ltiIds - the JSONified list of lti app ids from Canvas to
+   * @param {string} appName - the name of the app being uninstalled
+   * @param {string} appId - the id of the app being uninstalled
    *   uninstall (once parsed, type should be string[])
    * @return {object} success description response of the form:
    * {
@@ -248,6 +296,20 @@ module.exports = (expressApp) => {
         message: 'We could not uninstall this app because we couldn\'t understand the request from the client. Please contact an admin.',
       });
     }
+
+    // Get app info
+    const { appId, appName } = req.body;
+
+    // Log that user uninstalled an app
+    writeLog({
+      req,
+      type: 'uninstall',
+      data: {
+        appId,
+        appName,
+      },
+    });
+
     // go through the list of apps to delete
     for (let i = 0; i < ltiIds.length; i++) {
       try {
@@ -269,6 +331,24 @@ module.exports = (expressApp) => {
       }
     }
     // All apps were deleted without an error occurring
+    return res.json({
+      success: true,
+    });
+  });
+
+  /**
+   * Client-side logging endpoint
+   * @param {string} type - the type of log object
+   * @param {object} data - the data in the log object
+   */
+  expressApp.post('/log', async (req, res) => {
+    // Log that user loaded the app store
+    writeLog({
+      req,
+      type: req.body.type,
+      data: req.body.data,
+    });
+
     return res.json({
       success: true,
     });

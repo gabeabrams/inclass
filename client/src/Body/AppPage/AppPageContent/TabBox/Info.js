@@ -25,9 +25,11 @@ class Info extends Component {
             <p className="lead font-weight-bold m-0">
               Description:
             </p>
-            <Markdown>
-              {description}
-            </Markdown>
+            <p>
+              <Markdown>
+                {description}
+              </Markdown>
+            </p>
 
             <p className="lead font-weight-bold mb-0 mt-2">
               Availability:

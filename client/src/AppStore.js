@@ -14,13 +14,13 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 // Import other components
 import Header from './Header';
 import Body from './Body';
-
 import SupportModal from './Modal/SupportModal';
 import InstallOrUninstallModal from './Modal/InstallOrUninstallModal';
 
 // Import helpers
 import filterByQuery from './utils/filter/filterByQuery';
 import filterByTags from './utils/filter/filterByTags';
+import writeLog from './utils/writeLog';
 
 // Import body types
 import BODY_TYPE from './Body/BODY_TYPE';
@@ -362,10 +362,24 @@ class AppStore extends Component {
   onSupportClicked() {
     // Deconstruct state and state variables
     const { currentSpecificApp, courseId } = this.state;
-    const { supportEmail, title } = currentSpecificApp;
+    const {
+      appId,
+      supportEmail,
+      title,
+    } = currentSpecificApp;
 
     const subject = `I need support for ${title} in course ${courseId}`;
     this.showSupportModal(supportEmail, subject);
+
+    // Log the event in the server
+    writeLog(
+      'support-clicked',
+      {
+        appId,
+        supportEmail,
+        appName: title,
+      }
+    );
   }
 
   /**
@@ -452,6 +466,8 @@ class AppStore extends Component {
         path: '/uninstall',
         method: 'POST',
         params: {
+          appId,
+          appName: title,
           ltiIds: JSON.stringify(ltiIds),
         },
       });

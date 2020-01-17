@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// Import FontAwesome Icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faExternalLinkSquareAlt,
+} from '@fortawesome/free-solid-svg-icons';
+
 /**
  * Renders the individual screenshot with an image and a header
  */
@@ -16,7 +22,24 @@ class Screenshot extends Component {
       // Screenshot is displayed with a header and the image
       <div className="card border-secondary mb-3">
         <div className="card-header bg-secondary text-light border-secondary">
-          <h5 className="card-title mb-0">{title}</h5>
+          <h5 className="card-title mb-0">
+            {title}
+            <a
+              className="float-right text-light"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`/screenshot?i=${url}`}
+              style={{
+                textDecoration: 'none !important',
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faExternalLinkSquareAlt}
+                alt="Open this screenshot in a new window"
+                title="Open this screenshot in a new window"
+              />
+            </a>
+          </h5>
         </div>
         <img
           className="card-img-top"
