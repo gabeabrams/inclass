@@ -15,7 +15,7 @@ const DAYS_OF_WEEK = [
 // Get MONGO_LOGS url from environment
 const url = process.env.MONGO_LOGS;
 let LOGGING_OFF;
-if (!url && !process.env.DEV) {
+if (!url) {
   // eslint-disable-next-line no-console
   console.log('No MONGO_LOGS environment variable could be found. Logging has been turned off.');
   LOGGING_OFF = true;
