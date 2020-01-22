@@ -4,12 +4,3 @@
 
   text-overflow: ellipsis;
 }
-
-.tagvaluefilter-checkboxes {
-  display: inline;
-}
-
-.tagvaluefilter-count {
-  display: inline;
-  float: right;
-}

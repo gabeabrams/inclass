@@ -20,18 +20,15 @@ class TagFilter extends Component {
     // For each card, we want to render the TagValueFilter component
     return (
       <div
-        className="card pb-1 pl-1 pr-1 pt-0 tagfilter-container"
+        className="tagfilter-container"
         style={{
           backgroundColor: tags[tagName].color,
         }}
       >
-        <div className="tagfilter-title card-header bg-transparent p-0">{ tagName }</div>
-        <div
-          className="card-body tagfilter-card p-1 rounded"
-          style={{
-            backgroundColor: 'white',
-          }}
-        >
+        <div className="tagfilter-title">
+          {tagName}
+        </div>
+        <div className="tagfilter-card">
           <div
             className="tagfilter-cardbody"
             style={{

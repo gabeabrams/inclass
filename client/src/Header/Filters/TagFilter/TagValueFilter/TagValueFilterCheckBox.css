@@ -9,14 +9,9 @@
 .tagvaluefiltercheckbox-checkbox {
   margin-left: 2px;
   margin-right: 5px;
+
 }
 
 .tagvaluefiltercheckbox-label {
   text-overflow: ellipsis;
-}
-
-/* Styling for checkboxes */
-.form-check-input {
-  /* Have to use !important to override bootstrap default */
-  margin-top: .5rem !important;
 }
