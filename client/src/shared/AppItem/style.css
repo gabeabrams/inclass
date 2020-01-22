@@ -2,27 +2,18 @@
 .appitem-container {
   display: flex;
   flex-direction: row;
-  flex-basis: 100%;
+  width: 100%;
 }
 
 /* contains app title, subtitle, creator, and tags */
 .appitem-right-container {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
+  flex-grow: 1;
+  text-align: left;
+  overflow: hidden;
 }
 
 /* contains app title and creator */
 .appitem-title-and-creator-container {
-  display: flex;
-  flex-direction: row;
-
-  /* make title and creator on opposite sides, same horizotal level */
-  justify-content: space-between;
-  align-items: center;
-
-  /* Set height so it's always the same height, independent of creator */
-  height: 30px;
 }
 
 /* Hover to indicate that the item is clickable */

@@ -1,17 +1,14 @@
 .tagvaluefiltercheckbox-container {
   display: flex;
   flex-grow: 1;
-  align-items: baseline;
-
-  overflow: hidden;
 }
 
 .tagvaluefiltercheckbox-checkbox {
   margin-left: 2px;
   margin-right: 5px;
-
 }
 
 .tagvaluefiltercheckbox-label {
   text-overflow: ellipsis;
+  flex-grow: 1;
 }

@@ -3,5 +3,27 @@
   font-size: 25px !important;
 
   padding: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  width: 100%;
+  text-align: left;
+}
+
+.app-title {
+  width: 100%;
+
+  border: 0 !important;
+  padding: 0 !important;
   margin: 0 !important;
+  color: black !important;
+  transform: translate(0, -5px) !important;
+}
+
+.apptitle-with-spacing {
+  margin-bottom: 9px !important;
 }

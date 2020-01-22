@@ -17,10 +17,9 @@ class TagValueFilterCheckBox extends Component {
     const idName = `filter-checkbox-${tagName}-${label}`;
 
     return (
-      <div className="form-check tagvaluefiltercheckbox-container">
+      <div className="tagvaluefiltercheckbox-container">
         <div className="tagvaluefiltercheckbox-checkbox">
           <input
-            className="form-check-input"
             type="checkbox"
             checked={isChecked}
             id={idName}

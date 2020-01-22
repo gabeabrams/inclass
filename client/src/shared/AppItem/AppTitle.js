@@ -15,7 +15,7 @@ class AppTitle extends Component {
     // if dark, make app title into button
     if (dark) {
       // if onClick is undefined, then make button disabled
-      const className = `btn btn-secondary ${onClick ? '' : 'disabled'} text-dark app-title m-0 p-0 border-0`;
+      const className = `btn btn-secondary ${onClick ? '' : 'disabled'} app-title`;
 
       return (
         <button
@@ -35,7 +35,7 @@ class AppTitle extends Component {
     }
     // if not dark, title is not a button
     return (
-      <div className="app-title">
+      <div className="app-title apptitle-with-spacing">
         <h3 className="app-title-h3">
           {title}
         </h3>
