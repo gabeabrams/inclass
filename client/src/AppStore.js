@@ -7,6 +7,8 @@ import React, { Component } from 'react';
 // Import Helmet (for title overwriting)
 import Helmet from 'react-helmet';
 
+import Favicon from 'react-favicon';
+
 // Import FontAwesome Icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
@@ -591,6 +593,9 @@ class AppStore extends Component {
             {`${storeTitle} App Store | ${catalogTitle} Catalog`}
           </title>
         </Helmet>
+        <Favicon
+          url={`https://${storeHost}/public/logo`}
+        />
         <div className="appstore-header-container">
           <Header
             storeHost={storeHost}
