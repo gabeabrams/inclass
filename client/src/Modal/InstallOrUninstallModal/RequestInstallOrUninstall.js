@@ -2,9 +2,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// Import other components
 import Modal from '..';
 import EmailForm from '../../shared/EmailForm';
 import OkayButton from '../../shared/OkayButton';
+
+// Import helpers
+import writeLog from '../../utils/writeLog';
 
 class RequestInstallOrUninstall extends Component {
   /**
@@ -19,6 +23,16 @@ class RequestInstallOrUninstall extends Component {
       onClose,
       uninstalling,
     } = this.props;
+
+    // Log the fact that someone viewed the request page
+    writeLog(
+      `request-${uninstalling ? 'uninstall' : 'install'}`,
+      {
+        appName,
+        courseId,
+        supportEmail: address,
+      }
+    );
 
     // Require install modal needs an Okay button as footer
     const modalFooter = (

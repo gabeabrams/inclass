@@ -95,8 +95,7 @@ const writeLog = (opts) => {
     || !req.session.catalogId
   ) {
     // eslint-disable-next-line no-console
-    console.log('Could not log becuase session info is not complete.');
-    console.log(req.session);
+    console.log('Could not log because session info is not complete.');
     return;
   }
 
@@ -132,6 +131,8 @@ const writeLog = (opts) => {
     // Store launch info
     catalogId: req.session.catalogId,
     courseId: req.session.launchInfo.courseId,
+    // Host
+    host: req.hostname,
     // User info
     userFirstName: req.session.launchInfo.userFirstName,
     userLastName: req.session.launchInfo.userLastName,

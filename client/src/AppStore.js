@@ -150,6 +150,18 @@ class AppStore extends Component {
         sendRequest({ path: '/store' }),
         sendRequest({ path: '/catalog' }),
       ]);
+
+      if (
+        !catalogRes
+        || !catalogRes.body
+        || !catalogRes.body.success
+      ) {
+        return this.setState({
+          loading: false,
+          fatalErrorMessage: catalogRes.body.message || 'Oops! An error occurred while attempting to get the list of apps available for your course',
+        });
+      }
+
       // loadLTIIds after catalog and store loads
       await this.loadLTIIds();
       // Process store metadata
