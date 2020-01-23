@@ -32,6 +32,8 @@ if (!LOGGING_OFF) {
       },
       (err, client) => {
         if (err) {
+          // eslint-disable-next-line no-console
+          console.log(`Could not connect to Mongo Logs server: ${err.message}`);
           return reject(err);
         }
 
@@ -53,7 +55,13 @@ if (!LOGGING_OFF) {
  * @param {object} fullData - the data to write
  */
 const sendToCollection = async (data) => {
-  const collection = await getCollection;
+  let collection;
+  try {
+    collection = await getCollection;
+  } catch (err) {
+    // Collection could not be retrieved. An error has already been printed.
+    return;
+  }
 
   return new Promise((resolve, reject) => {
     collection.insertOne(data, (err) => {
@@ -132,7 +140,7 @@ const writeLog = (opts) => {
     catalogId: req.session.catalogId,
     courseId: req.session.launchInfo.courseId,
     // Host
-    host: req.hostname,
+    appStoreHost: req.hostname,
     // User info
     userFirstName: req.session.launchInfo.userFirstName,
     userLastName: req.session.launchInfo.userLastName,

@@ -25,14 +25,13 @@ class RequestInstallOrUninstall extends Component {
     } = this.props;
 
     // Log the fact that someone viewed the request page
-    writeLog(
-      `request-${uninstalling ? 'uninstall' : 'install'}`,
-      {
-        appName,
-        courseId,
-        supportEmail: address,
-      }
-    );
+    const type = `request-${uninstalling ? 'uninstall' : 'install'}`;
+    const payload = {
+      appName,
+      courseId,
+    };
+    payload[`request${uninstalling ? 'Uninstall' : 'Install'}Email`] = address;
+    writeLog(type, payload);
 
     // Require install modal needs an Okay button as footer
     const modalFooter = (
