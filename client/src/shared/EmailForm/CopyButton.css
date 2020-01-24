@@ -1,0 +1,22 @@
+.CopyButton-button {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  background: #FFC16B;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  border: 2px solid #FFC16B;
+
+  color: black;
+  font-weight: bold;
+}
+
+.CopyButton-button:disabled {
+  background: #bbb;
+  border: 2px solid #bbb;
+
+  cursor: not-allowed;
+}

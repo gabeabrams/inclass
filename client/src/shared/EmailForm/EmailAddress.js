@@ -9,19 +9,11 @@ class EmailAddress extends Component {
     const { address, subject } = this.props;
 
     return (
-      <div className="email-address-container input-group mb-1 bg-info p-2 rounded">
-        <div className="input-group-prepend">
-          <span
-            className="input-group-text bg-info border-0 font-weight-bold text-white rounded"
-            id="address_addon"
-          >
-              Send to:
-          </span>
+      <div className="EmailAddress-container bg-info">
+        <div className="EmailAddress-label">
+          Send to:
         </div>
-        <span
-          className="alert alert-light form-control rounded text-truncate p-1 col-auto"
-        >
-          {/* Open user's default email and send with subject */}
+        <div className="EmailAddress-box">
           <a
             className="emailLink"
             target="_blank"
@@ -30,7 +22,7 @@ class EmailAddress extends Component {
           >
             {address}
           </a>
-        </span>
+        </div>
       </div>
     );
   }

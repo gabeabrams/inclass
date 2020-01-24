@@ -1,7 +1,26 @@
-.email-address-container {
+.EmailAddress-container {
   display: flex;
+  border-radius: 5px;
+  padding: 5px;
+  white-space: nowrap;
+  margin-bottom: 5px;
 }
 
-.alert {
+.EmailAddress-label {
+  color: white;
+  font-weight: bold;
+  padding-left: 2px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  user-select: none;
+}
+
+.EmailAddress-box {
+  color: black;
+
+  padding: 5px;
+  background: white;
+  border-radius: 5px;
   flex-grow: 1;
 }

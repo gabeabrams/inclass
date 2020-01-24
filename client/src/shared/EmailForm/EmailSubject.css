@@ -1,7 +1,27 @@
-.email-subject-container {
+.EmailSubject-container {
   display: flex;
+  border-radius: 5px;
+  padding: 5px;
+  white-space: nowrap;
+  margin-bottom: 5px;
 }
 
-.email-subject-text {
+.EmailSubject-label {
+  color: white;
+  font-weight: bold;
+  padding-left: 2px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  user-select: none;
+}
+
+.EmailSubject-box {
+  color: black;
+
+  padding: 5px;
+  background: white;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   flex-grow: 1;
 }

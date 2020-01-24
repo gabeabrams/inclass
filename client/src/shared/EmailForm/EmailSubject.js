@@ -11,25 +11,14 @@ class EmailSubject extends Component {
     const { subject } = this.props;
 
     return (
-      <div className="email-subject-container input-group mb-3 bg-info p-2 rounded">
-        <div className="input-group-prepend">
-          <span
-            className="input-group-text bg-info border-0 font-weight-bold text-white rounded"
-            id="subject_addon"
-          >
-            Subject:
-          </span>
+      <div className="EmailSubject-container bg-info">
+        <div className="EmailSubject-label">
+          Subject:
         </div>
-        <div className="email-subject-text">
-          <input
-            type="text"
-            className="form-control rounded text-truncate col-auto"
-            aria-describedby="subject_addon"
-            value={subject}
-            readOnly
-          />
+        <div className="EmailSubject-box">
+          {subject}
         </div>
-        <div className="input-group-append" id="copy-button-addon">
+        <div className="EmailSubject-copy">
           <CopyButton text={subject} />
         </div>
       </div>
