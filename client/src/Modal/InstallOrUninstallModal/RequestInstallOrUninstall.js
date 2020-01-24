@@ -21,7 +21,9 @@ class RequestInstallOrUninstall extends Component {
       courseId,
       appName,
       onClose,
+      onBypass,
       uninstalling,
+      isAdmin,
     } = this.props;
 
     // Log the fact that someone viewed the request page
@@ -47,6 +49,27 @@ class RequestInstallOrUninstall extends Component {
 
     const title = `To ${(uninstalling) ? 'uninstall' : 'install'} this app, request it via email`;
 
+    // Generate bypass
+    let bypassElem;
+    if (isAdmin) {
+      bypassElem = (
+        <div className="alert alert-info mt-3 mb-0">
+          <p className="lead m-0 text-center">
+            You are an admin, so you can
+            <button
+              type="button"
+              className="btn btn-secondary ml-2 mr-2"
+              aria-label="bypass the request step"
+              onClick={onBypass}
+            >
+              bypass
+            </button>
+            this step.
+          </p>
+        </div>
+      );
+    }
+
     return (
       <div className="request-install-uninstall-modal">
         <Modal
@@ -55,6 +78,7 @@ class RequestInstallOrUninstall extends Component {
           footer={modalFooter}
         >
           <EmailForm address={address} subject={subject} />
+          {bypassElem}
         </Modal>
       </div>
     );
@@ -70,6 +94,10 @@ RequestInstallOrUninstall.propTypes = {
   appName: PropTypes.string.isRequired,
   /* Function to call when the modal is closed */
   onClose: PropTypes.func.isRequired,
+  /* Function to call when request is bypassed (only available for admins) */
+  onBypass: PropTypes.func.isRequired,
+  // If true, the user is an admin
+  isAdmin: PropTypes.bool.isRequired,
   /* Install boolean to determine use for install or uninstall */
   uninstalling: PropTypes.bool,
 };

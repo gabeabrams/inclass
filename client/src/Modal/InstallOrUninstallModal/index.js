@@ -55,15 +55,15 @@ class InstallOrUninstallModal extends Component {
   /**
    * Called immediately if there is no message before, or called when user
    *   clicks "Install" or "Uninstall" in the messageBefore page
+   * @param {bool} bypass - if true, bypass the request step
    */
-  async attemptInstallOrUninstall() {
+  async attemptInstallOrUninstall(bypass) {
     // deconstruct the props
     const {
       currentSpecificApp,
       uninstalling,
       installApp,
       uninstallApp,
-      isAdmin,
     } = this.props;
     const {
       requestInstallEmail,
@@ -77,7 +77,7 @@ class InstallOrUninstallModal extends Component {
     );
     let errMessage;
     // if the app needs permission to install or uninstall
-    if (requestEmail && !isAdmin) {
+    if (requestEmail && !bypass) {
       this.setState({
         currentView: CURRENT_VIEWS.SHOW_REQUEST_VIA_EMAIL,
       });
@@ -122,6 +122,7 @@ class InstallOrUninstallModal extends Component {
       catalog,
       showSupportModal,
       courseId,
+      isAdmin,
     } = this.props;
     // deconstruct current specific app
     const {
@@ -205,7 +206,16 @@ class InstallOrUninstallModal extends Component {
             catalog={catalog}
             appName={title}
             onClose={onClose}
+            onBypass={() => {
+              // Bypass the request step
+              this.setState({
+                currentView: CURRENT_VIEWS.SHOW_SPINNER,
+              }, () => {
+                this.attemptInstallOrUninstall(true);
+              });
+            }}
             uninstalling={uninstalling}
+            isAdmin={isAdmin}
           />
         );
         break;
