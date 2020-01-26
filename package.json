@@ -42,6 +42,7 @@
 		"express": "^4.17.1",
 		"fast-clone": "^1.5.13",
 		"fs": "0.0.1-security",
+		"locks": "^0.2.2",
 		"mongodb": "^3.5.0"
 	},
 	"devDependencies": {
