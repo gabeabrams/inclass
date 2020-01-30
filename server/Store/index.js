@@ -32,7 +32,8 @@ class Store {
       this._attemptLoad();
     };
     // reload the store every 'hotReloadSec' dictated by STORE_CONSTANTS
-    callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
+    // callOnSchedule(hotReload, STORE_CONSTANTS.hotReloadSecs);
+    // NOTE: the line above is commented to temporarily disable hot reloading
   }
 
   /**
