@@ -1,3 +1,6 @@
+// Import gmail lib
+const prepareEmail = require('gmail-send');
+
 // Import mutex
 const Mutex = require('./Mutex');
 
@@ -134,7 +137,7 @@ const sendEmail = async () => {
         .join('\n')
     );
 
-    const body = `
+    const html = `
 <div style="max-width: 800px; margin: auto; font-family: Arial;">
   <h2 style="text-align: center; margin-bottom: 10px;">
     ${requests.length} new Request${requests.length === 1 ? '' : 's'}
@@ -157,10 +160,20 @@ const sendEmail = async () => {
 
 </div>`;
 
-    // TODO: send the email instead of this fake wait
-    await new Promise((r) => {
-      setTimeout(r, 2000);
+    // Unlock before sending
+    mutex.unlock();
+
+    // Send the email
+    // TODO: make the client call this code
+    const send = prepareEmail({
+      user: 'inclassnotifications@gmail.com', // TODO: use actual value
+      pass: 'PUTPASSHERE', // TODO: use actual value
+      to: 'gabeabrams@gmail.com', // TODO: use actual value
+      from: 'InClass Notifications <inclassnotifications@gmail.com>', // TODO: use actual value
+      subject,
+      html,
     });
+    await send();
 
     // Resolve
     resolve();
