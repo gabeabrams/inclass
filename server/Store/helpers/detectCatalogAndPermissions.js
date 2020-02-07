@@ -49,30 +49,26 @@ module.exports = async (api, launchInfo, catalogs) => {
     });
   }
 
-  /**
-   * Check if person is admin of account the course is in
-   * If not, check if person is admin of
-   * any account in the catalog (matchAccounts)
-   * isAdmin true, if satisfy one of the statements above
-   */
+  // Report an error if no catalog matches the course's account
   if (!matchCatalogId) {
     throw new Error('There is no catalog for this course');
   }
 
-  for (let i = 0; i < matchAccounts.length; i++) {
-    try {
-      const res = await api.account.get({ accountId: matchAccounts[i] });
-      if (!('sis_account_id' in res)) {
-        throw new Error('No sis_account_id');
-      }
-      if (!('integration_id' in res)) {
-        throw new Error('No integration_id');
-      }
-      isAdmin = true;
-      break;
-    } catch (err) {
-      isAdmin = false;
+  /**
+   * Check if person is admin of account the course is in.
+   * If this is true, isAdmin is true
+   */
+  try {
+    const res = await api.account.get({ accountId: myAccountId });
+    if (!('sis_account_id' in res)) {
+      throw new Error('No sis_account_id');
     }
+    if (!('integration_id' in res)) {
+      throw new Error('No integration_id');
+    }
+    isAdmin = true;
+  } catch (err) {
+    isAdmin = false;
   }
 
   return { catalogId: matchCatalogId, isAdmin };
