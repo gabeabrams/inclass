@@ -382,7 +382,7 @@ class AppStore extends Component {
       title,
     } = currentSpecificApp;
 
-    const subject = `I need support for ${title} in course ${courseId}`;
+    const subject = `I need support for ${title} in course with Canvas ID: ${courseId}`;
     this.showSupportModal(supportEmail, subject);
 
     // Log the event in the server

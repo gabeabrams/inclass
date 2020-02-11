@@ -42,7 +42,7 @@ describeS('end-to-end > gettingSupport', function () {
     const decodedSubject = decodeURIComponent(match.split('subject=')[1]);
     assert.equal(
       decodedSubject,
-      `I need support for GradeUp in course ${courseId}`,
+      `I need support for GradeUp in course with Canvas ID: ${courseId}`,
       'Invalid email subject'
     );
 
