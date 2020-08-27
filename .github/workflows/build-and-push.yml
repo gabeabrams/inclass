@@ -17,9 +17,12 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-
+      - name: Turnstyle (no concurrent builds)
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build + Push
-        uses: harvard-edtech/dce-ecr-action@v1
+        uses: harvard-edtech/dce-ecr-action@v1.2
         with:
           access_key_id:  ${{ secrets.PUSH_TO_ECR_AWS_ACCESS_KEY_ID }}
           secret_access_key: ${{ secrets.PUSH_TO_ECR_AWS_SECRET_ACCESS_KEY }}
@@ -28,3 +31,4 @@ jobs:
           region: ${{ secrets.AWS_DEFAULT_REGION }}
           tags: ${{ github.sha }}
           add_branch_tag: true
+          slack_webhook_url: ${{ secrets.PUSH_TO_ECR_SLACK_NOTIFY_WEBHOOK_URL }}
