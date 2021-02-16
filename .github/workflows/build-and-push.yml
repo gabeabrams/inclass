@@ -6,7 +6,7 @@
 name: Build and Push Image to ECR
 on:
   push:
-    branches: [ master, stage, '*/*' ]
+    branches: [master, stage, "*/*"]
 
 env:
   REPOSITORY_NAME: hdce/inclass
@@ -17,18 +17,27 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+        id: checkout
+
       - name: Turnstyle (no concurrent builds)
         uses: softprops/turnstyle@v1
+        id: turnstyle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+
       - name: Build + Push
-        uses: harvard-edtech/dce-ecr-action@v1.2
+        uses: harvard-edtech/dce-ecr-action@v1.3
+        id: build_and_push
         with:
-          access_key_id:  ${{ secrets.PUSH_TO_ECR_AWS_ACCESS_KEY_ID }}
+          access_key_id: ${{ secrets.PUSH_TO_ECR_AWS_ACCESS_KEY_ID }}
           secret_access_key: ${{ secrets.PUSH_TO_ECR_AWS_SECRET_ACCESS_KEY }}
           account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           repo: ${{ env.REPOSITORY_NAME }}
           region: ${{ secrets.AWS_DEFAULT_REGION }}
           tags: ${{ github.sha }}
           add_branch_tag: true
+          add_package_version_tag_for_branch: master
           slack_webhook_url: ${{ secrets.PUSH_TO_ECR_SLACK_NOTIFY_WEBHOOK_URL }}
