@@ -1,14 +1,12 @@
 /**
  * Determines which catalog to show to this user
- * @module server/detectCatalogAndPermissions
+ * @module server/detectCatalogId
  * @param {caccl-api instance} api - a caccl-api instance to use for accessing
  *   the Canvas API
  * @param {object} launchInfo - the launchInfo from the user's LTI launch
  * @param {object} catalogs - mapping { catalogId => catalogObject }
- * @return {object} form { catalogId, isAdmin } where catalogId is the id of the
- *   catalog that this user should be shown and isAdmin is true if the current
- *   user is an admin for the account of the current course or an admin for one
- *   of the accounts that are associated with this catalog
+ * @return {number} catalogId, the id of the
+ *   catalog that this user should be shown
  */
 module.exports = async (api, launchInfo, catalogs) => {
   const { courseId } = launchInfo;
@@ -18,7 +16,6 @@ module.exports = async (api, launchInfo, catalogs) => {
 
   let matchCatalogId;
   let matchAccounts;
-  let isAdmin;
 
   // Go through each catalog
   if (catalogs) {
@@ -54,22 +51,5 @@ module.exports = async (api, launchInfo, catalogs) => {
     throw new Error('There is no catalog for this course');
   }
 
-  /**
-   * Check if person is admin of account the course is in.
-   * If this is true, isAdmin is true
-   */
-  try {
-    const res = await api.account.get({ accountId: myAccountId });
-    if (!('sis_account_id' in res)) {
-      throw new Error('No sis_account_id');
-    }
-    if (!('integration_id' in res)) {
-      throw new Error('No integration_id');
-    }
-    isAdmin = true;
-  } catch (err) {
-    isAdmin = false;
-  }
-
-  return { catalogId: matchCatalogId, isAdmin };
+  return matchCatalogId;
 };

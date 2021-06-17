@@ -80,7 +80,6 @@ module.exports = (expressApp) => {
    *   success: <true/false>,
    *   message: <error message if success is false>,
    *   catalog: <catalog metadata if success is true>,
-   *   isAdmin: <included if success is true>,
    * }
    */
   expressApp.get('/catalog', async (req, res) => {
@@ -96,17 +95,13 @@ module.exports = (expressApp) => {
       const {
         catalog,
         catalogId,
-        isAdmin,
-      } = await store.getCatalogAndPermissions(
+      } = await store.getCatalog(
         req.api,
         req.session.launchInfo
       );
 
       // Store the catalogId to the user's session
       req.session.catalogId = catalogId;
-
-      // Store isAdmin to the user's session
-      req.session.isAdmin = isAdmin;
 
       // Save the session
       await new Promise((resolve, reject) => {
@@ -125,13 +120,11 @@ module.exports = (expressApp) => {
         type: 'load',
         data: {
           catalogId,
-          isAdmin,
         },
       });
 
       return res.json({
         catalog,
-        isAdmin,
         success: true,
       });
     } catch (err) {
@@ -371,7 +364,7 @@ module.exports = (expressApp) => {
    */
   expressApp.get('/installed-apps', async (req, res) => {
     // the initRoutesWithInstallableStore function replaces this with fake store
-    const currentCatalog = store.getCatalog(req.session.catalogId);
+    const currentCatalog = store.getCatalogById(req.session.catalogId);
     // if no catalog returned, throw an error
     if (!currentCatalog || currentCatalog === null) {
       return res.json({

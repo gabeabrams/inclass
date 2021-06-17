@@ -14,7 +14,7 @@ class Store {
     return storeMetadata;
   }
 
-  async getCatalogAndPermissions(api, launchInfo) {
+  async getCatalog(api, launchInfo) {
     if (!api) {
       throw new Error('API not included');
     }
@@ -24,7 +24,6 @@ class Store {
     }
 
     return {
-      isAdmin: false,
       catalogId: 'dce',
       catalog: catalogIdToCatalogMetadata.dce,
     };
@@ -59,7 +58,7 @@ class Store {
     return appInstallData;
   }
 
-  getCatalog(catalogId) {
+  getCatalogById(catalogId) {
     return catalogIdToCatalogMetadata[catalogId];
   }
 }

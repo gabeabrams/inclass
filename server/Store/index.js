@@ -10,7 +10,7 @@ const postProcessTags = require('./helpers/postProcessTags');
 const serveScreenshots = require('./helpers/serveScreenshots');
 const serveIcon = require('./helpers/serveIcon');
 const serveStoreLogo = require('./helpers/serveStoreLogo');
-const detectCatalogAndPermissions = require('./helpers/detectCatalogAndPermissions');
+const detectCatalogId = require('./helpers/detectCatalogId');
 const callOnSchedule = require('./helpers/callOnSchedule');
 const STORE_CONSTANTS = require('./STORE_CONSTANTS');
 
@@ -174,19 +174,17 @@ class Store {
 
   /**
    * Function that determines the catalog we should show the current user based
-   *   on the launch course and its account. Also determines if the user is an
-   *   admin for the current catalog.
+   *   on the launch course and its account
    * @param {caccl-api Instance} api - the caccl-api instance from req.api
    * @param {object} launchInfo - the launch info from req.session.launchInfo
-   * @return {object} metadata and permissions in the form:
+   * @return {object} metadata in the form:
    * {
    *   catalog: <catalog metadata object>,
    *   catalogId: <catalog id>,
-   *   isAdmin: <true if the user is an admin>,
    * }
    */
-  async getCatalogAndPermissions(api, launchInfo) {
-    const { catalogId, isAdmin } = await detectCatalogAndPermissions(
+  async getCatalog(api, launchInfo) {
+    const catalogId = await detectCatalogId(
       api,
       launchInfo,
       this.catalogIdToCatalogMetadata
@@ -195,8 +193,16 @@ class Store {
     return {
       catalog,
       catalogId,
-      isAdmin,
     };
+  }
+
+  /**
+   * Returns a catalog object given its id
+   * @param {string} catalogId - the id of the catalog to return
+   * @return {Catalog} the catalog
+   */
+  getCatalogById(catalogId) {
+    return this.catalogIdToCatalogMetadata[catalogId];
   }
 
   /**
@@ -249,15 +255,6 @@ class Store {
    */
   getStoreMetadata() {
     return this.storeMetadata;
-  }
-
-  /**
-   * Returns a catalog object
-   * @param {string} catalogId - the id of the catalog to return
-   * @return {Catalog} the catalog
-   */
-  getCatalog(catalogId) {
-    return this.catalogIdToCatalogMetadata[catalogId];
   }
 }
 
