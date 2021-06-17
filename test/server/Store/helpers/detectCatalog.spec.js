@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const detectCatalogAndPermissions = require('../../../../server/Store/helpers/detectCatalogAndPermissions');
+const detectCatalogId = require('../../../../server/Store/helpers/detectCatalogId');
 const API = require('../../../dummy-objects/API');
 
 const catalogOne = {
@@ -39,36 +39,18 @@ const noCatalogs = {};
 
 const api = new API();
 
-describe('server > Store > helpers > detectCatalogAndPermissions', function () {
+describe('server > Store > helpers > detectCatalogId', function () {
   it('checks correct catalog is found', async function () {
     const launchInfo = { courseId: 100 };
-    const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
-    assert.equal(match.catalogId, 'two', 'Catalog Id does not match what is expected');
-  });
-
-  it('checks isAdmin is true when person is admin of course they are in', async function () {
-    const launchInfo = { courseId: 100 };
-    const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
-    assert.equal(match.isAdmin, true, 'iAdmin is false when it should be true');
-  });
-
-  it('checks isAdmin is true when person is admin to any account in catalog', async function () {
-    const launchInfo = { courseId: 2 };
-    const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
-    assert.equal(match.isAdmin, true, 'isAdmin is false when it should be true');
-  });
-
-  it('checks isAdmin is false when person does not satisfy admin requirements', async function () {
-    const launchInfo = { courseId: 20 };
-    const match = await detectCatalogAndPermissions(api, launchInfo, catalogs);
-    assert.equal(match.isAdmin, false, 'isAdmin is true when the person is not an admin');
+    const catalogId = await detectCatalogId(api, launchInfo, catalogs);
+    assert.equal(catalogId, 'two', 'Catalog Id does not match what is expected');
   });
 
   it('checks error thrown for no catalog for the course', async function () {
     const launchInfo = { courseId: 50 };
     let errorOccurred = false;
     try {
-      await detectCatalogAndPermissions(api, launchInfo, catalogs);
+      await detectCatalogId(api, launchInfo, catalogs);
     } catch (err) {
       if (err.message.includes('There is no catalog for this course')) {
         // The correct error occurred
@@ -88,7 +70,7 @@ describe('server > Store > helpers > detectCatalogAndPermissions', function () {
     const launchInfo = { courseId: 366 };
     let errorOccurred = false;
     try {
-      await detectCatalogAndPermissions(api, launchInfo, noCatalogs);
+      await detectCatalogId(api, launchInfo, noCatalogs);
     } catch (err) {
       if (err.message.includes('There is no catalog for this course')) {
         // The correct error occurred

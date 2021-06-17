@@ -113,6 +113,7 @@ class AppStore extends Component {
   async componentDidMount() {
     /* ---------------------- Load Server State --------------------- */
     let courseId;
+    let isAdmin;
     try {
       // Get status from server
       const status = await getStatus();
@@ -134,7 +135,7 @@ class AppStore extends Component {
       }
 
       // > Get courseId from launchInfo
-      ({ courseId } = status.launchInfo);
+      ({ courseId, isAdmin } = status.launchInfo);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
@@ -181,7 +182,7 @@ class AppStore extends Component {
           fatalErrorMessage: `We couldn't get info on the app catalog for your course due to an error: ${catalogRes.body.message}`,
         });
       }
-      const { catalog, isAdmin } = catalogRes.body;
+      const { catalog } = catalogRes.body;
       // Post-process store metadata, catalog, and add to state
       // > Tags
       const tags = {};

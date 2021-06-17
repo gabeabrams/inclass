@@ -81,8 +81,20 @@ describe('server > Store > helpers > loadApp', function () {
       assert.equal(app.launchPrivacy, 'public', 'app launch privacy is not "public"');
       appKeys.splice(appKeys.indexOf('launchPrivacy'), 1);
     }
+    // Check placement
+    assert.equal(app.placement[0], 'navigation', 'app placement is not "navigation"');
     // check for every other key we copied straight from metadata file
-    appKeys.forEach((key) => {
+    [
+      'title',
+      'subtitle',
+      'description',
+      'messageBeforeInstall',
+      'messageAfterInstall',
+      'messageBeforeUninstall',
+      'messageAfterUninstall',
+      'requestInstallEmail',
+      'requestUninstallEmail',
+    ].forEach((key) => {
       assert(JSON.stringify(app[key]) === JSON.stringify(realApp[key]), `the value of key: ${key} was not read in from metadata file correctly`);
     });
   });
@@ -183,7 +195,10 @@ describe('server > Store > helpers > loadApp', function () {
     // test launchPrivacy
     assert.equal(childApp.launchPrivacy, 'public', 'app launchPrivacy was not "public"');
     numOfKeys -= 1;
-    // these tests should exaust all possible app keys, otherwise throw error
+    // test placement
+    assert.equal(childApp.placement[0], 'navigation', 'app placement was not "navigation"');
+    numOfKeys -= 1;
+    // these tests should exhaust all possible app keys, otherwise throw error
     assert(numOfKeys === 0, 'did not test all keys included in child app');
   });
 

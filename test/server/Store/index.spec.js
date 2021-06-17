@@ -17,7 +17,8 @@ describe('server > Store > index', function () {
     return new Promise((resolve) => { return setTimeout(resolve, ms); });
   }
 
-  it('replaces store if reload successful', async function () {
+  // NOTE: test skipped because feature is currently disabled
+  it.skip('replaces store if reload successful', async function () {
     const expressApp = new ExpressApp();
     // set the maximum timeout for this test according to store reloading time
     this.timeout(reloadSec * 1000 + 5000);
@@ -221,11 +222,10 @@ describe('server > Store > index', function () {
     const api = new API();
     const launchInfo = { courseId: 102 };
     const dataPermissions = (
-      await store.getCatalogAndPermissions(api, launchInfo)
+      await store.getCatalog(api, launchInfo)
     );
     assert.equal(dataPermissions.catalogId, 'seas', 'Did not return the right catalogId');
     assert.equal(dataPermissions.catalog.title, 'SEAS Catalog', 'Did not return the right catalog');
-    assert.equal(dataPermissions.isAdmin, true, 'Did not return the right admin permission');
   });
 
   it('Checks getInstallData returns expected item', async function () {

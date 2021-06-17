@@ -498,7 +498,7 @@ describe('server > routes', function () {
         defaultSupportEmail: 'example@harvard.edu',
       };
 
-      // init store with metadata, catalog, and isAdmin
+      // init store with metadata, catalog
       initRoutesWithStore(
         fakeExpressApp,
         {
@@ -506,7 +506,6 @@ describe('server > routes', function () {
             title: 'Harvard Store',
           },
           catalog: fakeCatalog,
-          isAdmin: true,
         }
       );
 
@@ -528,7 +527,6 @@ describe('server > routes', function () {
       await fakeExpressApp.simulateRequest('/catalog', req, res);
       assert(dataReturnedToClient.success, 'failed when it should return success');
       assert.deepEqual(dataReturnedToClient.catalog, fakeCatalog, 'did not return correct catalog');
-      assert.equal(dataReturnedToClient.isAdmin, true, 'did not return correct isAdmin object');
     });
   });
   describe('server > routes /install', function () {
