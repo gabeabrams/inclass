@@ -16,8 +16,8 @@ const installXML = fs.readFileSync(
 
 // Initialize CACCL
 const app = initCACCL({
-  expressAppPreprocessor: (app) => {
-    app.all('*', (req, res, next) => {
+  expressAppPreprocessor: (expressApp) => {
+    expressApp.all('*', (req, res, next) => {
       console.log('Request:');
       console.log(req.hostname, req.path);
       console.log(req.session);
@@ -40,3 +40,5 @@ app.get('/config', (req, res) => {
 
 // Add routes
 addRoutes(app);
+
+console.log('New Service Up and Running');
