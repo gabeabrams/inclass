@@ -30,3 +30,6 @@ app.get('/config', (req, res) => {
 
 // Add routes
 addRoutes(app);
+
+// TODO: remove
+console.log('New InClass Instance Running');
